@@ -13,7 +13,7 @@ const config: Config = {
       colors: {
         primary: "#187bc8",
         secondary: "#235a9f",
-        accent: "#000000",
+        accent: "#0d6efd",
         info: "#3abff8",
         success: "#36d399",
         warning: "#fbbd23",

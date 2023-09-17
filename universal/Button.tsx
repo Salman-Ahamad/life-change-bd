@@ -12,16 +12,25 @@ export const Button: FC<IButton> = ({
   type = "button",
   disabled,
   variant = "primary",
-}) => (
-  <button
-    type={type}
-    onClick={onClick}
-    disabled={disabled}
-    className={twMerge(
-      `bg-transparent hover:bg-secondary px-5 py-2.5 text-sm rounded-md text-white text-center font-sora font-semibold border border-white transition-all delay-75 `,
-      className
-    )}
-  >
-    {children}
-  </button>
-);
+}) => {
+  const btnVariant =
+    (variant === "primary" &&
+      "bg-transparent hover:bg-secondary px-5 py-3 border border-white rounded-md") ||
+    (variant === "secondary" &&
+      "px-3 py-1.5 bg-accent hover:bg-[#0052cd] rounded") ||
+    (variant === "accent" && "px-2 py-1 bg-white text-black rounded-sm");
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={twMerge(
+        `text-sm text-white text-center font-sora font-semibold transition-all delay-75 ${btnVariant}`,
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
+};
