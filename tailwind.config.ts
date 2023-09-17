@@ -19,6 +19,10 @@ const config: Config = {
         warning: "#fbbd23",
         error: "#ff0000",
       },
+      fontFamily: {
+        sora: "Sora",
+        "source-Sans-3": "Source Sans 3",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
