@@ -11,9 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#026848",
-        secondary: "#cd6b2e",
-        accent: "#54D487",
+        primary: "#187bc8",
+        secondary: "#235a9f",
+        accent: "#000000",
         info: "#3abff8",
         success: "#36d399",
         warning: "#fbbd23",
