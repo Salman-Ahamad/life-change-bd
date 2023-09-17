@@ -17,7 +17,7 @@ export const Button: FC<IButton> = ({
     onClick={onClick}
     disabled={disabled}
     className={twMerge(
-      `bg-black px-8 py-3 text-base rounded-lg text-surface text-center font-sora font-extrabold`,
+      `bg-primary px-8 py-3 text-base rounded-lg text-surface text-center font-sora font-extrabold`,
       className
     )}
   >
