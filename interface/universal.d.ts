@@ -16,8 +16,6 @@ export interface ITitleVariant {
 
 export interface ITitle extends IChildrenWithClassName, ITitleVariant {
   color?: IColor;
-  lowOpacityMobH3?: boolean;
-  lowOpacityWebH4?: boolean;
 }
 
 export interface IH extends IChildrenWithClassName, ITitleVariant {}
