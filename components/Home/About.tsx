@@ -42,7 +42,7 @@ export const About: FC = () => (
           </p>
         </div>
       </div>
-      <p className="text-4xl text-center w-full max-w-6xl mx-auto mt-14 mb-4">
+      <p className="text-xl lg:text-4xl text-center w-full max-w-6xl mx-auto mt-14 mb-4">
         The Main objective of this setup is how to develop Skill&rsquo;s on
         digital marketing And how to generate revenue on it
       </p>
