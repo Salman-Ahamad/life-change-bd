@@ -33,6 +33,7 @@ export interface IButton extends IChildrenWithClassName {
   type?: "button" | "reset" | "submit";
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
+  variant?: "primary" | "secondary" | "accent";
 }
 
 export interface IBgContainer
@@ -42,6 +43,7 @@ export interface IBgContainer
 export interface IBackgroundImage extends IChildrenWithClassName {
   img: StaticImageData;
   mobImg?: StaticImageData;
+  overflow?: boolean;
 }
 
 export interface IAbsoluteImg extends IClassName {

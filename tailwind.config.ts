@@ -13,11 +13,16 @@ const config: Config = {
       colors: {
         primary: "#187bc8",
         secondary: "#235a9f",
-        accent: "#000000",
+        accent: "#0d6efd",
         info: "#3abff8",
         success: "#36d399",
         warning: "#fbbd23",
         error: "#ff0000",
+      },
+      fontFamily: {
+        sora: "Sora",
+        poppins: "Poppins",
+        "source-Sans-3": "Source Sans 3",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
