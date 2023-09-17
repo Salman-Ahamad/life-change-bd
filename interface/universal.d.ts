@@ -33,6 +33,7 @@ export interface IButton extends IChildrenWithClassName {
   type?: "button" | "reset" | "submit";
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
+  variant?: "primary" | "secondary" | "accent";
 }
 
 export interface IBgContainer

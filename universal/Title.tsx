@@ -8,9 +8,9 @@ import { H } from "./H";
 
 export const Title: FC<ITitle> = ({ children, className, variant }) => {
   const h1 = "text-[38px] lg:text-[52px] leading-[44px] lg:leading-[60px]";
-  const h2 = "text-[28px] lg:text-[48px] leading-[34px] lg:leading-[56px]";
-  const h3 = `text-[24px] lg:text-[40px] leading-[30px] lg:leading-[48px]`;
-  const h4 = `text-[18px] lg:text-[18px] leading-[26px] lg:leading-[36px]`;
+  const h2 = "text-[28px] lg:text-[40px] leading-[34px] lg:leading-[50px]";
+  const h3 = `text-[24px] lg:text-[30px] leading-[30px] lg:leading-[48px]`;
+  const h4 = `text-[20px] lg:text-[24px] leading-[26px] lg:leading-[36px]`;
   const h5 = "text-[18px] leading-[26px]";
 
   const titleVariant =
