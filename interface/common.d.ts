@@ -1,16 +1,7 @@
 import { StaticImageData } from "next/image";
 import { IChildrenWithClassName } from ".";
 
-export type IColor =
-  | "surface"
-  | "surface-sunken"
-  | "surface-accent"
-  | "surface-accent-sunken"
-  | "high-contrast"
-  | "low-contrast"
-  | "subtle-contrast"
-  | "transparent"
-  | "white";
+export type IColor = "black" | "white" | "transparent";
 
 export type IFontWeight = "400" | "500" | "600" | "700" | "800" | "900";
 
@@ -23,8 +14,6 @@ export interface IText extends IChildrenWithClassName {
 
 export interface IMainContainer extends IChildrenWithClassName {
   bgColor?: IColor;
-  navbar?: boolean;
-  isScrolling?: boolean;
 }
 
 export interface ILogo extends IClassName {

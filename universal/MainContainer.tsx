@@ -9,22 +9,14 @@ export const MainContainer: FC<IMainContainer> = ({
   children,
   className,
   bgColor = "transparent",
-  navbar,
-  isScrolling,
 }) => {
   const background =
-    (bgColor === "transparent" && "bg-transparent") ||
-    (bgColor === "white" && "bg-white");
+    (bgColor === "white" && "bg-white") ||
+    (bgColor === "black" && "bg-black") ||
+    (bgColor === "transparent" && "bg-transparent");
 
   return (
-    <main
-      className={`w-full ${!navbar && background} ${
-        navbar &&
-        `fixed top-0 z-30 ${
-          isScrolling ? "bg-white" : "bg-surface-accent"
-        } lg:bg-white transition-all ease-in-out delay-100 `
-      }`}
-    >
+    <main className={`w-full ${background}`}>
       <section
         className={twMerge(`w-full max-w-[1280px] mx-auto relative`, className)}
       >

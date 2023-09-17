@@ -1,6 +1,6 @@
 import { Container, MainContainer, Title } from "@/universal";
 
-export default function Home() {
+const Home = () => {
   return (
     <MainContainer className="bg-black">
       <Title variant="H1">Life Change Bd</Title>
@@ -9,4 +9,4 @@ export default function Home() {
       </Container>
     </MainContainer>
   );
-}
+};
