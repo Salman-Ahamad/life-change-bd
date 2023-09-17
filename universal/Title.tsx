@@ -23,7 +23,7 @@ export const Title: FC<ITitle> = ({ children, className, variant }) => {
   return (
     <H
       variant={variant}
-      className={twMerge(`font-extrabold font-sora ${titleVariant}`, className)}
+      className={twMerge(`font-medium uppercase ${titleVariant}`, className)}
     >
       {children}
     </H>

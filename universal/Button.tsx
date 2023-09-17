@@ -15,7 +15,7 @@ export const Button: FC<IButton> = ({
 }) => {
   const btnVariant =
     (variant === "primary" &&
-      "bg-transparent hover:bg-secondary px-5 py-3 border border-white rounded-md") ||
+      "bg-transparent hover:bg-secondary px-7 py-3 border border-white rounded-md") ||
     (variant === "secondary" &&
       "px-3 py-1.5 bg-accent hover:bg-[#0052cd] rounded") ||
     (variant === "accent" && "px-2 py-1 bg-white text-black rounded-sm");

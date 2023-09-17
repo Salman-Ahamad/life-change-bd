@@ -21,6 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         sora: "Sora",
+        poppins: "Poppins",
         "source-Sans-3": "Source Sans 3",
       },
       backgroundImage: {

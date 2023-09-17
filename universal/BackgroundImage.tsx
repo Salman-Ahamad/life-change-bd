@@ -10,10 +10,21 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
   img,
   mobImg,
   className,
+  overflow,
 }) => (
-  <main className={twMerge(`relative w-full`, className)}>
+  <main
+    className={twMerge(
+      `relative w-full ${overflow && "overflow-x-hidden"}`,
+      className
+    )}
+  >
     <div className={`absolute w-full inset-0`}>
-      <Image src={img} className={`w-full`} alt="background image" fill />
+      <Image
+        src={img}
+        className={`w-full ${overflow && "min-w-[500px] min-h-[500px]"}`}
+        alt="background image"
+        fill
+      />
       {mobImg && (
         <Image
           src={mobImg}
