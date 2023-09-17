@@ -13,10 +13,6 @@ export const MainContainer: FC<IMainContainer> = ({
   isScrolling,
 }) => {
   const background =
-    (bgColor === "surface" && "bg-surface") ||
-    (bgColor === "surface-accent" && "bg-surface-accent") ||
-    (bgColor === "surface-accent-sunken" && "bg-surface-accent-sunken") ||
-    (bgColor === "surface-sunken" && "bg-surface-sunken") ||
     (bgColor === "transparent" && "bg-transparent") ||
     (bgColor === "white" && "bg-white");
 

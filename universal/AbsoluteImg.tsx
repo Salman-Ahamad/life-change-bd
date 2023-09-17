@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { twMerge } from "tailwind-merge";
-import { IAbsoluteImg } from "@/interface";
-
 import { FC } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { IAbsoluteImg } from "@/interface";
 
 export const AbsoluteImg: FC<IAbsoluteImg> = ({
   img,
