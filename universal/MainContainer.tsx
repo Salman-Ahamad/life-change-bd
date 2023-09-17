@@ -1,16 +1,17 @@
 "use client";
 
+import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { IMainContainer } from "@/interface";
 
-export const MainContainer = ({
+export const MainContainer: FC<IMainContainer> = ({
   children,
   className,
   bgColor = "transparent",
   navbar,
   isScrolling,
-}: IMainContainer) => {
+}) => {
   const background =
     (bgColor === "surface" && "bg-surface") ||
     (bgColor === "surface-accent" && "bg-surface-accent") ||
