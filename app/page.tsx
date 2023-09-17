@@ -1,12 +1,11 @@
-import { Container, MainContainer, Title } from "@/universal";
+"use client";
 
 const Home = () => {
   return (
-    <MainContainer className="bg-black">
-      <Title variant="H1">Life Change Bd</Title>
-      <Container>
-        <Title variant="H1">Life Change Bd</Title>
-      </Container>
-    </MainContainer>
+    <div>
+      <h1>This is home page</h1>
+    </div>
   );
 };
+
+export default Home;
