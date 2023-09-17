@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
+import Header from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,8 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: IChildren) => (
   <html lang="en">
     <body className={inter.className}>
-      {/* header */}
-      <main>{children}</main>
-      {/* Header */}
+      <Header />
+      {children}
     </body>
   </html>
 );

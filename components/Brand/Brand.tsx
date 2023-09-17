@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 const Brand = () => (
   <Link href="/" className="text-white">
-    Logo
+    <Image src="/logo.png" width={60} height={24} alt="Life Change Bd" />
   </Link>
 );
 
