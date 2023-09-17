@@ -15,7 +15,7 @@ export const Label: FC<ILabel> = ({
   const weight = findFontWeight(fontWeight);
 
   return (
-    <span
+    <label
       className={twMerge(
         `tracking-[2px] text-[12px] md:text-[14px] leading-[22px] md:leading-[18px] text-center ${weight}  ${
           uppercase && "uppercase"
@@ -24,6 +24,6 @@ export const Label: FC<ILabel> = ({
       )}
     >
       {children}
-    </span>
+    </label>
   );
 };
