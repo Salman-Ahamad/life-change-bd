@@ -1,10 +1,11 @@
 "use client";
 
-import { Hero } from "@/components/Home";
+import { About, Hero } from "@/components/Home";
 
 const Home = () => (
   <main>
     <Hero />
+    <About />
   </main>
 );
 
