@@ -1,9 +1,9 @@
 "use client";
 
 import { Container, MainContainer, Title } from "@/universal";
-import React, { FC } from "react";
+import { FC } from "react";
 
-export const UpcommingEvents: FC = () => {
+export const UpComingEvents: FC = () => {
   const events = [
     { date: "19 FEB", title: "WE HELD FREE TRAINING FOR DIGITAL MARKETING" },
     {

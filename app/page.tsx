@@ -6,7 +6,7 @@ import {
   Hero,
   OurServices,
   PopularCourses,
-  UpcommingEvents,
+  UpComingEvents,
 } from "@/components/Home";
 
 const Home = () => (
@@ -16,7 +16,7 @@ const Home = () => (
     <About />
     <PopularCourses />
     <OurServices />
-    <UpcommingEvents />
+    <UpComingEvents />
   </main>
 );
 export default Home;
