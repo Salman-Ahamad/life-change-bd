@@ -4,11 +4,10 @@ import { IFaqList } from "@/interface";
 import { faqsList } from "@/lib/data";
 import { FC, useRef, useState } from "react";
 
-const FaqsCard = (props) => {
-  const answerElRef = useRef();
+const FaqsCard: FC<IFaqList> = ({ a, q }) => {
+  const answerElRef = useRef<any>();
   const [state, setState] = useState(false);
   const [answerH, setAnswerH] = useState("0px");
-  const { faqsList } = props;
 
   const handleOpenAnswer = () => {
     const answerElH = answerElRef.current.childNodes[0].offsetHeight;
@@ -22,7 +21,7 @@ const FaqsCard = (props) => {
       onClick={handleOpenAnswer}
     >
       <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-700 font-medium">
-        {faqsList.q}
+        {q}
         {state ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +60,7 @@ const FaqsCard = (props) => {
         style={state ? { height: answerH } : { height: "0px" }}
       >
         <div>
-          <p className="text-gray-500">{faqsList.a}</p>
+          <p className="text-gray-500">{a}</p>
         </div>
       </div>
     </div>
@@ -81,8 +80,8 @@ export const FAQ = () => {
         </p>
       </div>
       <div className="mt-14 w-full md:max-w-5xl mx-auto">
-        {faqsList.map((item, idx) => (
-          <FaqsCard key={idx} faqsList={item} />
+        {faqsList.map(({ ...faq }, idx) => (
+          <FaqsCard key={idx} {...faq} />
         ))}
       </div>
     </section>
