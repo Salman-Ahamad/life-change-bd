@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { IChildrenWithClassName } from ".";
+import { ICardData, IChildrenWithClassName } from ".";
 
 export type IColor = "black" | "white" | "transparent";
 
@@ -44,4 +44,8 @@ export interface IFormikError extends IClassName {
 
 export interface INav {
   navData: ILinkLabel[];
+}
+
+export interface IImageCard extends ICardData {
+  cardWidth?: "3/1" | "2/1" | "1";
 }

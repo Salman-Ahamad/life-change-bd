@@ -1,7 +1,7 @@
-import { ICard, IEventsData } from "@/interface";
+import { ICardData, IEventsData } from "@/interface";
 import { course1, course2, course3, serviceImg1, serviceImg2 } from "../assets";
 
-export const servicesData: ICard[] = [
+export const servicesData: ICardData[] = [
   {
     title: "Online Health Consultation with MBBS or BHMS or BDS Doctor",
     fees: "100 (INR)",
@@ -16,7 +16,7 @@ export const servicesData: ICard[] = [
   },
 ];
 
-export const courseInfoData: ICard[] = [
+export const courseInfoData: ICardData[] = [
   {
     title: "Digital Marketing",
     fees: "Fees - 1300 (INR) (fluctuate over time)",

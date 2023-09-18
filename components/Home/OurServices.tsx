@@ -3,7 +3,7 @@
 import { servicesData } from "@/lib/data";
 import { Container, MainContainer, Title } from "@/universal";
 import { FC } from "react";
-import { ImageCard } from "./ImageCard";
+import { ImageCard } from "..";
 
 export const OurServices: FC = () => (
   <MainContainer>
@@ -13,7 +13,7 @@ export const OurServices: FC = () => (
       </Title>
       <div className="justify-center items-center gap-6 sm:grid sm:grid-cols-2 sm:space-y-0">
         {servicesData.map((service, idx) => (
-          <ImageCard key={idx} {...service} />
+          <ImageCard key={idx} {...service} cardWidth="2/1" />
         ))}
       </div>
       <div className="my-10">
