@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, MainContainer, Title } from "@/universal";
+import { Container, Title } from "@/universal";
 import React, { FC } from "react";
 
 export const UpcommingEvents: FC = () => {
@@ -16,10 +16,15 @@ export const UpcommingEvents: FC = () => {
     },
   ];
   return (
-    <MainContainer bgColor="black">
-      <Container className="text-white pt-8">
-        <Title variant="H1">UPCOMING EVENTS</Title>
-        <p>
+    <div className="bg-sky-600">
+      <Container className="text-white pt-28">
+        <Title
+          variant="H1"
+          className="text-center text-4xl md:text-[42px] font-normal md:font-medium pb-8"
+        >
+          UPCOMING EVENTS
+        </Title>
+        <p className="text-lg md:text-2xl font-normal">
           MY BUSINESS UNION PLATFORM GIVES YOU A CORPORATE ENVIRONMENT AND
           HELPFULL DIGITAL MARKETING COMMUNITY
         </p>
@@ -28,15 +33,19 @@ export const UpcommingEvents: FC = () => {
             {events.map((event, idx) => (
               <li
                 key={idx}
-                className="w-full md:w-[510px] h-20 py-16 flex justify-start items-center gap-12 border-b-2"
+                className={`w-full md:w-[510px] min-h-20 py-16 flex justify-start items-center gap-4 sm:gap-8 md:gap-16 ${
+                  idx === events.length - 1 ? "" : "border-b-2"
+                }`}
               >
-                <p className="w-16 text-3xl font-bold">{event.date}</p>
-                <p className="text-xl font-normal">{event.title}</p>
+                <p className="w-16 text-3xl md:text-4xl font-bold">
+                  {event.date}
+                </p>
+                <p className="text-lg md:text-3xl font-normal">{event.title}</p>
               </li>
             ))}
           </ul>
         </div>
       </Container>
-    </MainContainer>
+    </div>
   );
 };
