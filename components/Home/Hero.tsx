@@ -1,6 +1,6 @@
 "use client";
 
-import { banner, bnsLogo } from "@/public/assets";
+import { banner, bnsLogo } from "@/lib/assets";
 import {
   BackgroundImg,
   Button,
