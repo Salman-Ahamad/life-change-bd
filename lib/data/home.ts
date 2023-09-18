@@ -39,11 +39,11 @@ export const courseInfoData: ICardData[] = [
 
 export const eventsData: IEventsData[] = [
   {
-    date: "19 FEB",
+    date: "19 JAN",
     title: "WE HELD FREE TRAINING FOR DIGITAL MARKETING",
   },
   {
-    date: "02 MAR",
+    date: "02 FEB",
     title: "WE HELD FREE TRAINING FOR BASIC SHARE MARKET KNOWLEDGE",
   },
   {

@@ -1,29 +1,31 @@
 "use client";
 
 import { eventsData } from "@/lib/data";
-import { Container, MainContainer, Title } from "@/universal";
+import { Container, Label, MainContainer, Title } from "@/universal";
 import { FC } from "react";
 
 export const UpComingEvents: FC = () => (
-  <MainContainer bgColor="black">
-    <Container className="text-white pt-8">
+  <MainContainer bgColor="black" className="py-10 lg:py-20 my-10 lg:my-20">
+    <Container className="text-white text-center flex flex-col justify-center items-center gap-5 lg:gap-8">
       <Title variant="H1">UPCOMING EVENTS</Title>
-      <p>
+      <Label>
         MY BUSINESS UNION PLATFORM GIVES YOU A CORPORATE ENVIRONMENT AND
         HELPFULL DIGITAL MARKETING COMMUNITY
-      </p>
-      <div>
-        <ul>
-          {eventsData.map(({ date, title }, idx) => (
-            <li
-              key={idx}
-              className="w-full md:w-[510px] h-20 py-16 flex justify-start items-center gap-12 border-b-2"
-            >
-              <p className="w-16 text-3xl font-bold">{date}</p>
-              <p className="text-xl font-normal">{title}</p>
-            </li>
-          ))}
-        </ul>
+      </Label>
+      <div className="">
+        {eventsData.map(({ date, title }, idx) => (
+          <div
+            key={idx}
+            className="w-full max-w-[510px] border-b-2 grid grid-cols-4 py-5"
+          >
+            <p className="w-16 text-2xl lg:text-3xl font-bold col-span-1">
+              {date}
+            </p>
+            <p className="text-base md:text-lg lg:text-xl font-poppins text-start col-span-3">
+              {title}
+            </p>
+          </div>
+        ))}
       </div>
     </Container>
   </MainContainer>
