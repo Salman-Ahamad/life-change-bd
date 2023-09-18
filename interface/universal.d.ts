@@ -36,6 +36,10 @@ export interface IButton extends IChildrenWithClassName {
   variant?: "primary" | "secondary" | "accent";
 }
 
+export interface ILinkButton extends IButton {
+  href: string;
+}
+
 export interface IBgContainer
   extends IChildrenWithClassName,
     IBackgroundImage {}
