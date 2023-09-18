@@ -2,6 +2,7 @@
 
 import {
   About,
+  FAQ,
   Hero,
   OurServices,
   PopularCourses,
@@ -18,6 +19,7 @@ const Home = () => (
     <PopularCourses />
     <OurServices />
     <UpComingEvents />
+    <FAQ />
   </main>
 );
 export default Home;

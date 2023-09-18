@@ -101,7 +101,7 @@ export const FAQ = () => {
           contact us.
         </p>
       </div>
-      <div className="mt-14 max-w-2xl mx-auto">
+      <div className="mt-14 w-full md:max-w-5xl mx-auto">
         {faqsList.map((item, idx) => (
           <FaqsCard key={idx} faqsList={item} />
         ))}
