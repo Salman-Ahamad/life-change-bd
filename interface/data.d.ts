@@ -11,3 +11,8 @@ export interface IEventsData {
   date: string;
   title: string;
 }
+
+export interface IFooterData {
+  title: string;
+  option: string[];
+}

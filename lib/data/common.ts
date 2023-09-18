@@ -1,4 +1,4 @@
-import { ILinkLabel } from "@/interface";
+import { IFooterData, ILinkLabel } from "@/interface";
 
 export const commonNavItems: ILinkLabel[] = [
   {
@@ -18,3 +18,14 @@ export const commonNavItems: ILinkLabel[] = [
     link: "/",
   },
 ];
+
+export const footerItems: IFooterData = {
+  title: "COMPANY",
+  option: [
+    "Careers",
+    "Contact Us",
+    "Terms and conditions",
+    "Privacy Policy",
+    "cancellation and refund policy",
+  ],
+};
