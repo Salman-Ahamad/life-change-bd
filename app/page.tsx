@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  About,
   Header,
   Hero,
   OurServices,
@@ -12,6 +13,7 @@ const Home = () => (
   <main>
     <Header />
     <Hero />
+    <About />
     <PopularCourses />
     <OurServices />
     <UpcommingEvents />
