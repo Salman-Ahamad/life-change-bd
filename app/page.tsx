@@ -25,6 +25,5 @@ const Home = () => (
       </Container>
     </MainContainer>
   </>
-);
 
 export default Home;
