@@ -8,7 +8,7 @@ import {
   UpComingEvents,
 } from "@/components/Home";
 import { Header } from "@/components/common/Header";
-import { commonNavItems } from "@/public/data";
+import { commonNavItems } from "@/lib/data";
 
 const Home = () => (
   <main>

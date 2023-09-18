@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 
 import { INav } from "@/interface";
-import { bulletList, close } from "@/public/assets";
+import { bulletList, close } from "@/lib/assets";
 import { LinkButton } from "@/universal";
 import { Brand } from "..";
 
