@@ -16,71 +16,84 @@ const Nav: FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   return (
-    <nav className="items-center py-5 md:py-4 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:justify-between md:space-x-6">
-      <div className="w-full flex md:justify-between items-center gap-14">
-        <div className="w-full flex justify-between md:justify-start items-center">
-          <Brand />
-          {/* Mobile Menu | hidden in desktop version*/}
-          <button
-            className="text-gray-500 outline-none md:hidden"
-            onClick={() => setToggleMenu(!toggleMenu)}
-          >
-            {toggleMenu ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-        <ul
-          className={`flex-1 justify-between mt-12 md:flex md:gap-4 md:mt-0 ${
-            toggleMenu ? "" : "hidden"
-          }`}
+    <nav className="relative items-center pt-5 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6 md:justify-between">
+      <div className="flex justify-between">
+        <Brand />
+
+        {/* Mobile Button */}
+        <button
+          className="text-white outline-none md:hidden"
+          onClick={() => setToggleMenu(!toggleMenu)}
         >
-          <li className="order-2 pb-5 md:pb-0 md:flex md:items-center gap-4">
-            <Button>SubAdmin Login</Button>
-          </li>
-          <li className="order-3 pb-5 md:pb-0 md:flex md:items-center gap-4">
-            <Button>Admin Login</Button>
-          </li>
-          <div className="order-1 flex-1 justify-center items-center space-y-5 md:flex md:space-x-6 md:space-y-0">
-            {nav.map((item, idx) => (
-              <li
-                className="text-white hover:text-indigo-500 text-2xl font-normal transition-all ease-in-out delay-75"
-                key={idx}
-              >
-                <Link href={item.path}>{item.title}</Link>
-              </li>
-            ))}
-          </div>
-        </ul>
+          {toggleMenu ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
+        </button>
       </div>
+      <ul
+        className={`flex-1 justify-between mt-12 md:text-sm md:font-medium md:flex md:mt-0 ${
+          toggleMenu
+            ? "absolute inset-x-0 px-4 border-b bg-black md:border-none md:static"
+            : "hidden"
+        }`}
+      >
+        <div className="items-center space-y-5 md:flex md:space-x-6 md:space-y-0 md:ml-12">
+          {nav.map((item, idx) => (
+            <li
+              className="text-white hover:text-indigo-500 text-2xl font-normal transition-all ease-in-out delay-75"
+              key={idx}
+            >
+              <a href={item.path}>{item.title}</a>
+            </li>
+          ))}
+        </div>
+        <div className="flex gap-4">
+          <li className="order-2 py-5 md:py-0">
+            <Link
+              href="/"
+              className="py-2 px-5 rounded-lg font-medium text-white text-center hover:bg-indigo-500 active:bg-indigo-500 duration-150 block md:py-3 md:inline border"
+            >
+              SubAdmin Login
+            </Link>
+          </li>
+          <li className="order-2 py-5 md:py-0">
+            <Link
+              href="/"
+              className="py-2 px-5 rounded-lg font-medium text-white text-center hover:bg-indigo-500 active:bg-indigo-500 duration-150 block md:py-3 md:inline border"
+            >
+              Admin Login
+            </Link>
+          </li>
+        </div>
+      </ul>
     </nav>
   );
 };

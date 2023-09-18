@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { bnsLogo } from "@/public/assets";
 
 const Brand = () => (
   <Link href="/" className="text-white">
-    <Image src="/logo.png" width={60} height={24} alt="Life Change Bd" />
+    <Image src={bnsLogo} width={60} height={24} alt="Life Change Bd" />
   </Link>
 );
 
