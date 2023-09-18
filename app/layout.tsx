@@ -13,11 +13,7 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: IChildren) => (
   <html lang="en">
-    <body className={inter.className}>
-      {/* header */}
-      <main>{children}</main>
-      {/* Header */}
-    </body>
+    <body className={inter.className}>{children}</body>
   </html>
 );
 

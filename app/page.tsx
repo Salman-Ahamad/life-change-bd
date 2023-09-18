@@ -1,12 +1,20 @@
 "use client";
 
-import { About, Hero } from "@/components/Home";
+import {
+  Header,
+  Hero,
+  OurServices,
+  PopularCourses,
+  UpcommingEvents,
+} from "@/components/Home";
 
 const Home = () => (
   <main>
+    <Header />
     <Hero />
-    <About />
+    <PopularCourses />
+    <OurServices />
+    <UpcommingEvents />
   </main>
 );
-
 export default Home;
