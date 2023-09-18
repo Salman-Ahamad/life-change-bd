@@ -1,13 +1,12 @@
 "use client";
 
+import { bnsLogo } from "@/lib/assets";
 import Image from "next/image";
 import Link from "next/link";
-import { bnsLogo } from "@/public/assets";
+import { FC } from "react";
 
-const Brand = () => (
-  <Link href="/" className="text-white">
+export const Brand: FC = () => (
+  <Link href="/">
     <Image src={bnsLogo} width={60} height={24} alt="Life Change Bd" />
   </Link>
 );
-
-export default Brand;

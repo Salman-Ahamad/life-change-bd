@@ -1,6 +1,6 @@
 "use client";
 
-import { avatar, books, time } from "@/public/assets";
+import { avatar, books, time } from "@/lib/assets";
 import { Container, MainContainer } from "@/universal";
 import Image from "next/image";
 import { FC } from "react";

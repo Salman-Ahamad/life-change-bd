@@ -14,7 +14,7 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
 }) => (
   <main
     className={twMerge(
-      `relative w-full ${overflow && "overflow-x-hidden"}`,
+      `relative w-full ${overflow && "overflow-hidden"}`,
       className
     )}
   >

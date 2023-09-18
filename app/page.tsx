@@ -1,22 +1,23 @@
 "use client";
 
 import {
-  FAQ,
-  Header,
+  About,
   Hero,
   OurServices,
   PopularCourses,
-  UpcommingEvents,
+  UpComingEvents,
 } from "@/components/Home";
+import { Header } from "@/components/common/Header";
+import { commonNavItems } from "@/lib/data";
 
 const Home = () => (
   <main>
-    <Header />
+    <Header navData={commonNavItems} />
     <Hero />
+    <About />
     <PopularCourses />
     <OurServices />
-    <UpcommingEvents />
-    <FAQ />
+    <UpComingEvents />
   </main>
 );
 export default Home;
