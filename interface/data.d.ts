@@ -21,3 +21,8 @@ export interface IFooterData {
     copyright?: string;
   }[];
 }
+
+export interface IFaqList {
+  q: string;
+  a: string;
+}

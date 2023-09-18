@@ -1,4 +1,4 @@
-import { ICardData, IEventsData } from "@/interface";
+import { ICardData, IEventsData, IFaqList } from "@/interface";
 import { course1, course2, course3, serviceImg1, serviceImg2 } from "../assets";
 
 export const servicesData: ICardData[] = [
@@ -39,15 +39,38 @@ export const courseInfoData: ICardData[] = [
 
 export const eventsData: IEventsData[] = [
   {
-    date: "19 FEB",
+    date: "19 JAN",
     title: "WE HELD FREE TRAINING FOR DIGITAL MARKETING",
   },
   {
-    date: "02 MAR",
+    date: "02 FEB",
     title: "WE HELD FREE TRAINING FOR BASIC SHARE MARKET KNOWLEDGE",
   },
   {
     date: "20 MAR",
     title: "WE HELD FREE TRAINING FOR BASIC CRYPTOCURRENCY KNOWLEDGE",
+  },
+];
+
+export const faqsList: IFaqList[] = [
+  {
+    q: "What is My Business Union platform?",
+    a: "My Business Union Platform is a platform where you will be able to enhance your performance through learning As you show your talents on Facebook, Instagram and tiktok etc like that you could able to show your talents in Yesnet Digital E-learning Platform as it is a digital marketing platform where you can learn. Besides learning you will be able to improve your work ability or performance.",
+  },
+  {
+    q: "Do we need any admission fees ?",
+    a: "Yes you need to pay admission fees for taking the course , product or services",
+  },
+  {
+    q: "Can we do this from the comfort of our home ?",
+    a: "Yes you can take this course or services from your home only because it's is a online process",
+  },
+  {
+    q: "What kind of documents and gadgets do we need to do this Course ?",
+    a: "There's not much requirements you will need for doing this Courses you just need an electronic device like a mobile or a laptop, a steady internet connection.",
+  },
+  {
+    q: "Is this a part-time or a full-time Work?",
+    a: "It's not a work or its not a job it's only a learning and earning process you need to join here as a learner besides of learning you will be able to earn selling some courses goods or services",
   },
 ];

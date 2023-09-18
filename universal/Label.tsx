@@ -4,26 +4,16 @@ import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { ILabel } from "@/interface";
-import { findFontWeight } from "./constant";
 
-export const Label: FC<ILabel> = ({
-  children,
-  className,
-  fontWeight = "500",
-  uppercase,
-}) => {
-  const weight = findFontWeight(fontWeight);
-
-  return (
-    <label
-      className={twMerge(
-        `tracking-[2px] text-[12px] md:text-[14px] leading-[22px] md:leading-[18px] text-center ${weight}  ${
-          uppercase && "uppercase"
-        }`,
-        className
-      )}
-    >
-      {children}
-    </label>
-  );
-};
+export const Label: FC<ILabel> = ({ children, className, uppercase }) => (
+  <label
+    className={twMerge(
+      `text-lg md:text-xl lg:text-2xl leading-[22px] md:leading-[28px] text-center font-poppins ${
+        uppercase && "uppercase"
+      }`,
+      className
+    )}
+  >
+    {children}
+  </label>
+);
