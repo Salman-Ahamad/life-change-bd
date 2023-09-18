@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  FAQ,
   Header,
   Hero,
   OurServices,
@@ -15,6 +16,7 @@ const Home = () => (
     <PopularCourses />
     <OurServices />
     <UpcommingEvents />
+    <FAQ />
   </main>
 );
 export default Home;
