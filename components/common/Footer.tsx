@@ -33,6 +33,7 @@ export const Footer: FC = () => (
         <Title variant="H5" className="text-start">
           {footerItems.title}
         </Title>
+
         {footerItems.option.map((item, i) => (
           <CommonText key={i} className="text-white max-w-[200px]">
             {item}
