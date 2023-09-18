@@ -14,7 +14,7 @@ export const ImageCard: FC<IImageCard> = ({
   <article
     className={`w-full h-80 mx-auto mt-4 shadow-lg rounded-md duration-300 hover:shadow-sm overflow-hidden relative ${
       (cardWidth === "3/1" && "max-w-sm") ||
-      (cardWidth === "2/1" && "max-w-[50%]") ||
+      (cardWidth === "2/1" && "max-w-xl") ||
       (cardWidth === "1" && "max-w-full")
     }`}
   >
@@ -28,7 +28,6 @@ export const ImageCard: FC<IImageCard> = ({
       <div className="absolute bottom-0 w-full flex flex-col items-center justify-center gap-1.5 py-3 px-2 bg-primary bg-opacity-95 text-center">
         <h3 className="text-gray-50 text-2xl">{title}</h3>
         <Button variant="secondary">{fees}</Button>
-        {/* <p className="text-gray-50 text-sm">{fees}</p> */}
       </div>
     </Link>
   </article>

@@ -1,24 +1,27 @@
 "use client";
 
 import { servicesData } from "@/lib/data";
-import { Container, MainContainer, Title } from "@/universal";
+import { CommonText, Container, MainContainer, Title } from "@/universal";
 import { FC } from "react";
 import { ImageCard } from "..";
 
 export const OurServices: FC = () => (
   <MainContainer>
-    <Container>
-      <Title variant="H1" className="mb-12 mt-6 md:mt-60">
+    <Container className="mt-6 md:mt-60">
+      <Title variant="H1" className="mb-12">
         Our Services
       </Title>
-      <div className="justify-center items-center gap-6 sm:grid sm:grid-cols-2 sm:space-y-0">
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
         {servicesData.map((service, idx) => (
           <ImageCard key={idx} {...service} cardWidth="2/1" />
         ))}
       </div>
+
       <div className="my-10">
-        <Title variant="H3">Online Health Consultation</Title>
-        <p>
+        <Title variant="H3" className="text-start">
+          Online Health Consultation
+        </Title>
+        <CommonText>
           You may avail online consultancy with doctors on My Business
           Union.Normal medicines can be provided by the doctors if it is
           necessity. Doctors will not give any prescribed medication without any
@@ -32,11 +35,14 @@ export const OurServices: FC = () => (
           your disease. All guidance will be provided verbally. You can be
           completely cured by taking the right treatment from the right place on
           the advice of the doctors on My Business Union.
-        </p>
+        </CommonText>
       </div>
+
       <div className="my-10">
-        <Title variant="H3">Online Astrology Consultation</Title>
-        <p>
+        <Title variant="H3" className="text-start">
+          Online Astrology Consultation
+        </Title>
+        <CommonText>
           My Business Union astro consultancy offers you astrology consultancy
           in online i.e. your fortune is forecasted by reading the lines of your
           palm through online.My Business Union astro consultancy will listen
@@ -49,7 +55,7 @@ export const OurServices: FC = () => (
           your life. No rudraksha and maduli etc, are given or sold in online
           astro consultancy on My Business Union. This consultation will give
           you a stress free life in future.
-        </p>
+        </CommonText>
       </div>
     </Container>
   </MainContainer>

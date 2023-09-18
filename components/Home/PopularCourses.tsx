@@ -11,7 +11,7 @@ export const PopularCourses: FC = () => (
       <Title variant="H1" className="mb-12 text-center">
         Popular Courses
       </Title>
-      <div className="flex justify-center items-center flex-wrap pb-16 md:pb-0 md:-mb-36">
+      <div className="flex justify-center items-center flex-wrap gap-5 pb-16 md:pb-0 md:-mb-36">
         {courseInfoData.map((course, idx) => (
           <ImageCard key={idx} {...course} />
         ))}
