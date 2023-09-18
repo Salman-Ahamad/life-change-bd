@@ -14,5 +14,10 @@ export interface IEventsData {
 
 export interface IFooterData {
   title: string;
-  option: string[];
+  policy: string[];
+  option: {
+    title?: string;
+    text?: string;
+    copyright?: string;
+  }[];
 }
