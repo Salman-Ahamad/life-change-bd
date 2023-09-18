@@ -1,22 +1,13 @@
-import { IClassName, ILinkIcon, ILinkLabel } from "./common";
+import { StaticImageData } from "next/image";
 
-export interface IAppDownloads extends ILinkIcon {
-  mobIcon: StaticImageData;
-}
-
-export interface ITailored extends IClassName {
-  img: StaticImageData;
+export interface ICard {
   title: string;
-  des: string;
-  width?: "sm" | "md";
+  fees: string;
+  thumbnail: StaticImageData;
+  href: string;
 }
 
-export interface ICardData {
-  id: number;
-  imageURL: StaticImageData | string;
-}
-
-export interface IMenuItem extends ILinkLabel {
-  label: string;
-  option?: IMenuOption[];
+export interface IEventsData {
+  date: string;
+  title: string;
 }
