@@ -8,6 +8,9 @@ import googlePlay from "./googlePlay.svg";
 import pinterest from "./pinterest.svg";
 import time from "./time.png";
 import twitter from "./twitter.svg";
+import group from "./groupdiscuss.png";
+import helping from "./helpinghand.png";
+import globe from "./globe.png";
 
 export {
   appStore,
@@ -20,4 +23,7 @@ export {
   pinterest,
   time,
   twitter,
+  group,
+  helping,
+  globe,
 };
