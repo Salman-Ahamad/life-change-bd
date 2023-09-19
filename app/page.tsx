@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "@/components";
 import {
   About,
   FAQ,
@@ -20,6 +21,7 @@ const Home = () => (
     <OurServices />
     <UpComingEvents />
     <FAQ />
+    <Footer />
   </main>
 );
 export default Home;

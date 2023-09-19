@@ -7,8 +7,8 @@ import Image from "next/image";
 import { FC } from "react";
 import { AppDownload } from ".";
 
-export const Footer: FC<{ ignorePath: boolean }> = ({ ignorePath }) => (
-  <footer className={`${ignorePath && "hidden"}`}>
+export const Footer: FC = () => (
+  <footer>
     <MainContainer bgColor="black" className="text-white py-20">
       <section className="flex flex-col md:flex-row justify-center md:justify-between items-start gap-10 md:gap-40 px-5 2xl:px-0">
         <div className="flex flex-col justify-start items-start gap-5">
