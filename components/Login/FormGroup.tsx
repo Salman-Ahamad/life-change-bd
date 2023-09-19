@@ -1,8 +1,11 @@
 "use client";
 
-import { Button, CommonText, Title } from "@/universal";
 import { Form, Formik, FormikHelpers } from "formik";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
+
+import { Button, CommonText, Title } from "@/universal";
+import { getRandomNumber } from "@/utils";
 import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
@@ -11,27 +14,40 @@ const validationSchema = Yup.object().shape({
     .matches(/^\d{11}$/, "Phone number must be 11 digits"),
   password: Yup.string()
     .required("Password is required")
-    .min(6, "Password must be at least 6 characters long")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      "Password must contain at least one letter, one number, and one special character"
-    ),
+    .min(6, "Password must be at least 6 characters long"),
+  randomNum: Yup.string().required("Password is required"),
 });
 
 interface EmailValue {
   phone: string;
   password: string;
+  randomNum: string;
 }
 
 export const FormGroup = () => {
-  const initialValues: EmailValue = { phone: "", password: "" };
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const initialValues: EmailValue = { phone: "", password: "", randomNum: "" };
+
+  useEffect(() => {
+    const randomNum = getRandomNumber(20, 50);
+    const randomNum2 = getRandomNumber(1, 20);
+    setNum1(randomNum);
+    setNum2(randomNum2);
+  }, []);
 
   const handleSubmit = (
-    { phone, password }: EmailValue,
-    { resetForm }: FormikHelpers<EmailValue>
+    { phone, password, randomNum }: EmailValue,
+    { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
   ) => {
-    console.log(phone, password);
-    resetForm();
+    if (Number(randomNum) !== num1 + num2) {
+      setFieldError("randomNum", "Please give correct answer");
+      setSubmitting(false);
+    } else {
+      console.log({ phone, password });
+
+      resetForm();
+    }
   };
 
   return (
@@ -42,7 +58,9 @@ export const FormGroup = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
-          <Title variant="H3">Login</Title>
+          <Title variant="H3" className="mb-10">
+            Login
+          </Title>
 
           <CommonText className="mt-2.5">
             Phone Number with Country code
@@ -51,7 +69,7 @@ export const FormGroup = () => {
             isSubmitting={isSubmitting}
             name="phone"
             placeholder="Enter Your Phone"
-            type="phone"
+            type="text"
           />
           <CommonText className="mt-2.5">Password</CommonText>
           <Input
@@ -61,8 +79,15 @@ export const FormGroup = () => {
             type="password"
           />
 
-          <CommonText className="mt-2.5">10 + 20 = ?</CommonText>
-          <input className="text-black text-base md:text-lg w-full border border-primary focus:border-primary focus:outline-none rounded-[5px] py-2.5 px-3" />
+          <CommonText className="mt-2.5">
+            {num1 || 0} + {num2 || 0} = ?
+          </CommonText>
+          <Input
+            isSubmitting={isSubmitting}
+            name="randomNum"
+            placeholder=""
+            type="text"
+          />
 
           <Button
             variant="primary"
