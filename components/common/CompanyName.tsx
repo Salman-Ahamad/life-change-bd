@@ -3,5 +3,5 @@
 import React, { FC } from "react";
 
 export const CompanyName: FC = () => {
-  return <span>Life Change Bd</span>;
+  return <p>Life Change Bd</p>;
 };
