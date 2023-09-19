@@ -1,2 +1,3 @@
 export * from "./FormGroup";
-export * from "./SignUpFrom";
+export * from "./RegisterBtn";
+export * from "./SignUpForm";

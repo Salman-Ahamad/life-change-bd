@@ -4,9 +4,9 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
-import { Button, CTA, Title } from "@/universal";
+import { CTA } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { Input } from "..";
+import { Input, RegisterBtn } from "..";
 
 const validationSchema = Yup.object().shape({
   phone: Yup.string()
@@ -58,10 +58,6 @@ export const FormGroup = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form>
-          <Title variant="H3" className="mb-10">
-            Login
-          </Title>
-
           <CTA className="mt-2.5">Phone Number with Country code</CTA>
           <Input
             isSubmitting={isSubmitting}
@@ -87,14 +83,7 @@ export const FormGroup = () => {
             type="text"
           />
 
-          <Button
-            variant="primary"
-            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full mt-5"
-            type="submit"
-            disabled={!isValid || isSubmitting}
-          >
-            Login
-          </Button>
+          <RegisterBtn disabled={!isValid || isSubmitting} />
         </Form>
       )}
     </Formik>

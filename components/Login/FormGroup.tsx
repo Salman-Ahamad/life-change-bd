@@ -89,7 +89,7 @@ export const FormGroup = () => {
 
           <Button
             variant="primary"
-            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full mt-5"
+            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full mt-2.5"
             type="submit"
             disabled={!isValid || isSubmitting}
           >
