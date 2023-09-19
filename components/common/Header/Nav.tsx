@@ -7,7 +7,7 @@ import { FC, useState } from "react";
 import { INav } from "@/interface";
 import { bulletList, close } from "@/lib/assets";
 import { LinkButton } from "@/universal";
-import { Logo } from ".";
+import { Logo } from "..";
 
 export const Nav: FC<INav> = ({ navData }) => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
