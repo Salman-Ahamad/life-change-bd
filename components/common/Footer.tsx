@@ -69,10 +69,3 @@ export const Footer: FC = () => (
     </MainContainer>
   </footer>
 );
-
-const option = [
-  {
-    title: "",
-    text: "",
-  },
-];

@@ -3,9 +3,9 @@
 import { banner, bnsLogo } from "@/lib/assets";
 import {
   BackgroundImg,
-  Button,
   CommonText,
   Container,
+  LinkButton,
   Title,
 } from "@/universal";
 import Image from "next/image";
@@ -31,8 +31,8 @@ export const Hero: FC = () => (
         </CommonText>
 
         <div className="flex justify-center lg:justify-start items-center gap-1.5 w-full">
-          <Button>Login</Button>
-          <Button>SignUp</Button>
+          <LinkButton href="/login">Login</LinkButton>
+          <LinkButton href="/signup">SignUp</LinkButton>
         </div>
       </div>
     </Container>
