@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/universal";
+import { Button, CommonText, Title } from "@/universal";
 import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Input } from "..";
@@ -41,22 +41,32 @@ export const FormGroup = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({ isSubmitting, isValid }) => (
-        <Form>
+        <Form className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
+          <Title variant="H3">Login</Title>
+
+          <CommonText className="mt-2.5">
+            Phone Number with Country code
+          </CommonText>
           <Input
             isSubmitting={isSubmitting}
             name="phone"
             placeholder="Enter Your Phone"
             type="phone"
           />
+          <CommonText className="mt-2.5">Password</CommonText>
           <Input
             isSubmitting={isSubmitting}
             name="password"
             placeholder="Enter Your Password"
             type="password"
           />
+
+          <CommonText className="mt-2.5">10 + 20 = ?</CommonText>
+          <input className="text-black text-base md:text-lg w-full border border-primary focus:border-primary focus:outline-none rounded-[5px] py-2.5 px-3" />
+
           <Button
             variant="primary"
-            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full"
+            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full mt-5"
             type="submit"
             disabled={!isValid || isSubmitting}
           >

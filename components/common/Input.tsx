@@ -2,18 +2,11 @@
 
 import { IInput } from "@/interface";
 import { Field } from "formik";
+import { FC } from "react";
 import { FormikError } from "./FormikError";
 
-export const Input = ({
-  as,
-  name,
-  type,
-  placeholder,
-  withBtn,
-  btnLabel = "Sign Up",
-  isSubmitting,
-}: IInput) => {
-  const allClassName = `outline-none text-subtle-contrast text-base md:text-lg w-full border border-primary rounded-[5px] py-6 px-3 ${
+export const Input: FC<IInput> = ({ as, name, type, placeholder }) => {
+  const allClassName = `outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-6 px-3 ${
     as === "textarea" ? "h-full" : "h-7"
   }`;
 
