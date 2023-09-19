@@ -60,10 +60,10 @@ const TermsConditions = () => {
           <li className="pb-4">
             8)If any current Student of our company offers any another work
             proposal to another Student of our company then without any previous
-            notice his or her I'd will be deactivated if he or she is caught
-            doing this kind of activity. Besides if anyone speaks loudly or
-            misbehaves with seniors then also he or she will be expelled without
-            giving any previous notice.
+            notice his or her I&apos;d will be deactivated if he or she is
+            caught doing this kind of activity. Besides if anyone speaks loudly
+            or misbehaves with seniors then also he or she will be expelled
+            without giving any previous notice.
           </li>
           <li className="pb-4">
             9)The company does not provide any kinds of jobs .The company mainly
