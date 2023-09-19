@@ -2,11 +2,12 @@
 
 import { Container, MainContainer } from "@/universal";
 import { FC } from "react";
+import { FormGroup } from "./FormGroup";
 
 export const LoginFrom: FC = () => (
   <MainContainer>
-    <Container>
-      <h1>Login From</h1>
+    <Container className="h-screen w-full flex justify-center items-center">
+      <FormGroup />
     </Container>
   </MainContainer>
 );
