@@ -1,7 +1,5 @@
 "use client";
 
-import React, { FC } from "react";
+import { FC } from "react";
 
-export const CompanyName: FC = () => {
-  return <p>Life Change Bd</p>;
-};
+export const CompanyName: FC = () => <p>Life Change Bd</p>;
