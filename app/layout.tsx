@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<IChildren> = ({ children }) => {
   const ignorePath = useIgnorePate();
-
   return (
     <html lang="en">
       <body className={inter.className}>
