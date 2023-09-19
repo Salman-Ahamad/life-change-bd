@@ -1,6 +1,6 @@
 "use client";
 
-import { Footer } from "@/components";
+import { Footer, Header } from "@/components";
 import {
   About,
   FAQ,
@@ -9,7 +9,6 @@ import {
   PopularCourses,
   UpComingEvents,
 } from "@/components/Home";
-import { Header } from "@/components/common/Header";
 import { commonNavItems } from "@/lib/data";
 
 const Home = () => (
@@ -24,4 +23,5 @@ const Home = () => (
     <Footer />
   </main>
 );
+
 export default Home;
