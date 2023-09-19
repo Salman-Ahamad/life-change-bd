@@ -18,6 +18,7 @@ export const Support: FC = () => {
             <Link href="/" className="border-b">
               For counselling Support group
             </Link>
+            <hr />
             <Link href="/">My Business UnionTrainer, TL, STL</Link>
           </div>
         </div>
