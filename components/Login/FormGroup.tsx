@@ -4,7 +4,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
-import { Button, CommonText, Title } from "@/universal";
+import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
 import { Input } from "..";
 
@@ -15,7 +15,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters long"),
-  randomNum: Yup.string().required("Password is required"),
+  randomNum: Yup.string().required("Math is required"),
 });
 
 interface EmailValue {
@@ -57,21 +57,19 @@ export const FormGroup = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({ isSubmitting, isValid }) => (
-        <Form className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
+        <Form>
           <Title variant="H3" className="mb-10">
             Login
           </Title>
 
-          <CommonText className="mt-2.5">
-            Phone Number with Country code
-          </CommonText>
+          <CTA className="mt-2.5">Phone Number with Country code</CTA>
           <Input
             isSubmitting={isSubmitting}
             name="phone"
             placeholder="Enter Your Phone"
             type="text"
           />
-          <CommonText className="mt-2.5">Password</CommonText>
+          <CTA className="mt-2.5">Password</CTA>
           <Input
             isSubmitting={isSubmitting}
             name="password"
@@ -79,9 +77,9 @@ export const FormGroup = () => {
             type="password"
           />
 
-          <CommonText className="mt-2.5">
+          <CTA className="mt-2.5">
             {num1 || 0} + {num2 || 0} = ?
-          </CommonText>
+          </CTA>
           <Input
             isSubmitting={isSubmitting}
             name="randomNum"
