@@ -6,23 +6,31 @@ import * as Yup from "yup";
 import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d{11}$/, "Phone number must be 11 digits"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters long")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      "Password must contain at least one letter, one number, and one special character"
+    ),
 });
 
 interface EmailValue {
-  email: string;
+  phone: string;
+  password: string;
 }
 
 export const FormGroup = () => {
-  const initialValues: EmailValue = { email: "" };
+  const initialValues: EmailValue = { phone: "", password: "" };
 
   const handleSubmit = (
-    { email }: EmailValue,
+    { phone, password }: EmailValue,
     { resetForm }: FormikHelpers<EmailValue>
   ) => {
-    console.log(email);
+    console.log(phone, password);
     resetForm();
   };
 
@@ -36,13 +44,19 @@ export const FormGroup = () => {
         <Form>
           <Input
             isSubmitting={isSubmitting}
-            name="email"
-            placeholder="Enter Your Email"
-            type="email"
+            name="phone"
+            placeholder="Enter Your Phone"
+            type="phone"
+          />
+          <Input
+            isSubmitting={isSubmitting}
+            name="password"
+            placeholder="Enter Your Password"
+            type="password"
           />
           <Button
             variant="primary"
-            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed"
+            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full"
             type="submit"
             disabled={!isValid || isSubmitting}
           >
