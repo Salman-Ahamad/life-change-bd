@@ -7,7 +7,7 @@ import { FC, useState } from "react";
 import { INav } from "@/interface";
 import { bulletList, close } from "@/lib/assets";
 import { LinkButton } from "@/universal";
-import { Brand } from "..";
+import { Logo } from ".";
 
 export const Nav: FC<INav> = ({ navData }) => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
@@ -15,7 +15,7 @@ export const Nav: FC<INav> = ({ navData }) => {
   return (
     <nav className="relative items-center py-5 px-4 mx-auto sm:px-8 lg:flex lg:space-x-6 lg:justify-between">
       <div className="flex justify-between ">
-        <Brand />
+        <Logo />
 
         {/* Mobile Button */}
         <button
