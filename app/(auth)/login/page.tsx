@@ -1,6 +1,6 @@
 "use client";
 
-import { FormGroup } from "@/components";
+import { LoginForm } from "@/components";
 import { loginBanner } from "@/lib/assets";
 import { CommonText } from "@/universal";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { FC } from "react";
 const Login: FC = () => (
   <main className="h-screen flex justify-between items-center">
     <section className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
-      <FormGroup />
+      <LoginForm />
 
       <Link href="/forgot-password">
         <CommonText className="mt-2.5 text-orange-400">

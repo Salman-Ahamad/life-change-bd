@@ -1,3 +1,2 @@
-export * from "./Login";
-export * from "./SignUp";
+export * from "./auth";
 export * from "./common";
