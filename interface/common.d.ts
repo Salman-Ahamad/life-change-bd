@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { ICardData, IChildrenWithClassName } from ".";
+import { ICardData, IChildrenWithClassName, IClassName } from ".";
 
 export type IColor = "black" | "white" | "transparent";
 
