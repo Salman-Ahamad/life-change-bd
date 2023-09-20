@@ -171,15 +171,24 @@ export const FormGroup = () => {
             <CommonText className="pr-5">
               By clicking Register, you agree to My Business Union Learning
               Platform&rsquo;s&nbsp;
-              <Link href="/" className="text-blue-700">
+              <Link
+                href="/terms-conditions"
+                className="text-blue-700 hover:text-warning transition-all delay-75"
+              >
                 terms & conditions
               </Link>
               ,&nbsp;
-              <Link href="/" className="text-blue-700">
+              <Link
+                href="/privacy-policy"
+                className="text-blue-700 hover:text-warning transition-all delay-75"
+              >
                 Privacy Policy
               </Link>
               &nbsp;and
-              <Link href="/" className="text-blue-700">
+              <Link
+                href="/terms-conditions"
+                className="text-blue-700 hover:text-warning transition-all delay-75"
+              >
                 &nbsp;Cookie Policy
               </Link>
             </CommonText>
