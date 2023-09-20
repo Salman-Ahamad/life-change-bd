@@ -1,12 +1,10 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
-import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 import { Input, RegisterBtn } from "@/components";
 import { CTA } from "@/universal";
-import { getRandomNumber } from "@/utils";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -14,7 +12,7 @@ const validationSchema = Yup.object().shape({
   language: Yup.string().required("Language is required"),
   country: Yup.string().required("Country is required"),
   whatsapp: Yup.string()
-    .required("Phone number is required")
+    .required("Whatsapp number is required")
     .matches(/^\d{11}$/, "Whatsapp number must be 11 digits"),
   phone: Yup.string()
     .required("Phone number is required")
@@ -23,7 +21,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters long"),
-  reference: Yup.string().required("Reference is required"),
+  reference: Yup.string().required("Reference id is required"),
 });
 
 interface EmailValue {
@@ -39,8 +37,6 @@ interface EmailValue {
 }
 
 export const FormGroup = () => {
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
   const initialValues: EmailValue = {
     first_name: "",
     last_name: "",
@@ -52,13 +48,6 @@ export const FormGroup = () => {
     password: "",
     reference: "",
   };
-
-  useEffect(() => {
-    const randomNum = getRandomNumber(20, 50);
-    const randomNum2 = getRandomNumber(1, 20);
-    setNum1(randomNum);
-    setNum2(randomNum2);
-  }, []);
 
   const handleSubmit = (
     values: EmailValue,
@@ -75,31 +64,97 @@ export const FormGroup = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({ isSubmitting, isValid }) => (
-        <Form>
-          <CTA className="mt-2.5">Phone Number with Country code</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="phone"
-            placeholder="Enter Your Phone"
-            type="text"
-          />
-          <CTA className="mt-2.5">Password</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="password"
-            placeholder="Enter Your Password"
-            type="password"
-          />
-
-          <CTA className="mt-2.5">
-            {num1 || 0} + {num2 || 0} = ?
-          </CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="randomNum"
-            placeholder=""
-            type="text"
-          />
+        <Form className="flex flex-col justify-center items-center gap-0">
+          <div className="flex justify-center items-center gap-2">
+            <div>
+              <CTA>Enter First Name</CTA>
+              <Input
+                type="text"
+                name="first_name"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your First Name"
+              />
+            </div>
+            <div>
+              <CTA>Enter Last Name</CTA>
+              <Input
+                type="text"
+                name="last_name"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Last Name"
+              />
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div>
+              <CTA>Choose Your Language</CTA>
+              <Input
+                type="text"
+                name="language"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Language"
+              />
+            </div>
+            <div>
+              <CTA>Choose Your Country</CTA>
+              <Input
+                type="text"
+                name="country"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Country"
+              />
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div>
+              <CTA>Enter Whatsapp No</CTA>
+              <Input
+                type="text"
+                name="whatsapp"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Whatsapp No"
+              />
+            </div>
+            <div>
+              <CTA>Enter Phone No</CTA>
+              <Input
+                name="phone"
+                type="text"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Phone No"
+              />
+            </div>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div>
+              <CTA>Enter Gmail Address</CTA>
+              <Input
+                isSubmitting={isSubmitting}
+                name="gmail"
+                placeholder="Enter Your Phone"
+                type="text"
+              />
+            </div>
+            <div>
+              <CTA>Enter Reference No.</CTA>
+              <Input
+                type="text"
+                name="reference"
+                isSubmitting={isSubmitting}
+                placeholder="Enter Your Reference No"
+              />
+            </div>
+          </div>
+          <div>
+            <CTA>Set New Password</CTA>
+            <Input
+              type="password"
+              name="password"
+              isSubmitting={isSubmitting}
+              placeholder="Enter Your Password"
+              className="w-full max-w-full"
+            />
+          </div>
 
           <RegisterBtn disabled={!isValid || isSubmitting} />
         </Form>
