@@ -18,27 +18,63 @@ export const commonNavItems: ILinkLabel[] = [
     link: "/",
   },
 ];
+export const InActiveNavItems: ILinkLabel[] = [
+  {
+    label: "Profile",
+    link: "/",
+  },
+  {
+    label: "Courses",
+    link: "/",
+  },
+  {
+    label: "Referances",
+    link: "/",
+  },
+  {
+    label: "Collect Points",
+    link: "/",
+  },
+  {
+    label: "Earn Reward Points",
+    link: "/",
+  },
+  {
+    label: "Redeem Reward Points",
+    link: "/",
+  },
+  {
+    label: "Messages",
+    link: "/",
+  },
+  {
+    label: "Redeem Partner Training Class",
+    link: "/",
+  },
+  {
+    label: "Photo Zone",
+    link: "/",
+  },
+  {
+    label: "Log Out",
+    link: "/",
+  },
+];
 
 export const footerItems: IFooterData = {
   title: "COMPANY",
-  policy: [
-    "Careers",
-    "Contact Us",
-    "Terms and conditions",
-    "Privacy Policy",
-    "cancellation and refund policy",
-  ],
+  policy: ["Careers", "Contact Us", "Terms and conditions", "Privacy Policy"],
   option: [
     {
       title: "VIRTUAL OFFICE ADDRESS",
       text: "We work DLF Forum, Cybercity, phase lll, gurugram, Haryana 122002.",
     },
     {
-      title: "HEAD OFFICE ADDRESS",
-      text: "55B MIRZA GHALIB STREET PARK STREET, Kol - 16",
+      title: "OFFICE ADDRESS",
+      text: "Kansat, chapainowabgonj,Rajshahi",
     },
     {
-      copyright: `Copyright © 2019 - ${new Date().getFullYear()} My Business Union® All rights reserved.`,
+      copyright: `Copyright © 2019 - ${new Date().getFullYear()} Life Change Bd® All rights reserved.`,
     },
   ],
 };

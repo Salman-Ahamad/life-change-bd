@@ -16,12 +16,12 @@ export const MainContainer: FC<IMainContainer> = ({
     (bgColor === "transparent" && "bg-transparent");
 
   return (
-    <main className={`w-full ${background}`}>
-      <section
+    <section className={`w-full ${background}`}>
+      <div
         className={twMerge(`w-full max-w-[1280px] mx-auto relative`, className)}
       >
         {children}
-      </section>
-    </main>
+      </div>
+    </section>
   );
 };

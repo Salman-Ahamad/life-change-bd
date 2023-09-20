@@ -49,3 +49,11 @@ export interface INav {
 export interface IImageCard extends ICardData {
   cardWidth?: "3/1" | "2/1" | "1";
 }
+
+export interface IPrivacyPolicy {
+  title?: string;
+  content: string[];
+}
+export interface IPrivacyPolicyWithClass extends IPrivacyPolicy {
+  className?: string;
+}

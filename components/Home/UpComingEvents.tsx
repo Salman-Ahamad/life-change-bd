@@ -9,14 +9,14 @@ export const UpComingEvents: FC = () => (
     <Container className="text-white text-center flex flex-col justify-center items-center gap-5 lg:gap-8">
       <Title variant="H1">UPCOMING EVENTS</Title>
       <Label>
-        MY BUSINESS UNION PLATFORM GIVES YOU A CORPORATE ENVIRONMENT AND
-        HELPFULL DIGITAL MARKETING COMMUNITY
+        LIFE CHANGE BD PLATFORM GIVES YOU A CORPORATE ENVIRONMENT AND HELPFULL
+        DIGITAL MARKETING COMMUNITY
       </Label>
       <div className="">
         {eventsData.map(({ date, title }, idx) => (
           <div
             key={idx}
-            className="w-full max-w-[510px] border-b-2 grid grid-cols-4 py-5"
+            className="w-full max-w-[510px] border-b-2 grid grid-cols-4 py-5 items-center"
           >
             <p className="w-16 text-2xl lg:text-3xl font-bold col-span-1">
               {date}
