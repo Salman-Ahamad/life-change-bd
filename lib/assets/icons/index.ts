@@ -11,6 +11,7 @@ import twitter from "./twitter.svg";
 import group from "./groupdiscuss.png";
 import helping from "./helpinghand.png";
 import globe from "./globe.png";
+import plus from "./plus.png";
 
 export {
   appStore,
@@ -26,4 +27,5 @@ export {
   group,
   helping,
   globe,
+  plus,
 };
