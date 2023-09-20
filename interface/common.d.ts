@@ -27,12 +27,10 @@ export interface ILinkLabel {
   label: string;
 }
 
-export interface IInput {
+export interface IInput extends IClassName {
   name: string;
   type?: HTMLInputTypeAttribute;
   placeholder: string;
-  withBtn?: boolean;
-  btnLabel?: string;
   isSubmitting?: boolean;
   as?: "textarea";
 }

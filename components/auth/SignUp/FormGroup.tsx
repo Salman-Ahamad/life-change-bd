@@ -9,25 +9,49 @@ import { CTA } from "@/universal";
 import { getRandomNumber } from "@/utils";
 
 const validationSchema = Yup.object().shape({
+  first_name: Yup.string().required("First Name is required"),
+  last_name: Yup.string().required("Last Name is required"),
+  language: Yup.string().required("Language is required"),
+  country: Yup.string().required("Country is required"),
+  whatsapp: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d{11}$/, "Whatsapp number must be 11 digits"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^\d{11}$/, "Phone number must be 11 digits"),
+  gmail: Yup.string().email().required("Gmail is required"),
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters long"),
-  randomNum: Yup.string().required("Math is required"),
+  reference: Yup.string().required("Reference is required"),
 });
 
 interface EmailValue {
+  first_name: string;
+  last_name: string;
+  language: string;
+  country: string;
+  whatsapp: string;
   phone: string;
+  gmail: string;
   password: string;
-  randomNum: string;
+  reference: string;
 }
 
 export const FormGroup = () => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
-  const initialValues: EmailValue = { phone: "", password: "", randomNum: "" };
+  const initialValues: EmailValue = {
+    first_name: "",
+    last_name: "",
+    language: "",
+    country: "",
+    whatsapp: "",
+    phone: "",
+    gmail: "",
+    password: "",
+    reference: "",
+  };
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
@@ -37,17 +61,11 @@ export const FormGroup = () => {
   }, []);
 
   const handleSubmit = (
-    { phone, password, randomNum }: EmailValue,
+    values: EmailValue,
     { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
   ) => {
-    if (Number(randomNum) !== num1 + num2) {
-      setFieldError("randomNum", "Please give correct answer");
-      setSubmitting(false);
-    } else {
-      console.log({ phone, password });
-
-      resetForm();
-    }
+    console.log(values);
+    resetForm();
   };
 
   return (
