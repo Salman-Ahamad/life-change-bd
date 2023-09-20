@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   randomNum: Yup.string().required("Math is required"),
 });
 
-interface EmailValue {
+interface ILoginFormValue {
   phone: string;
   password: string;
   randomNum: string;
@@ -27,7 +27,11 @@ interface EmailValue {
 export const LoginForm = () => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
-  const initialValues: EmailValue = { phone: "", password: "", randomNum: "" };
+  const initialValues: ILoginFormValue = {
+    phone: "",
+    password: "",
+    randomNum: "",
+  };
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
@@ -37,8 +41,8 @@ export const LoginForm = () => {
   }, []);
 
   const handleSubmit = (
-    { phone, password, randomNum }: EmailValue,
-    { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
+    { phone, password, randomNum }: ILoginFormValue,
+    { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
     if (Number(randomNum) !== num1 + num2) {
       setFieldError("randomNum", "Please give correct answer");
