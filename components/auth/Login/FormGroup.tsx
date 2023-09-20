@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   randomNum: Yup.string().required("Math is required"),
 });
 
-interface EmailValue {
+interface ILoginFormValue {
   phone: string;
   password: string;
   randomNum: string;
@@ -27,7 +27,11 @@ interface EmailValue {
 export const LoginForm = () => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
-  const initialValues: EmailValue = { phone: "", password: "", randomNum: "" };
+  const initialValues: ILoginFormValue = {
+    phone: "",
+    password: "",
+    randomNum: "",
+  };
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
@@ -37,8 +41,8 @@ export const LoginForm = () => {
   }, []);
 
   const handleSubmit = (
-    { phone, password, randomNum }: EmailValue,
-    { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
+    { phone, password, randomNum }: ILoginFormValue,
+    { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
     if (Number(randomNum) !== num1 + num2) {
       setFieldError("randomNum", "Please give correct answer");
@@ -58,20 +62,14 @@ export const LoginForm = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form>
-          <Title variant="H3" className="mb-10">
+          <Title variant="H3" className="mb-10 normal-case">
             Login
           </Title>
 
           <CTA className="mt-2.5">Phone Number with Country code</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="phone"
-            placeholder="Enter Your Phone"
-            type="text"
-          />
+          <Input name="phone" placeholder="Enter Your Phone" type="text" />
           <CTA className="mt-2.5">Password</CTA>
           <Input
-            isSubmitting={isSubmitting}
             name="password"
             placeholder="Enter Your Password"
             type="password"
@@ -80,12 +78,7 @@ export const LoginForm = () => {
           <CTA className="mt-2.5">
             {num1 || 0} + {num2 || 0} = ?
           </CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="randomNum"
-            placeholder=""
-            type="text"
-          />
+          <Input name="randomNum" placeholder="" type="text" />
 
           <Button
             variant="primary"
