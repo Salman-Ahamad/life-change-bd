@@ -10,13 +10,12 @@ export const Input: FC<IInput> = ({
   as,
   name,
   type,
+  select,
   fullWidth,
   className,
   placeholder,
 }) => {
-  const allClassName = `outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-5 px-3 ${
-    as === "textarea" ? "h-full" : "h-7"
-  }`;
+  const allClassName = `outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-2 px-3`;
 
   return (
     <section
@@ -27,13 +26,30 @@ export const Input: FC<IInput> = ({
         fullWidth
       )}
     >
-      {as === "textarea" ? (
+      {(as === "textarea" && (
         <Field
           as="textarea"
           name={name}
           placeholder={placeholder}
-          className={twMerge(allClassName, className)}
+          className={twMerge(
+            `${allClassName} ${as === "textarea" ? "h-full" : "h-7"}`,
+            className
+          )}
         />
+      )) ||
+      select ? (
+        <select name="country" className={twMerge(allClassName, "py-2.5")}>
+          <option value="">Select a country</option>
+          {select?.map((country, i) => (
+            <option key={i} value={country}>
+              {country}
+            </option>
+          ))}
+
+          <option value="Canada">Canada</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Australia">Australia</option>
+        </select>
       ) : (
         <Field
           type={type}

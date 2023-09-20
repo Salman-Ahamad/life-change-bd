@@ -4,10 +4,10 @@ import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import { Input } from "@/components";
+import { allCountry } from "@/lib/constant";
 import { Button, CTA, CommonText } from "@/universal";
 import Link from "next/link";
 import { useState } from "react";
-import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -109,8 +109,8 @@ export const FormGroup = () => {
                   Choose Your Country<span className="text-red-600">*</span>
                 </CTA>
                 <Input
-                  type="text"
                   name="country"
+                  select={allCountry}
                   placeholder="Enter Your Country"
                 />
               </div>
@@ -170,19 +170,7 @@ export const FormGroup = () => {
           </div>
 
           <div className="lg:px-2.5 flex justify-center items-start gap-1.5 lg:gap-2.5 pb-2 lg:mb-2.5">
-            {agree ? (
-              <ImCheckboxChecked
-                onClick={() => setAgree((prv) => !prv)}
-                className={className}
-                size="20px"
-              />
-            ) : (
-              <ImCheckboxUnchecked
-                onClick={() => setAgree((prv) => !prv)}
-                className={className}
-                size="20px"
-              />
-            )}
+            <input type="checkbox" className="accent-primary mt-1" />
             <CommonText className="pr-5">
               By clicking Register, you agree to My Business Union Learning
               Platform&rsquo;s&nbsp;

@@ -29,10 +29,11 @@ export interface ILinkLabel {
 }
 
 export interface IInput extends IClassName {
-  as?: "textarea";
   name: string;
+  as?: "textarea";
+  select?: string[];
   fullWidth?: string;
-  placeholder: string;
+  placeholder?: string;
   type?: HTMLInputTypeAttribute;
 }
 
