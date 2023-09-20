@@ -7,7 +7,7 @@ import { FormGroup } from "./FormGroup";
 
 export const SignUpForm: FC = () => (
   <section className="min-h-screen flex justify-between items-center px-5">
-    <div className="w-full mx-auto flex flex-col justify-center items-center max-w-[750px] py-20">
+    <div className="w-full mx-auto flex flex-col justify-center items-center max-w-[750px] py-20 lg:py-0">
       <Title variant="H3" className="normal-case">
         Account Opening Form
       </Title>
