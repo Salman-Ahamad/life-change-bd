@@ -1,199 +1,44 @@
 "use client";
 
-import { Container, Title } from "@/universal";
+import { MainTitle } from "@/components/PrivacyPolicy";
+import { PolicySection } from "@/components/PrivacyPolicy/PolicySection";
+import { privacyPolicyData } from "@/lib/data";
+import { Container } from "@/universal";
 import React from "react";
 
 const PrivacyPolicy = () => {
   return (
     <Container>
       <div className="max-w-3xl px-12 pb-16 mx-auto">
-        <Title variant="H3" className="pb-16 pt-6">
-          Privacy and Policy
-        </Title>
+        <MainTitle>Privacy and Policy</MainTitle>
 
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            Life Change bd Massage built the Massage app as a Free app. This
-            SERVICE is provided by Massage at no cost and is intended for use as
-            is.
-          </li>
+        {privacyPolicyData.map((item, idx) => (
+          <PolicySection
+            key={idx}
+            className=""
+            title={item.title}
+            content={item.content}
+          />
+        ))}
 
-          <li className="pb-4">
-            This page is used to inform visitors regarding my policies with the
-            collection, use, and disclosure of Personal Information if anyone
-            decided to use my Service.
-          </li>
-          <li className="pb-4">
-            If you choose to use my Service, then you agree to the collection
-            and use of information in relation to this policy. The Personal
-            Information that I collect is used for providing and improving the
-            Service. I will not use or share your information with anyone except
-            as described in this Privacy Policy.
-          </li>
-          <li className="pb-4">
-            The terms used in this Privacy Policy have the same meanings as in
-            our Terms and Conditions, which are accessible at life change bd
-            Massage unless otherwise defined in this Privacy Policy.
-          </li>
-        </ol>
+        <MainTitle>Contact Us</MainTitle>
 
-        <Title variant="H5" className="py-5">
-          Information Collection and Use
-        </Title>
-
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            For a better experience, while using our Service, I may require you
-            to provide us with certain personally identifiable information. The
-            information that I request will be retained on your device and is
-            not collected by me in any way.
-          </li>
-          <li className="pb-4">
-            The app does use third-party services that may collect information
-            used to identify you.
-          </li>
-          <li className="pb-4">
-            Link to the privacy policy of third-party service providers used by
-            the app
-          </li>
-          <li className="pb-4">
-            Google Play ServicesAdMobGoogle Analytics for Firebase
-          </li>
-        </ol>
-
-        <Title variant="H5" className="py-5">
-          Log Data
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            I want to inform you that whenever you use my Service, in a case of
-            an error in the app I collect data and information (through
-            third-party products) on your phone called Log Data. This Log Data
-            may include information such as your device Internet Protocol (“IP”)
-            address, device name, operating system version, the configuration of
-            the app when utilizing my Service, the time and date of your use of
-            the Service, and other statistics.
-          </li>
-        </ol>
-
-        <Title variant="H5" className="py-5">
-          Cookies
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            Cookies are files with a small amount of data that are commonly used
-            as anonymous unique identifiers. These are sent to your browser from
-            the websites that you visit and are stored on your device’s internal
-            memory.
-          </li>
-          <li className="pb-4">
-            This Service does not use these “cookies” explicitly. However, the
-            app may use third-party code and libraries that use “cookies” to
-            collect information and improve their services. You have the option
-            to either accept or refuse these cookies and know when a cookie is
-            being sent to your device. If you choose to refuse our cookies, you
-            may not be able to use some portions of this Service.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Service Providers
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            I may employ third-party companies and individuals due to the
-            following reasons:
-          </li>
-          <li className="pb-4">
-            To facilitate our Service;To provide the Service on our behalf;To
-            perform Service-related services; orTo assist us in analyzing how
-            our Service is used.
-          </li>
-          <li className="pb-4">
-            I want to inform users of this Service that these third parties have
-            access to their Personal Information. The reason is to perform the
-            tasks assigned to them on our behalf. However, they are obligated
-            not to disclose or use the information for any other purpose.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Security
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            I value your trust in providing us your Personal Information, thus
-            we are striving to use commercially acceptable means of protecting
-            it. But remember that no method of transmission over the internet,
-            or method of electronic storage is 100% secure and reliable, and I
-            cannot guarantee its absolute security.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Links to Other Sites
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            This Service may contain links to other sites. If you click on a
-            third-party link, you will be directed to that site. Note that these
-            external sites are not operated by me. Therefore, I strongly advise
-            you to review the Privacy Policy of these websites. I have no
-            control over and assume no responsibility for the content, privacy
-            policies, or practices of any third-party sites or services.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Children’s Privacy
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            These Services do not address anyone under the age of 13. I do not
-            knowingly collect personally identifiable information from children
-            under 13 years of age. In the case I discover that a child under 13
-            has provided me with personal information, I immediately delete this
-            from our servers. If you are a parent or guardian and you are aware
-            that your child has provided us with personal information, please
-            contact me so that I will be able to do the necessary actions.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Changes to This Privacy Policy
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            I may update our Privacy Policy from time to time. Thus, you are
-            advised to review this page periodically for any changes. I will
-            notify you of any changes by posting the new Privacy Policy on this
-            page.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Third-Party Advertising Notice
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            We value your privacy. As part of our ongoing effort to enhance user
-            experience, we have incorporated third-party advertisements on our
-            webpages. These ads may collect certain anonymous information to
-            provide you with personalized content and relevant offers. By
-            continuing to browse our site, you consent to the use of cookies and
-            tracking technologies employed by these third-party advertisers. You
-            have the option to adjust your preferences and opt-out of targeted
-            advertising. Please review our Privacy Policy for more information
-            on how your data is handled. Thank you for your understanding and
-            continued support.
-          </li>
-        </ol>
-        <Title variant="H5" className="py-5">
-          Contact Us
-        </Title>
-        <ol className="font-normal text-lg text-justify">
-          <li className="pb-4">
-            If you have any questions or suggestions about my Privacy Policy, do
-            not hesitate to contact me at
-            <br />
-            👇👇👇👇👇 <br />
-            <strong>lifechangebd4@gmail.com</strong>
-          </li>
-        </ol>
+        <div className="pb-4 text-lg">
+          <div className="text-justify">
+            <p className="text-justify mb-[14px]">
+              If you have any questions or suggestions about my Privacy Policy,
+              do not hesitate to contact me at
+              <br />
+              👇👇👇👇👇
+              <br />
+              <strong>
+                <a href="mailto:lifechangebd4@gmail.com">
+                  lifechangebd4@gmail.com
+                </a>
+              </strong>
+            </p>
+          </div>
+        </div>
       </div>
     </Container>
   );
