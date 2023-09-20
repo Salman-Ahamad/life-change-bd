@@ -8,7 +8,7 @@ import React, { FC } from "react";
 export const Meeting: FC = () => {
   return (
     <MainContainer bgColor="black">
-      <div className="px-4 text-white lg:py-36 lg:flex lg:items-center lg:justify-between">
+      <div className="px-4 pb-12 text-white lg:py-36 lg:flex lg:items-center lg:justify-between">
         <Image
           src={meetingilustration}
           className="w-full lg:w-[530px] xl:w-[630px] sm:px-3 lg:order-2"

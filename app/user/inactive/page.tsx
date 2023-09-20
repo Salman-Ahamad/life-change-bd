@@ -3,7 +3,12 @@
 import React from "react";
 import { DashboardHeader } from "@/components";
 import { InActiveNavItems } from "@/lib/data";
-import { Meeting, Support } from "@/components/User/Inactive";
+import {
+  ActivationPoint,
+  Footer,
+  Meeting,
+  Support,
+} from "@/components/User/Inactive";
 
 const page = () => {
   return (
@@ -11,6 +16,8 @@ const page = () => {
       <DashboardHeader navData={InActiveNavItems} />
       <Support />
       <Meeting />
+      <ActivationPoint />
+      <Footer />
     </>
   );
 };
