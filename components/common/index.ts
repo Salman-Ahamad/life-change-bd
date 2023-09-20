@@ -4,6 +4,3 @@ export * from "./FormikError";
 export * from "./Header";
 export * from "./ImageCard";
 export * from "./Input";
-export * from "./Nav";
-export * from "./Logo";
-export * from "./CompanyName";

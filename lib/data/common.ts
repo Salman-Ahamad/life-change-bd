@@ -18,6 +18,48 @@ export const commonNavItems: ILinkLabel[] = [
     link: "/",
   },
 ];
+export const InActiveNavItems: ILinkLabel[] = [
+  {
+    label: "Profile",
+    link: "/",
+  },
+  {
+    label: "Courses",
+    link: "/",
+  },
+  {
+    label: "Referances",
+    link: "/",
+  },
+  {
+    label: "Collect Points",
+    link: "/",
+  },
+  {
+    label: "Earn Reward Points",
+    link: "/",
+  },
+  {
+    label: "Redeem Reward Points",
+    link: "/",
+  },
+  {
+    label: "Messages",
+    link: "/",
+  },
+  {
+    label: "Redeem Partner Training Class",
+    link: "/",
+  },
+  {
+    label: "Photo Zone",
+    link: "/",
+  },
+  {
+    label: "Log Out",
+    link: "/",
+  },
+];
 
 export const footerItems: IFooterData = {
   title: "COMPANY",
