@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { HTMLInputTypeAttribute } from "react";
 import { ICardData, IChildrenWithClassName, IClassName } from ".";
 
 export type IColor = "black" | "white" | "transparent";
@@ -28,11 +29,11 @@ export interface ILinkLabel {
 }
 
 export interface IInput extends IClassName {
-  name: string;
-  type?: HTMLInputTypeAttribute;
-  placeholder: string;
-  isSubmitting?: boolean;
   as?: "textarea";
+  name: string;
+  fullWidth?: string;
+  placeholder: string;
+  type?: HTMLInputTypeAttribute;
 }
 
 export interface IFormikError extends IClassName {

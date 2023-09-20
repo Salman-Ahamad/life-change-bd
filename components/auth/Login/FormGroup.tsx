@@ -62,20 +62,14 @@ export const LoginForm = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form>
-          <Title variant="H3" className="mb-10">
+          <Title variant="H3" className="mb-10 normal-case">
             Login
           </Title>
 
           <CTA className="mt-2.5">Phone Number with Country code</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="phone"
-            placeholder="Enter Your Phone"
-            type="text"
-          />
+          <Input name="phone" placeholder="Enter Your Phone" type="text" />
           <CTA className="mt-2.5">Password</CTA>
           <Input
-            isSubmitting={isSubmitting}
             name="password"
             placeholder="Enter Your Password"
             type="password"
@@ -84,12 +78,7 @@ export const LoginForm = () => {
           <CTA className="mt-2.5">
             {num1 || 0} + {num2 || 0} = ?
           </CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="randomNum"
-            placeholder=""
-            type="text"
-          />
+          <Input name="randomNum" placeholder="" type="text" />
 
           <Button
             variant="primary"

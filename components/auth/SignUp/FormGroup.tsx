@@ -3,8 +3,11 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
-import { Input, RegisterBtn } from "@/components";
-import { CTA } from "@/universal";
+import { Input } from "@/components";
+import { Button, CTA, CommonText } from "@/universal";
+import Link from "next/link";
+import { useState } from "react";
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required("First Name is required"),
@@ -21,7 +24,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters long"),
-  reference: Yup.string().required("Reference id is required"),
+  reference: Yup.string(),
 });
 
 interface ISignUpFormValue {
@@ -37,6 +40,7 @@ interface ISignUpFormValue {
 }
 
 export const FormGroup = () => {
+  const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
     first_name: "",
     last_name: "",
@@ -54,9 +58,10 @@ export const FormGroup = () => {
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
     console.log(values);
+    setAgree(false);
     resetForm();
   };
-
+  const className = "text-primary mt-[2px] cursor-pointer min-w-[15px]";
   return (
     <Formik
       validationSchema={validationSchema}
@@ -64,99 +69,144 @@ export const FormGroup = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({ isSubmitting, isValid }) => (
-        <Form className="flex flex-col justify-center items-center gap-0">
-          <div className="flex justify-center items-center gap-2">
-            <div>
-              <CTA>Enter First Name</CTA>
+        <Form>
+          <div className="flex flex-col justify-center items-center gap-0 w-full">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter First Name<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="first_name"
+                  placeholder="Enter Your First Name"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Enter Last Name<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="last_name"
+                  placeholder="Enter Your Last Name"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Choose Your Language<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="language"
+                  placeholder="Enter Your Language"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Choose Your Country<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="country"
+                  placeholder="Enter Your Country"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter Whatsapp No<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="whatsapp"
+                  placeholder="Enter Your Whatsapp No"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Enter Phone No<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  name="phone"
+                  type="text"
+                  placeholder="Enter Your Phone No"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter Gmail Address<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  name="gmail"
+                  placeholder="Enter Your Phone"
+                  type="text"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>Enter Reference No.</CTA>
+                <Input
+                  type="text"
+                  name="reference"
+                  placeholder="Enter Your Reference No"
+                />
+              </div>
+            </div>
+            <div className="w-full">
+              <CTA>Set New Password</CTA>
               <Input
-                type="text"
-                name="first_name"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your First Name"
+                type="password"
+                name="password"
+                placeholder="Enter Your Password"
+                className="w-full lg:w-full lg:max-w-full"
+                fullWidth="w-full lg:w-full lg:max-w-full"
               />
             </div>
-            <div>
-              <CTA>Enter Last Name</CTA>
-              <Input
-                type="text"
-                name="last_name"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Last Name"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center items-center gap-2">
-            <div>
-              <CTA>Choose Your Language</CTA>
-              <Input
-                type="text"
-                name="language"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Language"
-              />
-            </div>
-            <div>
-              <CTA>Choose Your Country</CTA>
-              <Input
-                type="text"
-                name="country"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Country"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center items-center gap-2">
-            <div>
-              <CTA>Enter Whatsapp No</CTA>
-              <Input
-                type="text"
-                name="whatsapp"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Whatsapp No"
-              />
-            </div>
-            <div>
-              <CTA>Enter Phone No</CTA>
-              <Input
-                name="phone"
-                type="text"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Phone No"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center items-center gap-2">
-            <div>
-              <CTA>Enter Gmail Address</CTA>
-              <Input
-                isSubmitting={isSubmitting}
-                name="gmail"
-                placeholder="Enter Your Phone"
-                type="text"
-              />
-            </div>
-            <div>
-              <CTA>Enter Reference No.</CTA>
-              <Input
-                type="text"
-                name="reference"
-                isSubmitting={isSubmitting}
-                placeholder="Enter Your Reference No"
-              />
-            </div>
-          </div>
-          <div>
-            <CTA>Set New Password</CTA>
-            <Input
-              type="password"
-              name="password"
-              isSubmitting={isSubmitting}
-              placeholder="Enter Your Password"
-              className="w-full max-w-full"
-            />
           </div>
 
-          <RegisterBtn disabled={!isValid || isSubmitting} />
+          <div className="lg:px-2.5 flex justify-center items-start gap-1.5 lg:gap-2.5 pb-2 lg:mb-2.5">
+            {agree ? (
+              <ImCheckboxChecked
+                onClick={() => setAgree((prv) => !prv)}
+                className={className}
+                size="20px"
+              />
+            ) : (
+              <ImCheckboxUnchecked
+                onClick={() => setAgree((prv) => !prv)}
+                className={className}
+                size="20px"
+              />
+            )}
+            <CommonText className="pr-5">
+              By clicking Register, you agree to My Business Union Learning
+              Platform&rsquo;s&nbsp;
+              <Link href="/" className="text-blue-700">
+                terms & conditions
+              </Link>
+              ,&nbsp;
+              <Link href="/" className="text-blue-700">
+                Privacy Policy
+              </Link>
+              &nbsp;and
+              <Link href="/" className="text-blue-700">
+                &nbsp;Cookie Policy
+              </Link>
+            </CommonText>
+          </div>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={!isValid || isSubmitting || !agree}
+            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full"
+          >
+            Sign Up
+          </Button>
         </Form>
       )}
     </Formik>

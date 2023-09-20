@@ -10,8 +10,9 @@ export const Input: FC<IInput> = ({
   as,
   name,
   type,
-  placeholder,
+  fullWidth,
   className,
+  placeholder,
 }) => {
   const allClassName = `outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-5 px-3 ${
     as === "textarea" ? "h-full" : "h-7"
@@ -19,9 +20,12 @@ export const Input: FC<IInput> = ({
 
   return (
     <section
-      className={`w-full input-group-with lg:w-[370px] lg:max-w-[370px] relative   ${
-        as === "textarea" ? "h-[267px] items-end" : "h-16 items-center"
-      }`}
+      className={twMerge(
+        `w-full input-group-with lg:w-[370px] lg:max-w-[370px] relative ${
+          as === "textarea" ? "h-[267px] items-end" : "h-16 items-center"
+        }`,
+        fullWidth
+      )}
     >
       {as === "textarea" ? (
         <Field
