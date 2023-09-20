@@ -1,53 +1,66 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
-import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
-import { Input, RegisterBtn } from "@/components";
-import { CTA } from "@/universal";
-import { getRandomNumber } from "@/utils";
+import { Input } from "@/components";
+import { Languages, allCountry } from "@/lib/constant";
+import { Button, CTA, CommonText } from "@/universal";
+import Link from "next/link";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
+  first_name: Yup.string().required("First Name is required"),
+  last_name: Yup.string().required("Last Name is required"),
+  language: Yup.string().required("Language is required"),
+  country: Yup.string().required("Country is required"),
+  whatsapp: Yup.string()
+    .required("Whatsapp number is required")
+    .matches(/^\d{11}$/, "Whatsapp number must be 11 digits"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^\d{11}$/, "Phone number must be 11 digits"),
+  gmail: Yup.string().email().required("Gmail is required"),
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters long"),
-  randomNum: Yup.string().required("Math is required"),
+  reference: Yup.string(),
 });
 
-interface EmailValue {
+interface ISignUpFormValue {
+  first_name: string;
+  last_name: string;
+  language: string;
+  country: string;
+  whatsapp: string;
   phone: string;
+  gmail: string;
   password: string;
-  randomNum: string;
+  reference: string;
 }
 
 export const FormGroup = () => {
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
-  const initialValues: EmailValue = { phone: "", password: "", randomNum: "" };
-
-  useEffect(() => {
-    const randomNum = getRandomNumber(20, 50);
-    const randomNum2 = getRandomNumber(1, 20);
-    setNum1(randomNum);
-    setNum2(randomNum2);
-  }, []);
+  const [agree, setAgree] = useState(false);
+  const initialValues: ISignUpFormValue = {
+    first_name: "",
+    last_name: "",
+    language: "",
+    country: "",
+    whatsapp: "",
+    phone: "",
+    gmail: "",
+    password: "",
+    reference: "",
+  };
 
   const handleSubmit = (
-    { phone, password, randomNum }: EmailValue,
-    { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
+    values: ISignUpFormValue,
+    { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
-    if (Number(randomNum) !== num1 + num2) {
-      setFieldError("randomNum", "Please give correct answer");
-      setSubmitting(false);
-    } else {
-      console.log({ phone, password });
+    console.log(values);
 
-      resetForm();
-    }
+    setAgree(false);
+    resetForm();
   };
 
   return (
@@ -58,32 +71,127 @@ export const FormGroup = () => {
     >
       {({ isSubmitting, isValid }) => (
         <Form>
-          <CTA className="mt-2.5">Phone Number with Country code</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="phone"
-            placeholder="Enter Your Phone"
-            type="text"
-          />
-          <CTA className="mt-2.5">Password</CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="password"
-            placeholder="Enter Your Password"
-            type="password"
-          />
+          <div className="flex flex-col justify-center items-center gap-0 w-full">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter First Name<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="first_name"
+                  placeholder="Enter Your First Name"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Enter Last Name<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="last_name"
+                  placeholder="Enter Your Last Name"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Choose Your Language<span className="text-red-600">*</span>
+                </CTA>
+                <Input name="language" select={Languages} />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Choose Your Country<span className="text-red-600">*</span>
+                </CTA>
+                <Input name="country" select={allCountry} />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter Whatsapp No<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  type="text"
+                  name="whatsapp"
+                  placeholder="Enter Your Whatsapp No"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>
+                  Enter Phone No<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  name="phone"
+                  type="text"
+                  placeholder="Enter Your Phone No"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
+              <div className="w-full">
+                <CTA>
+                  Enter Gmail Address<span className="text-red-600">*</span>
+                </CTA>
+                <Input
+                  name="gmail"
+                  placeholder="Enter Your Phone"
+                  type="text"
+                />
+              </div>
+              <div className="w-full">
+                <CTA>Enter Reference No.</CTA>
+                <Input
+                  type="text"
+                  name="reference"
+                  placeholder="Enter Your Reference No"
+                />
+              </div>
+            </div>
+            <div className="w-full">
+              <CTA>Set New Password</CTA>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Enter Your Password"
+                className="w-full lg:w-full lg:max-w-full"
+                fullWidth="w-full lg:w-full lg:max-w-full"
+              />
+            </div>
+          </div>
 
-          <CTA className="mt-2.5">
-            {num1 || 0} + {num2 || 0} = ?
-          </CTA>
-          <Input
-            isSubmitting={isSubmitting}
-            name="randomNum"
-            placeholder=""
-            type="text"
-          />
-
-          <RegisterBtn disabled={!isValid || isSubmitting} />
+          <div className="lg:px-2.5 flex justify-center items-start gap-1.5 lg:gap-2.5 pb-2 lg:mb-2.5">
+            <input
+              onClick={() => setAgree((prv) => !prv)}
+              type="checkbox"
+              className="accent-primary mt-1"
+            />
+            <CommonText className="pr-5">
+              By clicking Register, you agree to My Business Union Learning
+              Platform&rsquo;s&nbsp;
+              <Link href="/" className="text-blue-700">
+                terms & conditions
+              </Link>
+              ,&nbsp;
+              <Link href="/" className="text-blue-700">
+                Privacy Policy
+              </Link>
+              &nbsp;and
+              <Link href="/" className="text-blue-700">
+                &nbsp;Cookie Policy
+              </Link>
+            </CommonText>
+          </div>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={!isValid || isSubmitting || !agree}
+            className="bg-primary disabled:bg-opacity-70 disabled:cursor-not-allowed w-full"
+          >
+            Sign Up
+          </Button>
         </Form>
       )}
     </Formik>

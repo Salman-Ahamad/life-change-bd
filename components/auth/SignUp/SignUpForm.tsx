@@ -6,11 +6,14 @@ import { FC } from "react";
 import { FormGroup } from "./FormGroup";
 
 export const SignUpForm: FC = () => (
-  <section className="h-screen flex justify-between items-center px-5">
-    <div className="w-full max-w-[413px] mx-auto border border-primary rounded-md p-5 justify-center items-center">
-      <Title variant="H3" className="mb-10">
-        Register Form
+  <section className="min-h-screen flex justify-between items-center px-5">
+    <div className="w-full mx-auto flex flex-col justify-center items-center max-w-[750px] py-20 lg:py-0">
+      <Title variant="H3" className="normal-case">
+        Account Opening Form
       </Title>
+      <CommonText className="mb-10 mt-2.5 text-secondary text-center">
+        Provide your necessary <br /> information here
+      </CommonText>
 
       <FormGroup />
 

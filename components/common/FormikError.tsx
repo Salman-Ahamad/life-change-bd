@@ -13,9 +13,6 @@ export const FormikError = ({
   <ErrorMessage
     name={name}
     component={component}
-    className={twMerge(
-      "text-red-600 absolute -bottom-[5px] left-[5px]",
-      className
-    )}
+    className={twMerge("text-red-600 absolute bottom-0 left-[5px]", className)}
   />
 );
