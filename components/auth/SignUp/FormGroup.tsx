@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
   reference: Yup.string().required("Reference id is required"),
 });
 
-interface EmailValue {
+interface SignUpFormValue {
   first_name: string;
   last_name: string;
   language: string;
@@ -37,7 +37,7 @@ interface EmailValue {
 }
 
 export const FormGroup = () => {
-  const initialValues: EmailValue = {
+  const initialValues: SignUpFormValue = {
     first_name: "",
     last_name: "",
     language: "",
@@ -50,8 +50,8 @@ export const FormGroup = () => {
   };
 
   const handleSubmit = (
-    values: EmailValue,
-    { resetForm, setFieldError, setSubmitting }: FormikHelpers<EmailValue>
+    values: SignUpFormValue,
+    { resetForm }: FormikHelpers<SignUpFormValue>
   ) => {
     console.log(values);
     resetForm();
