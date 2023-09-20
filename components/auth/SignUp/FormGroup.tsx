@@ -4,7 +4,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import { Input } from "@/components";
-import { allCountry } from "@/lib/constant";
+import { Languages, allCountry } from "@/lib/constant";
 import { Button, CTA, CommonText } from "@/universal";
 import Link from "next/link";
 import { useState } from "react";
@@ -58,10 +58,11 @@ export const FormGroup = () => {
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
     console.log(values);
+
     setAgree(false);
     resetForm();
   };
-  const className = "text-primary mt-[2px] cursor-pointer min-w-[15px]";
+
   return (
     <Formik
       validationSchema={validationSchema}
@@ -98,21 +99,13 @@ export const FormGroup = () => {
                 <CTA>
                   Choose Your Language<span className="text-red-600">*</span>
                 </CTA>
-                <Input
-                  type="text"
-                  name="language"
-                  placeholder="Enter Your Language"
-                />
+                <Input name="language" select={Languages} />
               </div>
               <div className="w-full">
                 <CTA>
                   Choose Your Country<span className="text-red-600">*</span>
                 </CTA>
-                <Input
-                  name="country"
-                  select={allCountry}
-                  placeholder="Enter Your Country"
-                />
+                <Input name="country" select={allCountry} />
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
@@ -170,7 +163,11 @@ export const FormGroup = () => {
           </div>
 
           <div className="lg:px-2.5 flex justify-center items-start gap-1.5 lg:gap-2.5 pb-2 lg:mb-2.5">
-            <input type="checkbox" className="accent-primary mt-1" />
+            <input
+              onClick={() => setAgree((prv) => !prv)}
+              type="checkbox"
+              className="accent-primary mt-1"
+            />
             <CommonText className="pr-5">
               By clicking Register, you agree to My Business Union Learning
               Platform&rsquo;s&nbsp;

@@ -37,27 +37,28 @@ export const Input: FC<IInput> = ({
           )}
         />
       )) ||
-      select ? (
-        <select name="country" className={twMerge(allClassName, "py-2.5")}>
-          <option value="">Select a country</option>
-          {select?.map((country, i) => (
-            <option key={i} value={country}>
-              {country}
-            </option>
-          ))}
-
-          <option value="Canada">Canada</option>
-          <option value="United Kingdom">United Kingdom</option>
-          <option value="Australia">Australia</option>
-        </select>
-      ) : (
-        <Field
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          className={twMerge(allClassName, className)}
-        />
-      )}
+        (select && (
+          <Field
+            as="select"
+            id={name}
+            name={name}
+            className={twMerge(allClassName, "py-2.5")}
+          >
+            <option value="">Select a {name}</option>
+            {select.map((item, i) => (
+              <option key={i} value={item}>
+                {item}
+              </option>
+            ))}
+          </Field>
+        )) || (
+          <Field
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            className={twMerge(allClassName, className)}
+          />
+        )}
 
       <FormikError name={name} component="div" />
     </section>

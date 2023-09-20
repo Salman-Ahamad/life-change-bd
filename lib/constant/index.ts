@@ -16,3 +16,12 @@ export const allCountry: string[] = [
   "Saudi Arabia",
   "United Arab Emirates",
 ];
+
+export const Languages: string[] = [
+  "English",
+  "Bengali",
+  "Urdu",
+  "Hindi",
+  "Nepali",
+  "Assamese",
+];
