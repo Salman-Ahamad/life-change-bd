@@ -42,7 +42,7 @@ export const Nav: FC<INav> = ({ navData }) => {
             <Link
               key={idx}
               href={link}
-              className="text-white hover:text-indigo-500 text-2xl font-normal transition-all ease-in-out delay-75"
+              className="text-white hover:text-sky-500 text-2xl font-normal transition-all ease-in-out delay-75"
             >
               {label}
             </Link>
