@@ -4,19 +4,23 @@ import { Header } from "@/components";
 import {
   ActivationPoint,
   Footer,
+  ImageUpload,
   Meeting,
   Support,
 } from "@/components/User/Inactive";
 import { inActiveNavItems } from "@/lib/data";
 
 const Inactive = () => (
-  <section className="bg-black">
+  <>
     <Header navData={inActiveNavItems} />
-    <Support />
-    <Meeting />
-    <ActivationPoint />
-    <Footer />
-  </section>
+    <ImageUpload />
+    <section className="bg-black">
+      <Support />
+      <Meeting />
+      <ActivationPoint />
+      <Footer />
+    </section>
+  </>
 );
 
 export default Inactive;
