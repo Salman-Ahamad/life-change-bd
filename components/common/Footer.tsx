@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import { FC } from "react";
+
 import { bnsLogo, facebook, pinterest, twitter } from "@/lib/assets";
 import { footerItems } from "@/lib/data";
 import { Button, CommonText, MainContainer, Title } from "@/universal";
-import Image from "next/image";
-import { FC } from "react";
 import { AppDownload } from ".";
 
 export const Footer: FC = () => (

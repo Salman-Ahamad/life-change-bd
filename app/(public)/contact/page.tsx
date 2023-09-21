@@ -1,29 +1,31 @@
 "use client";
 
-import { Header } from "@/components";
-import { Container, Title } from "@/universal";
-import React from "react";
+import { CommonText, Container, Title } from "@/universal";
 
-const page = () => {
-  return (
-    <>
-      <Container>
-        <Title variant="H1">CONTACT US</Title>
-        <div>
-          <p>
-            Phone: <a href="tel:+1234567890">918617384824</a>
-          </p>
-          <p>
-            WhatsApp: <a href="tel:+1234567890">+1 (234) 567-890</a>
-          </p>
-          <p>
-            Email at:{" "}
-            <a href="mailto:lifechangebd4@gmail.com">lifechangebd4@gmail.com</a>
-          </p>
-        </div>
-      </Container>
-    </>
-  );
-};
+const Contact = () => (
+  <Container className="mt-10">
+    <Title variant="H1">CONTACT US</Title>
+    <div className="flex flex-col justify-center items-center gap-2.5 text-start mt-10">
+      <CommonText>
+        Phone:&nbsp;
+        <a href="tel:+1234567890" className="text-primary">
+          918617384824
+        </a>
+      </CommonText>
+      <CommonText>
+        WhatsApp:&nbsp;
+        <a href="tel:+1234567890" className="text-primary">
+          +1 (234) 567-890
+        </a>
+      </CommonText>
+      <CommonText>
+        Email at:&nbsp;
+        <a href="mailto:lifechangebd4@gmail.com" className="text-primary">
+          lifechangebd4@gmail.com
+        </a>
+      </CommonText>
+    </div>
+  </Container>
+);
 
-export default page;
+export default Contact;

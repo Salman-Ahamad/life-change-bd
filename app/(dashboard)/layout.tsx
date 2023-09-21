@@ -6,9 +6,9 @@ import { commonNavItems } from "@/lib/data";
 
 const layout: FC<IChildren> = ({ children }) => (
   <main>
-    <Header navData={commonNavItems} />
+    {/* <Header navData={commonNavItems} /> */}
     {children}
-    <Footer />
+    {/* <Footer /> */}
   </main>
 );
 
