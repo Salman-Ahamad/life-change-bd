@@ -1,18 +1,40 @@
 "use client";
 
-import { popular1, popular2, popular3, popular4 } from "@/lib/assets";
-import { Container, Title } from "@/universal";
+import { IUploadImage } from "@/interface";
+import { uploadImg } from "@/lib/assets";
 import Image from "next/image";
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 
-export const ImageUpload: FC = () => (
-  <Container className="py-16">
-    <Title variant="H1">UPLOAD YOUR MOOD</Title>
+export const ImageUpload: FC<IUploadImage> = ({ setSelectedImage }) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
 
-    <div className="flex justify-center items-center gap-5 lg:gap-10 mt-14">
-      {[popular1, popular2, popular3, popular4].map((icon, i) => (
-        <Image key={i} src={icon} className="rounded-xl" alt="" />
-      ))}
+      reader.onload = (event) => {
+        setSelectedImage(event.target?.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return (
+    <div className="w-[220px] h-[260px]">
+      <label
+        htmlFor="imageInput"
+        className="cursor-pointer text-blue-500 hover:text-blue-600 rounded-xl"
+      >
+        <Image src={uploadImg} className="max-w-[220px] max-h-[260px]" alt="" />
+      </label>
+
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/*"
+        className="hidden"
+        onChange={handleImageChange}
+      />
     </div>
-  </Container>
-);
+  );
+};

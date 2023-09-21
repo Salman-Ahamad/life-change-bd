@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FC } from "react";
 
 export const Meeting: FC = () => (
-  <MainContainer bgColor="black">
+  <MainContainer bgColor="black" className="-mt-24 pt-12">
     <Container className="py-12 lg:py-36 text-white flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-16">
       <Image
         src={meetingilustration}

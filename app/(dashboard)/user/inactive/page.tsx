@@ -4,7 +4,7 @@ import { Header } from "@/components";
 import {
   ActivationPoint,
   Footer,
-  ImageUpload,
+  ImageUploadSection,
   Meeting,
   Support,
 } from "@/components/User/Inactive";
@@ -13,9 +13,9 @@ import { inActiveNavItems } from "@/lib/data";
 const Inactive = () => (
   <>
     <Header navData={inActiveNavItems} />
-    <ImageUpload />
+    <ImageUploadSection />
+    <Support />
     <section className="bg-black">
-      <Support />
       <Meeting />
       <ActivationPoint />
       <Footer />
