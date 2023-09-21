@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FC } from "react";
 
 export const Support: FC = () => (
-  <section className="rounded-[40px] bg-primary min-h-[700px] my-12 py-14">
+  <section className="rounded-[40px] bg-primary min-h-[700px] my-12 py-14 relative z-10">
     <Container className="max-w-5xl mx-auto text-white text-2xl font-bold">
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-10 lg:gap-20 border-b justify-items-center">
         <Image
