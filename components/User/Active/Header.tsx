@@ -1,22 +1,12 @@
+"use client";
+
+import { INav } from "@/interface";
 import { bulletList, close } from "@/lib/assets";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC, useState } from "react";
 
-const navData = [
-  { label: "Profile", link: "/" },
-  { label: "Courses", link: "/" },
-  { label: "References", link: "/" },
-  { label: "Earn Reward Points", link: "/" },
-  { label: "Instant Redeem", link: "/" },
-  { label: "Messages", link: "/" },
-  { label: "Transfer Points", link: "/" },
-  { label: "Photo Zone", link: "/" },
-  { label: "Video Zone", link: "/" },
-  { label: "Logout", link: "/" },
-];
-
-export const Header: FC = () => {
+export const Header: FC<INav> = ({ navData }) => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   return (
