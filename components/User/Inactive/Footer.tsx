@@ -1,18 +1,16 @@
 import { facebook, pinterest, twitter } from "@/lib/assets";
+import { Title } from "@/universal";
 import Image from "next/image";
-import React from "react";
 
-export const Footer = () => {
-  return (
-    <footer className="bg-sky-500 py-16 text-white">
-      <h3 className="py-5 mb-10 text-2xl md:text-5xl font-bold text-center">
-        Follow our CEO
-      </h3>
-      <div className="flex justify-center items-center gap-5">
-        {[facebook, twitter, pinterest].map((icon, i) => (
-          <Image key={i} src={icon} className="w-8 h-8" alt="" />
-        ))}
-      </div>
-    </footer>
-  );
-};
+export const Footer = () => (
+  <footer className="bg-primary py-20 text-white">
+    <Title variant="H2" className="capitalize">
+      Follow our CEO
+    </Title>
+    <div className="flex justify-center items-center gap-5 lg:gap-10 mt-14">
+      {[facebook, twitter, pinterest].map((icon, i) => (
+        <Image key={i} src={icon} className="w-10 h-10" alt="" />
+      ))}
+    </div>
+  </footer>
+);
