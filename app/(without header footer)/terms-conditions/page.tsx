@@ -72,9 +72,9 @@ const TermsConditions = () => (
       </CommonText>
     </div>
 
-    <hr />
+    <hr className="my-10" />
 
-    <Title variant="H5" className="pb-10 pt-10">
+    <Title variant="H5" className="pb-10">
       Terms and conditions for life change bd Meet App
     </Title>
 
