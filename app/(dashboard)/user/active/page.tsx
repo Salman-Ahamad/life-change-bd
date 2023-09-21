@@ -4,16 +4,15 @@ import React from "react";
 import { Header } from "@/components/User/Active";
 
 const navData = [
-  { label: "Profile", link: "/" },
-  { label: "Courses", link: "/user/active/courses" },
-  { label: "References", link: "/" },
-  { label: "Earn Reward Points", link: "/" },
-  { label: "Instant Redeem", link: "/" },
-  { label: "Messages", link: "/" },
-  { label: "Transfer Points", link: "/" },
-  { label: "Photo Zone", link: "/" },
-  { label: "Video Zone", link: "/" },
-  { label: "Logout", link: "/" },
+  { label: "Profile", link: "/user/profile" },
+  { label: "Courses", link: "/user/courses" },
+  { label: "References", link: "/user/ref-list" },
+  { label: "Instant Redeem", link: "/user/instant-redeem" },
+  { label: "Messages", link: "/user/messages" },
+  { label: "Transfer Points", link: "/user/transfer-points" },
+  { label: "Photo Zone", link: "/user/photo-zone" },
+  { label: "Video Zone", link: "/player" },
+  { label: "Logout", link: "/user/" },
 ];
 
 const page = () => {
