@@ -1,6 +1,7 @@
 "use client";
 
 export * from "./AbsoluteImg";
+export * from "./BackButton";
 export * from "./BackgroundImage";
 export * from "./BgContainer";
 export * from "./Button";

@@ -1,26 +1,30 @@
 "use client";
 
 import { IPrivacyPolicyWithClass } from "@/interface";
-import React, { FC } from "react";
+import { CommonText, Title } from "@/universal";
+import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 export const PolicySection: FC<IPrivacyPolicyWithClass> = ({
   className,
   title,
   content,
-}) => {
-  return (
-    <div className={twMerge(`pb-4 text-lg`, className)}>
-      {title && (
-        <h3 className="pb-4 text-lg font-semibold text-center">{title}</h3>
-      )}
-      <div className="text-justify">
-        {content.map((item, idx) => (
-          <p key={idx} className="text-justify mb-[14px]">
-            {item}
-          </p>
-        ))}
-      </div>
+}) => (
+  <div className={twMerge(`pb-4 text-lg`, className)}>
+    {title && (
+      <Title
+        variant="H5"
+        className="pb-4 text-lg font-semibold text-center capitalize"
+      >
+        {title}
+      </Title>
+    )}
+    <div className="text-justify flex flex-col gap-[14px]">
+      {content.map((item, idx) => (
+        <CommonText key={idx} className="text-justify">
+          {item}
+        </CommonText>
+      ))}
     </div>
-  );
-};
+  </div>
+);
