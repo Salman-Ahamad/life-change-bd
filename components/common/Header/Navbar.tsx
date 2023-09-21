@@ -1,18 +1,23 @@
 "use client";
 
-import { FC, useState } from "react";
-import { INav } from "@/interface";
-import { MainContainer } from "@/universal";
 import Image from "next/image";
-import { bulletList, close } from "@/lib/assets";
 import Link from "next/link";
+import { FC, useState } from "react";
 
-export const DashboardHeader: FC<INav> = ({ navData }) => {
+import { INav } from "@/interface";
+import { bulletList, close } from "@/lib/assets";
+import { LinkButton, MainContainer } from "@/universal";
+import { Logo } from "../Brand";
+
+export const Navbar: FC<INav> = ({ navData }) => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+
   return (
     <MainContainer bgColor="black" className="relative">
       <nav className="relative items-center py-5 px-4 mx-auto sm:px-8 lg:flex lg:space-x-6 lg:justify-between">
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
+          <Logo />
+
           {/* Mobile Button */}
           <button
             onClick={() => setToggleMenu((prv: boolean) => !prv)}
@@ -38,14 +43,21 @@ export const DashboardHeader: FC<INav> = ({ navData }) => {
               <Link
                 key={idx}
                 href={link}
-                className="text-white hover:text-indigo-500 text-2xl font-normal text-center transition-all ease-in-out delay-75"
+                className="text-white hover:text-indigo-500 text-2xl font-normal transition-all ease-in-out delay-75"
               >
                 {label}
               </Link>
             ))}
           </div>
 
-          {/* <div className="flex gap-4 pb-10 lg:pb-0 flex-col sm:flex-row"></div> */}
+          <div className="flex gap-4 pb-10 lg:pb-0 flex-col sm:flex-row">
+            <LinkButton href="/" className="w-full sm:w-auto">
+              SubAdmin Login
+            </LinkButton>
+            <LinkButton href="/" className="w-full sm:w-auto">
+              Admin Login
+            </LinkButton>
+          </div>
         </div>
       </nav>
     </MainContainer>
