@@ -10,6 +10,7 @@ export * from "./CommonText";
 export * from "./Container";
 export * from "./Label";
 export * from "./LinkButton";
+export * from "./LinkImage";
 export * from "./MainContainer";
 export * from "./Title";
 export * from "./constant";
