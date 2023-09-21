@@ -4,7 +4,7 @@ import React from "react";
 import { Header } from "@/components/User/Active";
 
 const navData = [
-  { label: "Profile", link: "/user/profile" },
+  { label: "Profile", link: "/user/active/profile" },
   { label: "Courses", link: "/user/courses" },
   { label: "References", link: "/user/ref-list" },
   { label: "Instant Redeem", link: "/user/instant-redeem" },

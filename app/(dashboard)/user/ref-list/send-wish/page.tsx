@@ -4,7 +4,7 @@ import { Header } from "@/components/User/Active";
 import React from "react";
 // Logout
 
-const navData = [{ label: "Back", link: "/user/ref-list/send-wish" }];
+const navData = [{ label: "Back", link: "/user/ref-list" }];
 
 const page = () => {
   return (

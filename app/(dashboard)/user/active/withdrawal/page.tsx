@@ -2,13 +2,14 @@
 
 import { Header } from "@/components/User/Active";
 import React from "react";
-// Logout
+//  PassbookRedeem List/histInstant RedeemLogout
 
 const navData = [
-  { label: "Back", link: "/user/active" },
   { label: "Profile", link: "/user/active/profile" },
-  { label: "Courses", link: "/courses" },
-  { label: "Reference", link: "/user/ref-list" },
+  { label: "Change Payment Method", link: "/user/payment-method" },
+  { label: "Passbook", link: "/user/passbook" },
+  { label: "Redeem List/hist", link: "/user/redeem-list" },
+  { label: "Instant Redeem", link: "/user/instant-redeem" },
   { label: "Logout", link: "/user/" },
 ];
 

@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
 import { Header } from "@/components/User/Active";
+import React from "react";
+//  PassbookRedeem List/histInstant RedeemLogout
 
 const navData = [
-  { label: "Homepage", link: "/user/active" },
+  { label: "Back", link: "/user/active/withdrawal" },
   { label: "Profile", link: "/user/active/profile" },
-  { label: "Notification", link: "/user/notification" },
   { label: "Logout", link: "/user/" },
 ];
 
