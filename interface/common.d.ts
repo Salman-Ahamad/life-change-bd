@@ -2,7 +2,13 @@ import { StaticImageData } from "next/image";
 import { HTMLInputTypeAttribute } from "react";
 import { ICardData, IChildrenWithClassName, IClassName } from ".";
 
-export type IColor = "black" | "white" | "transparent";
+export type IColor =
+  | "black"
+  | "white"
+  | "transparent"
+  | "primary"
+  | "secondary"
+  | "accent";
 
 export type IFontWeight = "400" | "500" | "600" | "700" | "800" | "900";
 

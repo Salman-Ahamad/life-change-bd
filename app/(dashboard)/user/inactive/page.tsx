@@ -1,25 +1,26 @@
 "use client";
 
-import React from "react";
-import { DashboardHeader } from "@/components";
-import { InActiveNavItems } from "@/lib/data";
+import { Header } from "@/components";
 import {
   ActivationPoint,
   Footer,
+  ImageUpload,
   Meeting,
   Support,
 } from "@/components/User/Inactive";
+import { inActiveNavItems } from "@/lib/data";
 
-const page = () => {
-  return (
-    <>
-      <DashboardHeader navData={InActiveNavItems} />
+const Inactive = () => (
+  <>
+    <Header navData={inActiveNavItems} />
+    <ImageUpload />
+    <section className="bg-black">
       <Support />
       <Meeting />
       <ActivationPoint />
       <Footer />
-    </>
-  );
-};
+    </section>
+  </>
+);
 
-export default page;
+export default Inactive;

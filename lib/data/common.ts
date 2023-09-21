@@ -18,7 +18,7 @@ export const commonNavItems: ILinkLabel[] = [
     link: "/",
   },
 ];
-export const InActiveNavItems: ILinkLabel[] = [
+export const inActiveNavItems: ILinkLabel[] = [
   {
     label: "Profile",
     link: "/",
@@ -53,10 +53,6 @@ export const InActiveNavItems: ILinkLabel[] = [
   },
   {
     label: "Photo Zone",
-    link: "/",
-  },
-  {
-    label: "Log Out",
     link: "/",
   },
 ];

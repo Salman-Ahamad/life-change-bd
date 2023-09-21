@@ -1,34 +1,30 @@
 "use client";
 
 import { meetingilustration, plus } from "@/lib/assets";
-import { Button, MainContainer } from "@/universal";
+import { Button, Container, MainContainer, Title } from "@/universal";
 import Image from "next/image";
-import React, { FC } from "react";
+import { FC } from "react";
 
-export const Meeting: FC = () => {
-  return (
-    <MainContainer bgColor="black">
-      <div className="px-4 pb-12 text-white lg:py-36 lg:flex lg:items-center lg:justify-between">
-        <Image
-          src={meetingilustration}
-          className="w-full lg:w-[530px] xl:w-[630px] sm:px-3 lg:order-2"
-          alt="Meeting Illustration"
-        />
-        <div className="pt-[30px] sm:px-3 lg:order-1">
-          <div className="pt-8 flex flex-col items-center">
-            <h3 className="pt-5 pb-5 mb-5 font-medium text-3xl sm:text-4xl lg:text-5xl">
-              Active Meeting Link
-            </h3>
-            <Button
-              variant="secondary"
-              className="font-medium text-2xl p-3 pr-12 flex justify-between items-center gap-6 rounded-xl"
-            >
-              <Image src={plus} className="w-12 h-12" alt="join meeting" />
-              Join Meeting
-            </Button>
-          </div>
-        </div>
+export const Meeting: FC = () => (
+  <MainContainer bgColor="black">
+    <Container className="py-12 lg:py-36 text-white flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-16">
+      <Image
+        src={meetingilustration}
+        className="w-full max-w-[530px] lg:max-w-[630px] lg:w-[530px] xl:w-[630px] sm:px-3 lg:order-2"
+        alt="Meeting Illustration"
+      />
+      <div className="flex flex-col gap-2.5 items-center lg:order-1">
+        <Title variant="H3" className="font-medium capitalize">
+          Active Meeting Link
+        </Title>
+        <Button
+          variant="secondary"
+          className="font-medium text-xl lg:text-2xl p-3 pr-12 flex justify-between items-center gap-6 rounded-xl bg-primary lg:bg-accent"
+        >
+          <Image src={plus} className="w-12 h-12" alt="join meeting" />
+          Join Meeting
+        </Button>
       </div>
-    </MainContainer>
-  );
-};
+    </Container>
+  </MainContainer>
+);

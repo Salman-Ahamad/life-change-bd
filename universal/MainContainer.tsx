@@ -13,6 +13,9 @@ export const MainContainer: FC<IMainContainer> = ({
   const background =
     (bgColor === "white" && "bg-white") ||
     (bgColor === "black" && "bg-black") ||
+    (bgColor === "accent" && "bg-accent") ||
+    (bgColor === "primary" && "bg-primary") ||
+    (bgColor === "secondary" && "bg-secondary") ||
     (bgColor === "transparent" && "bg-transparent");
 
   return (

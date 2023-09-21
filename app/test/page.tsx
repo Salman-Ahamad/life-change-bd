@@ -26,7 +26,6 @@ const Test = () => {
 
   return (
     <div>
-      <h2>Country Selection</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
           <label htmlFor="country">Select a Country:</label>
