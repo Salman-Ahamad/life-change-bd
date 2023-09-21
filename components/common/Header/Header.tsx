@@ -1,27 +1,28 @@
 "use client";
 
-import { INav } from "@/interface";
-import { bulletList, close } from "@/lib/assets";
-import { Button, MainContainer } from "@/universal";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
 
+import { INav } from "@/interface";
+import { bulletList, close } from "@/lib/assets";
+import { Button, MainContainer } from "@/universal";
+
 export const Header: FC<INav> = ({ navData }) => {
-  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false);
   return (
     <MainContainer
-      bgColor={toggleMenu ? "black" : "secondary"}
+      bgColor={toggle ? "black" : "secondary"}
       className="relative"
     >
       <nav className="relative items-center py-5 px-4 xl:px-4 mx-auto  xl:flex xl:gap-4 xl:justify-between">
         <div className="flex justify-between">
           <div className="block xl:hidden" />
           <button
-            onClick={() => setToggleMenu((prv: boolean) => !prv)}
+            onClick={() => setToggle((prv: boolean) => !prv)}
             className="block xl:hidden"
           >
-            {toggleMenu ? (
+            {toggle ? (
               <Image src={close} alt="" className="h-6 w-6" />
             ) : (
               <Image src={bulletList} alt="" className="h-6 w-6" />
@@ -31,7 +32,7 @@ export const Header: FC<INav> = ({ navData }) => {
 
         <div
           className={`flex-1 justify-between xl:text-sm xl:font-medium xl:flex xl:mt-0 ${
-            toggleMenu
+            toggle
               ? "absolute inset-x-0 border-b bg-black xl:border-none xl:static z-50"
               : "hidden"
           }`}
