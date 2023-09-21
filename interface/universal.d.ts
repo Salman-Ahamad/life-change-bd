@@ -56,3 +56,9 @@ export interface IAbsoluteImg extends IClassName {
   width?: string;
   zIndex?: string;
 }
+
+export interface ILinkImage extends IClassName {
+  href: string;
+  src: StaticImageData;
+  alt: string;
+}
