@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
   gmail: Yup.string().email().required("Gmail is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(6, "Password must be at least 6 characters long"),
+    .min(6, "Must be at least 6 characters"),
   reference: Yup.string(),
 });
 
