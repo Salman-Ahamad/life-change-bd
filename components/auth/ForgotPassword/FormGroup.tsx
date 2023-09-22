@@ -50,11 +50,7 @@ export const ForgotPasswordForm = () => {
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({ isSubmitting, isValid }) => (
-        <Form>
-          <Title variant="H3" className="mb-10 normal-case">
-            Forgot Password
-          </Title>
-
+        <Form className="w-full flex flex-col justify-center items-start max-w-[370px]">
           <CTA className="mt-2.5">New Password</CTA>
           <Input
             name="newPassword"
