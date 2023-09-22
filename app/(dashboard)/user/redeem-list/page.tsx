@@ -1,20 +1,12 @@
 "use client";
 
-import React from "react";
-import { Header } from "@/components/User/Active";
+import { Header } from "@/components";
+import { navData } from "@/lib/data";
 
-const navData = [
-  { label: "Homepage", link: "/user/active" },
-  { label: "Instant Redeem Home", link: "/user/instant-redeem" },
-  { label: "Logout", link: "/user/" },
-];
+const RedeemList = () => (
+  <>
+    <Header navData={navData.redeemList} />
+  </>
+);
 
-const page = () => {
-  return (
-    <>
-      <Header navData={navData} />
-    </>
-  );
-};
-
-export default page;
+export default RedeemList;

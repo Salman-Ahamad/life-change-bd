@@ -1,17 +1,12 @@
 "use client";
 
-import { Header } from "@/components/User/Active";
-import React from "react";
-// Logout
+import { Header } from "@/components";
+import { navData } from "@/lib/data";
 
-const navData = [{ label: "Back", link: "/user/active" }];
+const Meeting = () => (
+  <>
+    <Header navData={navData.meeting} />
+  </>
+);
 
-const page = () => {
-  return (
-    <>
-      <Header navData={navData} />
-    </>
-  );
-};
-
-export default page;
+export default Meeting;

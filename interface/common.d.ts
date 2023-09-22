@@ -75,4 +75,17 @@ export interface INaveData {
   active: ILinkLabel[];
   profile: ILinkLabel[];
   withdrawal: ILinkLabel[];
+  courses: ILinkLabel[];
+  instantRedeem: ILinkLabel[];
+  messages: ILinkLabel[];
+  notification: ILinkLabel[];
+  memo: ILinkLabel[];
+  passbook: ILinkLabel[];
+  paymentMethod: ILinkLabel[];
+  redeemList: ILinkLabel[];
+  refList: ILinkLabel[];
+  joining: ILinkLabel[];
+  meeting: ILinkLabel[];
+  sendWish: ILinkLabel[];
+  transferPoints: ILinkLabel[];
 }

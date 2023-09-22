@@ -1,21 +1,12 @@
 "use client";
 
-import React from "react";
-import { Header } from "@/components/User/Active";
+import { Header } from "@/components";
+import { navData } from "@/lib/data";
 
-const navData = [
-  { label: "Back", link: "/user/active" },
-  { label: "Memo", link: "/user/notification/memo" },
-  { label: "Message", link: "/user/message" },
-  { label: "Logout", link: "/user/" },
-];
+const Notification = () => (
+  <>
+    <Header navData={navData.notification} />
+  </>
+);
 
-const page = () => {
-  return (
-    <>
-      <Header navData={navData} />
-    </>
-  );
-};
-
-export default page;
+export default Notification;

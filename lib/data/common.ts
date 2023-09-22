@@ -163,6 +163,184 @@ export const navData: INaveData = {
       link: "/user/",
     },
   ],
+  courses: [
+    {
+      label: "Back",
+      link: "/user/active",
+    },
+  ],
+  instantRedeem: [
+    {
+      label: "Homepage",
+      link: "/user/active",
+    },
+    {
+      label: "Request/History",
+      link: "/user/redeem-list",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  messages: [
+    {
+      label: "Homepage",
+      link: "/user/active",
+    },
+    {
+      label: "Profile",
+      link: "/user/active/profile",
+    },
+    {
+      label: "Notification",
+      link: "/user/notification",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  notification: [
+    {
+      label: "Back",
+      link: "/user/active",
+    },
+    {
+      label: "Memo",
+      link: "/user/notification/memo",
+    },
+    {
+      label: "Message",
+      link: "/user/message",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  memo: [
+    {
+      label: "Back",
+      link: "/user/notification",
+    },
+    {
+      label: "Homepage",
+      link: "/user/active",
+    },
+  ],
+  passbook: [
+    {
+      label: "Back",
+      link: "/user/active",
+    },
+    {
+      label: "Profile",
+      link: "/user/active/profile",
+    },
+    {
+      label: "Courses",
+      link: "/courses",
+    },
+    {
+      label: "Reference",
+      link: "/user/ref-list",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  paymentMethod: [
+    {
+      label: "Back",
+      link: "/user/active/withdrawal",
+    },
+    {
+      label: "Profile",
+      link: "/user/active/profile",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  redeemList: [
+    {
+      label: "Homepage",
+      link: "/user/active",
+    },
+    {
+      label: "Instant Redeem Home",
+      link: "/user/instant-redeem",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  refList: [
+    {
+      label: "Back",
+      link: "/user/active",
+    },
+    {
+      label: "Meeting Joining",
+      link: "/user/ref-list/meeting",
+    },
+    {
+      label: "Passbook",
+      link: "/user/passbook",
+    },
+    {
+      label: "Reference Joining",
+      link: "/user/ref-list/joining",
+    },
+    {
+      label: "Send Wish",
+      link: "/user/ref-list/send-wish",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
+  joining: [
+    {
+      label: "Back",
+      link: "/user/ref-list",
+    },
+    {
+      label: "Meeting Joining",
+      link: "/user/ref-list/send-wish",
+    },
+  ],
+  meeting: [
+    {
+      label: "Back",
+      link: "/user/active",
+    },
+  ],
+  sendWish: [
+    {
+      label: "Back",
+      link: "/user/ref-list",
+    },
+  ],
+  transferPoints: [
+    {
+      label: "Homepage",
+      link: "/user/active",
+    },
+    {
+      label: "Passbook",
+      link: "/user/passbook",
+    },
+    {
+      label: "Logout",
+      link: "/user/",
+    },
+  ],
 };
 
 export const footerItems: IFooterData = {

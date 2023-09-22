@@ -1,20 +1,12 @@
 "use client";
 
-import React from "react";
-import { Header } from "@/components/User/Active";
+import { Header } from "@/components";
+import { navData } from "@/lib/data";
 
-const navData = [
-  { label: "Homepage", link: "/user/active" },
-  { label: "Passbook", link: "/user/passbook" },
-  { label: "Logout", link: "/user/" },
-];
+const TransferPoints = () => (
+  <>
+    <Header navData={navData.transferPoints} />
+  </>
+);
 
-const page = () => {
-  return (
-    <>
-      <Header navData={navData} />
-    </>
-  );
-};
-
-export default page;
+export default TransferPoints;
