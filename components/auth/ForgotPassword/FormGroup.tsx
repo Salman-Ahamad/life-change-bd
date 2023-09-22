@@ -15,20 +15,24 @@ const validationSchema = Yup.object().shape({
     .min(6, "Must be at least 6 characters"),
 });
 
-interface ILoginFormValue {
+interface IForgotPasswordValue {
   newPassword: string;
   retypeNewPassword: string;
 }
 
 export const ForgotPasswordForm = () => {
-  const initialValues: ILoginFormValue = {
+  const initialValues: IForgotPasswordValue = {
     newPassword: "",
     retypeNewPassword: "",
   };
 
   const handleSubmit = (
-    values: ILoginFormValue,
-    { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
+    values: IForgotPasswordValue,
+    {
+      resetForm,
+      setFieldError,
+      setSubmitting,
+    }: FormikHelpers<IForgotPasswordValue>
   ) => {
     if (values.newPassword !== values.retypeNewPassword) {
       setFieldError("retypeNewPassword", "Password didn't match!");
