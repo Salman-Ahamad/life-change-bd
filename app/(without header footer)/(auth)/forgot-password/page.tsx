@@ -1,11 +1,14 @@
 "use client";
 
+import { ForgotPasswordForm } from "@/components";
 import { FC } from "react";
 
 const ForgotPassword: FC = () => (
-  <section>
-    <h1>This is forgot password page</h1>
-  </section>
+  <main className="h-screen flex justify-between items-center">
+    <section className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
+      <ForgotPasswordForm />
+    </section>
+  </main>
 );
 
 export default ForgotPassword;
