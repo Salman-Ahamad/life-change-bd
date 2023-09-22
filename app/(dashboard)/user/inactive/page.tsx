@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from "@/components";
+import { Header, Tost } from "@/components";
 import {
   ActivationPoint,
   Footer,
@@ -8,11 +8,12 @@ import {
   Meeting,
   Support,
 } from "@/components/User/Inactive";
-import { inActiveNavItems } from "@/lib/data";
+import { navData } from "@/lib/data";
 
 const Inactive = () => (
   <>
-    <Header navData={inActiveNavItems} />
+    <Header navData={navData.inActive} />
+    <Tost label="verify your email" btnText="verify" />
     <ImageUploadSection />
     <Support />
     <section className="bg-black">

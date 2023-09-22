@@ -63,3 +63,29 @@ export interface IPrivacyPolicy {
 export interface IPrivacyPolicyWithClass extends IPrivacyPolicy {
   className?: string;
 }
+
+export interface ITost {
+  label: string;
+  btnText: string;
+}
+
+export interface INaveData {
+  common: ILinkLabel[];
+  inActive: ILinkLabel[];
+  active: ILinkLabel[];
+  profile: ILinkLabel[];
+  withdrawal: ILinkLabel[];
+  courses: ILinkLabel[];
+  instantRedeem: ILinkLabel[];
+  messages: ILinkLabel[];
+  notification: ILinkLabel[];
+  memo: ILinkLabel[];
+  passbook: ILinkLabel[];
+  paymentMethod: ILinkLabel[];
+  redeemList: ILinkLabel[];
+  refList: ILinkLabel[];
+  joining: ILinkLabel[];
+  meeting: ILinkLabel[];
+  sendWish: ILinkLabel[];
+  transferPoints: ILinkLabel[];
+}
