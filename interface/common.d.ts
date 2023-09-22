@@ -63,3 +63,8 @@ export interface IPrivacyPolicy {
 export interface IPrivacyPolicyWithClass extends IPrivacyPolicy {
   className?: string;
 }
+
+export interface ITost {
+  label: string;
+  btnText: string;
+}
