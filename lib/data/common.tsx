@@ -1,6 +1,7 @@
-import { IFooterData, INaveData } from "@/interface";
+import { IFooterData, INavData } from "@/interface";
+import { BackButton } from "@/universal";
 
-export const navData: INaveData = {
+export const navData: INavData = {
   common: [
     {
       label: "Home",
@@ -90,14 +91,10 @@ export const navData: INaveData = {
       label: "Video Zone",
       link: "/player",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   profile: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -132,10 +129,6 @@ export const navData: INaveData = {
       label: "Photo Zone",
       link: "/user/ref-list",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   withdrawal: [
     {
@@ -158,34 +151,26 @@ export const navData: INaveData = {
       label: "Instant Redeem",
       link: "/user/instant-redeem",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   courses: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
   ],
   instantRedeem: [
     {
-      label: "Homepage",
+      label: "Home",
       link: "/user/active",
     },
     {
       label: "Request/History",
       link: "/user/redeem-list",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   messages: [
     {
-      label: "Homepage",
+      label: "Home",
       link: "/user/active",
     },
     {
@@ -196,14 +181,10 @@ export const navData: INaveData = {
       label: "Notification",
       link: "/user/notification",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   notification: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -212,26 +193,22 @@ export const navData: INaveData = {
     },
     {
       label: "Message",
-      link: "/user/message",
-    },
-    {
-      label: "Logout",
-      link: "/user/",
+      link: "/user/messages",
     },
   ],
   memo: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/notification",
     },
     {
-      label: "Homepage",
+      label: "Home",
       link: "/user/active",
     },
   ],
   passbook: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -246,42 +223,30 @@ export const navData: INaveData = {
       label: "Reference",
       link: "/user/ref-list",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   paymentMethod: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active/withdrawal",
     },
     {
       label: "Profile",
       link: "/user/active/profile",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   redeemList: [
     {
-      label: "Homepage",
+      label: "Home",
       link: "/user/active",
     },
     {
       label: "Instant Redeem Home",
       link: "/user/instant-redeem",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   refList: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -300,14 +265,10 @@ export const navData: INaveData = {
       label: "Send Wish",
       link: "/user/ref-list/send-wish",
     },
-    {
-      label: "Logout",
-      link: "/user/",
-    },
   ],
   joining: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/ref-list",
     },
     {
@@ -317,28 +278,24 @@ export const navData: INaveData = {
   ],
   meeting: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/active",
     },
   ],
   sendWish: [
     {
-      label: "Back",
+      label: <BackButton className="text-2xl" />,
       link: "/user/ref-list",
     },
   ],
   transferPoints: [
     {
-      label: "Homepage",
+      label: "Home",
       link: "/user/active",
     },
     {
       label: "Passbook",
       link: "/user/passbook",
-    },
-    {
-      label: "Logout",
-      link: "/user/",
     },
   ],
 };
