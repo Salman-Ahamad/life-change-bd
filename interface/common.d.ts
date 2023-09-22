@@ -68,3 +68,11 @@ export interface ITost {
   label: string;
   btnText: string;
 }
+
+export interface INaveData {
+  common: ILinkLabel[];
+  inActive: ILinkLabel[];
+  active: ILinkLabel[];
+  profile: ILinkLabel[];
+  withdrawal: ILinkLabel[];
+}

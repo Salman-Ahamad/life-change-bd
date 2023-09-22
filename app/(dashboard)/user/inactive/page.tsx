@@ -8,11 +8,11 @@ import {
   Meeting,
   Support,
 } from "@/components/User/Inactive";
-import { inActiveNavItems } from "@/lib/data";
+import { navData } from "@/lib/data";
 
 const Inactive = () => (
   <>
-    <Header navData={inActiveNavItems} />
+    <Header navData={navData.inActive} />
     <Tost label="verify your email" btnText="verify" />
     <ImageUploadSection />
     <Support />

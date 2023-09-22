@@ -2,14 +2,14 @@ import { FC } from "react";
 
 import { Footer, Navbar } from "@/components";
 import { IChildren } from "@/interface";
-import { commonNavItems } from "@/lib/data";
+import { navData } from "@/lib/data";
 
-const layout: FC<IChildren> = ({ children }) => (
+const PublicLayout: FC<IChildren> = ({ children }) => (
   <main>
-    <Navbar navData={commonNavItems} />
+    <Navbar navData={navData.common} />
     {children}
     <Footer />
   </main>
 );
 
-export default layout;
+export default PublicLayout;
