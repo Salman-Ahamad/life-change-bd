@@ -10,4 +10,3 @@ export const getRandomNumber = (min: number, max: number): number => {
 };
 
 // Usage example
-// const randomNum =
