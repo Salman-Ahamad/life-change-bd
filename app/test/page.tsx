@@ -20,7 +20,7 @@ const Test = () => {
     validationSchema,
     onSubmit: (values) => {
       // Handle form submission here, e.g., send values to an API or perform an action
-      console.log("Form submitted with values:", values);
+      // console.log("Form submitted with values:", values);
     },
   });
 

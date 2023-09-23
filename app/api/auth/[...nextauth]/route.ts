@@ -59,8 +59,6 @@ export const authOptions = {
           throw new Error("Invalid Password!");
         }
 
-        console.log(user);
-
         return user;
       },
     }),
@@ -72,7 +70,11 @@ export const authOptions = {
   },
 
   callbacks: {
-    async signIn(user, account, profile) {
+    async signIn({ user, account, profile }) {
+      // User: came from the "authorize" function in credential
+      // Account: {providerAccountId: undefined, type: 'credentials', provider: 'credentials'}
+      // Profile: Only return when login with provider (Google).
+
       if (account.provider === "google") {
         const { Email, id } = profile;
 
@@ -86,21 +88,24 @@ export const authOptions = {
       }
       return true;
     },
+
     async jwt({ token, user }) {
       if (user) {
+        token.modify = "Test Token";
         // Include Google authentication info in the JWT if available
         if (user.googleId) {
           token.googleId = user.googleId;
         }
       }
+
       return token;
     },
+
     async session({ session, token }) {
       if (token.googleId) {
         // Include Google authentication info in the session
         session.user.googleId = token.googleId;
       }
-
       return session;
     },
   },

@@ -4,6 +4,7 @@
 import { Header } from "@/components";
 import { courses, navData } from "@/lib/data";
 import { Button } from "@/universal";
+import Link from "next/link";
 
 const Courses = () => (
   <>
@@ -13,7 +14,7 @@ const Courses = () => (
         <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((items, key) => (
             <li className="w-full mx-auto group sm:max-w-sm" key={key}>
-              <a href={items.href}>
+              <Link href={items.href}>
                 <img
                   src={items.img}
                   loading="lazy"
@@ -26,7 +27,7 @@ const Courses = () => (
                   </h3>
                   <Button variant="accent">{items.status}</Button>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

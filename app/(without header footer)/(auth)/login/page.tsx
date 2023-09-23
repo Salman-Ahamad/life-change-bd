@@ -8,10 +8,14 @@ import { LoginForm } from "@/components";
 import { loginBanner } from "@/lib/assets";
 import { CommonText } from "@/universal";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Login: FC = () => {
   const { data: session } = useSession();
-  console.log(session);
+
+  if (session?.user) {
+    redirect("/user/active");
+  }
 
   return (
     <main className="h-screen flex justify-between items-center">
