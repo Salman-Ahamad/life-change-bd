@@ -8,5 +8,3 @@ export const getRandomNumber = (min: number, max: number): number => {
   // Use Math.floor() to make it an integer within the range
   return Math.floor(randomNumber);
 };
-
-// Usage example
