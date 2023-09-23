@@ -10,6 +10,7 @@ import {
 } from "@/universal";
 import Image from "next/image";
 import { FC } from "react";
+import { LogOut } from "..";
 
 export const Hero: FC = () => (
   <BackgroundImg
@@ -31,8 +32,8 @@ export const Hero: FC = () => (
         </CommonText>
 
         <div className="flex justify-center lg:justify-start items-center gap-1.5 w-full">
-          <LinkButton href="/api/auth/signin">Login</LinkButton>
-          <LinkButton href="/api/auth/signup">SignUp</LinkButton>
+          <LinkButton href="/login">Login</LinkButton>
+          <LinkButton href="/signup">SignUp</LinkButton>
         </div>
       </div>
     </Container>

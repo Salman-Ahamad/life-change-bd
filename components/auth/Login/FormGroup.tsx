@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
 import { Input } from "@/components/common/Input";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object().shape({
   phone: Yup.string()
@@ -40,7 +42,7 @@ export const LoginForm = () => {
     setNum2(randomNum2);
   }, []);
 
-  const handleSubmit = (
+  const handleSubmit = async (
     { phone, password, randomNum }: ILoginFormValue,
     { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
@@ -48,7 +50,17 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      console.log({ phone, password });
+      const authRequest = await signIn("credentials", {
+        phone,
+        password,
+        redirect: false,
+      });
+
+      if (authRequest?.error) {
+        setFieldError(randomNum, authRequest.error);
+      } else {
+        useRouter("/user/active");
+      }
 
       resetForm();
     }
