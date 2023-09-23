@@ -1,1 +1,1 @@
-export * from "./useIgnorePate";
+export * from "./";
