@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { Input } from "../..";
+import { Input } from "@/components/common/Input";
 
 const validationSchema = Yup.object().shape({
   phone: Yup.string()
