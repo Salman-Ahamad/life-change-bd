@@ -4,7 +4,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import { Input } from "@/components";
-import { Button, CTA, Title } from "@/universal";
+import { Button, CTA } from "@/universal";
 
 const validationSchema = Yup.object().shape({
   newPassword: Yup.string()
