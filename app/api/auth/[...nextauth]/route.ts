@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
+    // GoogleAuthenticationProvider:{},
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -71,23 +72,36 @@ export const authOptions = {
   },
 
   callbacks: {
+    async signIn(user, account, profile) {
+      if (account.provider === "google") {
+        const { Email, id } = profile;
+
+        const existingUser = "await"; //Check if the data is exist in the database
+
+        if (!existingUser) {
+          // Link the Google account with the current user
+          // You should have access to the current user's ID in the `user` object
+          // Update DATABASE with the new user's ID
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
-        return {
-          ...token,
-          // id: user.id, // This may need need to modify when DB added
-        };
+        // Include Google authentication info in the JWT if available
+        if (user.googleId) {
+          token.googleId = user.googleId;
+        }
       }
       return token;
     },
-    async session({ session, token, user }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          // id: token.id, // This will came from db for the first time we lagged in
-        },
-      }; // The return type will match the one returned in `useSession()`
+    async session({ session, token }) {
+      if (token.googleId) {
+        // Include Google authentication info in the session
+        session.user.googleId = token.googleId;
+      }
+
+      return session;
     },
   },
 
