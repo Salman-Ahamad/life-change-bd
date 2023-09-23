@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
+
 import { LoginForm } from "@/components";
 import { loginBanner } from "@/lib/assets";
 import { CommonText } from "@/universal";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
 
 const Login: FC = () => {
   const { data: session } = useSession();

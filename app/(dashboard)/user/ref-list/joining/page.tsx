@@ -1,20 +1,12 @@
 "use client";
 
-import { Header } from "@/components/User/Active";
-import React from "react";
-// Logout
+import { Header } from "@/components";
+import { navData } from "@/lib/data";
 
-const navData = [
-  { label: "Back", link: "/user/ref-list" },
-  { label: "Meeting Joining", link: "/user/ref-list/send-wish" },
-];
+const Joining = () => (
+  <>
+    <Header navData={navData.joining} />
+  </>
+);
 
-const page = () => {
-  return (
-    <>
-      <Header navData={navData} />
-    </>
-  );
-};
-
-export default page;
+export default Joining;

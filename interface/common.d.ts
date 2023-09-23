@@ -34,6 +34,36 @@ export interface ILinkLabel {
   label: string;
 }
 
+export interface INavItem {
+  link: string;
+  label: string | JSX.Element;
+}
+
+export interface INav {
+  navData: INavItem[];
+}
+
+export interface INavData {
+  common: INavItem[];
+  inActive: INavItem[];
+  active: INavItem[];
+  profile: INavItem[];
+  withdrawal: INavItem[];
+  courses: INavItem[];
+  instantRedeem: INavItem[];
+  messages: INavItem[];
+  notification: INavItem[];
+  memo: INavItem[];
+  passbook: INavItem[];
+  paymentMethod: INavItem[];
+  redeemList: INavItem[];
+  refList: INavItem[];
+  joining: INavItem[];
+  meeting: INavItem[];
+  sendWish: INavItem[];
+  transferPoints: INavItem[];
+}
+
 export interface IInput extends IClassName {
   name: string;
   as?: "textarea";
@@ -48,10 +78,6 @@ export interface IFormikError extends IClassName {
   component?: string;
 }
 
-export interface INav {
-  navData: ILinkLabel[];
-}
-
 export interface IImageCard extends ICardData {
   cardWidth?: "3/1" | "2/1" | "1";
 }
@@ -62,4 +88,9 @@ export interface IPrivacyPolicy {
 }
 export interface IPrivacyPolicyWithClass extends IPrivacyPolicy {
   className?: string;
+}
+
+export interface ITost {
+  label: string;
+  btnText: string;
 }
