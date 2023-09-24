@@ -1,14 +1,14 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { Input } from "@/components/common/Input";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
   phone: Yup.string()

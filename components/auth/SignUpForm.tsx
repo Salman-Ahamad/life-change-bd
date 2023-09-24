@@ -39,7 +39,7 @@ interface ISignUpFormValue {
   reference: string;
 }
 
-export const FormGroup = () => {
+export const SignUpForm = () => {
   const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
     first_name: "",

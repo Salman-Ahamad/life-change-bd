@@ -1,4 +1,5 @@
-"use client";
+import { getServerSession } from "next-auth/next";
+import { options } from "../api/auth/[...nextauth]/options";
 
 import {
   About,
@@ -10,19 +11,24 @@ import {
 } from "@/components/Home";
 import { useSession } from "next-auth/react";
 
-const Home = () => {
-  const { data: session } = useSession();
-  console.log(session);
+const Home = async () => {
+  const session = await getServerSession(options);
 
   return (
-    <main>
-      <Hero />
-      <About />
-      <PopularCourses />
-      <OurServices />
-      <UpComingEvents />
-      <FAQ />
-    </main>
+    <>
+      {session ? (
+        <main>
+          <Hero />
+          <About />
+          <PopularCourses />
+          <OurServices />
+          <UpComingEvents />
+          <FAQ />
+        </main>
+      ) : (
+        <h1> user not found</h1>
+      )}
+    </>
   );
 };
 

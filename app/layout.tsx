@@ -4,7 +4,7 @@ import { FC } from "react";
 
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
-import { NextAuthProvider } from "@/components/common/provider";
+import AuthProvider from "./context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<IChildren> = ({ children }) => (
   <html lang="en">
     <body className={inter.className}>
-      <NextAuthProvider>{children}</NextAuthProvider>
+      <AuthProvider>{children}</AuthProvider>
     </body>
   </html>
 );
