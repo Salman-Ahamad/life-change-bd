@@ -4,6 +4,7 @@ import { FC } from "react";
 
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
+import AuthProvider from "./context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<IChildren> = ({ children }) => (
   <html lang="en">
-    <body className={inter.className}>{children}</body>
+    <body className={inter.className}>
+      <AuthProvider>{children}</AuthProvider>
+    </body>
   </html>
 );
 
