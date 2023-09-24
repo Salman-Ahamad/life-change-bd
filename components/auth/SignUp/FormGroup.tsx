@@ -39,7 +39,7 @@ interface ISignUpFormValue {
   reference: string;
 }
 
-export const SignUpForm = () => {
+export const FormGroup = () => {
   const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
     first_name: "",
@@ -57,7 +57,7 @@ export const SignUpForm = () => {
     values: ISignUpFormValue,
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
-    // console.log(values);
+    console.log(values);
 
     setAgree(false);
     resetForm();
