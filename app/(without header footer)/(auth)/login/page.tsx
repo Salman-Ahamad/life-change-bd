@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
-import { LoginForm } from "@/components";
+// import { LoginForm } from "@/components/auth";
 import { loginBanner } from "@/lib/assets";
 import { CommonText } from "@/universal";
+import { LoginForm } from "@/components";
 
 const Login: FC = () => (
   <main className="h-screen flex justify-between items-center">

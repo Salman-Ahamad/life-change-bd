@@ -1,4 +1,5 @@
-"use client";
+import { getServerSession } from "next-auth/next";
+import { options } from "../api/auth/[...nextauth]/options";
 
 import {
   About,
@@ -9,15 +10,25 @@ import {
   UpComingEvents,
 } from "@/components/Home";
 
-const Home = () => (
-  <main>
-    <Hero />
-    <About />
-    <PopularCourses />
-    <OurServices />
-    <UpComingEvents />
-    <FAQ />
-  </main>
-);
+const Home = async () => {
+  const session = await getServerSession(options);
+
+  return (
+    <>
+      {session ? (
+        <main>
+          <Hero />
+          <About />
+          <PopularCourses />
+          <OurServices />
+          <UpComingEvents />
+          <FAQ />
+        </main>
+      ) : (
+        <h1> user not found</h1>
+      )}
+    </>
+  );
+};
 
 export default Home;
