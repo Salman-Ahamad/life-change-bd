@@ -9,6 +9,7 @@ import {
   PopularCourses,
   UpComingEvents,
 } from "@/components/Home";
+import { useSession } from "next-auth/react";
 
 const Home = async () => {
   const session = await getServerSession(options);

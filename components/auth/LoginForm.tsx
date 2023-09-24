@@ -1,6 +1,8 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
@@ -25,6 +27,8 @@ interface ILoginFormValue {
 }
 
 export const LoginForm = () => {
+  const route = useRouter();
+
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const initialValues: ILoginFormValue = {
@@ -40,7 +44,7 @@ export const LoginForm = () => {
     setNum2(randomNum2);
   }, []);
 
-  const handleSubmit = (
+  const handleSubmit = async (
     { phone, password, randomNum }: ILoginFormValue,
     { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
@@ -48,7 +52,17 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      console.log({ phone, password });
+      const authRequest = await signIn("credentials", {
+        phone,
+        password,
+        redirect: false,
+      });
+
+      if (authRequest?.error) {
+        setFieldError(randomNum, authRequest.error);
+      } else {
+        route.push("/user/active");
+      }
 
       resetForm();
     }

@@ -38,7 +38,7 @@ export const ForgotPasswordForm = () => {
       setFieldError("retypeNewPassword", "Password didn't match!");
       setSubmitting(false);
     } else {
-      console.log(values);
+      // console.log(values);
       resetForm();
     }
   };
