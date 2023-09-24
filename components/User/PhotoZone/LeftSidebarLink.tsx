@@ -1,7 +1,6 @@
 import Image from "next/image";
-import React from "react";
 
-const LeftSidebarLink = ({ image, text }) => {
+const LeftSidebarLink = ({ image, text }: any) => {
   return (
     <div className="flex items-center gap-3 w-[300px] py-2 pl-1 cursor-pointer hover:bg-gray-300">
       <Image

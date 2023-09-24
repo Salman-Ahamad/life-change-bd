@@ -1,7 +1,6 @@
 import Image from "next/image";
-import React from "react";
 
-const SingleStory = ({ title, img, postImg }) => {
+const SingleStory = ({ title, img, postImg }: any) => {
   return (
     <div
       className={`relative w-[112px] shadow-md rounded-[15px] pb-2 bg-cover shrink-0 ${postImg} singleStory`}

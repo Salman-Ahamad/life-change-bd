@@ -1,12 +1,11 @@
 "use client";
 
 import { CompanyName } from "@/components/common/Brand";
-import { INav } from "@/interface";
 import { bulletList, close } from "@/lib/assets";
+import { Button } from "@/universal";
 import Image from "next/image";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { AvatarSmall } from "./Avatar";
-import { ButtonSmall } from "./Button";
 
 export const Header: FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
@@ -41,7 +40,7 @@ export const Header: FC = () => {
           }`}
         >
           <div className="w-full flex flex-col lg:flex-row justify-end items-start lg:items-center gap-5 py-5 lg:py-0">
-            <ButtonSmall>Home Page</ButtonSmall>
+            <Button variant="secondary">Home Page</Button>
             <AvatarSmall />
           </div>
         </div>

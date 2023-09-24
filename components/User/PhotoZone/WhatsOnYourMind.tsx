@@ -1,8 +1,6 @@
-import React, { useRef, useState } from "react";
-import { IoVideocamSharp } from "react-icons/io5";
-import { MdOutlinePhotoLibrary } from "react-icons/md";
+import { useRef, useState } from "react";
 import { GoSmiley } from "react-icons/go";
-import { MdOutlineClose } from "react-icons/md";
+import { MdOutlineClose, MdOutlinePhotoLibrary } from "react-icons/md";
 
 import { useSession } from "next-auth/react";
 
@@ -15,7 +13,7 @@ import { useSession } from "next-auth/react";
 // } from "firebase/firestore";
 // import { db, storage } from "../firebase";
 // import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { Button } from ".";
+import { Button } from "@/universal";
 import Image from "next/image";
 
 const WhatsOnYourMind = () => {
@@ -28,7 +26,7 @@ const WhatsOnYourMind = () => {
 
   const { data: session } = useSession();
 
-  const addImageToPost = (e) => {
+  const addImageToPost = (e: any) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
@@ -79,8 +77,8 @@ const WhatsOnYourMind = () => {
           width={40}
           height={40}
           className="w-10 h-10 object-cover rounded-full"
-          src={session?.user?.image}
-          alt={session?.user?.name}
+          src={session?.user?.image || ""}
+          alt={session?.user?.name || ""}
         />
 
         <input
@@ -136,7 +134,15 @@ const WhatsOnYourMind = () => {
         </div>
       </div>
 
-      <Button input={input} selectedFile={selectedFile} onClick={sendPost} />
+      {/* <Button input={input} selectedFile={selectedFile} onClick={sendPost} /> */}
+      <Button
+        disabled={!input.trim() && !selectedFile}
+        onClick={sendPost}
+        variant="primary"
+        className="bg-primary w-full text-white py-2 px-5 rounded-lg mt-[30px] disabled:bg-gray-300 disabled:text-gray-500"
+      >
+        Post
+      </Button>
     </div>
   );
 };

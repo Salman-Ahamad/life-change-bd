@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
 import { Title } from "@/universal";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useEffect } from "react";
 
 const ProfileDetails = () => {
   const { data: session } = useSession();
@@ -14,10 +14,10 @@ const ProfileDetails = () => {
     <div className="px-4 bg-white rounded-[17px] shadow-md mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">
       <div className="flex items-center justify-center py-2 cursor-pointer hover:bg-gray-300">
         <Image
-          src={session?.user?.image}
+          src={session?.user?.image || ""}
           width={140}
           height={140}
-          alt={session?.user?.name}
+          alt={session?.user?.name || ""}
           className="rounded-full  border-2 p-2"
         />
       </div>

@@ -1,13 +1,11 @@
 "use client";
 
-import React, { FC } from "react";
-import { BsMessenger } from "react-icons/bs";
-import { AiOutlineSearch, AiFillHome } from "react-icons/ai";
-import { IoStorefrontOutline, IoNotifications } from "react-icons/io5";
-import { CgMenuGridO } from "react-icons/cg";
+import { Button } from "@/universal";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { Button, ButtonSmall } from "./Button";
+import { FC } from "react";
+import { AiFillHome, AiOutlineSearch } from "react-icons/ai";
+import { IoStorefrontOutline } from "react-icons/io5";
 
 const Navbar: FC = () => {
   const { data: session } = useSession();
@@ -16,7 +14,7 @@ const Navbar: FC = () => {
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">
       <div className="flex items-center gap-2">
         <p className="text-xl font-semibold px-4">
-          {session && session.user.name}
+          {session && session?.user?.name}
         </p>
 
         <div className="relative hidden sm:block">
@@ -57,14 +55,16 @@ const Navbar: FC = () => {
           <IoNotifications />
         </div> */}
 
-        <ButtonSmall onClick={signOut}>LogOut</ButtonSmall>
+        <Button variant="secondary" className="rounded-lg" onClick={signOut}>
+          LogOut
+        </Button>
 
         <Image
-          src={session?.user?.image}
+          src={session?.user?.image || ""}
           width={40}
           height={40}
           className="w-10 h-10 cursor-pointer rounded-full"
-          alt={session?.user?.name}
+          alt={session?.user?.name || ""}
         />
       </div>
     </div>

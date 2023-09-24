@@ -1,11 +1,10 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import React from "react";
 
+import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import SingleStory from "./SingleStory";
-import Image from "next/image";
 
 const Story = () => {
   const recentImage = [
@@ -47,8 +46,8 @@ const Story = () => {
             width={112}
             height={144}
             className="w-28 h-36 rounded-t-[15px] object-cover"
-            src={session?.user?.image}
-            alt={session?.user?.name}
+            src={session?.user?.image || ""}
+            alt={session?.user?.name || ""}
           />
           <div>
             <div className="bg-primary w-9 h-9 rounded-full grid place-items-center text-[24px] text-white mx-auto -mt-[20px] relative outline outline-[6px] outline-white">
