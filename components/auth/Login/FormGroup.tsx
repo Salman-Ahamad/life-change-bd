@@ -27,6 +27,8 @@ interface ILoginFormValue {
 }
 
 export const LoginForm = () => {
+  const route = useRouter();
+
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const initialValues: ILoginFormValue = {
@@ -59,7 +61,7 @@ export const LoginForm = () => {
       if (authRequest?.error) {
         setFieldError(randomNum, authRequest.error);
       } else {
-        useRouter("/user/active");
+        route.push("/user/active");
       }
 
       resetForm();
