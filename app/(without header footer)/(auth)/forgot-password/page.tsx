@@ -1,9 +1,8 @@
 "use client";
 
-import { FC } from "react";
-
-import { Container, Title } from "@/universal";
 import { ForgotPasswordForm } from "@/components";
+import { Container, Title } from "@/universal";
+import { FC } from "react";
 
 const ForgotPassword: FC = () => (
   <Container className="h-screen flex flex-col justify-center items-center w-full  mx-auto">
