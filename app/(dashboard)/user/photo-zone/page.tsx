@@ -1,11 +1,17 @@
 "use client";
 
-import { NextPage } from "next";
+import Feed from "@/components/User/PhotoZone/Feed";
+import LeftSidebar from "@/components/User/PhotoZone/LeftSidebar";
+import RightSidebar from "@/components/User/PhotoZone/RightSidebar";
 
-const PhotoZone: NextPage = () => (
-  <main>
-    <h1>photo-zone</h1>
-  </main>
-);
+const page = () => {
+  return (
+    <>
+      <LeftSidebar />
+      <RightSidebar />
+      <Feed />
+    </>
+  );
+};
 
-export default PhotoZone;
+export default page;
