@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Sora } from "next/font/google";
 import { FC } from "react";
 
+import { AuthProvider } from "@/components";
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const sora = Sora({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Life Change BD",
@@ -14,7 +20,9 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<IChildren> = ({ children }) => (
   <html lang="en">
-    <body className={inter.className}>{children}</body>
+    <body className={`${(inter.className, poppins.className, sora.className)}`}>
+      <AuthProvider>{children}</AuthProvider>
+    </body>
   </html>
 );
 
