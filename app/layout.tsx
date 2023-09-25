@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { FC } from "react";
 
+import { AuthProvider } from "@/components";
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
 
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<IChildren> = ({ children }) => (
   <html lang="en">
-    <body className={inter.className}>{children}</body>
+    <body className={inter.className}>
+      <AuthProvider>{children}</AuthProvider>
+    </body>
   </html>
 );
 
