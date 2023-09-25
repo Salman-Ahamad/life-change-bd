@@ -3,6 +3,7 @@
 import { DefaultSession, DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 
+type IUser = "inactive" | "active" | "subAdmin" | "admin";
 declare module "next-auth" {
   interface Session {
     user: {
