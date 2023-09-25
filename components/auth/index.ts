@@ -1,5 +1,5 @@
 "use client";
 
-export * from "./ForgotPassword";
-export * from "./Login";
-export * from "./SignUp";
+export * from "./ForgotPasswordForm";
+export * from "./LoginForm";
+export * from "./SignUpForm";
