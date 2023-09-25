@@ -37,10 +37,10 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "42",
-          name: "salman",
-          phone: "01712345678",
-          password: "112233",
           role: "admin",
+          name: "salman",
+          password: "112233",
+          phone: "01712345678",
         };
 
         if (
