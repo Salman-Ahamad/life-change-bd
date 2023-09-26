@@ -34,6 +34,7 @@ export default withAuth(
 // Ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
   matcher: [
+    "/inactive",
     "/user/active",
     "/user/active/profile",
     "/user/active/withdrawal",
