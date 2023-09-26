@@ -7,22 +7,14 @@ export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     // console.log(request.nextUrl.pathname);
     // console.log(request.nextauth.token)
-    switch (request.nextauth.token?.role) {
-      case "inactive":
-        return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
-      case "active":
-        return NextResponse.redirect(`${process.env.BASE_URL}/user/active`);
 
-      default:
-        return NextResponse.redirect(`${process.env.BASE_URL}`);
+    if (
+      request.nextUrl.pathname.includes("/user") &&
+      request.nextauth.token?.role !== "active"
+    ) {
+      // return NextResponse.rewrite(new URL("/denied", request.url));
+      return NextResponse.redirect("http://localhost:3000/inactive");
     }
-
-    // if (
-    //   request.nextUrl.pathname.includes("/user") &&
-    //   request.nextauth.token?.role === "inactive"
-    // ) {
-    //   return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
-    // }
 
     // if (
     //   request.nextUrl.pathname.startsWith("/client") &&
