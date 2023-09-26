@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
+import { signIn } from "next-auth/react";
 import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
@@ -48,7 +49,7 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      console.log({ phone, password });
+      signIn("Credentials", { phone, password });
 
       resetForm();
     }
