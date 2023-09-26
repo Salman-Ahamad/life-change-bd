@@ -55,6 +55,10 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      console.log({ url, baseUrl });
+      return `${baseUrl}/active`;
+    },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) token.role = user.role;
@@ -65,5 +69,9 @@ export const options: NextAuthOptions = {
       if (session?.user) session.role = token.role;
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
+    newUser: "/signup",
   },
 };
