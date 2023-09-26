@@ -12,7 +12,7 @@ export default withAuth(
       request.nextUrl.pathname.includes("/user") &&
       request.nextauth.token?.role !== "active"
     ) {
-      return NextResponse.rewrite(new URL("/denied", request.url));
+      return NextResponse.redirect("http://localhost:3000/inactive");
     }
 
     // if (
@@ -25,7 +25,10 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token }) => {
+        console.log("Token", token);
+        return !!token;
+      },
     },
   }
 );

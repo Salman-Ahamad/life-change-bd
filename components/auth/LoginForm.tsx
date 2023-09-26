@@ -51,7 +51,7 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      signIn("Credentials", { phone, password });
+      signIn("credentials", { phone, password });
 
       resetForm();
     }

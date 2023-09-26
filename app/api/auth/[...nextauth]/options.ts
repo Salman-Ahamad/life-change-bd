@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         phone: {
           label: "Phone:",
@@ -37,11 +37,13 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "42",
-          role: "admin",
+          role: "inactive",
           name: "salman",
           password: "112233",
           phone: "01712345678",
         };
+
+        console.log("Credential: ", credentials);
 
         if (
           credentials?.phone === user.phone &&
@@ -56,17 +58,18 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async redirect({ url, baseUrl }) {
-      console.log({ url, baseUrl });
-      return `${baseUrl}/active`;
+      return `${baseUrl}/user/active`;
     },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) token.role = user.role;
+      console.log({ token });
       return token;
     },
     // If you want to use the role in client components
     async session({ session, token }) {
       if (session?.user) session.role = token.role;
+      console.log({ session });
       return session;
     },
   },
