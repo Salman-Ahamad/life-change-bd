@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         phone: {
           label: "Phone:",
@@ -37,7 +37,7 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "42",
-          role: "admin",
+          role: "inactive",
           name: "salman",
           password: "112233",
           phone: "01712345678",
@@ -55,10 +55,9 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      console.log({ url, baseUrl });
-      return `${baseUrl}/active`;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   return `${baseUrl}/user/active`;
+    // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) token.role = user.role;
