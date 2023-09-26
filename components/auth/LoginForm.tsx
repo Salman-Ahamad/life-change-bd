@@ -51,7 +51,11 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      signIn("credentials", { phone, password });
+      signIn("credentials", {
+        phone,
+        password,
+        callbackUrl: "http://localhost:3000/user/active",
+      });
 
       resetForm();
     }
