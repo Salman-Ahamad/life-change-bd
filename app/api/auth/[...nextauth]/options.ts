@@ -1,32 +1,50 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider from "next-auth/providers/github";
+import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
 
 export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
+      profile(profile: GithubProfile) {
+        //console.log(profile)
+        return {
+          ...profile,
+          role: profile.role ?? "user",
+          id: profile.id.toString(),
+          image: profile.avatar_url,
+        };
+      },
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
-          label: "Username",
-          type: "text ",
-          placeholder: "username here!",
+        phone: {
+          label: "Phone:",
+          type: "text",
+          placeholder: "Phone Number",
         },
         password: {
-          label: "Password",
+          label: "Password:",
           type: "password",
-          placeholder: "password here!",
+          placeholder: "your-awesome-password",
         },
       },
       async authorize(credentials) {
-        const user = { id: "42", name: "salman", password: "112233" };
+        // This is where you need to retrieve user data
+        // to verify with credentials
+        // Docs: https://next-auth.js.org/configuration/providers/credentials
+        const user = {
+          id: "42",
+          role: "admin",
+          name: "salman",
+          password: "112233",
+          phone: "01712345678",
+        };
 
         if (
-          credentials?.username === user.name &&
+          credentials?.phone === user.phone &&
           credentials?.password === user.password
         ) {
           return user;
@@ -36,4 +54,24 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      console.log({ url, baseUrl });
+      return `${baseUrl}/active`;
+    },
+    // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+    // If you want to use the role in client components
+    async session({ session, token }) {
+      if (session?.user) session.role = token.role;
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/login",
+    newUser: "/signup",
+  },
 };

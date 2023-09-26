@@ -1,13 +1,12 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
+import { signIn, useSession } from "next-auth/react";
 import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
@@ -27,8 +26,6 @@ interface ILoginFormValue {
 }
 
 export const LoginForm = () => {
-  const route = useRouter();
-
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const initialValues: ILoginFormValue = {
@@ -36,6 +33,8 @@ export const LoginForm = () => {
     password: "",
     randomNum: "",
   };
+  const { data: session } = useSession();
+  console.log(session);
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
@@ -44,7 +43,7 @@ export const LoginForm = () => {
     setNum2(randomNum2);
   }, []);
 
-  const handleSubmit = async (
+  const handleSubmit = (
     { phone, password, randomNum }: ILoginFormValue,
     { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
@@ -52,17 +51,7 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      const authRequest = await signIn("credentials", {
-        phone,
-        password,
-        redirect: false,
-      });
-
-      if (authRequest?.error) {
-        setFieldError(randomNum, authRequest.error);
-      } else {
-        route.push("/user/active");
-      }
+      signIn("Credentials", { phone, password });
 
       resetForm();
     }

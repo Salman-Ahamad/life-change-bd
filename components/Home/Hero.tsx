@@ -10,7 +10,6 @@ import {
 } from "@/universal";
 import Image from "next/image";
 import { FC } from "react";
-import { LogOut } from "..";
 
 export const Hero: FC = () => (
   <BackgroundImg

@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import { INav } from "@/interface";
 import { bulletList, close } from "@/lib/assets";
 import { Button, MainContainer } from "@/universal";
+import { signOut } from "next-auth/react";
 
 export const Header: FC<INav> = ({ navData }) => {
   const [toggle, setToggle] = useState<boolean>(false);
@@ -49,7 +50,9 @@ export const Header: FC<INav> = ({ navData }) => {
                 </Link>
               ))}
             </div>
-            <Button variant="secondary">Log Out</Button>
+            <Button variant="secondary" onClick={() => signOut()}>
+              Log Out
+            </Button>
           </div>
         </div>
       </nav>

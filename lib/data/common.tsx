@@ -13,11 +13,11 @@ export const navData: INavData = {
     },
     {
       label: "Contact",
-      link: "/",
+      link: "/contact",
     },
     {
       label: "Courses",
-      link: "/",
+      link: "/courses",
     },
   ],
   inActive: [
@@ -27,7 +27,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/",
+      link: "/courses",
     },
     {
       label: "Referances",

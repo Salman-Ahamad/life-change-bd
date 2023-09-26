@@ -41,14 +41,14 @@ const Post = ({ data, id }: any) => {
 
         <div className="text-gray-500 text-[26px] flex gap-4">
           <FiMoreHorizontal className="cursor-pointer" />
-          {/* {isAdmin(data.id, session?.user?.uid) && (
+          {isAdmin(data.id, session?.id) && (
             <MdOutlineClose
               className="cursor-pointer"
               onClick={() => {
                 // deleteDoc(doc(db, "posts", id));
               }}
             />
-          )} */}
+          )}
         </div>
       </div>
 

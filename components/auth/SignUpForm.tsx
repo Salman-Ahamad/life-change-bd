@@ -57,7 +57,7 @@ export const SignUpForm = () => {
     values: ISignUpFormValue,
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
-    // console.log(values);
+    console.log(values);
 
     setAgree(false);
     resetForm();

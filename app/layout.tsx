@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { FC } from "react";
 
+import { AuthProvider } from "@/components";
 import { IChildren } from "@/interface";
 import "@/styles/globals.css";
-import AuthProvider from "./context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

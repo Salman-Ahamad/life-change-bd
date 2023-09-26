@@ -1,14 +1,13 @@
 "use client";
 
+import { SignUpForm } from "@/components";
+import { CommonText, Title } from "@/universal";
 import Link from "next/link";
 import { FC } from "react";
 
-import { SignUpForm } from "@/components";
-import { CommonText, Title } from "@/universal";
-
 const SignUp: FC = () => (
-  <section className="min-h-screen flex justify-between items-center px-5">
-    <div className="w-full mx-auto flex flex-col justify-center items-center max-w-[750px] py-20 lg:py-0">
+  <main className="min-h-screen flex justify-between items-center px-5">
+    <section className="w-full mx-auto flex flex-col justify-center items-center max-w-[750px] py-20 lg:py-0">
       <Title variant="H3" className="normal-case">
         Account Opening Form
       </Title>
@@ -24,8 +23,8 @@ const SignUp: FC = () => (
           Login here
         </Link>
       </CommonText>
-    </div>
-  </section>
+    </section>
+  </main>
 );
 
 export default SignUp;
