@@ -10,10 +10,15 @@ export default withAuth(
 
     if (
       request.nextUrl.pathname.includes("/user") &&
-      request.nextauth.token?.role !== "active"
+      request.nextauth.token?.role === "inactive"
     ) {
       // return NextResponse.rewrite(new URL("/denied", request.url));
       return NextResponse.redirect("http://localhost:3000/inactive");
+    } else if (
+      request.nextUrl.pathname.includes("/inactive") &&
+      request.nextauth.token?.role === "active"
+    ) {
+      return NextResponse.redirect("http://localhost:3000/user/active");
     }
 
     // if (
@@ -27,7 +32,6 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
-        console.log("Midleware Token 5: ", token);
         return !!token;
       },
     },

@@ -37,13 +37,11 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "42",
-          role: "active",
+          role: "inactive",
           name: "salman",
           password: "112233",
           phone: "01712345678",
         };
-
-        console.log("Credential 1: ", credentials);
 
         if (
           credentials?.phone === user.phone &&
@@ -57,13 +55,12 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      return `${baseUrl}/user/active`;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   return `${baseUrl}/user/active`;
+    // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) token.role = user.role;
-      console.log("JWT Token 2: ", token);
       return token;
 
       // After JWT, run the middleware authorized callbacks.
@@ -71,7 +68,6 @@ export const options: NextAuthOptions = {
     // If you want to use the role in client components
     async session({ session, token }) {
       if (session?.user) session.role = token.role;
-      console.log("Session 3: ", session);
       return session;
     },
   },
