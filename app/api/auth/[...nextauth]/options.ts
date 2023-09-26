@@ -55,13 +55,15 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      return `${baseUrl}/user/active`;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   return `${baseUrl}/user/active`;
+    // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) token.role = user.role;
       return token;
+
+      // After JWT, run the middleware authorized callbacks.
     },
     // If you want to use the role in client components
     async session({ session, token }) {

@@ -8,16 +8,21 @@ import {
   PopularCourses,
   UpComingEvents,
 } from "@/components/Home";
+import { useSession } from "next-auth/react";
 
-const Home = () => (
-  <main>
-    <Hero />
-    <About />
-    <PopularCourses />
-    <OurServices />
-    <UpComingEvents />
-    <FAQ />
-  </main>
-);
+const Home = () => {
+  const { data: session } = useSession();
+  console.log(session);
+  return (
+    <main>
+      <Hero />
+      <About />
+      <PopularCourses />
+      <OurServices />
+      <UpComingEvents />
+      <FAQ />
+    </main>
+  );
+};
 
 export default Home;
