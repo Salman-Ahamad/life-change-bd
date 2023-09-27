@@ -1,5 +1,6 @@
 import { IFooterData, INavData } from "@/interface";
 import { BackButton } from "@/universal";
+import { facebook, pinterest, twitter } from "@/lib/assets";
 
 export const navData: INavData = {
   common: [
@@ -9,7 +10,7 @@ export const navData: INavData = {
     },
     {
       label: "About",
-      link: "/",
+      link: "/about",
     },
     {
       label: "Contact",
@@ -320,7 +321,24 @@ export const navData: INavData = {
 
 export const footerItems: IFooterData = {
   title: "COMPANY",
-  policy: ["Careers", "Contact Us", "Terms and conditions", "Privacy Policy"],
+  policy: [
+    {
+      title: "Careers",
+      href: "/signup",
+    },
+    {
+      title: "Contact Us",
+      href: "/contact",
+    },
+    {
+      title: "Terms and conditions",
+      href: "/terms-conditions",
+    },
+    {
+      title: "Privacy Policy",
+      href: "/privacy-policy",
+    },
+  ],
   option: [
     {
       title: "VIRTUAL OFFICE ADDRESS",
@@ -333,5 +351,10 @@ export const footerItems: IFooterData = {
     {
       copyright: `Copyright © 2019 - ${new Date().getFullYear()} Life Change Bd® All rights reserved.`,
     },
+  ],
+  socialIcons: [
+    { icon: facebook, href: "#" },
+    { icon: twitter, href: "#" },
+    { icon: pinterest, href: "#" },
   ],
 };
