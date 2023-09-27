@@ -1,5 +1,5 @@
 "use client";
 
-import bnsLogo from "./my-bns-logo.png";
+import bnsLogo from "./logo-life_change_bd.png";
 
 export { bnsLogo };

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { Header } from "@/components";
 import { courses, navData } from "@/lib/data";
 import { Button } from "@/universal";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import Link from "next/link";
 
 const Courses = () => (
   <>
+    <Header navData={navData.courses} />
     <section className="py-12">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
         <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">

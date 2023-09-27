@@ -22,7 +22,9 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
     <div className={`absolute w-full inset-0`}>
       <Image
         src={img}
-        className={`w-full ${overflow && "min-w-[500px] min-h-[500px]"}`}
+        className={`w-full object-cover ${
+          overflow && "min-w-[500px] min-h-[500px]"
+        }`}
         alt="background image"
         fill
       />
