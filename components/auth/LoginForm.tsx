@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Input } from "..";
 
 const validationSchema = Yup.object().shape({
@@ -33,8 +33,8 @@ export const LoginForm = () => {
     password: "",
     randomNum: "",
   };
-  const { data: session } = useSession();
-  console.log(session);
+  // const { data: session } = useSession();
+  // console.log(session);
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
