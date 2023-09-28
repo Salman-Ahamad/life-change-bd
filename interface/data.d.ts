@@ -14,11 +14,18 @@ export interface IEventsData {
 
 export interface IFooterData {
   title: string;
-  policy: string[];
+  policy: {
+    title: string;
+    href: string;
+  }[];
   option: {
     title?: string;
     text?: string;
     copyright?: string;
+  }[];
+  socialIcons: {
+    icon: any;
+    href: string;
   }[];
 }
 

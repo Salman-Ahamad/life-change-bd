@@ -16,7 +16,7 @@ export const About: FC = () => (
             alt=""
           />
           <p className="text-2xl">
-            6+ <br className="hidden lg:block" /> courses
+            10+ <br className="hidden lg:block" /> courses
           </p>
         </div>
         <div className="bg-black w-full lg:w-96 h-28 lg:h-40 flex justify-start items-center gap-10 text-white p-[30px] rounded-xl">

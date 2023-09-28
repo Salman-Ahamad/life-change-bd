@@ -70,7 +70,7 @@ export const LoginForm = () => {
       {({ isSubmitting, isValid }) => (
         <Form>
           <Title variant="H3" className="mb-10 normal-case">
-            Login
+            Welcome back
           </Title>
 
           <CTA className="mt-2.5">Phone Number with Country code</CTA>

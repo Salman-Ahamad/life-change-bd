@@ -1,5 +1,6 @@
 import { IFooterData, INavData } from "@/interface";
 import { BackButton } from "@/universal";
+import { facebook, pinterest, twitter } from "@/lib/assets";
 
 export const navData: INavData = {
   common: [
@@ -9,7 +10,7 @@ export const navData: INavData = {
     },
     {
       label: "About",
-      link: "/",
+      link: "/about",
     },
     {
       label: "Contact",
@@ -33,28 +34,32 @@ export const navData: INavData = {
       label: "Referances",
       link: "/",
     },
-    {
-      label: "Collect Points",
-      link: "/",
-    },
-    {
-      label: "Earn Reward Points",
-      link: "/",
-    },
-    {
-      label: "Redeem Reward Points",
-      link: "/",
-    },
-    {
-      label: "Messages",
-      link: "/",
-    },
-    {
-      label: "Redeem Partner Training Class",
-      link: "/",
-    },
+    // {
+    //   label: "Collect Points",
+    //   link: "/",
+    // },
+    // {
+    //   label: "Earn Reward Points",
+    //   link: "/",
+    // },
+    // {
+    //   label: "Redeem Reward Points",
+    //   link: "/",
+    // },
+    // {
+    //   label: "Messages",
+    //   link: "/",
+    // },
+    // {
+    //   label: "Redeem Partner Training Class",
+    //   link: "/",
+    // },
     {
       label: "Photo Zone",
+      link: "/",
+    },
+    {
+      label: "Video Zone",
       link: "/",
     },
   ],
@@ -98,37 +103,43 @@ export const navData: INavData = {
       link: "/user/active",
     },
     {
-      label: "Withdrawal",
-      link: "/user/active/withdrawal",
-    },
-    {
-      label: "Points",
-      link: "/courses",
-    },
-    {
       label: "Edit Profile",
       link: "/user/ref-list",
     },
     {
-      label: "Document Verification",
-      link: "/user/ref-list",
+      label: "Change Password",
+      link: "/user/change-password",
     },
     {
       label: "Passbook",
-      link: "/user/ref-list",
+      link: "/user/passbook",
     },
     {
-      label: "Redeem List/hist",
-      link: "/user/ref-list",
-    },
-    {
-      label: "Instant Redeem",
-      link: "/user/ref-list",
+      label: "Withdrawal",
+      link: "/user/active/withdrawal",
     },
     {
       label: "Photo Zone",
       link: "/user/ref-list",
     },
+    // {
+    //   label: "Points",
+    //   link: "/courses",
+    // },
+
+    // {
+    //   label: "Document Verification",
+    //   link: "/user/ref-list",
+    // },
+
+    // {
+    //   label: "Redeem List/hist",
+    //   link: "/user/ref-list",
+    // },
+    // {
+    //   label: "Instant Redeem",
+    //   link: "/user/ref-list",
+    // },
   ],
   withdrawal: [
     {
@@ -136,21 +147,29 @@ export const navData: INavData = {
       link: "/user/active/profile",
     },
     {
-      label: "Change Payment Method",
-      link: "/user/payment-method",
+      label: "Courses",
+      link: "/user/courses",
     },
     {
-      label: "Passbook",
-      link: "/user/passbook",
+      label: "Reference",
+      link: "/user/ref-list",
     },
-    {
-      label: "Redeem List/hist",
-      link: "/user/redeem-list",
-    },
-    {
-      label: "Instant Redeem",
-      link: "/user/instant-redeem",
-    },
+    // {
+    //   label: "Change Payment Method",
+    //   link: "/user/payment-method",
+    // },
+    // {
+    //   label: "Passbook",
+    //   link: "/user/passbook",
+    // },
+    // {
+    //   label: "Redeem List/hist",
+    //   link: "/user/redeem-list",
+    // },
+    // {
+    //   label: "Instant Redeem",
+    //   link: "/user/instant-redeem",
+    // },
   ],
   courses: [
     {
@@ -302,7 +321,24 @@ export const navData: INavData = {
 
 export const footerItems: IFooterData = {
   title: "COMPANY",
-  policy: ["Careers", "Contact Us", "Terms and conditions", "Privacy Policy"],
+  policy: [
+    {
+      title: "Careers",
+      href: "/signup",
+    },
+    {
+      title: "Contact Us",
+      href: "/contact",
+    },
+    {
+      title: "Terms and conditions",
+      href: "/terms-conditions",
+    },
+    {
+      title: "Privacy Policy",
+      href: "/privacy-policy",
+    },
+  ],
   option: [
     {
       title: "VIRTUAL OFFICE ADDRESS",
@@ -315,5 +351,10 @@ export const footerItems: IFooterData = {
     {
       copyright: `Copyright © 2019 - ${new Date().getFullYear()} Life Change Bd® All rights reserved.`,
     },
+  ],
+  socialIcons: [
+    { icon: facebook, href: "#" },
+    { icon: twitter, href: "#" },
+    { icon: pinterest, href: "#" },
   ],
 };

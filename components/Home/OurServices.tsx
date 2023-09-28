@@ -17,28 +17,28 @@ export const OurServices: FC = () => (
         ))}
       </div>
 
-      <div className="my-10">
+      {/* <div className="my-10">
         <Title variant="H3" className="text-start">
           Online Health Consultation
         </Title>
         <CommonText>
-          You may avail online consultancy with doctors on My Business
-          Union.Normal medicines can be provided by the doctors if it is
-          necessity. Doctors will not give any prescribed medication without any
-          visual treatment. Only online consultancy will be provided for on
-          behalf of the doctors on My Business Union. For this consultation the
-          person will come to know about their own disease and could discussed
-          with the doctors in this regards. The doctor will counsel on the best
-          place to get treatment,the specialist doctor of that particular
-          diseases and guide you the further necessary stpes. By the counsel of
-          doctors on My Business Union you would able to get best treatment for
-          your disease. All guidance will be provided verbally. You can be
-          completely cured by taking the right treatment from the right place on
-          the advice of the doctors on My Business Union.
+          You may avail online consultancy with doctors on My Business Union.
+          Normal medicines can be provided by the doctors if it is necessity.
+          Doctors will not give any prescribed medication without any visual
+          treatment. Only online consultancy will be provided for on behalf of
+          the doctors on My Business Union. For this consultation the person
+          will come to know about their own disease and could discussed with the
+          doctors in this regards. The doctor will counsel on the best place to
+          get treatment,the specialist doctor of that particular diseases and
+          guide you the further necessary stpes. By the counsel of doctors on My
+          Business Union you would able to get best treatment for your disease.
+          All guidance will be provided verbally. You can be completely cured by
+          taking the right treatment from the right place on the advice of the
+          doctors on My Business Union.
         </CommonText>
-      </div>
+      </div> */}
 
-      <div className="my-10">
+      {/* <div className="my-10">
         <Title variant="H3" className="text-start">
           Online Astrology Consultation
         </Title>
@@ -56,7 +56,7 @@ export const OurServices: FC = () => (
           astro consultancy on My Business Union. This consultation will give
           you a stress free life in future.
         </CommonText>
-      </div>
+      </div> */}
     </Container>
   </MainContainer>
 );

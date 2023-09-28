@@ -13,7 +13,7 @@ import { navData } from "@/lib/data";
 const Inactive = () => (
   <>
     <Header navData={navData.inActive} />
-    <Tost label="verify your email" btnText="verify" />
+    <Tost label="erifyemailaddressandg e t5 Taka" btnText="verify" />
     <ImageUploadSection />
     <Support />
     <section className="bg-black">
