@@ -48,6 +48,7 @@ export interface IBackgroundImage extends IChildrenWithClassName {
   img: StaticImageData;
   mobImg?: StaticImageData;
   overflow?: boolean;
+  overlay?: boolean;
 }
 
 export interface IAbsoluteImg extends IClassName {

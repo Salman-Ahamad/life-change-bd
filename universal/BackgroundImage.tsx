@@ -11,8 +11,9 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
   mobImg,
   className,
   overflow,
+  overlay,
 }) => (
-  <main
+  <div
     className={twMerge(
       `relative w-full ${overflow && "overflow-hidden"}`,
       className
@@ -21,7 +22,9 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
     <div className={`absolute w-full inset-0`}>
       <Image
         src={img}
-        className={`w-full ${overflow && "min-w-[500px] min-h-[500px]"}`}
+        className={`w-full object-cover ${
+          overflow && "min-w-[500px] min-h-[500px]"
+        }`}
         alt="background image"
         fill
       />
@@ -34,7 +37,10 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
         />
       )}
     </div>
-
-    <section className="relative z-10">{children}</section>
-  </main>
+    {/* <!-- Overlay with gradient effect --> */}
+    {overlay && (
+      <div className="absolute inset-0 bg-gradient-to-r from-accent to-transparent"></div>
+    )}
+    <div className="relative z-10">{children}</div>
+  </div>
 );

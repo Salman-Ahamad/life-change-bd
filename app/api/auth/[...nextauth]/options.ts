@@ -37,7 +37,7 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "42",
-          role: "inactive",
+          role: "active",
           name: "salman",
           password: "112233",
           phone: "01712345678",
