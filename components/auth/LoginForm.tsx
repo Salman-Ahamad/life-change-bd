@@ -56,7 +56,7 @@ export const LoginForm = () => {
       signIn("credentials", {
         phone,
         password,
-        callbackUrl: `http://localhost:3000/user/active`,
+        callbackUrl: `https://life-change-bd.vercel.app/user/active`,
       });
 
       resetForm();

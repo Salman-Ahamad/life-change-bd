@@ -13,12 +13,16 @@ export default withAuth(
       request.nextauth.token?.role === "inactive"
     ) {
       // return NextResponse.rewrite(new URL("/denied", request.url)); ${process.env.BASE_URL}
-      return NextResponse.redirect(`http://localhost:3000/inactive`);
+      return NextResponse.redirect(
+        `https://life-change-bd.vercel.app/inactive`
+      );
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
       request.nextauth.token?.role === "active"
     ) {
-      return NextResponse.redirect(`http://localhost:3000/user/active`);
+      return NextResponse.redirect(
+        `https://life-change-bd.vercel.app/user/active`
+      );
     }
 
     // if (
