@@ -54,7 +54,7 @@ export const LoginForm = () => {
       signIn("credentials", {
         phone,
         password,
-        callbackUrl: "http://localhost:3000/user/active",
+        callbackUrl: `${process.env.BASE_URL}/user/active`,
       });
 
       resetForm();

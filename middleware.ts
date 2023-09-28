@@ -13,12 +13,12 @@ export default withAuth(
       request.nextauth.token?.role === "inactive"
     ) {
       // return NextResponse.rewrite(new URL("/denied", request.url));
-      return NextResponse.redirect("http://localhost:3000/inactive");
+      return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
       request.nextauth.token?.role === "active"
     ) {
-      return NextResponse.redirect("http://localhost:3000/user/active");
+      return NextResponse.redirect(`${process.env.BASE_URL}/user/active`);
     }
 
     // if (
