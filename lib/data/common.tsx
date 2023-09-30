@@ -324,7 +324,7 @@ export const footerItems: IFooterData = {
   policy: [
     {
       title: "Careers",
-      href: "/signup",
+      href: "/careers",
     },
     {
       title: "Contact Us",

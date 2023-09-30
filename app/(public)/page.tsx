@@ -14,14 +14,14 @@ const Home = () => {
   const { data: session } = useSession();
   console.log(session);
   return (
-    <main>
+    <>
       <Hero />
       <About />
       <PopularCourses />
       <OurServices />
       <UpComingEvents />
       <FAQ />
-    </main>
+    </>
   );
 };
 
