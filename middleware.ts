@@ -13,16 +13,12 @@ export default withAuth(
       request.nextUrl.pathname.includes("/user") &&
       request.nextauth.token?.role === UserRole.inactive
     ) {
-      return NextResponse.redirect(
-        `https://life-change-bd.vercel.app/inactive`
-      );
+      return NextResponse.redirect(`http://localhost:3000/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
       request.nextauth.token?.role === UserRole.active
     ) {
-      return NextResponse.redirect(
-        `https://life-change-bd.vercel.app/user/active`
-      );
+      return NextResponse.redirect(`http://localhost:3000/user/active`);
     }
   },
   {
