@@ -8,6 +8,8 @@ import { Input } from "@/components";
 import { ISignUpFormValue } from "@/interface";
 import { Languages, allCountry, signUpValidationSchema } from "@/lib";
 import { Button, CTA, CommonText } from "@/universal";
+import { Axios } from "@/utils";
+import { toast } from "react-toastify";
 
 export const SignUpForm = () => {
   const [agree, setAgree] = useState(false);
@@ -27,10 +29,15 @@ export const SignUpForm = () => {
     values: ISignUpFormValue,
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
-    console.log(values);
+    Axios.post("/auth/signup", values)
+      .then(({ data }) => {
+        toast.success(data.message);
+        console.log(data);
 
-    setAgree(false);
-    resetForm();
+        setAgree(false);
+        resetForm();
+      })
+      .catch((err) => console.log("error:- ", err));
   };
 
   return (
