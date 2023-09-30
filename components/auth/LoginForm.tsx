@@ -2,24 +2,14 @@
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
-import * as Yup from "yup";
 
+import { loginValidationSchema } from "@/lib/validation";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
 import { signIn } from "next-auth/react";
 import { Input } from "..";
 
-const validationSchema = Yup.object().shape({
-  phone: Yup.string()
-    .required("Phone number is required")
-    .matches(/^\d{11}$/, "Phone number must be 11 digits"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Must be at least 6 characters"),
-  randomNum: Yup.string().required("Math is required"),
-});
-
-interface ILoginFormValue {
+export interface ILoginFormValue {
   phone: string;
   password: string;
   randomNum: string;
@@ -65,7 +55,7 @@ export const LoginForm = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={loginValidationSchema}
       initialValues={initialValues}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >

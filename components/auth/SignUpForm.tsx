@@ -1,43 +1,13 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
-import * as Yup from "yup";
-
-import { Input } from "@/components";
-import { Languages, allCountry } from "@/lib/constant";
-import { Button, CTA, CommonText } from "@/universal";
 import Link from "next/link";
 import { useState } from "react";
 
-const validationSchema = Yup.object().shape({
-  first_name: Yup.string().required("First Name is required"),
-  last_name: Yup.string().required("Last Name is required"),
-  language: Yup.string().required("Language is required"),
-  country: Yup.string().required("Country is required"),
-  whatsapp: Yup.string()
-    .required("Whatsapp number is required")
-    .matches(/^\d{11}$/, "Whatsapp number must be 11 digits"),
-  phone: Yup.string()
-    .required("Phone number is required")
-    .matches(/^\d{11}$/, "Phone number must be 11 digits"),
-  gmail: Yup.string().email().required("Gmail is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Must be at least 6 characters"),
-  reference: Yup.string(),
-});
-
-interface ISignUpFormValue {
-  first_name: string;
-  last_name: string;
-  language: string;
-  country: string;
-  whatsapp: string;
-  phone: string;
-  gmail: string;
-  password: string;
-  reference: string;
-}
+import { Input } from "@/components";
+import { ISignUpFormValue } from "@/interface";
+import { Languages, allCountry, signUpValidationSchema } from "@/lib";
+import { Button, CTA, CommonText } from "@/universal";
 
 export const SignUpForm = () => {
   const [agree, setAgree] = useState(false);
@@ -48,7 +18,7 @@ export const SignUpForm = () => {
     country: "",
     whatsapp: "",
     phone: "",
-    gmail: "",
+    email: "",
     password: "",
     reference: "",
   };
@@ -65,7 +35,7 @@ export const SignUpForm = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={signUpValidationSchema}
       initialValues={initialValues}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
@@ -133,12 +103,12 @@ export const SignUpForm = () => {
             <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-full">
               <div className="w-full">
                 <CTA>
-                  Enter Gmail Address<span className="text-red-600">*</span>
+                  Enter Email Address<span className="text-red-600">*</span>
                 </CTA>
                 <Input
-                  name="gmail"
+                  name="email"
                   placeholder="Enter Your Phone"
-                  type="text"
+                  type="email"
                 />
               </div>
               <div className="w-full">
