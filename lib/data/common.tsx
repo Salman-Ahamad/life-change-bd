@@ -341,10 +341,6 @@ export const footerItems: IFooterData = {
   ],
   option: [
     {
-      title: "VIRTUAL OFFICE ADDRESS",
-      text: "We work DLF Forum, Cybercity, phase lll, gurugram, Haryana 122002.",
-    },
-    {
       title: "OFFICE ADDRESS",
       text: "Kansat, chapainowabgonj,Rajshahi",
     },

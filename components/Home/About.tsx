@@ -3,13 +3,17 @@
 import { avatar, books, time } from "@/lib/assets";
 import { Container, MainContainer } from "@/universal";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 
 export const About: FC = () => (
   <MainContainer>
     <Container>
       <div className="flex flex-col md:flex-row justify-center items-center gap-5 lg:gap-14 mt-[30px]  lg:-mt-20">
-        <div className="bg-black w-full lg:w-96 h-28 lg:h-40 flex justify-start items-center gap-10 text-white p-[30px] rounded-xl">
+        <Link
+          href="/courses"
+          className="bg-black w-full lg:w-96 h-28 lg:h-40 flex justify-start items-center gap-10 text-white p-[30px] rounded-xl"
+        >
           <Image
             src={books}
             className="w-[50px] h-[50px] lg:w-[104px] lg:h-[107px]"
@@ -18,7 +22,7 @@ export const About: FC = () => (
           <p className="text-2xl">
             10+ <br className="hidden lg:block" /> courses
           </p>
-        </div>
+        </Link>
         <div className="bg-black w-full lg:w-96 h-28 lg:h-40 flex justify-start items-center gap-10 text-white p-[30px] rounded-xl">
           <Image
             src={avatar}
