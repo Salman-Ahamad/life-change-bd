@@ -22,7 +22,7 @@ export const LoginForm = () => {
   };
 
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -46,12 +46,13 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      const signin = signIn("credentials", {
+      signIn("credentials", {
         phone,
         password,
-      });
-
-      console.log(signin);
+        redirect: false,
+      })
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
 
       resetForm();
     }
