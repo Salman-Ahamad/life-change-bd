@@ -15,8 +15,8 @@ import { toast } from "react-toastify";
 export const SignUpForm = () => {
   const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     language: "",
     country: "",
     whatsapp: "",
@@ -61,7 +61,7 @@ export const SignUpForm = () => {
                 </CTA>
                 <Input
                   type="text"
-                  name="first_name"
+                  name="firstName"
                   placeholder="Enter Your First Name"
                 />
               </div>
@@ -71,7 +71,7 @@ export const SignUpForm = () => {
                 </CTA>
                 <Input
                   type="text"
-                  name="last_name"
+                  name="lastName"
                   placeholder="Enter Your Last Name"
                 />
               </div>
