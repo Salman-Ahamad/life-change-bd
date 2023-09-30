@@ -3,13 +3,9 @@
 import { Form, Formik, FormikHelpers } from "formik";
 
 import { Input } from "@/components";
+import { IForgotPasswordValue } from "@/interface";
 import { forgotPasswordValidationSchema } from "@/lib/validation";
 import { Button, CTA } from "@/universal";
-
-export interface IForgotPasswordValue {
-  newPassword: string;
-  retypeNewPassword: string;
-}
 
 export const ForgotPasswordForm = () => {
   const initialValues: IForgotPasswordValue = {

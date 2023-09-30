@@ -1,19 +1,16 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
+import { ILoginFormValue } from "@/interface";
+import { UserRole } from "@/lib";
 import { loginValidationSchema } from "@/lib/validation";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { Input } from "..";
-
-export interface ILoginFormValue {
-  phone: string;
-  password: string;
-  randomNum: string;
-}
 
 export const LoginForm = () => {
   const [num1, setNum1] = useState(0);
@@ -23,12 +20,20 @@ export const LoginForm = () => {
     password: "",
     randomNum: "",
   };
-  // const { data: session } = useSession();
-  // console.log(session);
+
+  const { data: session } = useSession();
+  console.log(session);
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      if (session?.role === UserRole.inactive) redirect("/inactive");
+      if (session?.role !== UserRole.inactive) redirect("/user/active");
+    }
+  }, [session]);
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
-    const randomNum2 = getRandomNumber(1, 20);
+    const randomNum2 = getRandomNumber(1, 15);
     setNum1(randomNum);
     setNum2(randomNum2);
   }, []);
@@ -41,13 +46,12 @@ export const LoginForm = () => {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
     } else {
-      console.log({ phone, password });
-
-      signIn("credentials", {
+      const signin = signIn("credentials", {
         phone,
         password,
-        callbackUrl: `http://localhost:3000/user/active`,
       });
+
+      console.log(signin);
 
       resetForm();
     }

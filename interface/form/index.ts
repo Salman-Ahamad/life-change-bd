@@ -9,3 +9,14 @@ export interface ISignUpFormValue {
   password: string;
   reference: string;
 }
+
+export interface ILoginFormValue {
+  phone: string;
+  password: string;
+  randomNum: string;
+}
+
+export interface IForgotPasswordValue {
+  newPassword: string;
+  retypeNewPassword: string;
+}

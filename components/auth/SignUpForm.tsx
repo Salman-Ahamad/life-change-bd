@@ -9,6 +9,7 @@ import { ISignUpFormValue } from "@/interface";
 import { Languages, allCountry, signUpValidationSchema } from "@/lib";
 import { Button, CTA, CommonText } from "@/universal";
 import { Axios } from "@/utils";
+import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 
 export const SignUpForm = () => {
@@ -32,12 +33,16 @@ export const SignUpForm = () => {
     Axios.post("/auth/signup", values)
       .then(({ data }) => {
         toast.success(data.message);
-        console.log(data);
-
-        setAgree(false);
-        resetForm();
+        signIn("credentials", {
+          phone: values.phone,
+          password: values.password,
+          // callbackUrl: `http://localhost:3000/inactive`,
+        });
       })
-      .catch((err) => console.log("error:- ", err));
+      .catch((err) => toast.error(err.response.data.error));
+
+    setAgree(false);
+    resetForm();
   };
 
   return (

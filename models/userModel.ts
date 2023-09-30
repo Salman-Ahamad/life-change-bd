@@ -6,12 +6,10 @@ const userSchema = new Schema<IUser>(
     first_name: {
       type: String,
       required: [true, "Please provide a First Name"],
-      unique: true,
     },
     last_name: {
       type: String,
       required: [true, "Please provide a Last Name"],
-      unique: true,
     },
     email: {
       type: String,
