@@ -27,13 +27,7 @@ export const POST = async (req: NextRequest) => {
     const salt = await genSalt(10);
     const hashedPassword = await hash(password, salt);
 
-    console.log({
-      userData,
-      email,
-      password: hashedPassword,
-    });
-
-    const savedUser = await User.create({
+    const result = await User.create({
       ...userData,
       email,
       password: hashedPassword,
@@ -47,8 +41,6 @@ export const POST = async (req: NextRequest) => {
 
     // const savedUser = await newUser.save();
 
-    console.log(savedUser);
-
     //send verification email
 
     // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
@@ -56,7 +48,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({
       message: "User created successfully",
       success: true,
-      data: savedUser,
+      data: result,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
