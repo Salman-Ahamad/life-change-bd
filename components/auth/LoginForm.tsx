@@ -1,29 +1,16 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import * as Yup from "yup";
 
+import { ILoginFormValue } from "@/interface";
+import { UserRole } from "@/lib";
+import { loginValidationSchema } from "@/lib/validation";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
-import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { Input } from "..";
-
-const validationSchema = Yup.object().shape({
-  phone: Yup.string()
-    .required("Phone number is required")
-    .matches(/^\d{11}$/, "Phone number must be 11 digits"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Must be at least 6 characters"),
-  randomNum: Yup.string().required("Math is required"),
-});
-
-interface ILoginFormValue {
-  phone: string;
-  password: string;
-  randomNum: string;
-}
 
 export const LoginForm = () => {
   const [num1, setNum1] = useState(0);
@@ -33,12 +20,20 @@ export const LoginForm = () => {
     password: "",
     randomNum: "",
   };
+
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      if (session?.role === UserRole.inactive) redirect("/inactive");
+      if (session?.role !== UserRole.inactive) redirect("/user/active");
+    }
+  }, [session]);
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
-    const randomNum2 = getRandomNumber(1, 20);
+    const randomNum2 = getRandomNumber(1, 15);
     setNum1(randomNum);
     setNum2(randomNum2);
   }, []);
@@ -54,8 +49,10 @@ export const LoginForm = () => {
       signIn("credentials", {
         phone,
         password,
-        callbackUrl: "http://localhost:3000/user/active",
-      });
+        redirect: false,
+      })
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
 
       resetForm();
     }
@@ -63,7 +60,7 @@ export const LoginForm = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={loginValidationSchema}
       initialValues={initialValues}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >

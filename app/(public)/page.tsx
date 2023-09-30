@@ -8,11 +8,10 @@ import {
   PopularCourses,
   UpComingEvents,
 } from "@/components/Home";
-import { useSession } from "next-auth/react";
 
 const Home = () => {
-  const { data: session } = useSession();
-  console.log(session);
+  // const { data: session } = useSession();
+
   return (
     <>
       <Hero />

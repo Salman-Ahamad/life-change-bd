@@ -1,6 +1,7 @@
 // Ref: https://next-auth.js.org/configuration/nextjs#advanced-usage
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { UserRole } from "./lib";
 
 export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
@@ -10,24 +11,15 @@ export default withAuth(
 
     if (
       request.nextUrl.pathname.includes("/user") &&
-      request.nextauth.token?.role === "inactive"
+      request.nextauth.token?.role === UserRole.inactive
     ) {
-      // return NextResponse.rewrite(new URL("/denied", request.url));
-      return NextResponse.redirect("http://localhost:3000/inactive");
+      return NextResponse.redirect(`http://localhost:3000/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
-      request.nextauth.token?.role === "active"
+      request.nextauth.token?.role === UserRole.active
     ) {
-      return NextResponse.redirect("http://localhost:3000/user/active");
+      return NextResponse.redirect(`http://localhost:3000/user/active`);
     }
-
-    // if (
-    //   request.nextUrl.pathname.startsWith("/client") &&
-    //   request.nextauth.token?.role !== "admin" &&
-    //   request.nextauth.token?.role !== "manager"
-    // ) {
-    //   return NextResponse.rewrite(new URL("/denied", request.url));
-    // }
   },
   {
     callbacks: {

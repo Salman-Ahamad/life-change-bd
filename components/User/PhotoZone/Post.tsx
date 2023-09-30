@@ -41,7 +41,7 @@ const Post = ({ data, id }: any) => {
 
         <div className="text-gray-500 text-[26px] flex gap-4">
           <FiMoreHorizontal className="cursor-pointer" />
-          {isAdmin(data.id, session?.id) && (
+          {isAdmin(data.id, session?.user) && (
             <MdOutlineClose
               className="cursor-pointer"
               onClick={() => {

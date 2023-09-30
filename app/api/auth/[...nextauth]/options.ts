@@ -1,6 +1,9 @@
+import { User } from "@/models";
+import { compare } from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
+import { NextResponse } from "next/server";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -35,18 +38,21 @@ export const options: NextAuthOptions = {
         // This is where you need to retrieve user data
         // to verify with credentials
         // Docs: https://next-auth.js.org/configuration/providers/credentials
-        const user = {
-          id: "42",
-          role: "active",
-          name: "salman",
-          password: "112233",
-          phone: "01712345678",
-        };
 
-        if (
-          credentials?.phone === user.phone &&
-          credentials?.password === user.password
-        ) {
+        const user = await User.findOne({ phone: credentials?.phone });
+
+        const validPassword = await compare(
+          credentials?.password as string,
+          user.password
+        );
+        if (!validPassword) {
+          return NextResponse.json(
+            { error: "Invalid password" },
+            { status: 400 }
+          );
+        }
+
+        if (credentials?.phone === user.phone && validPassword) {
           return user;
         } else {
           return null;
@@ -71,6 +77,7 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
+
   pages: {
     signIn: "/login",
     newUser: "/signup",
