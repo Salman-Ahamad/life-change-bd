@@ -43,8 +43,6 @@ export const options: NextAuthOptions = {
 
         const user = await User.findOne({ phone: credentials?.phone });
 
-        console.log(user);
-
         // When user is not found, return an error
         if (!user) {
           // throw new Error("User not found!");
@@ -82,7 +80,7 @@ export const options: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) token.role = user.role;
 
-      console.log("JWT Token: ", token);
+      // console.log("JWT Token: ", token);
       // console.log("JWT Log: ", user);
 
       return token;
@@ -93,8 +91,8 @@ export const options: NextAuthOptions = {
     async session({ session, token }) {
       if (session?.user) session.role = token.role;
 
-      console.log("Token Log: ", token);
-      console.log("Session Log: ", session);
+      // console.log("Token Log: ", token);
+      // console.log("Session Log: ", session);
 
       return session;
     },
