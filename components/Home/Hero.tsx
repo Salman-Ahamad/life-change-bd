@@ -23,13 +23,16 @@ export const Hero: FC = () => {
       overlay
     >
       <Container className="w-full lg:h-screen flex flex-col justify-center items-start pt-5 lg:pt-0">
-        <Image
-          src={bnsLogo}
-          width={300}
-          height={150}
-          className="2xl:-ml-20"
-          alt=""
-        />
+        <div className="flex items-baseline max-w-full">
+          <Image
+            src={bnsLogo}
+            width={300}
+            height={150}
+            className="2xl:-ml-20"
+            alt=""
+          />
+          <span className="text-white text-[30px] text-left">BD</span>
+        </div>
         <div className="flex flex-col justify-center items-start gap-4 mt-1.5">
           <Title variant="H1" className="text-white text-[30px] text-left">
             WELCOME TO LIFE CHANGE E-LEARNING PLATFORM

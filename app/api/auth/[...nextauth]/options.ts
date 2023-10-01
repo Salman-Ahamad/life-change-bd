@@ -1,6 +1,10 @@
+import { User } from "@/models";
+import { compare } from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
+import { NextResponse } from "next/server";
+import { connectDb } from "@/config";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -32,21 +36,33 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
+        connectDb();
         // This is where you need to retrieve user data
         // to verify with credentials
         // Docs: https://next-auth.js.org/configuration/providers/credentials
-        const user = {
-          id: "42",
-          role: "active",
-          name: "salman",
-          password: "112233",
-          phone: "01712345678",
-        };
 
-        if (
-          credentials?.phone === user.phone &&
-          credentials?.password === user.password
-        ) {
+        const user = await User.findOne({ phone: credentials?.phone });
+
+        // When user is not found, return an error
+        if (!user) {
+          throw new Error(
+            JSON.stringify({ message: "User not found", status: 401 })
+          );
+        }
+
+        const validPassword = await compare(
+          credentials?.password as string,
+          user.password
+        );
+
+        // When password not matched, return an error
+        if (!validPassword) {
+          throw new Error(
+            JSON.stringify({ message: "Invalid password", status: 401 })
+          );
+        }
+
+        if (credentials?.phone === user.phone && validPassword) {
           return user;
         } else {
           return null;
@@ -60,17 +76,34 @@ export const options: NextAuthOptions = {
     // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
-      if (user) token.role = user.role;
-      return token;
+      if (user) {
+        return {
+          ...user,
+          user: {
+            ...token,
+          },
+          // role: user.role,
+        };
+      }
 
-      // After JWT, run the middleware authorized callbacks.
+      return token;
     },
     // If you want to use the role in client components
     async session({ session, token }) {
-      if (session?.user) session.role = token.role;
+      if (session?.user) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.sub,
+          },
+        };
+      }
+
       return session;
     },
   },
+
   pages: {
     signIn: "/login",
     newUser: "/signup",

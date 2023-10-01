@@ -1,3 +1,5 @@
+import { IUserRole } from "@/interface";
+
 export const navFooterHidePath: string[] = [
   "/sighup",
   "/login",
@@ -25,3 +27,10 @@ export const Languages: string[] = [
   "Nepali",
   "Assamese",
 ];
+
+export const UserRole = {
+  inactive: "inactive",
+  active: "active",
+  subAdmin: "subAdmin",
+  admin: "admin",
+};

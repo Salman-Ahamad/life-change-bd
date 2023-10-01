@@ -1,6 +1,6 @@
 import { IFooterData, INavData } from "@/interface";
-import { BackButton } from "@/universal";
 import { facebook, pinterest, twitter } from "@/lib/assets";
+import { BackButton } from "@/universal";
 
 export const navData: INavData = {
   common: [
@@ -24,43 +24,23 @@ export const navData: INavData = {
   inActive: [
     {
       label: "Profile",
-      link: "/",
+      link: "/user/active/profile",
     },
     {
       label: "Courses",
       link: "/courses",
     },
     {
-      label: "Referances",
-      link: "/",
+      label: "References",
+      link: "/user/ref-list",
     },
-    // {
-    //   label: "Collect Points",
-    //   link: "/",
-    // },
-    // {
-    //   label: "Earn Reward Points",
-    //   link: "/",
-    // },
-    // {
-    //   label: "Redeem Reward Points",
-    //   link: "/",
-    // },
-    // {
-    //   label: "Messages",
-    //   link: "/",
-    // },
-    // {
-    //   label: "Redeem Partner Training Class",
-    //   link: "/",
-    // },
     {
       label: "Photo Zone",
-      link: "/",
+      link: "/user/photo-zone",
     },
     {
       label: "Video Zone",
-      link: "/",
+      link: "/user/photo-zone",
     },
   ],
   active: [
@@ -94,7 +74,7 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/player",
+      link: "/user/photo-zone",
     },
   ],
   profile: [
@@ -122,24 +102,6 @@ export const navData: INavData = {
       label: "Photo Zone",
       link: "/user/ref-list",
     },
-    // {
-    //   label: "Points",
-    //   link: "/courses",
-    // },
-
-    // {
-    //   label: "Document Verification",
-    //   link: "/user/ref-list",
-    // },
-
-    // {
-    //   label: "Redeem List/hist",
-    //   link: "/user/ref-list",
-    // },
-    // {
-    //   label: "Instant Redeem",
-    //   link: "/user/ref-list",
-    // },
   ],
   withdrawal: [
     {
@@ -154,22 +116,6 @@ export const navData: INavData = {
       label: "Reference",
       link: "/user/ref-list",
     },
-    // {
-    //   label: "Change Payment Method",
-    //   link: "/user/payment-method",
-    // },
-    // {
-    //   label: "Passbook",
-    //   link: "/user/passbook",
-    // },
-    // {
-    //   label: "Redeem List/hist",
-    //   link: "/user/redeem-list",
-    // },
-    // {
-    //   label: "Instant Redeem",
-    //   link: "/user/instant-redeem",
-    // },
   ],
   courses: [
     {
@@ -324,7 +270,7 @@ export const footerItems: IFooterData = {
   policy: [
     {
       title: "Careers",
-      href: "/signup",
+      href: "/careers",
     },
     {
       title: "Contact Us",
@@ -340,10 +286,6 @@ export const footerItems: IFooterData = {
     },
   ],
   option: [
-    {
-      title: "VIRTUAL OFFICE ADDRESS",
-      text: "We work DLF Forum, Cybercity, phase lll, gurugram, Haryana 122002.",
-    },
     {
       title: "OFFICE ADDRESS",
       text: "Kansat, chapainowabgonj,Rajshahi",

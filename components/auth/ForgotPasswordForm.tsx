@@ -1,24 +1,11 @@
 "use client";
 
 import { Form, Formik, FormikHelpers } from "formik";
-import * as Yup from "yup";
 
 import { Input } from "@/components";
+import { IForgotPasswordValue } from "@/interface";
+import { forgotPasswordValidationSchema } from "@/lib/validation";
 import { Button, CTA } from "@/universal";
-
-const validationSchema = Yup.object().shape({
-  newPassword: Yup.string()
-    .required("Password is required")
-    .min(6, "Must be at least 6 characters"),
-  retypeNewPassword: Yup.string()
-    .required("Password is required")
-    .min(6, "Must be at least 6 characters"),
-});
-
-interface IForgotPasswordValue {
-  newPassword: string;
-  retypeNewPassword: string;
-}
 
 export const ForgotPasswordForm = () => {
   const initialValues: IForgotPasswordValue = {
@@ -45,7 +32,7 @@ export const ForgotPasswordForm = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={forgotPasswordValidationSchema}
       initialValues={initialValues}
       onSubmit={(values, actions) => handleSubmit(values, actions)}
     >

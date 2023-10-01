@@ -34,7 +34,7 @@ const userSchema = {
   likes: [{ id: "" }],
 
   // Course related information: Keep in separate table
-  course: [{ id: "", status: "" }],
+  course: [{ course: {}, status: "" }],
 };
 
 // Role Model --- Need more details or we may just use this as enum only
