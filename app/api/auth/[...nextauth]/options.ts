@@ -45,8 +45,6 @@ export const options: NextAuthOptions = {
 
         // When user is not found, return an error
         if (!user) {
-          // throw new Error("User not found!");
-
           throw new Error(
             JSON.stringify({ message: "User not found", status: 401 })
           );
@@ -57,7 +55,7 @@ export const options: NextAuthOptions = {
           user.password
         );
 
-        // When user is not found, return an error
+        // When password not matched, return an error
         if (!validPassword) {
           throw new Error(
             JSON.stringify({ message: "Invalid password", status: 401 })
@@ -78,21 +76,29 @@ export const options: NextAuthOptions = {
     // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
-      if (user) token.role = user.role;
-
-      // console.log("JWT Token: ", token);
-      // console.log("JWT Log: ", user);
+      if (user) {
+        return {
+          ...user,
+          user: {
+            ...token,
+          },
+          // role: user.role,
+        };
+      }
 
       return token;
-
-      // After JWT, run the middleware authorized callbacks.
     },
     // If you want to use the role in client components
     async session({ session, token }) {
-      if (session?.user) session.role = token.role;
-
-      // console.log("Token Log: ", token);
-      // console.log("Session Log: ", session);
+      if (session?.user) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.sub,
+          },
+        };
+      }
 
       return session;
     },

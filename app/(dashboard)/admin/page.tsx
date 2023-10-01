@@ -1,9 +1,9 @@
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import React from "react";
 
-const page = () => {
-  const session = getCurrentUser();
-  console.log(session);
+const page = async () => {
+  const session = await getCurrentUser();
+  console.log("Admin Session: ", session);
 
   return <div>page</div>;
 };

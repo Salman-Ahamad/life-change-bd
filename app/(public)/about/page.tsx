@@ -9,9 +9,6 @@ import Link from "next/link";
 import React from "react";
 
 const About = () => {
-  const { data: session } = useSession();
-  console.log(session);
-
   return (
     <Container className="mt-10 min-h-screen">
       <Title variant="H1">About Us</Title>

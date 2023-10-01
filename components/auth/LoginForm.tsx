@@ -53,8 +53,11 @@ export const LoginForm = () => {
       })
         .then((res) => {
           if (!res?.error) {
-            if (session?.role === "inactive") redirect("/inactive");
-            if (session?.role === "active") redirect("/user/active");
+            if (session?.role === "inactive") {
+              redirect("/inactive");
+            } else {
+              redirect("/user/active");
+            }
           } else {
             const error = JSON.parse(res.error);
             console.log(error);
