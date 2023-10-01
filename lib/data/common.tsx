@@ -270,7 +270,7 @@ export const footerItems: IFooterData = {
   policy: [
     {
       title: "Careers",
-      href: "/signup",
+      href: "/careers",
     },
     {
       title: "Contact Us",
@@ -286,10 +286,6 @@ export const footerItems: IFooterData = {
     },
   ],
   option: [
-    {
-      title: "VIRTUAL OFFICE ADDRESS",
-      text: "We work DLF Forum, Cybercity, phase lll, gurugram, Haryana 122002.",
-    },
     {
       title: "OFFICE ADDRESS",
       text: "Kansat, chapainowabgonj,Rajshahi",

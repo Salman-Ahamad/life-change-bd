@@ -5,7 +5,8 @@ import { APIResponse } from "@/utils";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-connectDb();
+
+// connectDb();
 
 export const GET = async () => {
   try {

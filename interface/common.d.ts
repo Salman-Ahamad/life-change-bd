@@ -95,6 +95,13 @@ export interface ITost {
   btnText: string;
 }
 
+export interface ICourseData {
+  title: string;
+  img: StaticImageData;
+  href: string;
+  price?: string;
+  content: string;
+}
 export interface IAPIResponse<T> {
   message: string;
   success: boolean;
