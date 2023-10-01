@@ -44,7 +44,7 @@ export const Header: FC<INav> = ({ navData }) => {
                 <Link
                   key={idx}
                   href={link}
-                  className="text-white hover:text-warning text-base font-normal text-center transition-all ease-in-out delay-75"
+                  className="text-white hover:text-info text-base font-normal text-center transition-all ease-in-out delay-75"
                 >
                   {label}
                 </Link>
