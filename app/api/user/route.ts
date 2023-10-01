@@ -1,48 +1,33 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { User } from "@/models";
-import { genSalt, hash } from "bcryptjs";
-import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 
 connectDb();
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   try {
-    const reqBody = await req.json();
-    const { email, password: userPass, ...userData } = reqBody;
+    const headersList = headers();
+    const id = headersList.get("id");
+    const role = headersList.get("role");
 
-    //check if user already exists
-    const user = await User.findOne({ email });
-
-    if (user) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 400 }
-      );
+    if (role !== (UserRole.active || UserRole.admin)) {
+      return NextResponse.json({
+        message: "denied❗ unauthorized user 😠😡😠",
+        success: false,
+        data: {},
+      });
     }
 
-    //hash password
-    const salt = await genSalt(10);
-    const hashedPassword = await hash(userPass, salt);
-
-    const result = await User.create({
-      ...userData,
-      email,
-      password: hashedPassword,
-    });
-
-    //send verification email
-    // await sendEmail({ email, emailType: "VERIFY", userId: result._id });
-
-    const finalResult = await User.findOne({ _id: result._id }).select(
-      "-password"
-    );
+    const user = await User.findOne({ _id: id }).select("-password");
 
     return NextResponse.json({
-      message: "User created successfully",
+      message: "User get successfully",
       success: true,
-      data: finalResult,
+      data: user,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };
