@@ -3,7 +3,6 @@ import { UserRole } from "@/lib";
 import { User } from "@/models";
 import { APIResponse } from "@/utils";
 import { headers } from "next/headers";
-import { NextResponse } from "next/server";
 
 connectDb();
 
@@ -14,13 +13,13 @@ export const GET = async () => {
     const role = headersList.get("role");
 
     if (role !== (UserRole.active || UserRole.admin)) {
-      return APIResponse("denied❗ unauthorized user 😠😡😠");
+      return APIResponse(401, "denied❗ unauthorized user 😠😡😠");
     }
 
     const user = await User.findOne({ _id: id }).select("-password");
 
-    return APIResponse("User get successfully", user);
+    return APIResponse(200, "User get successfully", user);
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return APIResponse(400, error.message);
   }
 };
