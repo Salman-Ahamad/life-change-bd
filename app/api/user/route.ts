@@ -1,16 +1,26 @@
-// import { connectDb } from "@/config";
+import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
+import { User } from "@/models";
+import { APIResponse } from "@/utils";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 
-import { NextRequest, NextResponse } from "next/server";
-import getCurrentUser from "@/utils/actions/getCurrentUser";
 
 // connectDb();
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   try {
-    const session = await getCurrentUser();
+    const headersList = headers();
+    const id = headersList.get("id");
+    const role = headersList.get("role");
 
-    return NextResponse.json(session);
+    if (role === (UserRole.active || UserRole.admin)) {
+      const user = await User.findOne({ _id: id }).select("-password");
+      return APIResponse(200, "User get successfully", user);
+    }
+
+    return APIResponse(401, "Denied❗ unauthorized user 😠😡😠");
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };

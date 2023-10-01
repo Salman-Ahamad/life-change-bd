@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 const Active = () => {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <>

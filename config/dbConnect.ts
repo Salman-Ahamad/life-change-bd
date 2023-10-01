@@ -1,9 +1,8 @@
-import mongoose, { connection } from "mongoose";
+import { connect, connection } from "mongoose";
 
 export const connectDb = async () => {
   try {
-    mongoose.connect(process.env.DB_URL!);
-    // const connection = mongoose.connection;
+    connect(process.env.DB_URL!);
 
     connection.on("connected", () => {
       console.log("🫀✅🫀 Database is Connected Successfully❗ ✅📦✅");
