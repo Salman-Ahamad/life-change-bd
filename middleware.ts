@@ -15,9 +15,7 @@ export default withAuth(
     ) {
       // `https://life-change-bd.vercel.app/inactive`
       // `http://localhost:3000/inactive`
-      return NextResponse.redirect(
-        `https://life-change-bd.vercel.app/inactive`
-      );
+      return NextResponse.redirect(`${process.env.BASE_URL}inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
       request.nextauth.token?.role === UserRole.active
