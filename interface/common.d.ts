@@ -94,3 +94,9 @@ export interface ITost {
   label: string;
   btnText: string;
 }
+
+export interface IAPIResponse<T> {
+  message: string;
+  success: boolean;
+  data: T;
+}
