@@ -3,6 +3,7 @@ import { UserRole } from "@/lib";
 import { User } from "@/models";
 import { APIResponse } from "@/utils";
 import { headers } from "next/headers";
+import { NextResponse } from "next/server";
 
 connectDb();
 
@@ -19,6 +20,6 @@ export const GET = async () => {
 
     return APIResponse(401, "Denied❗ unauthorized user 😠😡😠");
   } catch (error: any) {
-    return APIResponse(400, error.message);
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };
