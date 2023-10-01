@@ -14,6 +14,7 @@ export default withAuth(
       request.nextauth.token?.role === UserRole.inactive
     ) {
       // `https://life-change-bd.vercel.app/inactive`
+      // `http://localhost:3000/inactive`
       return NextResponse.redirect(
         `https://life-change-bd.vercel.app/inactive`
       );
@@ -22,6 +23,7 @@ export default withAuth(
       request.nextauth.token?.role === UserRole.active
     ) {
       // `https://life-change-bd.vercel.app/user/active`
+      // `http://localhost:3000/user/active`
       return NextResponse.redirect(
         `https://life-change-bd.vercel.app/user/active`
       );
