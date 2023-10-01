@@ -15,13 +15,15 @@ export default withAuth(
     ) {
       // `https://life-change-bd.vercel.app/inactive`
       // `http://localhost:3000/inactive`
-      return NextResponse.redirect(`${process.env.BASE_URL}inactive`);
+      // ${process.env.BASE_URL}
+      return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
       request.nextauth.token?.role === UserRole.active
     ) {
       // `https://life-change-bd.vercel.app/user/active`
       // `http://localhost:3000/user/active`
+      // ${process.env.BASE_URL}
       return NextResponse.redirect(
         `https://life-change-bd.vercel.app/user/active`
       );
