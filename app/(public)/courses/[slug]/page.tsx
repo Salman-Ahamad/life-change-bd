@@ -4,7 +4,6 @@ import { courses } from "@/lib/data";
 import { Container, Title } from "@/universal";
 import { NextPage } from "next";
 import Image from "next/image";
-import { ICourse } from "@/interface";
 
 interface ParamsProps {
   params: {

@@ -28,7 +28,7 @@ const Courses = () => (
                   <h3 className="text-lg text-gray-800 duration-150 group-hover:text-indigo-600 font-semibold">
                     {items.title}
                   </h3>
-                  <Button variant="accent">{items.status}</Button>
+                  {/* <Button variant="accent">{items.status}</Button> */}
                 </div>
               </Link>
             </li>
