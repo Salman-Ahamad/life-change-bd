@@ -36,7 +36,7 @@ export const SignUpForm = () => {
         signIn("credentials", {
           phone: values.phone,
           password: values.password,
-          // callbackUrl: `http://localhost:3000/inactive`,
+          callbackUrl: `http://localhost:3000/inactive`,
         });
       })
       .catch((err) => toast.error(err.response.data.error));

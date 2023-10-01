@@ -10,6 +10,7 @@ import { loginValidationSchema } from "@/lib/validation";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber } from "@/utils";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 import { Input } from "..";
 
 export const LoginForm = () => {
@@ -22,12 +23,11 @@ export const LoginForm = () => {
   };
 
   const { data: session } = useSession();
-  // console.log(session);
 
   useEffect(() => {
-    if (session?.user?.email) {
-      if (session?.role === UserRole.inactive) redirect("/inactive");
-      if (session?.role !== UserRole.inactive) redirect("/user/active");
+    if (session?.user) {
+      if (session.user.role === UserRole.inactive) redirect("/inactive");
+      if (session.user.role !== UserRole.inactive) redirect("/user/active");
     }
   }, [session]);
 
@@ -49,7 +49,6 @@ export const LoginForm = () => {
       signIn("credentials", {
         phone,
         password,
-        redirect: false,
       })
         .then((res) => {
           if (!res?.error) {
@@ -60,10 +59,10 @@ export const LoginForm = () => {
             }
           } else {
             const error = JSON.parse(res.error);
-            console.log(error);
+            toast.error(error);
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => toast.error(error));
 
       resetForm();
     }

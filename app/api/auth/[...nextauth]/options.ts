@@ -1,10 +1,9 @@
+import { connectDb } from "@/config";
 import { User } from "@/models";
 import { compare } from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
-import { NextResponse } from "next/server";
-import { connectDb } from "@/config";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -76,30 +75,20 @@ export const options: NextAuthOptions = {
     // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
+      console.log("userJWT", user);
       if (user) {
-        return {
-          ...user,
-          user: {
-            ...token,
-          },
-          // role: user.role,
-        };
+        token.role = user.role;
+        token.userData = user;
       }
-
       return token;
     },
     // If you want to use the role in client components
     async session({ session, token }) {
-      if (session?.user) {
-        return {
-          ...session,
-          user: {
-            ...session.user,
-            id: token.sub,
-          },
+      if (session?.user)
+        session.user = {
+          ...session.user,
+          ...token.userData,
         };
-      }
-
       return session;
     },
   },
