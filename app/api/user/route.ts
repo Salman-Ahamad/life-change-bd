@@ -17,7 +17,7 @@ export const GET = async () => {
       return APIResponse(200, "User get successfully", user);
     }
 
-    return APIResponse(401, "denied❗ unauthorized user 😠😡😠");
+    return APIResponse(401, "Denied❗ unauthorized user 😠😡😠");
   } catch (error: any) {
     return APIResponse(400, error.message);
   }
