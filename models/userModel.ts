@@ -3,11 +3,11 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema<IUser>(
   {
-    first_name: {
+    firstName: {
       type: String,
       required: [true, "Please provide a First Name"],
     },
-    last_name: {
+    lastName: {
       type: String,
       required: [true, "Please provide a Last Name"],
     },

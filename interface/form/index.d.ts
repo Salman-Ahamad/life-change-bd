@@ -1,6 +1,6 @@
 export interface ISignUpFormValue {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   language: string;
   country: string;
   whatsapp: string;

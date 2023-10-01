@@ -1,8 +1,8 @@
 export type IUserRole = "inactive" | "active" | "subAdmin" | "admin";
 
 export type IUser = {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   language: string;
   country: string;
   whatsapp: string;
