@@ -13,7 +13,7 @@ export type IColor =
 export type IFontWeight = "400" | "500" | "600" | "700" | "800" | "900";
 
 export type IFontFamily = "sora" | "poppins" | "source-Sans-3";
-
+export type IToastType = "default" | "success" | "info" | "error" | "warning";
 export interface IText extends IChildrenWithClassName {
   fontWeight?: IFontWeight;
   fontFamily?: IFontFamily;

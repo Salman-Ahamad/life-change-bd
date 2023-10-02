@@ -84,7 +84,7 @@ export const navData: INavData = {
     },
     {
       label: "Edit Profile",
-      link: "/user/ref-list",
+      link: "/user/active/profile/edit",
     },
     {
       label: "Change Password",
