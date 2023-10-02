@@ -8,8 +8,7 @@ connectDb();
 
 export const POST = async (req: NextRequest) => {
   try {
-    const reqBody = await req.json();
-    const { email, password: userPass, ...userData } = reqBody;
+    const { email, password: userPass, ...userData } = await req.json();
 
     //check if user already exists
     const user = await User.findOne({ email });
