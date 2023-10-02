@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Courses = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<any>([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -24,7 +24,7 @@ const Courses = () => {
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
           <ul className="grid gap-x-8 gap-y-24 mt-8 sm:grid-cols-2 lg:grid-cols-3">
             {courses &&
-              courses.map((items, key) => (
+              courses.map((items: any, key: number) => (
                 <li
                   className="mx-auto group sm:max-w-sm shadow-md rounded-lg"
                   key={key}

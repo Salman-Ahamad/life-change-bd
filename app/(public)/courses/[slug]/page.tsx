@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { Container, Title } from "@/universal";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const Page = ({ params }) => {
+const Page = ({ params }: any) => {
   const { slug } = params;
-  const [course, setCourse] = useState({});
+  const [course, setCourse] = useState<any>({});
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch("http://localhost:3000/api/courses");
       const courses = await data.json();
 
-      const [course] = await courses.filter((c) => c.courseSlug === slug);
+      const [course] = await courses.filter((c: any) => c.courseSlug === slug);
 
       setCourse(course);
     };
