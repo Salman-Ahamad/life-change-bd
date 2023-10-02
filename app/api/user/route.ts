@@ -27,13 +27,13 @@ export const GET = async () => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { id, role, ...updatedData } = await req.json();
+    const { id, role, ...userData } = await req.json();
 
     if (role !== (UserRole.active || UserRole.admin)) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
-    const result = await User.updateOne({ _id: id }, updatedData, {
+    const result = await User.updateOne({ _id: id }, userData, {
       new: true,
     });
 
