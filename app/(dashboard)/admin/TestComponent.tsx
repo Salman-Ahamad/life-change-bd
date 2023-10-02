@@ -5,7 +5,7 @@ import React from "react";
 
 const TestComponent = async () => {
   // createCourse();
-  const courses = await getCourses({} as any);
+  const courses = await getCourses();
   console.log(courses);
 
   return (
