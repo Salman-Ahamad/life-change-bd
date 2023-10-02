@@ -25,8 +25,8 @@ const Edit: NextPage = () => {
     const id = toast.loading("Profile Updating...");
 
     Axios.patch("/user", {
-      role: user?.role,
       id: user?.id,
+      role: user?.role,
       ...updatedData,
     })
       .then(({ data }) => {
