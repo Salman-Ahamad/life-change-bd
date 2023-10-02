@@ -1,38 +1,41 @@
 "use client";
 
 import { Header } from "@/components";
+import { useCurrentUser } from "@/hooks";
 import { IEditProfile } from "@/interface";
 import { navData } from "@/lib/data";
 import { Button, Container } from "@/universal";
-import { Axios } from "@/utils";
+import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Edit: NextPage = () => {
   const { user } = useSession().data || {};
   const [updatedData, setUpdatedData] = useState<IEditProfile>();
-  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const userData = useCurrentUser();
+
+  useEffect(() => {
+    updatedData && setDisabled(false);
+  }, [updatedData]);
 
   const updateProfile = () => {
-    setLoading(true);
+    const id = toast.loading("Profile Updating...");
+
     Axios.patch("/user", {
       role: user?.role,
       id: user?.id,
       ...updatedData,
     })
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.success);
-          setLoading(false);
-          toast.success("Profile updated successfully");
+      .then(({ data }) => {
+        if (data.data) {
+          loadingToast(id, data.message, "success");
         }
       })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-        toast.error("Profile updated failed");
+      .catch(({ response }) => {
+        loadingToast(id, response.data.message, "error");
       });
   };
 
@@ -50,7 +53,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="firstName"
-              defaultValue={user?.firstName}
+              defaultValue={userData?.firstName || user?.firstName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {
@@ -67,7 +70,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="lastName"
-              defaultValue={user?.lastName}
+              defaultValue={userData?.lastName || user?.lastName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {
@@ -82,8 +85,9 @@ const Edit: NextPage = () => {
 
           <Button
             variant="secondary"
-            className="capitalize mt-5"
+            className="capitalize mt-5 disabled:bg-opacity-50 disabled:cursor-not-allowed"
             onClick={updateProfile}
+            disabled={disabled}
           >
             update profile
           </Button>
