@@ -1,5 +1,4 @@
 import { connectDb } from "@/config";
-import { ICourse } from "@/interface";
 import { Course } from "@/models";
 import getCourses from "@/utils/actions/getCourses";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -36,7 +35,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   // }
 
   const courseData = await req.json();
-  console.log(courseData);
 
   connectDb();
   const newCourse = await Course.create(courseData);
@@ -52,6 +50,13 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
 export const PATCH = async (req: NextRequest, res: NextResponse) => {
   try {
+    // const user = await getCurrentUser();
+
+    // // Add new rules for admin access
+    // if (!user) {
+    //   return NextResponse.json({ message: "Not authorized" });
+    // }
+
     connectDb();
 
     const reqData = await req.json();
@@ -83,6 +88,13 @@ export const PATCH = async (req: NextRequest, res: NextResponse) => {
 export const DELETE = async (req: NextRequest, res: NextResponse) => {
   const reqData = await req.json();
   const courseCode = reqData.courseCode;
+
+  // const user = await getCurrentUser();
+
+  // // Add new rules for admin access
+  // if (!user) {
+  //   return NextResponse.json({ message: "Not authorized" });
+  // }
 
   connectDb();
   const deletedCourse = await Course.findOneAndDelete({
