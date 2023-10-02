@@ -1,11 +1,12 @@
-import getCurrentUser from "@/utils/actions/getCurrentUser";
 import React from "react";
+import TestComponent from "./TestComponent";
 
 const page = async () => {
-  const session = await getCurrentUser();
-  console.log("Admin Session: ", session);
-
-  return <div>page</div>;
+  return (
+    <div>
+      <TestComponent />
+    </div>
+  );
 };
 
 export default page;
