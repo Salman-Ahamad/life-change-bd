@@ -30,7 +30,7 @@ export const GET = async () => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { updatedData } = await req.json();
+    const updatedData = await req.json();
 
     // Get Current User
     const user = await getCurrentUser();

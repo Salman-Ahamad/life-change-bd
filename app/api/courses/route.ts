@@ -32,7 +32,7 @@ export const POST = async (req: NextRequest) => {
   try {
     connectDb();
     const courseData = await req.json();
-
+    console.log(courseData);
     const result = await Course.create(courseData);
 
     return ApiResponse(200, "Course created successfully 👌", result);

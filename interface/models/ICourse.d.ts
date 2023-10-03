@@ -17,7 +17,6 @@ export type ICourse = {
 
 export type ICourse1 = {
   title: string;
-  code: string;
   slug: string;
   image: StaticImageData;
   video: string;
@@ -27,6 +26,6 @@ export type ICourse1 = {
   enrolled: string[];
   certificates: string[];
   // others
-  price: number;
-  duration: number;
+  price: string;
+  duration: string;
 };

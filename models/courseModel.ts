@@ -7,10 +7,7 @@ const courseSchema = new Schema<ICourse1>(
       type: String,
       required: [true, "Please provide a valid course title"],
     },
-    code: {
-      type: String,
-      required: [true, "Please provide a valid code"],
-    },
+
     image: {
       type: String,
       required: [true, "Please provide a valid image"],
@@ -32,11 +29,11 @@ const courseSchema = new Schema<ICourse1>(
       required: [true, "Please provide a valid description"],
     },
     price: {
-      type: Number,
+      type: String,
       required: [true, "Please provide a valid price"],
     },
     duration: {
-      type: Number,
+      type: String,
       required: [true, "Please provide a valid duration"],
     },
     status: {
@@ -60,4 +57,5 @@ const courseSchema = new Schema<ICourse1>(
   }
 );
 
-export const Course = models.course || model<ICourse1>("course", courseSchema);
+export const Course =
+  models.courses || model<ICourse1>("courses", courseSchema);

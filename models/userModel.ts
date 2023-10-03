@@ -46,7 +46,10 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
-    reference: String,
+    reference: {
+      type: String,
+      default: "-",
+    },
   },
   {
     timestamps: true,
