@@ -1,5 +1,5 @@
 import { ICourse1 } from "@/interface";
-import { Schema, model, models } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const courseSchema = new Schema<ICourse1>(
   {
@@ -60,4 +60,4 @@ const courseSchema = new Schema<ICourse1>(
   }
 );
 
-export const Course = models.course || model("course", courseSchema);
+export const Course = model<ICourse1>("course", courseSchema);

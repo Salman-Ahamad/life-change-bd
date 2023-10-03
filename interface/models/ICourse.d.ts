@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-export type ICourseStatus = "active" | "inactive" | "completed";
+export type ICourseStatus = "active" | "inactive" | "running" | "completed";
 
 export type ICourse = {
   courseName: string;
