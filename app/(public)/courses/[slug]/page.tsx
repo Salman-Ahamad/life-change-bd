@@ -12,9 +12,7 @@ const Page = ({ params }: any) => {
     const fetchData = async () => {
       const data = await fetch("http://localhost:3000/api/courses");
       const courses = await data.json();
-
       const [course] = await courses.filter((c: any) => c.courseSlug === slug);
-
       setCourse(course);
     };
 
