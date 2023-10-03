@@ -7,19 +7,15 @@ import { navData } from "@/lib/data";
 import { Button, Container } from "@/universal";
 import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Edit: NextPage = () => {
-  const { user } = useSession().data || {};
   const [updatedData, setUpdatedData] = useState<IEditProfile>();
   const [disabled, setDisabled] = useState(true);
-  const userData = useCurrentUser();
+  const user = useCurrentUser();
 
-  useEffect(() => {
-    updatedData && setDisabled(false);
-  }, [updatedData]);
+  useEffect(() => updatedData && setDisabled(false), [updatedData]);
 
   const updateProfile = () => {
     const id = toast.loading("Profile Updating...");
@@ -49,7 +45,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="firstName"
-              defaultValue={userData?.firstName || user?.firstName}
+              defaultValue={user?.firstName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {
@@ -66,7 +62,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="lastName"
-              defaultValue={userData?.lastName || user?.lastName}
+              defaultValue={user?.lastName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {

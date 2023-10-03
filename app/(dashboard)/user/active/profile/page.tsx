@@ -1,15 +1,15 @@
 "use client";
 
 import { Header } from "@/components";
+import { useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
 import { avatarProfile } from "@/lib/assets";
 import { navData } from "@/lib/data";
 import { CommonText } from "@/universal";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 const Profile = () => {
-  const { user } = useSession().data || {};
+  const user = useCurrentUser();
 
   const title = [
     "email",

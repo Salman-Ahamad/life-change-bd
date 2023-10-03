@@ -1,6 +1,7 @@
 export type IUserRole = "inactive" | "active" | "subAdmin" | "admin";
 
 export type IUser = {
+  id?: string;
   firstName: string;
   lastName: string;
   language: string;
