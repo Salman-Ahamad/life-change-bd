@@ -45,7 +45,7 @@ const SingleCourses = ({ params }: ISlugParams) => {
               alt={title}
               width={400}
               height={400}
-              className="max-w-3xl w-[400px] h-auto object-cover mx-auto rounded-xl"
+              className="max-w-3xl w-[400px] h-[400px] object-cover mx-auto rounded-xl"
             />
           ) : (
             <div className="animate-pulse mx-auto">
@@ -76,7 +76,7 @@ const SingleCourses = ({ params }: ISlugParams) => {
           )}
         </div>
 
-        <CommonText className="mt-10 text-center">
+        <CommonText className="my-10 mt-20 text-center">
           {footerDes ? footerDes : ""}
         </CommonText>
       </div>
