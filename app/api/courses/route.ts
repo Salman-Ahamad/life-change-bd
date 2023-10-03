@@ -1,7 +1,7 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { Course } from "@/models";
 import { ApiResponse } from "@/utils";
-import getCourses from "@/utils/actions/getCourses";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 
 import { NextRequest, NextResponse } from "next/server";
@@ -9,35 +9,41 @@ import { NextRequest, NextResponse } from "next/server";
 connectDb();
 
 export const GET = async () => {
-  // Get courses from DB
-  const courses = await getCourses();
-
-  if (courses) {
+  try {
     // Get Current User
     const user = await getCurrentUser();
-    if (user) {
-      return NextResponse.json(courses);
+
+    if (user.role === UserRole.admin) {
+      const courses = await Course.find();
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
     } else {
       // This will return after removing certificate and enrolled user
-      return NextResponse.json(courses);
+      const courses = await Course.find().select({
+        enrolled: 0,
+        certificates: 0,
+      });
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
     }
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
   }
-
-  return NextResponse.json({
-    message: "Not Found",
-  });
 };
 
 export const POST = async (req: NextRequest) => {
   try {
-    connectDb();
     const courseData = await req.json();
-    console.log(courseData);
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
+
     const result = await Course.create(courseData);
 
     return ApiResponse(200, "Course created successfully 👌", result);
   } catch (error: any) {
-    return ApiResponse(500, error.message);
+    return ApiResponse(400, error.message);
   }
 };
 
