@@ -1,7 +1,7 @@
-import { ICourse1 } from "@/interface";
+import { ICourse } from "@/interface";
 import { Schema, model, models } from "mongoose";
 
-const courseSchema = new Schema<ICourse1>(
+const courseSchema = new Schema<ICourse>(
   {
     title: {
       type: String,
@@ -36,6 +36,10 @@ const courseSchema = new Schema<ICourse1>(
       type: String,
       required: [true, "Please provide a valid duration"],
     },
+    footerDes: {
+      type: String,
+      default: "",
+    },
     status: {
       type: String,
       default: "active",
@@ -57,5 +61,4 @@ const courseSchema = new Schema<ICourse1>(
   }
 );
 
-export const Course =
-  models.courses || model<ICourse1>("courses", courseSchema);
+export const Course = models.courses || model<ICourse>("courses", courseSchema);
