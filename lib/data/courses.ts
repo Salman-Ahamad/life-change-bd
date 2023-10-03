@@ -11,17 +11,7 @@ import {
   course9,
   course10,
 } from "../assets/img/course";
-/* 
-https://i.ibb.co/N7S4nPC/course2.jpg
-https://i.ibb.co/gSZRSrG/course3.jpg
-https://i.ibb.co/kVnTvL9/course4.jpg
-https://i.ibb.co/C6gRHF3/course5.jpg
-https://i.ibb.co/P4mYfpw/course6.jpg
-https://i.ibb.co/3C3bBVb/course7.jpg
-https://i.ibb.co/1RzNV8s/course8.jpg
-https://i.ibb.co/FWmdwYG/course9.jpg
-https://i.ibb.co/jD2JTbm/course10.jpg
-*/
+
 export const courses: ICourseData[] = [
   {
     title: "Sahih Holy Quran",
@@ -100,7 +90,6 @@ export const courses: ICourseData[] = [
     </div>
   `,
   },
-
   {
     title: "Video Editing",
     img: course3,
@@ -121,7 +110,7 @@ export const courses: ICourseData[] = [
       📝 Sound and effects in the video
       </li>
       <li style="margin-bottom: 8px; display: flex; align-items: center;">
-      📝 Speaking in front of the camara
+      📝 Speaking in front of the camera
       </li>
       <li style="margin-bottom: 8px; display: flex; align-items: center;">
       📝 Screen recorder video Making
