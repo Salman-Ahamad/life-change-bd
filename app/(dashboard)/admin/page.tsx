@@ -1,10 +1,9 @@
-import React from "react";
-import TestComponent from "./TestComponent";
+import { NextPage } from "next";
 
-const page = async () => {
+const page: NextPage = () => {
   return (
     <div>
-      <TestComponent />
+      <h1>admin page</h1>
     </div>
   );
 };
