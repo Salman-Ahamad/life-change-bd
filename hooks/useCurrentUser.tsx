@@ -1,26 +1,12 @@
 "use client";
 
 import { IUser } from "@/interface";
-import { Axios, loadingToast } from "@/utils";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { useState } from "react";
+import { useGetData } from ".";
 
 export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState<IUser | undefined>();
-
-  useEffect(() => {
-    const id = toast.loading("Loading... 🔃");
-
-    Axios.get(`/user`)
-      .then(({ data }) => {
-        loadingToast(id, data.message, "success");
-        setCurrentUser(data.data);
-      })
-      .catch(({ response }) => {
-        loadingToast(id, response.data.message, "warning");
-        setCurrentUser(undefined);
-      });
-  }, []);
+  useGetData("/user", setCurrentUser);
 
   return currentUser;
 };
