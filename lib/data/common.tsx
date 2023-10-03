@@ -103,6 +103,12 @@ export const navData: INavData = {
       link: "/user/ref-list",
     },
   ],
+  profileEdit: [
+    {
+      label: <BackButton className="text-2xl" />,
+      link: "/user/active",
+    },
+  ],
   withdrawal: [
     {
       label: "Profile",

@@ -21,11 +21,11 @@ const Profile = () => {
     "reference",
   ];
 
-  if (user)
-    return (
-      <main>
-        <Header navData={navData.profile} />
+  return (
+    <main>
+      <Header navData={navData.profile} />
 
+      {user ? (
         <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
           <Image
             src={avatarProfile}
@@ -38,14 +38,25 @@ const Profile = () => {
             <p
               className={`text-start w-full capitalize font-semibold text-xl lg:text-2xl`}
             >
-              {user.firstName} {user.lastName}
+              {user.firstName} {user?.lastName}
             </p>
             <CommonText className={`text-start w-full capitalize`}>
               {user.id}
             </CommonText>
           </div>
         </div>
-
+      ) : (
+        <div className="max-w-sm w-full mx-auto  my-10">
+          <div className="animate-pulse flex space-x-6">
+            <div className="rounded-full bg-slate-400 w-[80px] h-[80px]" />
+            <div className="flex-1 space-y-2.5 py-1 my-auto mt-2.5">
+              <div className="h-5 bg-slate-500 rounded" />
+              <div className="h-5 bg-slate-300 rounded" />
+            </div>
+          </div>
+        </div>
+      )}
+      {user ? (
         <section className="grid grid-cols-2 justify-center items-center w-fit mx-auto">
           <div className="flex justify-start items-start flex-col w-full">
             {title.map((item, i) => (
@@ -72,8 +83,24 @@ const Profile = () => {
             ))}
           </div>
         </section>
-      </main>
-    );
+      ) : (
+        <div className="shadow rounded-md p-4 max-w-sm w-full mx-auto">
+          <div className="animate-pulse">
+            <div className="space-y-2.5 py-1">
+              <div className="h-5 bg-slate-500 rounded" />
+              <div className="h-5 bg-slate-300 rounded" />
+              <div className="h-5 bg-slate-500 rounded" />
+              <div className="h-5 bg-slate-300 rounded" />
+              <div className="h-5 bg-slate-500 rounded" />
+              <div className="h-5 bg-slate-300 rounded" />
+              <div className="h-5 bg-slate-500 rounded" />
+              <div className="h-5 bg-slate-300 rounded" />
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
 };
 
 export default Profile;

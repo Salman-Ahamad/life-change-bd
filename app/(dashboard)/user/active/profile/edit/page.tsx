@@ -33,7 +33,7 @@ const Edit: NextPage = () => {
 
   return (
     <main>
-      <Header navData={navData.profile} />
+      <Header navData={navData.profileEdit} />
 
       <Container className="flex flex-col justify-center items-center">
         <h1 className="text-4xl font-semibold my-10 text-center">
