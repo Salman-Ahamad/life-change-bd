@@ -13,6 +13,7 @@ export default withAuth(
       request.nextUrl.pathname.includes("/user") &&
       request.nextauth.token?.role === UserRole.inactive
     ) {
+
       return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
