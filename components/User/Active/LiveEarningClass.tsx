@@ -7,8 +7,8 @@ import { ActivePageCard, DataRow } from ".";
 export const LiveEarningClass = () => {
   return (
     <ActivePageCard title="Join Live Earning Training Class">
-      <DataRow title="Photo Editing & Sharing Class" btnText="ViewClass" />
-      <DataRow title="Lead Generation Class" btnText="ViewClass" />
+      <DataRow title="Photo Editing & Sharing Class" btnText="ViewClass" icon />
+      <DataRow title="Lead Generation Class" btnText="ViewClass" icon />
     </ActivePageCard>
   );
 };
