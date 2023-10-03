@@ -88,14 +88,14 @@ const Profile = () => {
           </div>
           <div className="animate-pulse">
             <div className="space-y-2.5 py-1">
-              <div className="h-5 bg-slate-500 rounded" />
-              <div className="h-5 bg-slate-300 rounded" />
-              <div className="h-5 bg-slate-500 rounded" />
-              <div className="h-5 bg-slate-300 rounded" />
-              <div className="h-5 bg-slate-500 rounded" />
-              <div className="h-5 bg-slate-300 rounded" />
-              <div className="h-5 bg-slate-500 rounded" />
-              <div className="h-5 bg-slate-300 rounded" />
+              {Array.from(Array(8).keys()).map((el) => (
+                <div
+                  key={el}
+                  className={`h-5 rounded ${
+                    el % 2 === 0 ? "bg-slate-500" : "bg-slate-300"
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </section>
