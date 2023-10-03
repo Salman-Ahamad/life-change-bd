@@ -45,6 +45,10 @@ export const navData: INavData = {
   ],
   active: [
     {
+      label: "Home",
+      link: "/",
+    },
+    {
       label: "Profile",
       link: "/user/active/profile",
     },
