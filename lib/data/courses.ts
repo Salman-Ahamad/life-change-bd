@@ -90,7 +90,6 @@ export const courses: ICourseData[] = [
     </div>
   `,
   },
-
   {
     title: "Video Editing",
     img: course3,
@@ -111,7 +110,7 @@ export const courses: ICourseData[] = [
       📝 Sound and effects in the video
       </li>
       <li style="margin-bottom: 8px; display: flex; align-items: center;">
-      📝 Speaking in front of the camara
+      📝 Speaking in front of the camera
       </li>
       <li style="margin-bottom: 8px; display: flex; align-items: center;">
       📝 Screen recorder video Making

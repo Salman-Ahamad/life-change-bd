@@ -1,13 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Header } from "@/components";
 import { courses, navData } from "@/lib/data";
-import { Button } from "@/universal";
+import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const Courses = () => (
+const Courses: NextPage = () => (
   <>
     <Header navData={navData.courses} />
     <section className="py-12">
@@ -22,13 +21,12 @@ const Courses = () => (
                   height={200}
                   loading="lazy"
                   alt={items.title}
-                  className="w-full rounded-lg"
+                  className="w-[380px] h-[200px] rounded-lg"
                 />
                 <div className="mt-3 space-y-2">
                   <h3 className="text-lg text-gray-800 duration-150 group-hover:text-indigo-600 font-semibold">
                     {items.title}
                   </h3>
-                  {/* <Button variant="accent">{items.status}</Button> */}
                 </div>
               </Link>
             </li>

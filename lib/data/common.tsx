@@ -45,6 +45,10 @@ export const navData: INavData = {
   ],
   active: [
     {
+      label: "Home",
+      link: "/",
+    },
+    {
       label: "Profile",
       link: "/user/active/profile",
     },
@@ -84,7 +88,7 @@ export const navData: INavData = {
     },
     {
       label: "Edit Profile",
-      link: "/user/ref-list",
+      link: "/user/active/profile/edit",
     },
     {
       label: "Change Password",
@@ -101,6 +105,12 @@ export const navData: INavData = {
     {
       label: "Photo Zone",
       link: "/user/ref-list",
+    },
+  ],
+  profileEdit: [
+    {
+      label: <BackButton className="text-2xl" />,
+      link: "/user/active",
     },
   ],
   withdrawal: [

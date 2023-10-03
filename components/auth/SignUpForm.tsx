@@ -8,7 +8,7 @@ import { Input } from "@/components";
 import { ISignUpFormValue } from "@/interface";
 import { Languages, allCountry, signUpValidationSchema } from "@/lib";
 import { Button, CTA, CommonText } from "@/universal";
-import { Axios } from "@/utils";
+import { Axios, loadingToast } from "@/utils";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 
@@ -30,16 +30,26 @@ export const SignUpForm = () => {
     values: ISignUpFormValue,
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
+    const id = toast.loading("Loading... 🔃");
     Axios.post("/auth/signup", values)
       .then(({ data }) => {
-        toast.success(data.message);
+        loadingToast(id, data.message, "success");
         signIn("credentials", {
           phone: values.phone,
           password: values.password,
-          callbackUrl: `http://localhost:3000/inactive`,
-        });
+          callbackUrl: `/inactive`,
+        })
+          .then((res) => {
+            if (!res?.error) {
+              loadingToast(id, "Login Successfully ✅", "success");
+            } else {
+              const error = JSON.parse(res.error);
+              loadingToast(id, error, "success");
+            }
+          })
+          .catch((error) => loadingToast(id, error, "success"));
       })
-      .catch((err) => toast.error(err.response.data.error));
+      .catch((err) => loadingToast(id, err.response.data.error, "error"));
 
     setAgree(false);
     resetForm();

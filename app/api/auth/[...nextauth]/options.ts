@@ -9,7 +9,6 @@ export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
       profile(profile: GithubProfile) {
-        //console.log(profile)
         return {
           ...profile,
           role: profile.role ?? "user",
@@ -75,7 +74,6 @@ export const options: NextAuthOptions = {
     // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
-      console.log("userJWT", user);
       if (user) {
         token.role = user.role;
         token.userData = user;

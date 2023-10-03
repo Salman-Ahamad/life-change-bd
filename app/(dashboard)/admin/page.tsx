@@ -1,11 +1,11 @@
-import getCurrentUser from "@/utils/actions/getCurrentUser";
-import React from "react";
+import { NextPage } from "next";
 
-const page = async () => {
-  const session = await getCurrentUser();
-  console.log("Admin Session: ", session);
-
-  return <div>page</div>;
+const page: NextPage = () => {
+  return (
+    <div>
+      <h1>admin page</h1>
+    </div>
+  );
 };
 
 export default page;

@@ -8,7 +8,7 @@ import { ILoginFormValue } from "@/interface";
 import { UserRole } from "@/lib";
 import { loginValidationSchema } from "@/lib/validation";
 import { Button, CTA, Title } from "@/universal";
-import { getRandomNumber } from "@/utils";
+import { getRandomNumber, loadingToast } from "@/utils";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 import { Input } from "..";
@@ -42,6 +42,8 @@ export const LoginForm = () => {
     { phone, password, randomNum }: ILoginFormValue,
     { resetForm, setFieldError, setSubmitting }: FormikHelpers<ILoginFormValue>
   ) => {
+    const id = toast.loading("Loading... 🔃");
+
     if (Number(randomNum) !== num1 + num2) {
       setFieldError("randomNum", "Please give correct answer");
       setSubmitting(false);
@@ -52,6 +54,8 @@ export const LoginForm = () => {
       })
         .then((res) => {
           if (!res?.error) {
+            loadingToast(id, "Login Successfully ✅", "success");
+
             if (session?.role === "inactive") {
               redirect("/inactive");
             } else {
@@ -59,10 +63,10 @@ export const LoginForm = () => {
             }
           } else {
             const error = JSON.parse(res.error);
-            toast.error(error);
+            loadingToast(id, error, "success");
           }
         })
-        .catch((error) => toast.error(error));
+        .catch((error) => loadingToast(id, error, "success"));
 
       resetForm();
     }

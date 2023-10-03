@@ -46,7 +46,10 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
-    reference: String,
+    reference: {
+      type: String,
+      default: "-",
+    },
   },
   {
     timestamps: true,
@@ -56,4 +59,4 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-export const User = models.users || model("users", userSchema);
+export const User = models.users || model<IUser>("users", userSchema);

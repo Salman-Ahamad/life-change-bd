@@ -1,66 +1,87 @@
-import React from "react";
-import type { Metadata } from "next";
-import { courses } from "@/lib/data";
-import { Container, Title } from "@/universal";
-import { NextPage } from "next";
+"use client";
+
+import { useGetData } from "@/hooks";
+import { ICourse, ISlugParams } from "@/interface";
+import { CommonText, Container, Title } from "@/universal";
 import Image from "next/image";
+import { useState } from "react";
 
-interface ParamsProps {
-  params: {
-    slug: string;
-  };
-}
+const SingleCourses = ({ params }: ISlugParams) => {
+  const { slug } = params;
+  const [course, setCourse] = useState<ICourse | undefined>();
+  useGetData(`/courses/${slug}`, setCourse);
 
-// This will redirect to 404 page
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  const slugs = courses.map((course) => ({
-    slug: course.href.replace("/courses/", ""),
-  }));
-
-  console.log("Sluggs List Amir:", slugs);
-
-  return courses.map((course) => ({
-    slug: course.href.replace("/courses/", ""),
-  }));
-}
-
-export function generateMetadata({ params }: ParamsProps): Metadata {
-  const [course] = courses.filter(
-    (course) => course.href === `/courses/${params.slug}`
-  );
-
-  return {
-    title: course?.title,
-    description: `${course?.title} - Life Change BD: It’s an Bangladeshi trusted online platform. It is a learning and earning process by using your valuable free time at home through your smart phone only It is a very easy process and you can learn this process on your own mother tongue and you can earn from our community with selling some Courses Services or product also. Here you make your career smoothly.`,
-  };
-}
-
-const page: NextPage<ParamsProps> = ({ params }) => {
-  const slug = params.slug;
-
-  const [course] = courses.filter(
-    (course) => course.href === `/courses/${slug}`
-  );
-
+  const { title, description, image, learn, footerDes } = course || {};
   return (
     <Container className="mt-10 min-h-screen">
-      <Title variant="H2" className="">
-        {course.title}
-      </Title>
+      <div className="grid grid-cols-3 gap-5">
+        <div className="col-span-2 pt-10">
+          <Title variant="H2">
+            {title || (
+              <div className="animate-pulse mx-auto">
+                <div className="w-2/3 h-8 bg-slate-300 rounded" />
+              </div>
+            )}
+          </Title>
 
-      <div className="w-full mx-auto">
-        <Image
-          src={course.img}
-          alt={course.title}
-          className="max-w-3xl w-full h-80 object-cover mx-auto py-8"
-        />
+          <Title variant="H4" className="capitalize text-start mt-10">
+            Course Details
+          </Title>
+
+          <div className="mt-3 w-[90%]">
+            {description ? (
+              <CommonText>{description}</CommonText>
+            ) : (
+              <div className="animate-pulse mx-auto">
+                <div className="w-full h-40 bg-slate-300 rounded" />
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="col-span-1">
+          {image && title ? (
+            <Image
+              src={image}
+              alt={title}
+              width={400}
+              height={400}
+              className="max-w-3xl w-[400px] h-[400px] object-cover mx-auto rounded-xl"
+            />
+          ) : (
+            <div className="animate-pulse mx-auto">
+              <div className="w-[400px] h-[400px] bg-slate-300 rounded-xl" />
+            </div>
+          )}
+        </div>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: course.content as string }}></div>
+      <div>
+        <Title variant="H4" className="capitalize text-start mt-20 font-medium">
+          📕 What will you learn
+        </Title>
+
+        <div className="mt-5">
+          {learn ? (
+            learn.map((item) => (
+              <p key={item} className="mb-2 flex items-center">
+                📝 {item}
+              </p>
+            ))
+          ) : (
+            <div className="animate-pulse mx-auto space-y-3">
+              <div className="w-80 h-6 bg-slate-400 rounded" />
+              <div className="w-80 h-6 bg-slate-300 rounded" />
+              <div className="w-80 h-6 bg-slate-400 rounded" />
+            </div>
+          )}
+        </div>
+
+        <CommonText className="my-10 mt-20 text-center">
+          {footerDes ? footerDes : ""}
+        </CommonText>
+      </div>
     </Container>
   );
 };
 
-export default page;
+export default SingleCourses;
