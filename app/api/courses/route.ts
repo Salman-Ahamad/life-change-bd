@@ -6,9 +6,9 @@ import getCurrentUser from "@/utils/actions/getCurrentUser";
 
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
-  connectDb();
+connectDb();
 
+export const GET = async () => {
   // Get courses from DB
   const courses = await getCourses();
 
