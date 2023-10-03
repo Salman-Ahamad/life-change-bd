@@ -10,6 +10,11 @@ export interface IClassName {
 
 export interface IChildrenWithClassName extends IChildren, IClassName {}
 
+export interface ISlugParams {
+  params: {
+    slug: string;
+  };
+}
 export interface ITitleVariant {
   variant: "H1" | "H2" | "H3" | "H4" | "H5";
 }
