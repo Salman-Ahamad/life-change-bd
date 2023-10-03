@@ -13,12 +13,7 @@ export const useCurrentUser = () => {
   useEffect(() => {
     const id = toast.loading("Profile Updating...");
 
-    Axios.get(`/user`, {
-      headers: {
-        role: user?.role,
-        id: user?.id,
-      },
-    })
+    Axios.get(`/user`)
       .then(({ data }) => {
         loadingToast(id, data.message, "success");
         setCurrentUser(data.data);
