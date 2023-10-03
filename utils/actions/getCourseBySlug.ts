@@ -2,7 +2,8 @@ import { connectDb } from "@/config";
 import { Course } from "@/models";
 
 // Update the definition of getCourses
-export default async function getCourseBySlug({ slug }: { slug: string }) {
+
+export const getCourseBySlug = async ({ slug }: { slug: string }) => {
   try {
     connectDb();
 
@@ -16,4 +17,4 @@ export default async function getCourseBySlug({ slug }: { slug: string }) {
   } catch (error) {
     console.log("Get course error: ", error);
   }
-}
+};

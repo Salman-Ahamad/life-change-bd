@@ -1,10 +1,10 @@
 import { connectDb } from "@/config";
 import { Course } from "@/models";
-import getCourses from "@/utils/actions/getCourses";
-import getCurrentUser from "@/utils/actions/getCurrentUser";
+import { ApiResponse, getCourses, getCurrentUser } from "@/utils";
+
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async () => {
   connectDb();
 
   // Get courses from DB
@@ -26,29 +26,20 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   });
 };
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
-  // const user = await getCurrentUser();
+export const POST = async (req: NextRequest) => {
+  try {
+    connectDb();
+    const courseData = await req.json();
 
-  // // Add new rules for admin access
-  // if (!user) {
-  //   return NextResponse.json({ message: "Not authorized" });
-  // }
+    const result = await Course.create(courseData);
 
-  const courseData = await req.json();
-
-  connectDb();
-  const newCourse = await Course.create(courseData);
-
-  if (newCourse) {
-    return NextResponse.json(newCourse);
+    return ApiResponse(200, "Course created successfully 👌", result);
+  } catch (error: any) {
+    return ApiResponse(500, error.message);
   }
-
-  return NextResponse.json({
-    message: "Something went wrong",
-  });
 };
 
-export const PATCH = async (req: NextRequest, res: NextResponse) => {
+export const PATCH = async (req: NextRequest) => {
   try {
     // const user = await getCurrentUser();
 

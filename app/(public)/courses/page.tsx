@@ -1,18 +1,21 @@
 "use client";
 
+import { useGetData } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Courses = () => {
-  const [courses, setCourses] = useState<any>([]);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
+  const user = useGetData("/courses", setData);
+
+  console.log({ data });
 
   useEffect(() => {
     const fetchCourses = async () => {
       const res = await fetch("/api/courses");
       const data = await res.json();
-      console.log(data);
-
       setCourses(data);
     };
 
@@ -33,6 +36,8 @@ const Courses = () => {
                     <Image
                       src={items.courseImage}
                       alt={items.courseName}
+                      width={320}
+                      height={208}
                       className="rounded-t-lg object-cover w-80 h-52"
                     />
 

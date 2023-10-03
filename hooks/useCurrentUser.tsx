@@ -9,7 +9,7 @@ export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState<IUser | undefined>();
 
   useEffect(() => {
-    const id = toast.loading("Profile Updating... 🔃");
+    const id = toast.loading("Loading... 🔃");
 
     Axios.get(`/user`)
       .then(({ data }) => {

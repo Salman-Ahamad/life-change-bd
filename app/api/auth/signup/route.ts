@@ -1,7 +1,8 @@
 import { connectDb } from "@/config";
 import { User } from "@/models";
+import { ApiResponse } from "@/utils";
 import { genSalt, hash } from "bcryptjs";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 // import { sendEmail } from "@/helpers/mailer";
 
 connectDb();
@@ -14,10 +15,7 @@ export const POST = async (req: NextRequest) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 400 }
-      );
+      return ApiResponse(400, "User already exists 🙋🏻‍♂️");
     }
 
     //hash password
@@ -37,12 +35,8 @@ export const POST = async (req: NextRequest) => {
       "-password"
     );
 
-    return NextResponse.json({
-      message: "User created successfully",
-      success: true,
-      data: finalResult,
-    });
+    return ApiResponse(200, "User created successfully 👌", finalResult);
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return ApiResponse(500, error.message);
   }
 };

@@ -1,5 +1,3 @@
 import axios from "axios";
 
-export const Axios = axios.create({
-  baseURL: "/api",
-});
+export const Axios = axios.create({ baseURL: "/api" });

@@ -3,11 +3,11 @@ import { connectDb } from "@/config";
 import { User } from "@/models";
 import { getServerSession } from "next-auth/next";
 
-export async function getSession() {
+export const getSession = async () => {
   return await getServerSession(options);
-}
+};
 
-export default async function getCurrentUser() {
+export const getCurrentUser = async () => {
   const session = await getSession();
 
   if (!session?.user) {
@@ -20,4 +20,4 @@ export default async function getCurrentUser() {
   const user = await User.findOne({ email: session.user.email });
 
   return user;
-}
+};
