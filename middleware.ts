@@ -37,6 +37,7 @@ export const config = {
     "/inactive",
     "/user/active",
     "/user/active/profile",
+    "/user/change-password",
     "/user/active/withdrawal",
     "/user/instant-redeem",
     "/user/messages",
