@@ -2,7 +2,7 @@ import { connectDb } from "@/config";
 import { Course } from "@/models";
 
 // Update the definition of getCourses
-export const getCourses = async () => {
+export default async function getCourses() {
   try {
     connectDb();
 
@@ -12,4 +12,4 @@ export const getCourses = async () => {
   } catch (error) {
     console.log("Get course error: ", error);
   }
-};
+}

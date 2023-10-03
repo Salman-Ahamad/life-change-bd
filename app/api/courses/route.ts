@@ -1,6 +1,8 @@
 import { connectDb } from "@/config";
 import { Course } from "@/models";
-import { ApiResponse, getCourses, getCurrentUser } from "@/utils";
+import { ApiResponse } from "@/utils";
+import getCourses from "@/utils/actions/getCourses";
+import getCurrentUser from "@/utils/actions/getCurrentUser";
 
 import { NextRequest, NextResponse } from "next/server";
 

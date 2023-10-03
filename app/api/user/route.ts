@@ -1,7 +1,8 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
 import { User } from "@/models";
-import { ApiResponse, getCurrentUser } from "@/utils";
+import { ApiResponse } from "@/utils";
+import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
 
 connectDb();
