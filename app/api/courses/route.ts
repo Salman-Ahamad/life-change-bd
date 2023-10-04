@@ -49,15 +49,6 @@ export const POST = async (req: NextRequest) => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    // const user = await getCurrentUser();
-
-    // // Add new rules for admin access
-    // if (!user) {
-    //   return NextResponse.json({ message: "Not authorized" });
-    // }
-
-    connectDb();
-
     const reqData = await req.json();
     const courseCode = reqData.courseCode;
     const updatedCourseData = reqData.updatedCourseData;
@@ -88,14 +79,6 @@ export const DELETE = async (req: NextRequest, res: NextResponse) => {
   const reqData = await req.json();
   const courseCode = reqData.courseCode;
 
-  // const user = await getCurrentUser();
-
-  // // Add new rules for admin access
-  // if (!user) {
-  //   return NextResponse.json({ message: "Not authorized" });
-  // }
-
-  connectDb();
   const deletedCourse = await Course.findOneAndDelete({
     courseCode,
   });
