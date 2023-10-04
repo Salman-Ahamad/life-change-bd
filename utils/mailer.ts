@@ -9,6 +9,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
     console.log("Email: ", email);
     console.log("Email Type: ", emailType);
+    console.log("User Id: ", userId);
     console.log("hashedToken: ", hashedToken);
 
     if (emailType === "VERIFY") {
