@@ -1,6 +1,7 @@
 import { IFooterData, INavData } from "@/interface";
 import { facebook, pinterest, twitter } from "@/lib/assets";
 import { BackButton } from "@/universal";
+import { AiOutlineHome } from "react-icons/ai";
 
 export const navData: INavData = {
   common: [
@@ -45,7 +46,7 @@ export const navData: INavData = {
   ],
   active: [
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/",
     },
     {
@@ -135,7 +136,7 @@ export const navData: INavData = {
   ],
   instantRedeem: [
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -145,7 +146,7 @@ export const navData: INavData = {
   ],
   messages: [
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -177,7 +178,7 @@ export const navData: INavData = {
       link: "/user/notification",
     },
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
   ],
@@ -211,7 +212,7 @@ export const navData: INavData = {
   ],
   redeemList: [
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
     {
@@ -265,7 +266,7 @@ export const navData: INavData = {
   ],
   transferPoints: [
     {
-      label: "Home",
+      label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
     {
