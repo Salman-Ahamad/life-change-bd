@@ -43,7 +43,7 @@ export const PATCH = async (req: NextRequest) => {
       new: true,
     });
 
-    return ApiResponse(200, "User update successfully", result);
+    return ApiResponse(200, "User update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
