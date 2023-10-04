@@ -23,7 +23,7 @@ export const SignUpForm = () => {
     phone: "",
     email: "",
     password: "",
-    reference: "",
+    reference: "-",
   };
 
   const handleSubmit = (

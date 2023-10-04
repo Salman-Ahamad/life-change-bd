@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      return ApiResponse(400, "User already exists 🙋🏻‍♂️");
+      return ApiResponse(400, "User already exists 🙋🏻‍♂️🙋🏻‍♂️🙋🏻‍♂️");
     }
 
     //hash password
