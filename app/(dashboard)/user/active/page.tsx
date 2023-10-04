@@ -9,18 +9,30 @@ import {
   SupportTeam,
 } from "@/components/User/Active";
 import { navData } from "@/lib/data";
-
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Active = () => {
-  toast.success("✅ You are an active Seller 🏅 , well done!");
-  toast.success(
-    "Don't share your personal information with anyone even our employees and Student's and Seller and also don't share your personal information on any post Like phone number password and any kind of OTP."
-  );
-  toast.success("Any kind of problem join here for solution");
+  useEffect(() => {
+    toast.info("You are an active Seller 🏅, well done!✅", {
+      autoClose: 5000,
+    });
+    toast.warn(
+      "Don't share your personal information with anyone even our employees and Student's and Seller and also don't share your personal information on any post Like phone number password and any kind of OTP.",
+      {
+        autoClose: 15000,
+        delay: 5000,
+        theme: "colored",
+      }
+    );
+    toast("🎥 Any kind of problem join here for solution", {
+      autoClose: 10000,
+      delay: 20000,
+    });
+  }, []);
 
   return (
-    <>
+    <main>
       <Header navData={navData.active} />
       <div className="flex items-center justify-center py-12 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
@@ -31,7 +43,7 @@ const Active = () => {
           <ReferenceMeetingLink />
         </div>
       </div>
-    </>
+    </main>
   );
 };
 

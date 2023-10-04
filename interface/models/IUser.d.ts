@@ -18,9 +18,9 @@ export type IUser = {
   verifyTokenExpiry?: Date;
   forgotPasswordToken?: string;
   forgotPasswordTokenExpiry?: Date;
-  referrer?: string[];
-  courses: string[];
-  points: number;
-  posts: string[];
-  likes: string[];
+  myReferences?: string[];
+  courses?: string[];
+  points?: number;
+  posts?: string[];
+  likes?: string[];
 };

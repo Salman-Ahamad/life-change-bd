@@ -24,7 +24,9 @@ export const GET = async () => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: id }).select("-password");
+    const user = await User.findOne({ _id: id })
+      .populate("courses")
+      .select("-password");
 
     return ApiResponse(200, "User get successfully 👌", user);
   } catch (error: any) {
