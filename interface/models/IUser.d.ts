@@ -13,8 +13,14 @@ export type IUser = {
   reference: string;
   role?: IUserRole;
   isVerified?: boolean;
+
   verifyToken?: string;
   verifyTokenExpiry?: Date;
   forgotPasswordToken?: string;
   forgotPasswordTokenExpiry?: Date;
+  referrer?: string[];
+  courses: string[];
+  points: number;
+  posts: string[];
+  likes: string[];
 };

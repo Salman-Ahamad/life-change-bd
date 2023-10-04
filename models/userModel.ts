@@ -66,6 +66,26 @@ const userSchema = new Schema<IUser>(
       type: Date,
       default: null,
     },
+    courses: {
+      type: [String],
+      default: [],
+    },
+    referrer: {
+      type: [String],
+      default: [],
+    },
+    points: {
+      type: Number,
+      default: 0,
+    },
+    posts: {
+      type: [String],
+      default: [],
+    },
+    likes: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
