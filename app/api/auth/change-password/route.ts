@@ -1,8 +1,8 @@
 import { connectDb } from "@/config";
-import { compare, genSalt, hash } from "bcryptjs";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
+import { compare, genSalt, hash } from "bcryptjs";
 import { NextRequest } from "next/server";
 
 export const PATCH = async (req: NextRequest) => {
