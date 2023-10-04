@@ -5,6 +5,7 @@ import bulletList from "./bullet-list.svg";
 import close from "./close.svg";
 import facebook from "./facebook.svg";
 import googlePlay from "./googlePlay.svg";
+import googleMeet from "./Google_Meet_icon.png";
 import pinterest from "./pinterest.svg";
 import time from "./time.png";
 import twitter from "./twitter.svg";
@@ -21,6 +22,7 @@ export {
   close,
   facebook,
   googlePlay,
+  googleMeet,
   pinterest,
   time,
   twitter,

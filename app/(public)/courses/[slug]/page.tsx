@@ -12,6 +12,7 @@ const SingleCourses = ({ params }: ISlugParams) => {
   useGetData(`/courses/${slug}`, setCourse);
 
   const { title, description, image, learn, footerDes } = course || {};
+
   return (
     <Container className="mt-10 min-h-screen">
       <div className="grid grid-cols-3 gap-5">
@@ -60,7 +61,7 @@ const SingleCourses = ({ params }: ISlugParams) => {
           📕 What will you learn
         </Title>
 
-        <div className="mt-5">
+        <div className="mt-5 space-y-2.5">
           {learn ? (
             learn.map((item) => (
               <p key={item} className="mb-2 flex items-center">

@@ -10,6 +10,10 @@ export interface IClassName {
 
 export interface IChildrenWithClassName extends IChildren, IClassName {}
 
+export interface IChildrenWithTitle extends IChildren {
+  title: string;
+}
+
 export interface ISlugParams {
   params: {
     slug: string;

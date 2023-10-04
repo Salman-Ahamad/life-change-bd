@@ -50,7 +50,44 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: "-",
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
+    verifyToken: {
+      type: String,
+      default: "",
+    },
+    verifyTokenExpiry: {
+      type: Date,
+      default: "",
+    },
+    forgotPasswordToken: {
+      type: String,
+      default: "",
+    },
+    forgotPasswordTokenExpiry: {
+      type: Date,
+      default: "",
+    },
+    courses: {
+      type: [Schema.Types.ObjectId],
+      ref: "courses",
+    },
+    myReferences: {
+      type: [Schema.Types.ObjectId],
+      ref: "myReferences",
+    },
+    posts: {
+      type: [Schema.Types.ObjectId],
+      ref: "posts",
+    },
+    likes: {
+      type: [Schema.Types.ObjectId],
+      ref: "posts",
+    },
   },
+
   {
     timestamps: true,
     toJSON: {

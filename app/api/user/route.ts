@@ -16,11 +16,17 @@ export const GET = async () => {
     // Get Current User
     const { id, role } = await getCurrentUser();
 
-    if (role !== UserRole.active && role !== UserRole.admin) {
+    if (
+      role !== UserRole.active &&
+      role !== UserRole.inactive &&
+      role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: id }).select("-password");
+    const user = await User.findOne({ _id: id })
+      .populate("courses")
+      .select("-password");
 
     return ApiResponse(200, "User get successfully 👌", user);
   } catch (error: any) {
@@ -43,7 +49,7 @@ export const PATCH = async (req: NextRequest) => {
       new: true,
     });
 
-    return ApiResponse(200, "User update successfully", result);
+    return ApiResponse(200, "User update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

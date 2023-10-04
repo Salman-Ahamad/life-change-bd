@@ -31,6 +31,8 @@ export const SignUpForm = () => {
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
     const id = toast.loading("Loading... 🔃");
+    values.reference.length === 0 && (values.reference = "-");
+
     Axios.post("/auth/signup", values)
       .then(({ data }) => {
         loadingToast(id, data.message, "success");
