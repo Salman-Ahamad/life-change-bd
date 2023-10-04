@@ -10,7 +10,7 @@ import { FC } from "react";
 
 export const Tost: FC<ITost> = ({ label, btnText }) => {
   const userData = useCurrentUser();
-  console.log(userData);
+  console.log("Client User Data: ", userData);
 
   return (
     <div className="flex justify-start items-center gap-10 bg-green-200 w-fit mx-auto mt-1.5 shadow-md rounded-sm overflow-hidden pr-2.5">
@@ -21,7 +21,11 @@ export const Tost: FC<ITost> = ({ label, btnText }) => {
       <Button
         variant="secondary"
         onClick={() => {
-          // sendEmail("", "VERIFY");
+          sendEmail({
+            email: userData?.email,
+            emailType: "VERIFY",
+            userId: userData?.id,
+          });
         }}
       >
         {btnText}
