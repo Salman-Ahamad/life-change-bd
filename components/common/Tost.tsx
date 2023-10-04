@@ -4,13 +4,12 @@ import { useCurrentUser } from "@/hooks";
 import { ITost } from "@/interface";
 import { bell } from "@/lib/assets";
 import { Button, CommonText } from "@/universal";
-import { sendEmail } from "@/utils";
+import sendEmail from "@/utils/mailer";
 import Image from "next/image";
 import { FC } from "react";
 
 export const Tost: FC<ITost> = ({ label, btnText }) => {
   const userData = useCurrentUser();
-  console.log("Client User Data: ", userData);
 
   return (
     <div className="flex justify-start items-center gap-10 bg-green-200 w-fit mx-auto mt-1.5 shadow-md rounded-sm overflow-hidden pr-2.5">
@@ -21,11 +20,13 @@ export const Tost: FC<ITost> = ({ label, btnText }) => {
       <Button
         variant="secondary"
         onClick={() => {
-          sendEmail({
-            email: userData?.email,
-            emailType: "VERIFY",
-            userId: userData?.id,
-          });
+          if (userData) {
+            sendEmail({
+              email: userData?.email,
+              emailType: "VERIFY",
+              userId: userData?.id,
+            });
+          }
         }}
       >
         {btnText}

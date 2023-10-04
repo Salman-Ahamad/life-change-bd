@@ -1,27 +1,28 @@
-// import nodemailer from "nodemailer";
-import { User } from "@/models";
+import nodemailer from "nodemailer";
 import bcryptjs from "bcryptjs";
+import { Axios, loadingToast } from ".";
+import { toast } from "react-toastify";
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+export default async function sendEmail({ email, emailType, userId }: any) {
   try {
     // create a hased token
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
-    console.log("Email: ", email);
-    console.log("Email Type: ", emailType);
-    console.log("User Id: ", userId);
-    console.log("hashedToken: ", hashedToken);
-
     if (emailType === "VERIFY") {
-      await User.findByIdAndUpdate(userId, {
+      const id = toast.loading("Profile Updating...");
+
+      await Axios.patch("/user", {
         verifyToken: hashedToken,
         verifyTokenExpiry: Date.now() + 3600000,
-      });
-    } else if (emailType === "RESET") {
-      await User.findByIdAndUpdate(userId, {
-        forgotPasswordToken: hashedToken,
-        forgotPasswordTokenExpiry: Date.now() + 3600000,
-      });
+      })
+        .then(({ data }) => {
+          if (data.data) {
+            loadingToast(id, data.message, "success");
+          }
+        })
+        .catch(({ response }) => {
+          loadingToast(id, response.data.message, "error");
+        });
     }
 
     // const transporter = nodemailer.createTransport({
@@ -52,6 +53,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     // const mailresponse = await transporter.sendMail(mailOptions);
     // return mailresponse;
   } catch (error: any) {
-    throw new Error(error.message);
+    console.log("Error: ", error);
+
+    // throw new Error(error.message);
   }
-};
+}
