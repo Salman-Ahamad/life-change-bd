@@ -6,7 +6,7 @@ export default async function getCourses() {
   try {
     connectDb();
 
-    const courses = await Course.find({});
+    const courses = await Course.find();
 
     return courses;
   } catch (error) {

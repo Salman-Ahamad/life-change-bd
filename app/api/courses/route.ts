@@ -1,64 +1,54 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { Course } from "@/models";
-import getCourses from "@/utils/actions/getCourses";
+import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
+
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
-  connectDb();
+connectDb();
 
-  // Get courses from DB
-  const courses = await getCourses();
-
-  if (courses) {
+export const GET = async () => {
+  try {
     // Get Current User
     const user = await getCurrentUser();
-    if (user) {
-      return NextResponse.json(courses);
+
+    if (user.role === UserRole.admin) {
+      const courses = await Course.find();
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
     } else {
       // This will return after removing certificate and enrolled user
-      return NextResponse.json(courses);
+      const courses = await Course.find().select({
+        enrolled: 0,
+        certificates: 0,
+      });
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
     }
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
   }
-
-  return NextResponse.json({
-    message: "Not Found",
-  });
 };
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
-  // const user = await getCurrentUser();
-
-  // // Add new rules for admin access
-  // if (!user) {
-  //   return NextResponse.json({ message: "Not authorized" });
-  // }
-
-  const courseData = await req.json();
-
-  connectDb();
-  const newCourse = await Course.create(courseData);
-
-  if (newCourse) {
-    return NextResponse.json(newCourse);
-  }
-
-  return NextResponse.json({
-    message: "Something went wrong",
-  });
-};
-
-export const PATCH = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: NextRequest) => {
   try {
-    // const user = await getCurrentUser();
+    const courseData = await req.json();
+    // Get Current User
+    const user = await getCurrentUser();
 
-    // // Add new rules for admin access
-    // if (!user) {
-    //   return NextResponse.json({ message: "Not authorized" });
-    // }
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
 
-    connectDb();
+    const result = await Course.create(courseData);
 
+    return ApiResponse(200, "Course created successfully 👌", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
+
+export const PATCH = async (req: NextRequest) => {
+  try {
     const reqData = await req.json();
     const courseCode = reqData.courseCode;
     const updatedCourseData = reqData.updatedCourseData;
@@ -89,14 +79,6 @@ export const DELETE = async (req: NextRequest, res: NextResponse) => {
   const reqData = await req.json();
   const courseCode = reqData.courseCode;
 
-  // const user = await getCurrentUser();
-
-  // // Add new rules for admin access
-  // if (!user) {
-  //   return NextResponse.json({ message: "Not authorized" });
-  // }
-
-  connectDb();
   const deletedCourse = await Course.findOneAndDelete({
     courseCode,
   });

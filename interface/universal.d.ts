@@ -14,6 +14,11 @@ export interface IChildrenWithTitle extends IChildren {
   title: string;
 }
 
+export interface ISlugParams {
+  params: {
+    slug: string;
+  };
+}
 export interface ITitleVariant {
   variant: "H1" | "H2" | "H3" | "H4" | "H5";
 }

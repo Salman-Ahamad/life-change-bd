@@ -16,7 +16,7 @@ export const GET = async () => {
     // Get Current User
     const { id, role } = await getCurrentUser();
 
-    if (role !== (UserRole.active || UserRole.admin)) {
+    if (role !== UserRole.active && role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
@@ -30,7 +30,7 @@ export const GET = async () => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { updatedData } = await req.json();
+    const updatedData = await req.json();
 
     // Get Current User
     const user = await getCurrentUser();

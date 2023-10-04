@@ -62,6 +62,7 @@ export interface INavData {
   meeting: INavItem[];
   sendWish: INavItem[];
   transferPoints: INavItem[];
+  profileEdit: INavItem[];
 }
 
 export interface IInput extends IClassName {

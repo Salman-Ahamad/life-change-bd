@@ -11,13 +11,17 @@ export default async function getCurrentUser() {
   const session = await getSession();
 
   if (!session?.user) {
-    console.error("User not found");
+    console.error("Session user not found");
     return null;
   }
 
   connectDb();
 
   const user = await User.findOne({ email: session.user.email });
-
-  return user;
+  if (user) {
+    return user;
+  } else {
+    console.error("User not found");
+    return null;
+  }
 }
