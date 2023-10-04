@@ -50,6 +50,22 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: "-",
     },
+    verifyToken: {
+      type: String,
+      default: "",
+    },
+    verifyTokenExpiry: {
+      type: Date,
+      default: null,
+    },
+    forgotPasswordToken: {
+      type: String,
+      default: "",
+    },
+    forgotPasswordTokenExpiry: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
