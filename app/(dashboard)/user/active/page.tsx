@@ -1,52 +1,34 @@
 "use client";
 
 import { Header } from "@/components";
+import {
+  LiveEarningClass,
+  LiveLearningClass,
+  ReferenceMeetingLink,
+  SupportLink,
+  SupportTeam,
+} from "@/components/User/Active";
 import { navData } from "@/lib/data";
-import { Button } from "@/universal";
-import { useSession } from "next-auth/react";
+
+import { toast } from "react-toastify";
 
 const Active = () => {
-  const { data: session } = useSession();
-  // console.log(session);
+  toast.success("✅ You are an active Seller 🏅 , well done!");
+  toast.success(
+    "Don't share your personal information with anyone even our employees and Student's and Seller and also don't share your personal information on any post Like phone number password and any kind of OTP."
+  );
+  toast.success("Any kind of problem join here for solution");
 
   return (
     <>
       <Header navData={navData.active} />
-      <div className="flex flex-col md:flex-row items-center justify-center gap-16 py-12">
-        <div className="w-96">
-          <div className="shadow-md p-4">
-            <h4>May I help you</h4>
-            <Button variant="secondary">Get Links</Button>
-          </div>
-          <div className="shadow-md p-4">
-            <h4>Life change Support Team</h4>
-            <div className="flex justify-between items-center">
-              <p>Your Trainer</p>
-              <Button variant="secondary">Message</Button>
-            </div>
-            <div className="flex justify-between items-center">
-              <p>Your Team Leader</p>
-              <Button variant="secondary">Message</Button>
-            </div>
-            <div className="flex justify-between items-center">
-              <p>Senior Team Leader</p>
-              <Button variant="secondary">Message</Button>
-            </div>
-            <div className="flex justify-between items-center">
-              <p>Life Change BD Support</p>
-              <Button variant="secondary">Open Message</Button>
-            </div>
-          </div>
-          <div className="shadow-md p-4">
-            <p>Life Change BD Support Whatsapp</p>
-            <Button variant="secondary">Get Whatsapp</Button>
-          </div>
-        </div>
-        <div className="w-96">
-          <div className="shadow-md p-4">
-            <h4>Join Live Learning Training Class</h4>
-            <Button variant="secondary">Get Links</Button>
-          </div>
+      <div className="flex items-center justify-center py-12 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+          <SupportLink />
+          <SupportTeam />
+          <LiveEarningClass />
+          <LiveLearningClass />
+          <ReferenceMeetingLink />
         </div>
       </div>
     </>
