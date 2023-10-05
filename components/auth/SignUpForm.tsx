@@ -42,6 +42,7 @@ export const SignUpForm = () => {
           callbackUrl: `/inactive`,
         })
           .then((res) => {
+            console.log("🚀 ~ file: SignUpForm.tsx:45 ~ .then ~ res:", res);
             if (!res?.error) {
               loadingToast(id, "Login Successfully ✅", "success");
             } else {
@@ -49,10 +50,15 @@ export const SignUpForm = () => {
               loadingToast(id, error, "success");
             }
           })
-          .catch((error) => loadingToast(id, error, "success"));
+          .catch((error: any) => {
+            console.log("🚀 ~ file: SignUpForm.tsx:54 ~ .then ~ error:", error);
+            return loadingToast(id, error.response.data.error, "error");
+          });
       })
-      .catch((err) => loadingToast(id, err.response.data.error, "error"));
-
+      .catch((err) => {
+        console.log("🚀 ~ file: SignUpForm.tsx:58 ~ SignUpForm ~ err:", err);
+        return loadingToast(id, err.response.data.error, "error");
+      });
     setAgree(false);
     resetForm();
   };

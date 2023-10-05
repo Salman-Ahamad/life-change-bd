@@ -42,10 +42,6 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: "inactive",
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
     reference: {
       type: String,
       default: "-",
@@ -53,22 +49,6 @@ const userSchema = new Schema<IUser>(
     points: {
       type: Number,
       default: 0,
-    },
-    verifyToken: {
-      type: String,
-      default: "",
-    },
-    verifyTokenExpiry: {
-      type: Date,
-      default: "",
-    },
-    forgotPasswordToken: {
-      type: String,
-      default: "",
-    },
-    forgotPasswordTokenExpiry: {
-      type: Date,
-      default: "",
     },
     courses: {
       type: [Schema.Types.ObjectId],
@@ -86,6 +66,30 @@ const userSchema = new Schema<IUser>(
       type: [Schema.Types.ObjectId],
       ref: "posts",
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    verifyToken: String,
+    verifyTokenExpiry: Date,
+    forgotPasswordToken: String,
+    forgotPasswordTokenExpiry: Date,
+    // verifyToken: {
+    //   type: String,
+    //   default: "",
+    // },
+    // verifyTokenExpiry: {
+    //   type: Date || undefined,
+    //   default: undefined,
+    // },
+    // forgotPasswordToken: {
+    //   type: String,
+    //   default: "",
+    // },
+    // forgotPasswordTokenExpiry: {
+    //   type: Date || undefined,
+    //   default: undefined,
+    // },
   },
 
   {
