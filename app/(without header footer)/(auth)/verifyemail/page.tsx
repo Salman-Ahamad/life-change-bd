@@ -1,9 +1,11 @@
 "use client";
 
+import { useCurrentUser } from "@/hooks";
 import { UserRole } from "@/lib";
 import { Button } from "@/universal";
 import { Axios, loadingToast } from "@/utils";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -11,6 +13,13 @@ const VerifyEmailPage = () => {
   const [token, setToken] = useState("");
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
+  const user = useCurrentUser();
+
+  useEffect(() => {
+    if (user?.isVerified) {
+      redirect("/user/active");
+    }
+  }, [user]);
 
   const verifyUserEmail = async () => {
     const id = toast.loading("verifying...");
