@@ -1,60 +1,52 @@
-import nodemailer from "nodemailer";
+import { User } from "@/models";
 import bcryptjs from "bcryptjs";
-import { Axios, loadingToast } from ".";
-import { toast } from "react-toastify";
+import nodemailer from "nodemailer";
 
-export default async function sendEmail({ email, emailType, userId }: any) {
+export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     // create a hased token
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
     if (emailType === "VERIFY") {
-      const id = toast.loading("Profile Updating...");
-
-      await Axios.patch("/user", {
+      await User.findByIdAndUpdate(userId, {
         verifyToken: hashedToken,
         verifyTokenExpiry: Date.now() + 3600000,
-      })
-        .then(({ data }) => {
-          if (data.data) {
-            loadingToast(id, data.message, "success");
-          }
-        })
-        .catch(({ response }) => {
-          loadingToast(id, response.data.message, "error");
-        });
+      });
+    } else if (emailType === "RESET") {
+      await User.findByIdAndUpdate(userId, {
+        forgotPasswordToken: hashedToken,
+        forgotPasswordTokenExpiry: Date.now() + 3600000,
+      });
     }
 
-    // const transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   //   port:2333,
-    //   auth: {
-    //     user: process.env.MAIL_ID,
-    //     pass: process.env.MAIL_PASSWORD,
-    //   },
-    // });
+    var transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "383e131274c2a9",
+        pass: "bc86405dcb2e78",
+      },
+    });
 
-    // const mailOptions = {
-    //   from: process.env.MAIL_ID,
-    //   to: email,
-    //   subject:
-    //     emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-    //   html: `<p>Click <a href="${
-    //     process.env.BASE_URL
-    //   }/verifyemail?token=${hashedToken}">here</a> to ${
-    //     emailType === "VERIFY" ? "verify your email" : "reset your password"
-    //   }
-    //         or copy and paste the link below in your browser. <br> ${
-    //           process.env.BASE_URL
-    //         }/verifyemail?token=${hashedToken}
-    //         </p>`,
-    // };
+    const mailOptions = {
+      from: "hitesh@gmail.com",
+      to: email,
+      subject:
+        emailType === "VERIFY" ? "Verify your email" : "Reset your password",
+      html: `<p>Click <a href="${
+        process.env.BASE_URL
+      }/verifyemail?token=${hashedToken}">here</a> to ${
+        emailType === "VERIFY" ? "verify your email" : "reset your password"
+      }
+            or copy and paste the link below in your browser. <br> ${
+              process.env.BASE_URL
+            }/verifyemail?token=${hashedToken}
+            </p>`,
+    };
 
-    // const mailresponse = await transporter.sendMail(mailOptions);
-    // return mailresponse;
+    const mailresponse = await transport.sendMail(mailOptions);
+    return mailresponse;
   } catch (error: any) {
-    console.log("Error: ", error);
-
-    // throw new Error(error.message);
+    throw new Error(error.message);
   }
-}
+};

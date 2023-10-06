@@ -22,21 +22,24 @@ export const POST = async (req: NextRequest) => {
     const salt = await genSalt(10);
     const hashedPassword = await hash(userPass, salt);
 
-    const result = await User.create({
+    const newUser = new User({
       ...userData,
       email,
       password: hashedPassword,
     });
 
-    //send verification email
-    await sendEmail({ email, emailType: "VERIFY", userId: result._id });
+    const savedUser = await newUser.save();
 
-    const finalResult = await User.findOne({ _id: result._id }).select(
+    //send verification email
+    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+
+    const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"
     );
 
     return ApiResponse(200, "User created successfully 👌", finalResult);
   } catch (error: any) {
+    console.log("🚀 ~ file: route.ts:41 ~ POST ~ error:", error);
     return ApiResponse(500, error.message);
   }
 };

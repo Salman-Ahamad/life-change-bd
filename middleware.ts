@@ -13,7 +13,6 @@ export default withAuth(
       request.nextUrl.pathname.includes("/user") &&
       request.nextauth.token?.role === UserRole.inactive
     ) {
-
       return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
     } else if (
       request.nextUrl.pathname.includes("/inactive") &&
@@ -36,6 +35,7 @@ export default withAuth(
 export const config = {
   matcher: [
     "/inactive",
+    "/verifyemail",
     "/user/active",
     "/user/active/profile",
     "/user/change-password",

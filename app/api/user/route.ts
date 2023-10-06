@@ -38,14 +38,12 @@ export const PATCH = async (req: NextRequest) => {
   try {
     const updatedData = await req.json();
 
+    console.log("🚀 ~ file: route.ts:40 ~ PATCH ~ updatedData:", updatedData);
+
     // Get Current User
     const user = await getCurrentUser();
 
-    if (
-      user.role !== UserRole.active &&
-      user.role !== UserRole.inactive &&
-      user.role !== UserRole.admin
-    ) {
+    if (!user.role) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
