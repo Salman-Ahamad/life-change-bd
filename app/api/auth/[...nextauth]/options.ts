@@ -1,23 +1,17 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { User } from "@/models";
+import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { compare } from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 export const options: NextAuthOptions = {
   providers: [
-    GitHubProvider({
-      profile(profile: GithubProfile) {
-        return {
-          ...profile,
-          role: profile.role ?? "user",
-          id: profile.id.toString(),
-          image: profile.avatar_url,
-        };
-      },
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -69,6 +63,25 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ account, profile }: any) {
+      if (account.provider === "google") {
+        // return profile.email_verified && profile.email.endsWith("@example.com");
+        const currentUser = await getCurrentUser();
+        const email = profile.email;
+
+        if (currentUser.email === email) {
+          await User.updateOne(
+            { _id: currentUser.id },
+            { isVerified: true, role: UserRole.active },
+            {
+              new: true,
+            }
+          );
+          console.log("Email verified");
+        }
+      }
+      return true; // Do different verification for other providers that don't have `email_verified`
+    },
     // async redirect({ url, baseUrl }) {
     //   return `${baseUrl}/user/active`;
     // },

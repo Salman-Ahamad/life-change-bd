@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest) => {
     const savedUser = await newUser.save();
 
     //send verification email
-    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
     const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"

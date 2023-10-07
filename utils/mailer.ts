@@ -28,8 +28,17 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
 
+    // // Create a nodemailer transport using SMTP
+    // const transport = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "brohanmedia@gmail.com", // Your Gmail email address
+    //     pass: "Messi100", // Generate an App Password for your Gmail account
+    //   },
+    // });
+
     const mailOptions = {
-      from: "hitesh@gmail.com",
+      from: "brohanmedia@gmail.com",
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
