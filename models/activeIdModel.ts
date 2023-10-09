@@ -17,5 +17,5 @@ const ActiveIdSchema = new Schema<IActiveIdSchema>(
   }
 );
 
-export const AppConfig =
+export const ActiveId =
   models.ActiveId || model<IActiveIdSchema>("ActiveId", ActiveIdSchema);

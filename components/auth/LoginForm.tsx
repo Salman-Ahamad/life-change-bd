@@ -53,7 +53,6 @@ export const LoginForm = () => {
         password,
       })
         .then((res) => {
-          console.log("🚀 ~ file: LoginForm.tsx:56 ~ .then ~ res:", res);
           if (!res?.error) {
             loadingToast(id, "Login Successfully ✅", "success");
 
@@ -67,13 +66,7 @@ export const LoginForm = () => {
             loadingToast(id, error, "success");
           }
         })
-        .catch((error) => {
-          console.log(
-            "🚀 ~ file: LoginForm.tsx:71 ~ LoginForm ~ error:",
-            error
-          );
-          return loadingToast(id, error, "success");
-        });
+        .catch((error) => loadingToast(id, error, "success"));
       resetForm();
     }
   };

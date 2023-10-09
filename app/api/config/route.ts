@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { User } from "@/models";
+import { AppConfig, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -9,26 +9,15 @@ connectDb();
 
 export const GET = async () => {
   try {
-    // const headersList = headers();
-    // const id = headersList.get("id");
-    // const role = headersList.get("role");
+    const { role } = await getCurrentUser();
 
-    // Get Current User
-    const { id, role } = await getCurrentUser();
-
-    if (
-      role !== UserRole.active &&
-      role !== UserRole.inactive &&
-      role !== UserRole.admin
-    ) {
+    if (role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: id })
-      .populate("courses")
-      .select("-password");
+    const appConfig = await AppConfig.find();
 
-    return ApiResponse(200, "User get successfully 👌", user);
+    return ApiResponse(200, "App Config get successfully 👌", appConfig);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
@@ -37,8 +26,6 @@ export const GET = async () => {
 export const PATCH = async (req: NextRequest) => {
   try {
     const updatedData = await req.json();
-
-    console.log("🚀 ~ file: route.ts:40 ~ PATCH ~ updatedData:", updatedData);
 
     // Get Current User
     const user = await getCurrentUser();

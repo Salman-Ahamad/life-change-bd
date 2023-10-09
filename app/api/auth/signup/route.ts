@@ -40,7 +40,6 @@ export const POST = async (req: NextRequest) => {
 
     return ApiResponse(200, "User created successfully 👌", finalResult);
   } catch (error: any) {
-    console.log("🚀 ~ file: route.ts:41 ~ POST ~ error:", error);
     return ApiResponse(500, error.message);
   }
 };

@@ -38,8 +38,6 @@ export const PATCH = async (req: NextRequest) => {
   try {
     const updatedData = await req.json();
 
-    console.log("🚀 ~ file: route.ts:40 ~ PATCH ~ updatedData:", updatedData);
-
     // Get Current User
     const user = await getCurrentUser();
 
