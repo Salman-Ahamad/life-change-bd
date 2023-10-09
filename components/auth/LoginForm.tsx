@@ -2,34 +2,25 @@
 
 import { Form, Formik, FormikHelpers } from "formik";
 import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { ILoginFormValue } from "@/interface";
-import { UserRole } from "@/lib";
-import { loginValidationSchema } from "@/lib/validation";
+import { loginValidationSchema } from "@/lib";
 import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber, loadingToast } from "@/utils";
-import { redirect } from "next/navigation";
-import { toast } from "react-toastify";
 import { Input } from "..";
 
 export const LoginForm = () => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
+  const { data: session } = useSession();
   const initialValues: ILoginFormValue = {
     phone: "",
     password: "",
     randomNum: "",
   };
-
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    if (session?.user) {
-      if (session.user.role === UserRole.inactive) redirect("/inactive");
-      if (session.user.role !== UserRole.inactive) redirect("/user/active");
-    }
-  }, [session]);
 
   useEffect(() => {
     const randomNum = getRandomNumber(20, 50);
@@ -56,7 +47,6 @@ export const LoginForm = () => {
         .then((res) => {
           if (!res?.error) {
             loadingToast(id, "Login Successfully ✅", "success");
-
             if (session?.role === "inactive") {
               redirect("/inactive");
             } else {
@@ -67,11 +57,7 @@ export const LoginForm = () => {
             loadingToast(id, error.message, "warning");
           }
         })
-        .catch((error) => {
-          const resError = JSON.parse(error.error);
-          loadingToast(id, resError.message, "error");
-          return loadingToast(id, error, "success");
-        });
+        .catch((error) => loadingToast(id, error.message, "error"));
       resetForm();
     }
   };

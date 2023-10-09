@@ -13,16 +13,3 @@ export default async function getCourses() {
     console.log("Get course error: ", error);
   }
 }
-
-// const courseData: ICourse = {
-//   courseName: "",
-//   courseCode: "",
-//   courseImage: "",
-//   courseSlug: "",
-//   courseDescription: ``,
-//   coursePrice: 100,
-//   courseDuration: 30,
-//   courseStatus: "active",
-//   enrolled: [],
-//   certificates: [],
-// };
