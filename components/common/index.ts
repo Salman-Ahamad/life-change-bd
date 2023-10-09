@@ -6,3 +6,4 @@ export * from "./Header";
 export * from "./ImageCard";
 export * from "./Input";
 export * from "./Tost";
+export * from "./CopyToClipboard";

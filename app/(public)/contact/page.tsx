@@ -1,5 +1,6 @@
 "use client";
 
+import { CopyToClipboard } from "@/components";
 import { CommonText, Container, Title } from "@/universal";
 
 const Contact = () => (
@@ -25,6 +26,11 @@ const Contact = () => (
         </a>
       </CommonText>
     </div>
+
+    <CopyToClipboard
+      inputText="Fuck man, what did u do!"
+      buttonText="Fuck you"
+    />
   </Container>
 );
 
