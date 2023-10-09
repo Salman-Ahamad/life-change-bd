@@ -1,11 +1,29 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { AppConfig, User } from "@/models";
+import { AppConfig } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
 
 connectDb();
+
+export const POST = async (req: NextRequest) => {
+  try {
+    const courseData = await req.json();
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
+
+    const result = await AppConfig.create(courseData);
+
+    return ApiResponse(200, "App Config created successfully 👌", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
 
 export const GET = async () => {
   try {
@@ -28,17 +46,21 @@ export const PATCH = async (req: NextRequest) => {
     const updatedData = await req.json();
 
     // Get Current User
-    const user = await getCurrentUser();
+    const { role } = await getCurrentUser();
 
-    if (!user.role) {
-      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    if (role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const result = await User.updateOne({ _id: user.id }, updatedData, {
-      new: true,
-    });
+    const result = await AppConfig.updateOne(
+      { for: UserRole.admin },
+      updatedData,
+      {
+        new: true,
+      }
+    );
 
-    return ApiResponse(200, "User update successfully 🛠️✅", result);
+    return ApiResponse(200, "App Config update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

@@ -3,9 +3,17 @@ import { Schema, model, models } from "mongoose";
 
 const AppConfigSchema = new Schema<IAppConfigSchema>(
   {
+    for: {
+      type: String,
+      default: "admin",
+    },
     baseFee: {
       type: Number,
       default: 0,
+    },
+    sliderImage: {
+      type: [String],
+      default: [],
     },
   },
   {
@@ -17,4 +25,4 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
 );
 
 export const AppConfig =
-  models.AppConfig || model<IAppConfigSchema>("AppConfig", AppConfigSchema);
+  models.appConfig || model<IAppConfigSchema>("appConfig", AppConfigSchema);
