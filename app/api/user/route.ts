@@ -41,7 +41,7 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    if (user.role !== (UserRole.active || UserRole.admin)) {
+    if (!user.role) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 

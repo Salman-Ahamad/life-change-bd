@@ -1,9 +1,9 @@
+import { genSalt, hash } from "bcryptjs";
+import { NextRequest } from "next/server";
+
 import { connectDb } from "@/config";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
-import { genSalt, hash } from "bcryptjs";
-import { NextRequest } from "next/server";
-// import { sendEmail } from "@/helpers/mailer";
 
 connectDb();
 
@@ -22,16 +22,15 @@ export const POST = async (req: NextRequest) => {
     const salt = await genSalt(10);
     const hashedPassword = await hash(userPass, salt);
 
-    const result = await User.create({
+    const newUser = new User({
       ...userData,
       email,
       password: hashedPassword,
     });
 
-    //send verification email
-    // await sendEmail({ email, emailType: "VERIFY", userId: result._id });
+    const savedUser = await newUser.save();
 
-    const finalResult = await User.findOne({ _id: result._id }).select(
+    const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"
     );
 

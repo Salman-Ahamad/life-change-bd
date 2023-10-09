@@ -46,13 +46,14 @@ export const SignUpForm = () => {
               loadingToast(id, "Login Successfully ✅", "success");
             } else {
               const error = JSON.parse(res.error);
-              loadingToast(id, error, "success");
+              loadingToast(id, error.message, "error");
             }
           })
-          .catch((error) => loadingToast(id, error, "success"));
+          .catch((error: any) =>
+            loadingToast(id, error.response.data.message, "error")
+          );
       })
-      .catch((err) => loadingToast(id, err.response.data.error, "error"));
-
+      .catch((err) => loadingToast(id, err.response.data.message, "error"));
     setAgree(false);
     resetForm();
   };

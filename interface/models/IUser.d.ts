@@ -1,7 +1,8 @@
+import { ICourse } from ".";
+
 export type IUserRole = "inactive" | "active" | "subAdmin" | "admin";
 
-export type IUser = {
-  id?: string;
+export interface IUserSchema {
   firstName: string;
   lastName: string;
   language: string;
@@ -11,16 +12,19 @@ export type IUser = {
   email: string;
   password: string;
   reference: string;
+
   role?: IUserRole;
+  balance?: number;
   isVerified?: boolean;
 
-  verifyToken?: string;
-  verifyTokenExpiry?: Date;
-  forgotPasswordToken?: string;
-  forgotPasswordTokenExpiry?: Date;
   myReferences?: string[];
-  courses?: string[];
-  points?: number;
+  courses?: Types.ObjectId[] | ICourse[];
+
   posts?: string[];
   likes?: string[];
-};
+}
+
+export interface IUser extends IUserSchema {
+  id: string;
+  role: IUserRole;
+}

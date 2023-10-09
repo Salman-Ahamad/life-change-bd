@@ -1,7 +1,7 @@
-import { IUser } from "@/interface";
+import { IUserSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUserSchema>(
   {
     firstName: {
       type: String,
@@ -42,33 +42,13 @@ const userSchema = new Schema<IUser>(
       type: String,
       default: "inactive",
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
     reference: {
       type: String,
       default: "-",
     },
-    points: {
+    balance: {
       type: Number,
       default: 0,
-    },
-    verifyToken: {
-      type: String,
-      default: "",
-    },
-    verifyTokenExpiry: {
-      type: Date,
-      default: "",
-    },
-    forgotPasswordToken: {
-      type: String,
-      default: "",
-    },
-    forgotPasswordTokenExpiry: {
-      type: Date,
-      default: "",
     },
     courses: {
       type: [Schema.Types.ObjectId],
@@ -76,7 +56,7 @@ const userSchema = new Schema<IUser>(
     },
     myReferences: {
       type: [Schema.Types.ObjectId],
-      ref: "myReferences",
+      ref: "users",
     },
     posts: {
       type: [Schema.Types.ObjectId],
@@ -85,6 +65,10 @@ const userSchema = new Schema<IUser>(
     likes: {
       type: [Schema.Types.ObjectId],
       ref: "posts",
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -96,4 +80,4 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-export const User = models.users || model<IUser>("users", userSchema);
+export const User = models.users || model<IUserSchema>("users", userSchema);
