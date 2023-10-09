@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import { Header } from "@/components";
-import { useCurrentUser } from "@/hooks";
+import { updateData, useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, CommonText } from "@/universal";
 
 const Profile = () => {
+  const [baseFee, setBaseFee] = useState(0);
   const user = useCurrentUser();
+
   const profileTitle = [
     "email",
     "country",
@@ -106,9 +109,15 @@ const Profile = () => {
           <div className="flex gap-5">
             <input
               type="number"
+              onChange={(e) => setBaseFee(Number(e.target.value))}
               className="outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-1 px-2"
             />
-            <Button variant="secondary">Update</Button>
+            <Button
+              variant="secondary"
+              onClick={() => updateData("/config", { baseFee: baseFee })}
+            >
+              Update
+            </Button>
           </div>
         </section>
       )}
