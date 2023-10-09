@@ -14,12 +14,12 @@ export interface IUserSchema {
   reference: string;
 
   role?: IUserRole;
+  balance?: number;
   isVerified?: boolean;
 
   myReferences?: string[];
   courses?: Types.ObjectId[] | ICourse[];
 
-  points?: number;
   posts?: string[];
   likes?: string[];
 }

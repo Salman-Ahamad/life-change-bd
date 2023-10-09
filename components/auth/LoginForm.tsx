@@ -51,6 +51,7 @@ export const LoginForm = () => {
       signIn("credentials", {
         phone,
         password,
+        redirect: false,
       })
         .then((res) => {
           if (!res?.error) {
@@ -63,10 +64,14 @@ export const LoginForm = () => {
             }
           } else {
             const error = JSON.parse(res.error);
-            loadingToast(id, error, "success");
+            loadingToast(id, error.message, "warning");
           }
         })
-        .catch((error) => loadingToast(id, error, "success"));
+        .catch((error) => {
+          const resError = JSON.parse(error.error);
+          loadingToast(id, resError.message, "error");
+          return loadingToast(id, error, "success");
+        });
       resetForm();
     }
   };

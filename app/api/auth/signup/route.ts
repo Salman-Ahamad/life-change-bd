@@ -1,10 +1,9 @@
+import { genSalt, hash } from "bcryptjs";
+import { NextRequest } from "next/server";
+
 import { connectDb } from "@/config";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
-import { sendEmail } from "@/utils/mailer";
-import { genSalt, hash } from "bcryptjs";
-import { NextRequest } from "next/server";
-// import { sendEmail } from "@/helpers/mailer";
 
 connectDb();
 
@@ -30,9 +29,6 @@ export const POST = async (req: NextRequest) => {
     });
 
     const savedUser = await newUser.save();
-
-    //send verification email
-    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
     const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"
