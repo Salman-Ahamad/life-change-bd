@@ -4,6 +4,7 @@ import { useCurrentUser } from "@/hooks";
 import { ITost } from "@/interface";
 import { bell } from "@/lib/assets";
 import { Button, CommonText } from "@/universal";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { FC } from "react";
 
@@ -16,7 +17,16 @@ export const Tost: FC<ITost> = ({ label, btnText }) => {
         <Image src={bell} alt="" className="w-10 h-10" />
       </label>
       <CommonText>{label}</CommonText>
-      <Button variant="secondary">{btnText}</Button>
+      <Button
+        variant="secondary"
+        onClick={() =>
+          signIn("google")
+            .then((res) => console.log("After Login", res))
+            .catch((err) => console.log("Google Provider Error: ", err))
+        }
+      >
+        {btnText}
+      </Button>
     </div>
   );
 };

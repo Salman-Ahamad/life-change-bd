@@ -1,6 +1,14 @@
 "use client";
 
+import { Slider } from "@/components";
 import { CommonText, Container, Title } from "@/universal";
+
+const slides = [
+  "https://swiperjs.com/demos/images/nature-1.jpg",
+  "https://swiperjs.com/demos/images/nature-2.jpg",
+  "https://swiperjs.com/demos/images/nature-3.jpg",
+  "https://swiperjs.com/demos/images/nature-4.jpg",
+];
 
 const Contact = () => (
   <Container className="mt-10 min-h-screen">
@@ -25,6 +33,8 @@ const Contact = () => (
         </a>
       </CommonText>
     </div>
+
+    <Slider slides={slides} />
   </Container>
 );
 
