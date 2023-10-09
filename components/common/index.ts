@@ -7,3 +7,4 @@ export * from "./ImageCard";
 export * from "./Input";
 export * from "./Tost";
 export * from "./CopyToClipboard";
+export * from "./Slider";
