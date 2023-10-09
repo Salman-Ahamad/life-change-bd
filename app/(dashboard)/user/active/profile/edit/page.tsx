@@ -1,35 +1,22 @@
 "use client";
 
-import { Header } from "@/components";
-import { useCurrentUser } from "@/hooks";
-import { IEditProfile } from "@/interface";
-import { navData } from "@/lib/data";
-import { Button, Container } from "@/universal";
-import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
+import { Header } from "@/components";
+import { updateData, useCurrentUser } from "@/hooks";
+import { IEditProfile } from "@/interface";
+import { navData } from "@/lib";
+import { Button, Container } from "@/universal";
 
 const Edit: NextPage = () => {
-  const [updatedData, setUpdatedData] = useState<IEditProfile>();
+  const [updatedData, setUpdatedData] = useState<IEditProfile>({});
   const [disabled, setDisabled] = useState(true);
   const user = useCurrentUser();
 
   useEffect(() => updatedData && setDisabled(false), [updatedData]);
 
-  const updateProfile = () => {
-    const id = toast.loading("Profile Updating...");
-
-    Axios.patch("/user", updatedData)
-      .then(({ data }) => {
-        if (data.data) {
-          loadingToast(id, data.message, "success");
-        }
-      })
-      .catch(({ response }) => {
-        loadingToast(id, response.data.message, "error");
-      });
-  };
+  const updateProfile = () => updateData("/user", updatedData);
 
   return (
     <main>
@@ -45,7 +32,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="firstName"
-              defaultValue={user?.firstName}
+              defaultValue={user && user.firstName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {
@@ -62,7 +49,7 @@ const Edit: NextPage = () => {
             <input
               type="text"
               name="lastName"
-              defaultValue={user?.lastName}
+              defaultValue={user && user.lastName}
               onChange={(e) =>
                 setUpdatedData((prv) => {
                   return {
