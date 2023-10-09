@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { token } = reqBody;
-    console.log(token);
 
     const user = await User.findOne({
       verifyToken: token,
@@ -19,7 +18,6 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return ApiResponse(400, "Invalid token");
     }
-    console.log(user);
 
     user.isVerfied = true;
     user.verifyToken = undefined;

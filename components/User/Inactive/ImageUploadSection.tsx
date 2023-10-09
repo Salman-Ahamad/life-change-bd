@@ -9,8 +9,6 @@ import { ImageUpload } from "./ImageUpload";
 export const ImageUploadSection: FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // console.log(selectedImage);
-
   return (
     <Container className="py-16">
       <Title variant="H1">UPLOAD YOUR MOOD</Title>
