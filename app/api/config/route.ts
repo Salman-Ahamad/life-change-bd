@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
 
     const result = await AppConfig.create(courseData);
 
-    return ApiResponse(200, "App Config created successfully 👌", result);
+    return ApiResponse(200, "Config created successfully 👌", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
@@ -35,7 +35,7 @@ export const GET = async () => {
 
     const appConfig = await AppConfig.find();
 
-    return ApiResponse(200, "App Config get successfully 👌", appConfig);
+    return ApiResponse(200, "Config get successfully 👌", appConfig);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
@@ -52,15 +52,11 @@ export const PATCH = async (req: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const result = await AppConfig.updateOne(
-      { for: UserRole.admin },
-      updatedData,
-      {
-        new: true,
-      }
-    );
+    const result = await AppConfig.updateOne({ for: role }, updatedData, {
+      new: true,
+    });
 
-    return ApiResponse(200, "App Config update successfully 🛠️✅", result);
+    return ApiResponse(200, "Config update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
