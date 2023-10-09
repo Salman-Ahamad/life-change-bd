@@ -1,7 +1,7 @@
-import { IUser } from "@/interface";
+import { IUserSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUserSchema>(
   {
     firstName: {
       type: String,
@@ -56,7 +56,7 @@ const userSchema = new Schema<IUser>(
     },
     myReferences: {
       type: [Schema.Types.ObjectId],
-      ref: "myReferences",
+      ref: "users",
     },
     posts: {
       type: [Schema.Types.ObjectId],
@@ -70,26 +70,6 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
-    verifyToken: String,
-    verifyTokenExpiry: Date,
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    // verifyToken: {
-    //   type: String,
-    //   default: "",
-    // },
-    // verifyTokenExpiry: {
-    //   type: Date || undefined,
-    //   default: undefined,
-    // },
-    // forgotPasswordToken: {
-    //   type: String,
-    //   default: "",
-    // },
-    // forgotPasswordTokenExpiry: {
-    //   type: Date || undefined,
-    //   default: undefined,
-    // },
   },
 
   {
@@ -100,4 +80,4 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-export const User = models.users || model<IUser>("users", userSchema);
+export const User = models.users || model<IUserSchema>("users", userSchema);
