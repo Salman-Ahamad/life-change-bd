@@ -18,14 +18,24 @@ export interface IUserSchema {
   balance?: number;
   isVerified?: boolean;
 
-  myReferences?: string[];
   courses?: Types.ObjectId[] | ICourse[];
-
   posts?: string[];
   likes?: string[];
+  settings?: {
+    activeNotice: boolean;
+  };
 }
 
 export interface IUser extends IUserSchema {
   id: string;
   role: IUserRole;
+  balance: number;
+  isVerified: boolean;
+
+  courses: Types.ObjectId[] | ICourse[];
+  posts: string[];
+  likes: string[];
+  settings: {
+    activeNotice: boolean;
+  };
 }
