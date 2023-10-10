@@ -81,6 +81,10 @@ export const navData: INavData = {
       label: "Video Zone",
       link: "/user/photo-zone",
     },
+    {
+      label: "Settings",
+      link: "/user/settings",
+    },
   ],
   profile: [
     {
