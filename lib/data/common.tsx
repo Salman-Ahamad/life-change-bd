@@ -19,7 +19,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
   ],
   inActive: [
@@ -29,7 +29,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "References",
@@ -197,7 +197,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "Reference",

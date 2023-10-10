@@ -1,7 +1,7 @@
 "use client";
 
 import { Header } from "@/components";
-import { useCurrentUser, useGetData } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ICourse } from "@/interface";
 import { navData } from "@/lib/data";
 import { Button } from "@/universal";
@@ -12,11 +12,19 @@ import { useState } from "react";
 
 const Courses: NextPage = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
-  console.log("Course:", courses);
-
   useGetData("/courses", setCourses);
+
   const userData = useCurrentUser();
   console.log(userData);
+
+  const handleCourseEnrollment = async (courseId: string) => {
+    updateData(
+      "/courses/enroll",
+      { enrolled: userData?.id, id: courseId },
+      true
+    );
+    updateData("/user", { courses: courseId });
+  };
 
   return (
     <>
@@ -45,11 +53,12 @@ const Courses: NextPage = () => {
                         </h3>
                       </div>
                       <div className="m-4 pt-4 border-t items-end text-right flex justify-between">
-                        {userData?.courses.includes(id) ? (
+                        {userData?.courses.some((obj) => obj.id === id) ? (
                           <p className="text-green-600">Enrolled</p>
                         ) : (
                           <Button
                             variant="primary"
+                            onClick={() => handleCourseEnrollment(id)}
                             className="text-sm text-black text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 hover:bg-primary hover:text-white rounded"
                           >
                             Enroll Now

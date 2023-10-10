@@ -4,6 +4,7 @@ import { navData } from "@/lib";
 import { NextPage } from "next";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { ChangeBaseFee, SearchUser } from "@/components/Settings";
+import { Title } from "@/universal";
 
 const Settings: NextPage = async () => {
   const user = await getCurrentUser();
@@ -14,6 +15,9 @@ const Settings: NextPage = async () => {
   return (
     <main>
       <Header navData={navData.active} />
+      <Title variant="H2" className="pt-8">
+        Settings
+      </Title>
       <SearchUser role={userRoll} />
       {userRoll === "admin" && <ChangeBaseFee />}
 
