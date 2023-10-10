@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
-import { User } from "@/models";
+import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 
 connectDb();
@@ -47,9 +47,19 @@ export const POST = async (req: NextRequest) => {
     });
 
     const savedUser = await newUser.save();
-    const refUser = await User.findOne({ _id: reference });
-    refUser.balance++;
-    await refUser.save();
+
+    if (reference !== "-") {
+      if (Types.ObjectId.isValid(reference)) {
+        const refData = {
+          referredUserId: reference,
+          referUser: savedUser._id,
+        };
+        const refUser = await User.findOne({ _id: reference });
+        refUser.balance++;
+        await refUser.save();
+        await AllRefer.create(refData);
+      }
+    }
 
     const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"

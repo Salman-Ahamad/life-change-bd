@@ -9,7 +9,7 @@ const AllReferSchema = new Schema<IAllReferSchema>(
     },
     referUser: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
     },
   },
   {
