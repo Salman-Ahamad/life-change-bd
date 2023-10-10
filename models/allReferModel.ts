@@ -1,19 +1,15 @@
-import { IAppConfigSchema } from "@/interface";
+import { IAllReferSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
 
-const AppConfigSchema = new Schema<IAppConfigSchema>(
+const AllReferSchema = new Schema<IAllReferSchema>(
   {
-    for: {
-      type: String,
-      default: "admin",
+    referredUserId: {
+      type: Schema.Types.ObjectId,
+      required: true,
     },
-    baseFee: {
-      type: Number,
-      default: 0,
-    },
-    sliderImage: {
-      type: [String],
-      default: [],
+    referUser: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {
@@ -24,5 +20,5 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
   }
 );
 
-export const AppConfig =
-  models.appConfig || model<IAppConfigSchema>("appConfig", AppConfigSchema);
+export const AllRefer =
+  models.AllRefer || model<IAllReferSchema>("AllRefer", AllReferSchema);
