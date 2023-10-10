@@ -8,7 +8,7 @@ import { NextRequest } from "next/server";
 
 connectDb();
 
-export const GET = async (req: Request, { params }: ISlugParams) => {
+export const GET = async (req: NextRequest, { params }: ISlugParams) => {
   try {
     const id = params.slug;
 
@@ -33,8 +33,9 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
   }
 };
 
-export const PATCH = async (req: NextRequest) => {
+export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
   try {
+    const id = params.slug;
     const updatedData = await req.json();
 
     // Get Current User
@@ -42,15 +43,44 @@ export const PATCH = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (!user.role) {
-      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
-    const result = await User.updateOne({ _id: user.id }, updatedData, {
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
+
+    const result = await User.updateOne({ _id: id }, updatedData, {
       new: true,
     });
 
     return ApiResponse(200, "User update successfully 🛠️✅", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
+
+export const DELETE = async (req: NextRequest, { params }: ISlugParams) => {
+  try {
+    const id = params.slug;
+
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
+
+    const result = await User.deleteOne({ _id: id });
+
+    if (!result.deletedCount) {
+      return ApiResponse(500, "Something went wrong 🚨🚩");
+    } else {
+      return ApiResponse(200, "User deleted successfully 🚨✔️");
+    }
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

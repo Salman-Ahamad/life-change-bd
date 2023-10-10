@@ -1,4 +1,5 @@
 export * from "./activeIdModel";
+export * from "./allReferModel";
 export * from "./appConfigModel";
 export * from "./courseModel";
 export * from "./userModel";
