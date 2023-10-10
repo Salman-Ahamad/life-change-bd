@@ -14,17 +14,21 @@ export const GET = async () => {
     // const role = headersList.get("role");
 
     // Get Current User
-    const { id, role } = await getCurrentUser();
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser) {
+      return ApiResponse(404, "User not found❗");
+    }
 
     if (
-      role !== UserRole.active &&
-      role !== UserRole.inactive &&
-      role !== UserRole.admin
+      currentUser.role !== UserRole.active &&
+      currentUser.role !== UserRole.inactive &&
+      currentUser.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: id })
+    const user = await User.findOne({ _id: currentUser.id })
       .populate("courses")
       .select("-password");
 
@@ -41,7 +45,9 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    if (!user.role) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (!user.role) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 

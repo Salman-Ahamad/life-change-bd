@@ -54,6 +54,7 @@ export const SignUpForm = () => {
           );
       })
       .catch((err) => loadingToast(id, err.response.data.message, "error"));
+
     setAgree(false);
     resetForm();
   };
@@ -161,7 +162,8 @@ export const SignUpForm = () => {
             <input
               onClick={() => setAgree((prv) => !prv)}
               type="checkbox"
-              className="accent-primary mt-1"
+              checked={agree}
+              className="accent-primary mt-1 cursor-pointer"
             />
             <CommonText className="pr-5">
               By clicking Register, you agree to My Business Union Learning

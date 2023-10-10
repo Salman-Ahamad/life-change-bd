@@ -1,6 +1,9 @@
 "use client";
 
-import { Header } from "@/components";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+
+import { Header, Tost } from "@/components";
 import {
   LiveEarningClass,
   LiveLearningClass,
@@ -8,14 +11,11 @@ import {
   SupportLink,
   SupportTeam,
 } from "@/components/User/Active";
+import { useCurrentUser } from "@/hooks";
 import { navData } from "@/lib/data";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 const Active = () => {
-  const { data: session } = useSession();
-  console.log("Session is active", session);
+  const user = useCurrentUser();
 
   useEffect(() => {
     toast.info("You are an active Seller 🏅, well done!✅", {
@@ -38,6 +38,9 @@ const Active = () => {
   return (
     <main>
       <Header navData={navData.active} />
+      {user && !user.isVerified && (
+        <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
+      )}
       <div className="flex items-center justify-center py-12 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
           <SupportLink />

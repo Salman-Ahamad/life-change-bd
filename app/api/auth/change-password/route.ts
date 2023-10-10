@@ -11,8 +11,11 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    const { oldPassword, newPassword, reTypePassword } = await req.json();
-    console.log("Req Data", oldPassword);
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
+    const { oldPassword, newPassword } = await req.json();
 
     const validPassword = await compare(oldPassword, user.password);
 
@@ -32,7 +35,6 @@ export const PATCH = async (req: NextRequest) => {
       }
     );
 
-    // return ApiResponse(200, "User update successfully", result);
     return ApiResponse(200, "User update successfully", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);

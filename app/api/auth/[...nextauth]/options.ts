@@ -66,31 +66,28 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ account, profile }: any) {
-      if (account.provider === "google") {
-        // return profile.email_verified && profile.email.endsWith("@example.com");
+    async signIn({ account, profile }) {
+      if (account?.provider === "google") {
         const currentUser = await getCurrentUser();
-        const email = profile.email;
+        const returnUrl =
+          currentUser?.role === UserRole.inactive
+            ? "/inactive"
+            : "/user/active";
 
-        if (currentUser.email === email) {
-          await User.updateOne(
-            { _id: currentUser.id },
-            { isVerified: true, role: UserRole.active },
-            {
-              new: true,
-            }
-          );
-          console.log("Email verified");
-
-          return false;
+        if (currentUser.email === profile?.email) {
+          const updatedData = {
+            isVerified: true,
+            balance: currentUser.balance + 5,
+          };
+          await User.updateOne({ _id: currentUser.id }, updatedData, {
+            new: true,
+          });
+          return returnUrl;
         }
-        return false;
+        return returnUrl;
       }
       return true; // Do different verification for other providers that don't have `email_verified`
     },
-    // async redirect({ url, baseUrl }) {
-    //   return `${baseUrl}/user/active`;
-    // },
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
       if (user) {

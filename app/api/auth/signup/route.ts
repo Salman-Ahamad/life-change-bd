@@ -1,4 +1,5 @@
 import { genSalt, hash } from "bcryptjs";
+import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
@@ -9,13 +10,29 @@ connectDb();
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { email, password: userPass, ...userData } = await req.json();
+    const {
+      email,
+      password: userPass,
+      reference,
+      ...userData
+    } = await req.json();
 
     //check if user already exists
     const user = await User.findOne({ email });
 
     if (user) {
       return ApiResponse(400, "User already exists 🙋🏻‍♂️🙋🏻‍♂️🙋🏻‍♂️");
+    }
+
+    if (reference !== "-") {
+      if (Types.ObjectId.isValid(reference)) {
+        const refUser = await User.findOne({ _id: reference });
+        if (!refUser) {
+          return ApiResponse(404, "reference user notfound❗");
+        }
+      } else {
+        return ApiResponse(404, "Wrong reference Id❗");
+      }
     }
 
     //hash password
@@ -26,9 +43,13 @@ export const POST = async (req: NextRequest) => {
       ...userData,
       email,
       password: hashedPassword,
+      reference,
     });
 
     const savedUser = await newUser.save();
+    const refUser = await User.findOne({ _id: reference });
+    refUser.balance++;
+    await refUser.save();
 
     const finalResult = await User.findOne({ _id: savedUser._id }).select(
       "-password"

@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { ICourse } from ".";
 
 export type IUserRole = "inactive" | "active" | "subAdmin" | "admin";

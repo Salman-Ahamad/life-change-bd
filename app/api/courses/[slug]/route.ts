@@ -14,6 +14,9 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
     const { slug } = params;
     // Get Current User
     const user = await getCurrentUser();
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
 
     if (user.role === UserRole.admin) {
       const courses = await Course.findOne({ slug });
@@ -33,7 +36,7 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    return ApiResponse(200, "Course slut not found ❌");
+    return ApiResponse(404, "Course slut not found ❌");
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

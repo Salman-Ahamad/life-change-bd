@@ -13,6 +13,10 @@ export const GET = async () => {
     // Get Current User
     const user = await getCurrentUser();
 
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
     if (user.role === UserRole.admin) {
       const courses = await Course.find();
       return ApiResponse(200, "Courses Get successfully 👌", courses);
@@ -35,7 +39,9 @@ export const POST = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    if (user.role !== UserRole.admin) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
@@ -54,7 +60,9 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    if (user.role !== UserRole.admin) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
