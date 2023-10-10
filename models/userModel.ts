@@ -54,10 +54,6 @@ const userSchema = new Schema<IUserSchema>(
       type: [Schema.Types.ObjectId],
       ref: "courses",
     },
-    myReferences: {
-      type: [Schema.Types.ObjectId],
-      ref: "users",
-    },
     posts: {
       type: [Schema.Types.ObjectId],
       ref: "posts",
@@ -69,6 +65,33 @@ const userSchema = new Schema<IUserSchema>(
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    settings: {
+      activeNotice: {
+        type: Boolean,
+        default: true,
+      },
+
+      subAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      controller: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      consultant: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      teacher: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      gl: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
     },
   },
 

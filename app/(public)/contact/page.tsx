@@ -1,6 +1,11 @@
 "use client";
 
-import { Slider } from "@/components";
+import {
+  FileUploader,
+  GoogleMeetLink,
+  Slider,
+  WhatsAppLink,
+} from "@/components";
 import { CommonText, Container, Title } from "@/universal";
 
 const slides = [
@@ -34,7 +39,10 @@ const Contact = () => (
       </CommonText>
     </div>
 
-    <Slider slides={slides} />
+    {/* <WhatsAppLink /> */}
+    {/* <GoogleMeetLink meetId="" /> */}
+    {/* <Slider slides={slides} /> */}
+    <FileUploader fileType="image/png, image/jpeg, image/jpg, image/gif" />
   </Container>
 );
 
