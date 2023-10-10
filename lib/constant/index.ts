@@ -1,5 +1,3 @@
-import { IUserRole } from "@/interface";
-
 export const navFooterHidePath: string[] = [
   "/sighup",
   "/login",
@@ -34,3 +32,5 @@ export const UserRole = {
   subAdmin: "subAdmin",
   admin: "admin",
 };
+
+export const inactiveLimit: number = 10;

@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export interface IAllReferSchema {
-  referredUserId: Types.ObjectId;
+  referredId: Types.ObjectId;
   referUser: Types.ObjectId | IUser;
 }
 

@@ -24,7 +24,7 @@ export const GET = async () => {
     // }
 
     const refList = await AllRefer.find({
-      referredUserId: "6523f52df32839b523369fa1",
+      referredId: "6523f52df32839b523369fa1",
     })
       .populate("referUser")
       .sort({ createdAt: -1 });

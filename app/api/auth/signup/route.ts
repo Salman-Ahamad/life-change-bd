@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
+import { UserRole, inactiveLimit } from "@/lib";
 import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 
@@ -51,13 +52,34 @@ export const POST = async (req: NextRequest) => {
     if (reference !== "-") {
       if (Types.ObjectId.isValid(reference)) {
         const refData = {
-          referredUserId: reference,
+          referredId: reference,
           referUser: savedUser._id,
         };
+        const newRef = await AllRefer.create(refData);
+
         const refUser = await User.findOne({ _id: reference });
-        refUser.balance++;
+        const refList = await AllRefer.find({ referredId: reference })
+          .populate("referUser")
+          .sort({ createdAt: -1 })
+          .limit(inactiveLimit + 1);
+
+        if (refList.length <= inactiveLimit) {
+          console.log("limit ase add hobe");
+          refUser.balance++;
+        } else {
+          const active = refList.find(
+            ({ referUser }) => referUser.role === UserRole.active
+          );
+          if (active) {
+            console.log("active ase add hobe");
+            refUser.balance++;
+          } else {
+            console.log("limit ses");
+          }
+        }
+
+        // refUser.balance++;
         await refUser.save();
-        await AllRefer.create(refData);
       }
     }
 

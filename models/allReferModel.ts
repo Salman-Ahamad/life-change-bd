@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 
 const AllReferSchema = new Schema<IAllReferSchema>(
   {
-    referredUserId: {
+    referredId: {
       type: Schema.Types.ObjectId,
       required: true,
     },
