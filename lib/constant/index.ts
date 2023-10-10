@@ -27,10 +27,14 @@ export const Languages: string[] = [
 ];
 
 export const UserRole = {
-  inactive: "inactive",
-  active: "active",
-  subAdmin: "subAdmin",
   admin: "admin",
+  subAdmin: "subAdmin",
+  consultant: "consultant",
+  controller: "controller",
+  teacher: "teacher",
+  gl: "gl",
+  active: "active",
+  inactive: "inactive",
 };
 
 export const inactiveLimit: number = 10;
