@@ -13,7 +13,9 @@ export const POST = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    if (user.role !== UserRole.admin) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
@@ -27,9 +29,12 @@ export const POST = async (req: NextRequest) => {
 
 export const GET = async () => {
   try {
-    const { role } = await getCurrentUser();
+    // Get Current User
+    const user = await getCurrentUser();
 
-    if (role !== UserRole.admin) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
@@ -46,13 +51,15 @@ export const PATCH = async (req: NextRequest) => {
     const updatedData = await req.json();
 
     // Get Current User
-    const { role } = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    if (role !== UserRole.admin) {
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const result = await AppConfig.updateOne({ for: role }, updatedData, {
+    const result = await AppConfig.updateOne({ for: user.role }, updatedData, {
       new: true,
     });
 

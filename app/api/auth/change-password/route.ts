@@ -11,6 +11,10 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
     const { oldPassword, newPassword } = await req.json();
 
     const validPassword = await compare(oldPassword, user.password);
