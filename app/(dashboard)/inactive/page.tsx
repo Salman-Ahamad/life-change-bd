@@ -9,19 +9,25 @@ import {
   Support,
 } from "@/components/User/Inactive";
 import { navData } from "@/lib/data";
+import { useSession } from "next-auth/react";
 
-const Inactive = () => (
-  <>
-    <Header navData={navData.inActive} />
-    <Tost label="erifyemailaddressandg e t5 Taka" btnText="verify" />
-    <ImageUploadSection />
-    <Support />
-    <section className="bg-black">
-      <Meeting />
-      <ActivationPoint />
-      <Footer />
-    </section>
-  </>
-);
+const Inactive = () => {
+  const { data: session } = useSession();
+  console.log("Session is active", session);
+
+  return (
+    <>
+      <Header navData={navData.inActive} />
+      <Tost label="erifyemailaddressandg e t5 Taka" btnText="verify" />
+      <ImageUploadSection />
+      <Support />
+      <section className="bg-black">
+        <Meeting />
+        <ActivationPoint />
+        <Footer />
+      </section>
+    </>
+  );
+};
 
 export default Inactive;

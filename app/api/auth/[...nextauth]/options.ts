@@ -78,7 +78,10 @@ export const options: NextAuthOptions = {
             }
           );
           console.log("Email verified");
+
+          return false;
         }
+        return false;
       }
       return true; // Do different verification for other providers that don't have `email_verified`
     },

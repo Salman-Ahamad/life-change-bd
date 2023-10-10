@@ -9,10 +9,14 @@ import {
   SupportTeam,
 } from "@/components/User/Active";
 import { navData } from "@/lib/data";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Active = () => {
+  const { data: session } = useSession();
+  console.log("Session is active", session);
+
   useEffect(() => {
     toast.info("You are an active Seller 🏅, well done!✅", {
       autoClose: 5000,

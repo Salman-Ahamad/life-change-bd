@@ -6,7 +6,6 @@ import {
   Slider,
   WhatsAppLink,
 } from "@/components";
-import { NewUploader } from "@/components/common/NewUploader";
 import { CommonText, Container, Title } from "@/universal";
 
 const slides = [
@@ -44,7 +43,6 @@ const Contact = () => (
     {/* <GoogleMeetLink meetId="" /> */}
     {/* <Slider slides={slides} /> */}
     <FileUploader fileType="image/png, image/jpeg, image/jpg, image/gif" />
-    {/* <NewUploader /> */}
   </Container>
 );
 
