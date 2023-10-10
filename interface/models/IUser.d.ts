@@ -1,8 +1,24 @@
 import { Types } from "mongoose";
 import { ICourse } from ".";
 
-export type IUserRole = "inactive" | "active" | "subAdmin" | "admin";
+export type IUserRole =
+  | "admin"
+  | "subAdmin"
+  | "controller"
+  | "consultant"
+  | "teacher"
+  | "gl"
+  | "active"
+  | "inactive";
 
+export interface ISettings {
+  activeNotice: boolean;
+  subAdmin: Types.ObjectId;
+  consultant: Types.ObjectId;
+  controller: Types.ObjectId;
+  teacher: Types.ObjectId;
+  gl: Types.ObjectId;
+}
 export interface IUserSchema {
   firstName: string;
   lastName: string;
@@ -21,9 +37,7 @@ export interface IUserSchema {
   courses?: Types.ObjectId[] | ICourse[];
   posts?: string[];
   likes?: string[];
-  settings?: {
-    activeNotice: boolean;
-  };
+  settings?: ISettings;
 }
 
 export interface IUser extends IUserSchema {
@@ -35,7 +49,5 @@ export interface IUser extends IUserSchema {
   courses: Types.ObjectId[] | ICourse[];
   posts: string[];
   likes: string[];
-  settings: {
-    activeNotice: boolean;
-  };
+  settings: ISettings;
 }

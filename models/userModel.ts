@@ -71,6 +71,27 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: true,
       },
+
+      subAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      controller: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      consultant: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      teacher: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      gl: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
     },
   },
 
