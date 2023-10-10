@@ -10,10 +10,6 @@ import {
 } from "@/components/User/Inactive";
 import { useCurrentUser } from "@/hooks";
 import { navData } from "@/lib/data";
-import { useSession } from "next-auth/react";
-
-const Inactive = () => {
-  const user = useCurrentUser();
 
 const Inactive = () => {
   const user = useCurrentUser();
