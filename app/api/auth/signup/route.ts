@@ -1,10 +1,10 @@
 import { genSalt, hash } from "bcryptjs";
+import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
-import { Types } from "mongoose";
 
 connectDb();
 
@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest) => {
           return ApiResponse(404, "reference user notfound❗");
         }
       } else {
-        return ApiResponse(404, "29. Wrong reference Id❗");
+        return ApiResponse(404, "Wrong reference Id❗");
       }
     }
 
