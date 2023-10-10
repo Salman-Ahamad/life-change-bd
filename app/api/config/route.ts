@@ -59,9 +59,13 @@ export const PATCH = async (req: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const result = await AppConfig.updateOne({ for: user.role }, updatedData, {
-      new: true,
-    });
+    const result = await AppConfig.updateOne(
+      { for: UserRole.admin },
+      updatedData,
+      {
+        new: true,
+      }
+    );
 
     return ApiResponse(200, "Config update successfully 🛠️✅", result);
   } catch (error: any) {
