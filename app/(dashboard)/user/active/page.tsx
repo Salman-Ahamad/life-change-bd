@@ -13,6 +13,7 @@ import {
 } from "@/components/User/Active";
 import { updateData, useCurrentUser } from "@/hooks";
 import { navData } from "@/lib/data";
+import { Container } from "@/universal";
 
 const Active = () => {
   const user = useCurrentUser();
@@ -44,15 +45,13 @@ const Active = () => {
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
-      <div className="flex items-center justify-center py-12 px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
-          <SupportLink />
-          <SupportTeam />
-          <LiveEarningClass />
-          <LiveLearningClass />
-          <ReferenceMeetingLink />
-        </div>
-      </div>
+      <Container className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 content-center w-fit  py-12 px-6 mx-auto">
+        <SupportLink />
+        <SupportTeam />
+        <LiveEarningClass />
+        <LiveLearningClass />
+        <ReferenceMeetingLink />
+      </Container>
     </main>
   );
 };
