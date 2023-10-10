@@ -58,3 +58,30 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     return ApiResponse(400, error.message);
   }
 };
+
+export const DELETE = async (req: NextRequest, { params }: ISlugParams) => {
+  try {
+    const id = params.slug;
+
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
+
+    const result = await User.deleteOne({ _id: id });
+
+    if (!result.deletedCount) {
+      return ApiResponse(500, "Something went wrong 🚨🚩");
+    } else {
+      return ApiResponse(200, "User deleted successfully 🚨✔️");
+    }
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
