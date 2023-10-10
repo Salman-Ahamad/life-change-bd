@@ -8,3 +8,5 @@ export * from "./Input";
 export * from "./Tost";
 export * from "./CopyToClipboard";
 export * from "./Slider";
+export * from "./FileUploader";
+export * from "./DeepLink";
