@@ -1,15 +1,18 @@
 "use client";
 
-import { Header } from "@/components";
-import { useCurrentUser } from "@/hooks";
-import { IUser } from "@/interface";
-import { avatarProfile } from "@/lib/assets";
-import { navData } from "@/lib/data";
-import { CommonText } from "@/universal";
 import Image from "next/image";
+import { useState } from "react";
+
+import { Header } from "@/components";
+import { updateData, useCurrentUser } from "@/hooks";
+import { IUser } from "@/interface";
+import { UserRole, avatarProfile, navData } from "@/lib";
+import { Button, CommonText } from "@/universal";
 
 const Profile = () => {
+  const [baseFee, setBaseFee] = useState(0);
   const user = useCurrentUser();
+
   const profileTitle = [
     "email",
     "country",
@@ -97,6 +100,24 @@ const Profile = () => {
                 />
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {user?.role === UserRole.admin && (
+        <section className="max-w-sm w-full mx-auto px-4 mt-20">
+          <div className="flex gap-5">
+            <input
+              type="number"
+              onChange={(e) => setBaseFee(Number(e.target.value))}
+              className="outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-1 px-2"
+            />
+            <Button
+              variant="secondary"
+              onClick={() => updateData("/config", { baseFee: baseFee })}
+            >
+              Update
+            </Button>
           </div>
         </section>
       )}

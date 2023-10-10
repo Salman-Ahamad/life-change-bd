@@ -38,7 +38,10 @@ export const options: NextAuthOptions = {
         // When user is not found, return an error
         if (!user) {
           throw new Error(
-            JSON.stringify({ message: "User not found", status: 401 })
+            JSON.stringify({
+              message: "Wrong credentials!",
+              status: 401,
+            })
           );
         }
 

@@ -71,15 +71,3 @@ const referralSchema = {
   pointsEarned: 0,
   createdAt: "",
 };
-
-// Course Model
-const courseSchema = {
-  courseName: "",
-  courseCode: "",
-  courseDescription: "",
-  coursePrice: 0,
-  courseDuration: 0,
-  courseStatus: ["Active", "Completed"],
-  enrolled: ["id"],
-  certificates: [""],
-};

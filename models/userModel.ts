@@ -46,7 +46,7 @@ const userSchema = new Schema<IUserSchema>(
       type: String,
       default: "-",
     },
-    points: {
+    balance: {
       type: Number,
       default: 0,
     },
