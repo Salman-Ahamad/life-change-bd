@@ -8,7 +8,7 @@ import { NextRequest } from "next/server";
 
 connectDb();
 
-export const GET = async (req: Request, { params }: ISlugParams) => {
+export const GET = async (req: NextRequest, { params }: ISlugParams) => {
   try {
     const id = params.slug;
 
@@ -33,8 +33,9 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
   }
 };
 
-export const PATCH = async (req: NextRequest) => {
+export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
   try {
+    const id = params.slug;
     const updatedData = await req.json();
 
     // Get Current User
@@ -42,11 +43,13 @@ export const PATCH = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (!user.role) {
-      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
-    const result = await User.updateOne({ _id: user.id }, updatedData, {
+    if (user.role !== UserRole.admin) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
+
+    const result = await User.updateOne({ _id: id }, updatedData, {
       new: true,
     });
 
