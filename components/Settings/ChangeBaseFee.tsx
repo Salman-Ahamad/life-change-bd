@@ -23,7 +23,7 @@ export const ChangeBaseFee: React.FC = () => {
           className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
         />
         <Button variant="secondary" onClick={() => updateBaseFee()}>
-          Update
+          Update Base Fee
         </Button>
       </div>
     </section>
