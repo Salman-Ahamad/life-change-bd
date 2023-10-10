@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { IUser } from ".";
 
 export interface IActiveIdSchema {

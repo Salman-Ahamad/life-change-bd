@@ -25,4 +25,4 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
 );
 
 export const AppConfig =
-  models.appConfig || model<IAppConfigSchema>("appConfig", AppConfigSchema);
+  models.AppConfig || model<IAppConfigSchema>("AppConfig", AppConfigSchema);
