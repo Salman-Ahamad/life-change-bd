@@ -68,6 +68,7 @@ export const options: NextAuthOptions = {
   callbacks: {
     async signIn({ account, profile }) {
       if (account?.provider === "google") {
+        // TODO: Need to update this rules for error handling
         const currentUser = await getCurrentUser();
         const returnUrl =
           currentUser?.role === UserRole.inactive

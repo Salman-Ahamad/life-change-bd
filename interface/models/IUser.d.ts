@@ -40,14 +40,17 @@ export interface IUserSchema {
   settings?: ISettings;
 }
 
-export interface IUser extends IUserSchema {
+export interface IId {
   id: string;
+}
+
+export interface IUser extends IUserSchema, IId {
   role: IUserRole;
   balance: number;
   isVerified: boolean;
-
-  courses: Types.ObjectId[] | ICourse[];
+  courses: ICourse[];
   posts: string[];
   likes: string[];
   settings: ISettings;
+  createdAt: string;
 }

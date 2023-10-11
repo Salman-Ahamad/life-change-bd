@@ -19,7 +19,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
   ],
   inActive: [
@@ -29,7 +29,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "References",
@@ -41,7 +41,7 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
     },
   ],
   active: [
@@ -62,10 +62,6 @@ export const navData: INavData = {
       link: "/user/ref-list",
     },
     {
-      label: "Instant Redeem",
-      link: "/user/instant-redeem",
-    },
-    {
       label: "Messages",
       link: "/user/messages",
     },
@@ -79,7 +75,11 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
+    },
+    {
+      label: "Settings",
+      link: "/user/settings",
     },
   ],
   profile: [
@@ -134,16 +134,6 @@ export const navData: INavData = {
       link: "/user/active",
     },
   ],
-  instantRedeem: [
-    {
-      label: <AiOutlineHome className="text-2xl" />,
-      link: "/user/active",
-    },
-    {
-      label: "Request/History",
-      link: "/user/redeem-list",
-    },
-  ],
   messages: [
     {
       label: <AiOutlineHome className="text-2xl" />,
@@ -193,7 +183,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "Reference",
@@ -215,10 +205,6 @@ export const navData: INavData = {
       label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
-    {
-      label: "Instant Redeem Home",
-      link: "/user/instant-redeem",
-    },
   ],
   refList: [
     {
@@ -226,36 +212,22 @@ export const navData: INavData = {
       link: "/user/active",
     },
     {
-      label: "Meeting Joining",
-      link: "/user/ref-list/meeting",
+      label: "My Reference",
+      link: "/user/ref-list/my-ref",
     },
     {
       label: "Passbook",
       link: "/user/passbook",
     },
     {
-      label: "Reference Joining",
-      link: "/user/ref-list/joining",
-    },
-    {
       label: "Send Wish",
       link: "/user/ref-list/send-wish",
     },
   ],
-  joining: [
+  myRef: [
     {
       label: <BackButton className="text-2xl" />,
       link: "/user/ref-list",
-    },
-    {
-      label: "Meeting Joining",
-      link: "/user/ref-list/send-wish",
-    },
-  ],
-  meeting: [
-    {
-      label: <BackButton className="text-2xl" />,
-      link: "/user/active",
     },
   ],
   sendWish: [

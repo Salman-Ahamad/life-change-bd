@@ -38,7 +38,7 @@ export const GET = async () => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const appConfig = await AppConfig.find();
+    const appConfig = await AppConfig.findOne({ for: UserRole.admin });
 
     return ApiResponse(200, "Config get successfully 👌", appConfig);
   } catch (error: any) {

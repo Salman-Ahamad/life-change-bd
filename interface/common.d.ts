@@ -50,7 +50,6 @@ export interface INavData {
   profile: INavItem[];
   withdrawal: INavItem[];
   courses: INavItem[];
-  instantRedeem: INavItem[];
   messages: INavItem[];
   notification: INavItem[];
   memo: INavItem[];
@@ -58,8 +57,7 @@ export interface INavData {
   paymentMethod: INavItem[];
   redeemList: INavItem[];
   refList: INavItem[];
-  joining: INavItem[];
-  meeting: INavItem[];
+  myRef: INavItem[];
   sendWish: INavItem[];
   transferPoints: INavItem[];
   profileEdit: INavItem[];
@@ -107,4 +105,18 @@ export interface IAPIResponse<T> {
   message: string;
   success: boolean;
   data: T;
+}
+
+export interface ITHeader {
+  label: string | JSX.Element;
+}
+
+export interface ITbody extends ITHeader {}
+
+export interface IRefTable {
+  tableHeaders: string[];
+  dataProperties: string[];
+  tableData: IAllRefer[];
+  message?: string;
+  actionBtn?: JSX.Element;
 }

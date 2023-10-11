@@ -35,12 +35,10 @@ export default withAuth(
 export const config = {
   matcher: [
     "/inactive",
-    "/verifyemail",
     "/user/active",
     "/user/active/profile",
     "/user/change-password",
     "/user/active/withdrawal",
-    "/user/instant-redeem",
     "/user/messages",
     "/user/notification",
     "/user/notification/memo",
@@ -48,8 +46,7 @@ export const config = {
     "/user/payment-method",
     "/user/redeem-list",
     "/user/ref-list",
-    "/user/ref-list/joining",
-    "/user/ref-list/meeting",
+    "/user/ref-list/my-ref",
     "/user/ref-list/send-wish",
     "/user/transfer-points",
   ],

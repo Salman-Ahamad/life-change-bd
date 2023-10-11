@@ -1,20 +1,26 @@
 "use client";
 
-import { Header } from "@/components";
-import { navData } from "@/lib/data";
-import { CommonText, Container, Title } from "@/universal";
+import { NextPage } from "next";
+import { useState } from "react";
 
-const RefList = () => (
-  <>
-    <Header navData={navData.refList} />
-    <Title variant="H3" className="capitalize mt-10">
-      Reference List (Inactive)
-    </Title>
-    <CommonText className="w-full bg-primary bg-opacity-50 text-center py-2 text-base lg:text-lg mt-1.5">
-      Last 3 Month Outbound Data: 0
-    </CommonText>
-    <Container className="mb-10">{/*  */}</Container>
-  </>
-);
+import { Header, PageHeader } from "@/components";
+import { ISearchData } from "@/interface";
+import { navData } from "@/lib";
+
+const RefList: NextPage = () => {
+  const [searchData, setSearchData] = useState<ISearchData | {}>({});
+  console.log("🚀 ~ file: page.tsx:12 ~ searchData:", searchData);
+
+  return (
+    <>
+      <Header navData={navData.refList} />
+      <PageHeader
+        title="Reference List (Inactive)"
+        notice="Last 3 Month Outbound"
+        setSearchData={setSearchData}
+      />
+    </>
+  );
+};
 
 export default RefList;

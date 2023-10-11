@@ -1,24 +1,19 @@
 "use client";
 
 import { Header } from "@/components";
-import { useCurrentUser, useGetData } from "@/hooks";
-import { ICourse } from "@/interface";
-import { navData } from "@/lib/data";
-import { NextPage } from "next";
+import { useCurrentUser } from "@/hooks";
+import { navData } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React from "react";
 
-const Courses: NextPage = () => {
-  const [courses, setCourses] = useState<ICourse[]>([]);
-
-  useGetData("/courses", setCourses);
-
+const VideoZone = () => {
   const userData = useCurrentUser();
+  const courses = userData?.courses;
 
   return (
     <>
-      <Header navData={navData.courses} />
+      <Header navData={navData.active} />
       <section className="py-12">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
           <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -78,5 +73,4 @@ const Courses: NextPage = () => {
     </>
   );
 };
-
-export default Courses;
+export default VideoZone;

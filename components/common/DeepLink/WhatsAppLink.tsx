@@ -1,16 +1,18 @@
 "use client";
 
-import React, { FC } from "react";
 import { Button } from "@/universal";
+import { FC } from "react";
 
 interface IWaDeepLink {
-  phoneNo?: string;
+  phoneNo: string;
+  btnText: string;
   message?: string;
   groupLink?: string;
 }
 
 export const WhatsAppLink: FC<IWaDeepLink> = ({
   phoneNo,
+  btnText,
   message,
   groupLink,
 }) => {
@@ -18,7 +20,7 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
   const openWhatsappChat = () => {
     const messageToSend = encodeURIComponent(message || "");
     const url = phoneNo
-      ? `https://wa.me/${phoneNo}?text=${messageToSend}`
+      ? `https://wa.me/+88${phoneNo}?text=${messageToSend}`
       : groupLink
       ? `https://chat.whatsapp.com/${groupLink}`
       : "";
@@ -29,7 +31,7 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
 
   return (
     <Button variant="secondary" onClick={openWhatsappChat}>
-      Send WA Message
+      {btnText}
     </Button>
   );
 };
