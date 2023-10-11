@@ -15,6 +15,10 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       type: [String],
       default: [],
     },
+    meetings: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
