@@ -5,6 +5,7 @@ import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ICourse } from "@/interface";
 import { navData } from "@/lib/data";
 import { Button } from "@/universal";
+import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,19 +13,10 @@ import { useState } from "react";
 
 const Courses: NextPage = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
+
   useGetData("/courses", setCourses);
 
   const userData = useCurrentUser();
-  console.log(userData);
-
-  const handleCourseEnrollment = async (courseId: string) => {
-    updateData(
-      "/courses/enroll",
-      { enrolled: userData?.id, id: courseId },
-      true
-    );
-    // updateData("/user", { courses: courseId });
-  };
 
   return (
     <>
@@ -32,7 +24,7 @@ const Courses: NextPage = () => {
       <section className="py-12">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
           <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.length > 0
+            {courses && courses.length > 0
               ? courses.map(({ image, title, slug, id }, key: number) => (
                   <li
                     className="mx-auto group sm:max-w-sm shadow-md rounded-lg"
@@ -56,13 +48,7 @@ const Courses: NextPage = () => {
                         {userData?.courses.some((obj) => obj.id === id) ? (
                           <p className="text-green-600">Enrolled</p>
                         ) : (
-                          <Button
-                            variant="primary"
-                            onClick={() => handleCourseEnrollment(id)}
-                            className="text-sm text-black text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 hover:bg-primary hover:text-white rounded"
-                          >
-                            Enroll Now
-                          </Button>
+                          <p></p>
                         )}
                         <Link
                           href={`/courses/${slug}`}

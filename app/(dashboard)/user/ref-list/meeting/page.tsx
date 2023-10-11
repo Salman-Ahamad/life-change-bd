@@ -1,52 +1,33 @@
 "use client";
 
 import { Header } from "@/components";
-import { DataTable } from "@/components/common/DataTable";
+import { DataRow } from "@/components/User/Active";
+import { useGetData } from "@/hooks";
 import { navData } from "@/lib/data";
+import { useState } from "react";
 
-const tableItems = [
-  {
-    name: "Liam James",
-    email: "liamjames@example.com",
-    position: "Software engineer",
-    salary: "$100K",
-  },
-  {
-    name: "Olivia Emma",
-    email: "oliviaemma@example.com",
-    position: "Product designer",
-    salary: "$90K",
-  },
-  {
-    name: "William Benjamin",
-    email: "william.benjamin@example.com",
-    position: "Front-end developer",
-    salary: "$80K",
-  },
-  {
-    name: "Henry Theodore",
-    email: "henrytheodore@example.com",
-    position: "Laravel engineer",
-    salary: "$120K",
-  },
-  {
-    name: "Amelia Elijah",
-    email: "amelia.elijah@example.com",
-    position: "Open source manager",
-    salary: "$75K",
-  },
-];
+const Meeting = () => {
+  const [data, setData] = useState();
+  useGetData("/config", setData);
+  console.log(data);
 
-const Meeting = () => (
-  <>
-    <Header navData={navData.meeting} />
-    <DataTable
-      title="Team Members"
-      tableHeaders={["Name", "Email", "Position"]}
-      dataProperties={["name", "position", "salary", "email"]}
-      tableData={tableItems}
-    />
-  </>
-);
+  return (
+    <>
+      <Header navData={navData.meeting} />
+      <div className="max-w-lg mx-auto py-8">
+        <DataRow title="Meeting Tittle" btnText="Join Class" />
+      </div>
+      {/* 
+
+      Meet Url
+      Start at
+      Duration
+      Topics/ meeting title
+      access
+
+      */}
+    </>
+  );
+};
 
 export default Meeting;

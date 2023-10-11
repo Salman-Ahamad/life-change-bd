@@ -16,9 +16,13 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     }
 
     // Check if the ID is already in the enrolled array
-    if (user.courses.map((course: ICourse) => course.id === id)) {
-      return ApiResponse(400, "ID already exists in the enrolled array");
-    }
+    // if(user.course){}
+
+    user.courses.map((course: ICourse) => {
+      if (course.id === id) {
+        return ApiResponse(400, "ID already exists in the enrolled array");
+      }
+    });
 
     // Add the new item to the enrolled array
     const updatedEnrolled = [...user.courses, id];
@@ -33,7 +37,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       { new: true }
     );
 
-    return ApiResponse(200, "User update successfully 🛠️✅", result);
+    return ApiResponse(200, "Course Enrolled successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
