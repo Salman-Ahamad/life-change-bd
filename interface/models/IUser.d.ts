@@ -52,4 +52,5 @@ export interface IUser extends IUserSchema, IId {
   posts: string[];
   likes: string[];
   settings: ISettings;
+  createdAt: string;
 }

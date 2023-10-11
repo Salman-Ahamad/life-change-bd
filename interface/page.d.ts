@@ -21,13 +21,12 @@ export interface ISearchData {
   id: string;
 }
 
-export interface ISetSearchData {
+export interface ISearchBar extends ISetSearchData {
   setSearchData: Dispatch<SetStateAction<ISearchData>>;
 }
 
-export interface ISearchBar extends ISetSearchData {}
-
-export interface IPageHeader extends ISetSearchData {
+export interface IPageHeader {
   title: string;
   notice: string;
+  setSearchData?: Dispatch<SetStateAction<ISearchData>>;
 }
