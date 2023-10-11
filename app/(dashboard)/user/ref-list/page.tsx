@@ -10,7 +10,7 @@ import { navData } from "@/lib/data";
 import { CommonText, Title } from "@/universal";
 
 const RefList: NextPage = () => {
-  const [refData, setRefData] = useState("");
+  const [refData, setRefData] = useState([]);
   useGetData("/all-ref", setRefData);
 
   console.log(refData);
