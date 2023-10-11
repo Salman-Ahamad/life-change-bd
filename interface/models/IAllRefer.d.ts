@@ -6,4 +6,6 @@ export interface IAllReferSchema {
   referUser: Types.ObjectId | IUser;
 }
 
-export interface IAllRefer extends IAllReferSchema, IId {}
+export interface IAllRefer extends IAllReferSchema, IId {
+  referUser: IUser;
+}

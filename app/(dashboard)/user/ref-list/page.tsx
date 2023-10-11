@@ -5,15 +5,15 @@ import { useState } from "react";
 
 import { Header } from "@/components";
 import { RefHeader } from "@/components/User/Active";
+import { Table } from "@/components/common/DataTable/Table";
 import { useGetData } from "@/hooks";
+import { IAllRefer } from "@/interface";
 import { navData } from "@/lib/data";
 import { CommonText, Title } from "@/universal";
 
 const RefList: NextPage = () => {
-  const [refData, setRefData] = useState([]);
+  const [refData, setRefData] = useState<IAllRefer[] | []>([]);
   useGetData("/all-ref", setRefData);
-
-  console.log(refData);
 
   return (
     <>
@@ -25,6 +25,11 @@ const RefList: NextPage = () => {
         Last 3 Month Outbound Data: 0
       </CommonText>
       <RefHeader />
+      <Table
+        tableData={refData}
+        tableHeaders={["id", "Name", "email"]}
+        dataProperties={["id", "firstName", "email"]}
+      />
     </>
   );
 };

@@ -1,12 +1,19 @@
 "use client";
+
 import React from "react";
 
-export const DataTable: React.FC<{
+export interface IDataTable {
   title?: string;
-  tableHeaders?: string[];
-  dataProperties?: string[];
+  tableHeaders: string[];
+  dataProperties: string[];
   tableData: Record<string, any>[];
-}> = ({ title, tableHeaders, dataProperties, tableData }) => {
+}
+export const DataTable: React.FC<IDataTable> = ({
+  title,
+  tableHeaders,
+  dataProperties,
+  tableData,
+}) => {
   return (
     <div className="max-w-screen-xl mx-auto p-4 md:p-8">
       <div className="max-w-lg">
@@ -29,7 +36,7 @@ export const DataTable: React.FC<{
                     </th>
                   ))
                 : Object.entries(tableData[0]).map(([key, value]) => (
-                    <th key={key} className="py-3 px-6">
+                    <th key={key} className="py-3 px-6 capitalize">
                       {key}
                     </th>
                   ))}
