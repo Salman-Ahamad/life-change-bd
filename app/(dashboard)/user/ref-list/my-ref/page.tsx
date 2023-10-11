@@ -1,33 +1,25 @@
 "use client";
 
-import { Header } from "@/components";
-import { DataRow } from "@/components/User/Active";
+import { Header, Table } from "@/components";
 import { useGetData } from "@/hooks";
+import { IAllRefer } from "@/interface";
 import { navData } from "@/lib/data";
 import { useState } from "react";
 
-const Meeting = () => {
-  const [data, setData] = useState();
-  useGetData("/config", setData);
-  console.log(data);
+const MyReference = () => {
+  const [refData, setRefData] = useState<IAllRefer[] | []>([]);
+  useGetData("/all-ref", setRefData);
 
   return (
     <>
       <Header navData={navData.myRef} />
-      <div className="max-w-lg mx-auto py-8">
-        <DataRow title="Meeting Tittle" btnText="Join Class" />
-      </div>
-      {/* 
-
-      Meet Url
-      Start at
-      Duration
-      Topics/ meeting title
-      access
-
-      */}
+      <Table
+        tableData={refData}
+        tableHeaders={["id", "Name", "email"]}
+        dataProperties={["id", "firstName", "email"]}
+      />
     </>
   );
 };
 
-export default Meeting;
+export default MyReference;

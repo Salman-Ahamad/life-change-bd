@@ -14,3 +14,20 @@ export interface IChangePassword {
   newPassword?: string;
   reTypePassword?: string;
 }
+
+export interface ISearchData {
+  year: string;
+  month: string;
+  id: string;
+}
+
+export interface ISetSearchData {
+  setSearchData: Dispatch<SetStateAction<ISearchData>>;
+}
+
+export interface ISearchBar extends ISetSearchData {}
+
+export interface IPageHeader extends ISetSearchData {
+  title: string;
+  notice: string;
+}

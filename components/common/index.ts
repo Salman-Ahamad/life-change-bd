@@ -9,5 +9,7 @@ export * from "./FormikError";
 export * from "./Header";
 export * from "./ImageCard";
 export * from "./Input";
+export * from "./PageHeader";
+export * from "./SearchBar";
 export * from "./Slider";
 export * from "./Tost";
