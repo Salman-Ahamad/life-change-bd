@@ -1,6 +1,7 @@
 "use client";
 
 import { IAllRefer } from "@/interface";
+import { Button } from "@/universal";
 import { FC } from "react";
 
 export interface ITHeader {
@@ -14,11 +15,11 @@ export interface IRefTable {
 }
 
 const THeader = ({ title }: ITHeader) => (
-  <th className="py-3 px-6 capitalize">{title}</th>
+  <th className="p-2.5 capitalize">{title}</th>
 );
 
 const Tbody = ({ title }: ITHeader) => (
-  <td className="px-6 py-4 whitespace-nowrap">{title}</td>
+  <td className="px-2.5 py-3 whitespace-nowrap">{title}</td>
 );
 
 export const RefTable: FC<IRefTable> = ({
@@ -39,21 +40,38 @@ export const RefTable: FC<IRefTable> = ({
                 : dataProperties.map((header, idx) => (
                     <THeader key={idx} title={header} />
                   ))}
+              <THeader title="Message" />
+              <THeader title="Collect Mony" />
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
             {tableData.map(({ referUser }, idx) => (
               <tr key={idx}>
-                {dataProperties.map((item, i) =>
-                  item === "firstName" ? (
-                    <Tbody
-                      key={i}
-                      title={`${referUser[item]} ${referUser["lastName"]}`}
-                    />
-                  ) : (
-                    <Tbody key={i} title={referUser[item]} />
-                  )
-                )}
+                {dataProperties.map((item, i) => {
+                  switch (item) {
+                    case "firstName":
+                      return (
+                        <Tbody
+                          key={i}
+                          title={`${referUser[item]} ${referUser["lastName"]}`}
+                        />
+                      );
+                    case "createdAt":
+                      const date = new Date(
+                        referUser[item]
+                      ).toLocaleDateString();
+                      return <Tbody key={i} title={date} />;
+
+                    default:
+                      return <Tbody key={i} title={referUser[item]} />;
+                  }
+                })}
+                <td>
+                  <Button variant="accent">Message</Button>
+                </td>
+                <td>
+                  <Button variant="secondary">Collect Mony</Button>
+                </td>
               </tr>
             ))}
           </tbody>
