@@ -13,10 +13,7 @@ const RefList: NextPage = () => {
   const currentYear = new Date().getFullYear();
 
   const years = Array.from({ length: 3 }, (_, index) => currentYear - index);
-
-  // Usage example
   const lastThreeMonths = getLastThreeMonths();
-  console.log("🚀 ~ file: page.tsx:24 ~ lastThreeMonths:", lastThreeMonths);
 
   return (
     <>
@@ -28,10 +25,10 @@ const RefList: NextPage = () => {
         Last 3 Month Outbound Data: 0
       </CommonText>
       <Container className="my-5">
-        <div className="flex justify-center items-center">
+        <section className="flex justify-center items-center gap-5">
           <select
             onChange={(e) => setSelectYear(e.target.value)}
-            className="focus:outline-none border border-primary px-2 py-2 rounded-md"
+            className="focus:outline-none border border-primary p-2 rounded-md"
           >
             <option value="">Choose Year</option>
             {years.map((year) => (
@@ -43,7 +40,7 @@ const RefList: NextPage = () => {
 
           <select
             onChange={(e) => setSelectMonth(e.target.value)}
-            className="focus:outline-none border border-primary px-2 py-2 rounded-md"
+            className="focus:outline-none border border-primary p-2 rounded-md"
           >
             <option value="">Select Month</option>
             {lastThreeMonths.map((month, index) => (
@@ -52,7 +49,17 @@ const RefList: NextPage = () => {
               </option>
             ))}
           </select>
-        </div>
+          <div className="flex border border-primary rounded-md text-base">
+            <input
+              type="text"
+              placeholder="User Id"
+              className="py-2 px-1 border-none outline-none rounded-md"
+            />
+            <button className="bg-primary hover:bg-secondary transition-all delay-100 px-2.5 text-white">
+              Search
+            </button>
+          </div>
+        </section>
       </Container>
     </>
   );

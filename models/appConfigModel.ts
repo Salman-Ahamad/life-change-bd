@@ -6,6 +6,7 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
     for: {
       type: String,
       default: "admin",
+      unique: true,
     },
     baseFee: {
       type: Number,
