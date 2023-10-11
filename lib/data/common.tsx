@@ -134,16 +134,6 @@ export const navData: INavData = {
       link: "/user/active",
     },
   ],
-  instantRedeem: [
-    {
-      label: <AiOutlineHome className="text-2xl" />,
-      link: "/user/active",
-    },
-    {
-      label: "Request/History",
-      link: "/user/redeem-list",
-    },
-  ],
   messages: [
     {
       label: <AiOutlineHome className="text-2xl" />,
@@ -215,10 +205,6 @@ export const navData: INavData = {
       label: <AiOutlineHome className="text-2xl" />,
       link: "/user/active",
     },
-    {
-      label: "Instant Redeem Home",
-      link: "/user/instant-redeem",
-    },
   ],
   refList: [
     {
@@ -226,36 +212,22 @@ export const navData: INavData = {
       link: "/user/active",
     },
     {
-      label: "Meeting Joining",
-      link: "/user/ref-list/meeting",
+      label: "My Reference",
+      link: "/user/ref-list/my-ref",
     },
     {
       label: "Passbook",
       link: "/user/passbook",
     },
     {
-      label: "Reference Joining",
-      link: "/user/ref-list/joining",
-    },
-    {
       label: "Send Wish",
       link: "/user/ref-list/send-wish",
     },
   ],
-  joining: [
+  myRef: [
     {
       label: <BackButton className="text-2xl" />,
       link: "/user/ref-list",
-    },
-    {
-      label: "Meeting Joining",
-      link: "/user/ref-list/send-wish",
-    },
-  ],
-  meeting: [
-    {
-      label: <BackButton className="text-2xl" />,
-      link: "/user/active",
     },
   ],
   sendWish: [

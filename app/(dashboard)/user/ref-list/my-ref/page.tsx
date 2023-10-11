@@ -13,7 +13,7 @@ const Meeting = () => {
 
   return (
     <>
-      <Header navData={navData.meeting} />
+      <Header navData={navData.active} />
       <div className="max-w-lg mx-auto py-8">
         <DataRow title="Meeting Tittle" btnText="Join Class" />
       </div>
