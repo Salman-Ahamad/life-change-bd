@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, Table } from "@/components";
+import { Header, RefTable } from "@/components";
 import { useGetData } from "@/hooks";
 import { IAllRefer } from "@/interface";
 import { navData } from "@/lib/data";
@@ -13,7 +13,7 @@ const MyReference = () => {
   return (
     <>
       <Header navData={navData.myRef} />
-      <Table
+      <RefTable
         tableData={refData}
         tableHeaders={["id", "Name", "email"]}
         dataProperties={["id", "firstName", "email"]}

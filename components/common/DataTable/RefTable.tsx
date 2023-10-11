@@ -7,6 +7,12 @@ export interface ITHeader {
   title: string;
 }
 
+export interface IRefTable {
+  tableHeaders: string[];
+  dataProperties: string[];
+  tableData: IAllRefer[];
+}
+
 const THeader = ({ title }: ITHeader) => (
   <th className="py-3 px-6 capitalize">{title}</th>
 );
@@ -15,13 +21,7 @@ const Tbody = ({ title }: ITHeader) => (
   <td className="px-6 py-4 whitespace-nowrap">{title}</td>
 );
 
-export interface ITable {
-  tableHeaders: string[];
-  dataProperties: string[];
-  tableData: IAllRefer[];
-}
-
-export const Table: FC<ITable> = ({
+export const RefTable: FC<IRefTable> = ({
   tableHeaders,
   dataProperties,
   tableData,
