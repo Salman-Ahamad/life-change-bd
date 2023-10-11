@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IAllRefer[] | []>([]);
+  console.log("🚀 ~ file: page.tsx:11 ~ MyReference ~ refData:", refData);
   useGetData("/all-ref", setRefData);
 
   return (
@@ -20,7 +21,7 @@ const MyReference = () => {
       <RefTable
         tableData={refData}
         tableHeaders={["id", "Name", "Joining Time"]}
-        dataProperties={["id", "firstName", "createdAt"]}
+        dataProperties={["id", "firstName", "createdAt", "phone"]}
       />
     </>
   );

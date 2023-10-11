@@ -3,9 +3,14 @@
 import { IAllRefer } from "@/interface";
 import { Button } from "@/universal";
 import { FC } from "react";
+import { WhatsAppLink } from "..";
 
 export interface ITHeader {
   title: string;
+}
+
+export interface ITbody {
+  label: string | JSX.Element;
 }
 
 export interface IRefTable {
@@ -18,8 +23,8 @@ const THeader = ({ title }: ITHeader) => (
   <th className="p-2.5 capitalize text-center">{title}</th>
 );
 
-const Tbody = ({ title }: ITHeader) => (
-  <td className="px-2.5 py-3 whitespace-nowrap">{title}</td>
+const Tbody = ({ label }: ITbody) => (
+  <td className="px-2.5 py-3 whitespace-nowrap">{label}</td>
 );
 
 export const RefTable: FC<IRefTable> = ({
@@ -53,24 +58,34 @@ export const RefTable: FC<IRefTable> = ({
                       return (
                         <Tbody
                           key={i}
-                          title={`${referUser[item]} ${referUser["lastName"]}`}
+                          label={`${referUser[item]} ${referUser["lastName"]}`}
                         />
                       );
                     case "createdAt":
                       const date = new Date(
                         referUser[item]
                       ).toLocaleDateString();
-                      return <Tbody key={i} title={date} />;
+                      return <Tbody key={i} label={date} />;
 
+                    case "phone":
+                      return (
+                        <Tbody
+                          key={i}
+                          label={
+                            <WhatsAppLink
+                              btnText="Message"
+                              phoneNo={referUser[item]}
+                            />
+                          }
+                        />
+                      );
                     default:
-                      return <Tbody key={i} title={referUser[item]} />;
+                      return <Tbody key={i} label={referUser[item]} />;
                   }
                 })}
-                <td className="px-2.5">
-                  <Button variant="accent">Message</Button>
-                </td>
+
                 <td className="px-2.5 py-1.5">
-                  <Button variant="secondary" className="text-xs lg:text-sm">
+                  <Button variant="secondary" className="text-xs">
                     Collect Mony
                   </Button>
                 </td>
