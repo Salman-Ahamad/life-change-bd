@@ -1,31 +1,9 @@
 "use client";
 
-import { IAllRefer } from "@/interface";
+import { IRefTable } from "@/interface";
 import { Button } from "@/universal";
 import { FC } from "react";
-import { WhatsAppLink } from "..";
-
-export interface ITHeader {
-  title: string;
-}
-
-export interface ITbody {
-  label: string | JSX.Element;
-}
-
-export interface IRefTable {
-  tableHeaders: string[];
-  dataProperties: string[];
-  tableData: IAllRefer[];
-}
-
-const THeader = ({ title }: ITHeader) => (
-  <th className="p-2.5 capitalize text-center">{title}</th>
-);
-
-const Tbody = ({ label }: ITbody) => (
-  <td className="px-2.5 py-3 whitespace-nowrap">{label}</td>
-);
+import { THeader, Tbody, WhatsAppLink } from "..";
 
 export const RefTable: FC<IRefTable> = ({
   tableHeaders,
