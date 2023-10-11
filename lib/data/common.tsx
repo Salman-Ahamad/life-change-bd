@@ -41,7 +41,7 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
     },
   ],
   active: [
@@ -75,7 +75,7 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
     },
     {
       label: "Settings",
