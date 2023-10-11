@@ -3,10 +3,10 @@
 import { Header } from "@/components";
 import { navData } from "@/lib/data";
 
-const Meeting = () => (
+const MyRef = () => (
   <>
-    <Header navData={navData.meeting} />
+    <Header navData={navData.myRef} />
   </>
 );
 
-export default Meeting;
+export default MyRef;

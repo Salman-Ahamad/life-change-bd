@@ -50,7 +50,6 @@ export interface INavData {
   profile: INavItem[];
   withdrawal: INavItem[];
   courses: INavItem[];
-  instantRedeem: INavItem[];
   messages: INavItem[];
   notification: INavItem[];
   memo: INavItem[];
@@ -58,8 +57,7 @@ export interface INavData {
   paymentMethod: INavItem[];
   redeemList: INavItem[];
   refList: INavItem[];
-  joining: INavItem[];
-  meeting: INavItem[];
+  myRef: INavItem[];
   sendWish: INavItem[];
   transferPoints: INavItem[];
   profileEdit: INavItem[];
