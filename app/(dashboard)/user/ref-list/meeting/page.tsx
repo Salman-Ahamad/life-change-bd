@@ -42,7 +42,8 @@ const Meeting = () => (
     <Header navData={navData.meeting} />
     <DataTable
       title="Team Members"
-      tableHeaders={["User", "Email"]}
+      tableHeaders={["Name", "Email", "Position"]}
+      dataProperties={["name", "position", "salary", "email"]}
       tableData={tableItems}
     />
   </>

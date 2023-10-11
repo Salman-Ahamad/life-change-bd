@@ -2,7 +2,7 @@
 import React from "react";
 
 export const DataTable: React.FC<{
-  title: string;
+  title?: string;
   tableHeaders?: string[];
   dataProperties?: string[];
   tableData: Record<string, any>[];
@@ -16,28 +16,36 @@ export const DataTable: React.FC<{
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
-              {tableHeaders &&
-                tableHeaders.map((header, idx) => (
-                  <th key={idx} className="py-3 px-6">
-                    {header}
-                  </th>
-                ))}
+              {tableHeaders
+                ? tableHeaders.map((header, idx) => (
+                    <th key={idx} className="py-3 px-6">
+                      {header}
+                    </th>
+                  ))
+                : dataProperties
+                ? dataProperties.map((header, idx) => (
+                    <th key={idx} className="py-3 px-6">
+                      {header}
+                    </th>
+                  ))
+                : Object.entries(tableData[0]).map(([key, value]) => (
+                    <th key={key} className="py-3 px-6">
+                      {key}
+                    </th>
+                  ))}
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
             {tableData.map((item, idx) => (
               <tr key={idx}>
                 {dataProperties
-                  ? dataProperties.map((property, i) => (
+                  ? dataProperties.map((key, i) => (
                       <td key={i} className="px-6 py-4 whitespace-nowrap">
-                        {item[property]}
+                        {item[key]}
                       </td>
                     ))
-                  : Object.entries(item).map(([property, value]) => (
-                      <td
-                        key={property}
-                        className="px-6 py-4 whitespace-nowrap"
-                      >
+                  : Object.entries(item).map(([key, value]) => (
+                      <td key={key} className="px-6 py-4 whitespace-nowrap">
                         {value}
                       </td>
                     ))}

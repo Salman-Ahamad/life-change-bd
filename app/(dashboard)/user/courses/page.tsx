@@ -23,7 +23,7 @@ const Courses: NextPage = () => {
       { enrolled: userData?.id, id: courseId },
       true
     );
-    updateData("/user", { courses: courseId });
+    // updateData("/user", { courses: courseId });
   };
 
   return (
