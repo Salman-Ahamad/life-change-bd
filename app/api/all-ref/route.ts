@@ -1,4 +1,5 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -9,22 +10,21 @@ connectDb();
 export const GET = async () => {
   try {
     // Get Current User
-    // const user = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    // if (!user) {
-    //   return ApiResponse(404, "User not found❗");
-    // }
-
-    // if (
-    //   currentUser.role !== UserRole.active &&
-    //   currentUser.role !== UserRole.inactive &&
-    //   currentUser.role !== UserRole.admin
-    // ) {
-    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    // }
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+    if (
+      user.role !== UserRole.active &&
+      user.role !== UserRole.inactive &&
+      user.role !== UserRole.admin
+    ) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
 
     const refList = await AllRefer.find({
-      referredId: "6523f52df32839b523369fa1",
+      referredId: user.id,
     })
       .populate("referUser")
       .sort({ createdAt: -1 });
