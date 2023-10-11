@@ -6,9 +6,8 @@ import { ActivePageCard, DataRow } from ".";
 export const SupportTeam = () => {
   return (
     <ActivePageCard title="Life change Support Team">
-      <DataRow title="Your Trainer" />
-      <DataRow title="Your Team Leader" />
-      <DataRow title="Senior Team Leader" />
+      <DataRow title="Your Consultant" />
+      <DataRow title="Your Group Leader" />
       <DataRow title="Life Change BD Support" />
     </ActivePageCard>
   );

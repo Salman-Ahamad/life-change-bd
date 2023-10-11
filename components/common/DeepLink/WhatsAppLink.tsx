@@ -18,7 +18,7 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
   const openWhatsappChat = () => {
     const messageToSend = encodeURIComponent(message || "");
     const url = phoneNo
-      ? `https://wa.me/${phoneNo}?text=${messageToSend}`
+      ? `https://wa.me/+88${phoneNo}?text=${messageToSend}`
       : groupLink
       ? `https://chat.whatsapp.com/${groupLink}`
       : "";

@@ -19,7 +19,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
   ],
   inActive: [
@@ -29,7 +29,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "References",
@@ -41,7 +41,7 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
     },
   ],
   active: [
@@ -75,7 +75,11 @@ export const navData: INavData = {
     },
     {
       label: "Video Zone",
-      link: "/user/photo-zone",
+      link: "/user/video-zone",
+    },
+    {
+      label: "Settings",
+      link: "/user/settings",
     },
   ],
   profile: [
@@ -179,7 +183,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/courses",
+      link: "/user/courses",
     },
     {
       label: "Reference",
