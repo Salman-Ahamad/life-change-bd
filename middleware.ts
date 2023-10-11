@@ -35,7 +35,6 @@ export default withAuth(
 export const config = {
   matcher: [
     "/inactive",
-    "/verifyemail",
     "/user/active",
     "/user/active/profile",
     "/user/change-password",
