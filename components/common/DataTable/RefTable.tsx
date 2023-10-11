@@ -15,7 +15,7 @@ export interface IRefTable {
 }
 
 const THeader = ({ title }: ITHeader) => (
-  <th className="p-2.5 capitalize">{title}</th>
+  <th className="p-2.5 capitalize text-center">{title}</th>
 );
 
 const Tbody = ({ title }: ITHeader) => (
@@ -28,7 +28,7 @@ export const RefTable: FC<IRefTable> = ({
   tableData,
 }) => {
   return (
-    <div className="max-w-screen-xl mx-auto p-4 md:p-8">
+    <div className="max-w-screen-md mx-auto p-4 md:p-8">
       <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
@@ -66,11 +66,13 @@ export const RefTable: FC<IRefTable> = ({
                       return <Tbody key={i} title={referUser[item]} />;
                   }
                 })}
-                <td>
+                <td className="px-2.5">
                   <Button variant="accent">Message</Button>
                 </td>
-                <td>
-                  <Button variant="secondary">Collect Mony</Button>
+                <td className="px-2.5 py-1.5">
+                  <Button variant="secondary" className="text-xs lg:text-sm">
+                    Collect Mony
+                  </Button>
                 </td>
               </tr>
             ))}

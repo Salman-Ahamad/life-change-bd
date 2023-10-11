@@ -19,8 +19,8 @@ const MyReference = () => {
       />
       <RefTable
         tableData={refData}
-        tableHeaders={["id", "Name", "email", "Joining Time"]}
-        dataProperties={["id", "firstName", "email", "createdAt"]}
+        tableHeaders={["id", "Name", "Joining Time"]}
+        dataProperties={["id", "firstName", "createdAt"]}
       />
     </>
   );
