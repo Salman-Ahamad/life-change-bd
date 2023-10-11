@@ -1,4 +1,4 @@
-import { ISlugParams } from "@/interface";
+import { ICourse, ISlugParams } from "@/interface";
 import { Course, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -16,7 +16,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     }
 
     // Check if the ID is already in the enrolled array
-    if (user?.courses.some((item: Record<string, any>[]) => item.id === id)) {
+    if (user.courses.map((course: ICourse) => course.id === id)) {
       return ApiResponse(400, "ID already exists in the enrolled array");
     }
 
