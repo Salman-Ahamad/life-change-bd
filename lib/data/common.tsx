@@ -62,10 +62,6 @@ export const navData: INavData = {
       link: "/user/ref-list",
     },
     {
-      label: "Instant Redeem",
-      link: "/user/instant-redeem",
-    },
-    {
       label: "Messages",
       link: "/user/messages",
     },
