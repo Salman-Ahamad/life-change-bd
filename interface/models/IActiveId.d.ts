@@ -1,8 +1,8 @@
 import { Types } from "mongoose";
-import { IUser } from ".";
+import { IId, IUser } from ".";
 
 export interface IActiveIdSchema {
   userId: Types.ObjectId | IUser;
 }
 
-export interface IActiveId extends IActiveIdSchema {}
+export interface IActiveId extends IActiveIdSchema, IId {}

@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { IId } from ".";
 
 export type ICourseStatus = "active" | "inactive" | "running" | "completed";
 
@@ -18,6 +19,4 @@ export interface ICourseSchema {
   duration: string;
 }
 
-export interface ICourse extends ICourseSchema {
-  id: string;
-}
+export interface ICourse extends ICourseSchema, IId {}
