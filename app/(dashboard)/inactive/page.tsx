@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, Tost } from "@/components";
+import { FileUploader, Header, Tost } from "@/components";
 import {
   ActivationPoint,
   Footer,
@@ -17,9 +17,11 @@ const Inactive = () => {
   return (
     <>
       <Header navData={navData.inActive} />
+
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
+      <FileUploader fileType="image/png" />
       <ImageUploadSection />
       <Support />
       <section className="bg-black">

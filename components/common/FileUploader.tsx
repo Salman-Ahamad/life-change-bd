@@ -34,7 +34,7 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
         const formData = new FormData();
 
         formData.set("file", selectedFile);
-        formData.append("upload_preset", "yydamwcw");
+        formData.append("upload_preset", "fcxrhndr");
 
         const endpoint = process.env
           .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;

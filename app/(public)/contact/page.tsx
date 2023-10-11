@@ -1,19 +1,6 @@
 "use client";
 
-import {
-  FileUploader,
-  GoogleMeetLink,
-  Slider,
-  WhatsAppLink,
-} from "@/components";
 import { CommonText, Container, Title } from "@/universal";
-
-const slides = [
-  "https://swiperjs.com/demos/images/nature-1.jpg",
-  "https://swiperjs.com/demos/images/nature-2.jpg",
-  "https://swiperjs.com/demos/images/nature-3.jpg",
-  "https://swiperjs.com/demos/images/nature-4.jpg",
-];
 
 const Contact = () => (
   <Container className="mt-10 min-h-screen">
@@ -38,11 +25,6 @@ const Contact = () => (
         </a>
       </CommonText>
     </div>
-
-    {/* <WhatsAppLink /> */}
-    {/* <GoogleMeetLink meetId="" /> */}
-    {/* <Slider slides={slides} /> */}
-    <FileUploader fileType="image/png, image/jpeg, image/jpg, image/gif" />
   </Container>
 );
 
