@@ -108,15 +108,15 @@ export interface IAPIResponse<T> {
 }
 
 export interface ITHeader {
-  title: string;
-}
-
-export interface ITbody {
   label: string | JSX.Element;
 }
+
+export interface ITbody extends ITHeader {}
 
 export interface IRefTable {
   tableHeaders: string[];
   dataProperties: string[];
   tableData: IAllRefer[];
+  message?: string;
+  actionBtn?: JSX.Element;
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { IRefTable } from "@/interface";
-import { Button } from "@/universal";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
 
@@ -9,6 +8,8 @@ export const RefTable: FC<IRefTable> = ({
   tableHeaders,
   dataProperties,
   tableData,
+  message,
+  actionBtn,
 }) => {
   return (
     <div className="max-w-screen-md mx-auto p-4 md:p-8">
@@ -18,13 +19,13 @@ export const RefTable: FC<IRefTable> = ({
             <tr>
               {tableHeaders
                 ? tableHeaders.map((header, idx) => (
-                    <THeader key={idx} title={header} />
+                    <THeader key={idx} label={header} />
                   ))
                 : dataProperties.map((header, idx) => (
-                    <THeader key={idx} title={header} />
+                    <THeader key={idx} label={header} />
                   ))}
-              <THeader title="Message" />
-              <THeader title="Collect Mony" />
+              {message && <THeader label={message} />}
+              {actionBtn && <THeader label="Action" />}
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
@@ -51,7 +52,7 @@ export const RefTable: FC<IRefTable> = ({
                           key={i}
                           label={
                             <WhatsAppLink
-                              btnText="Message"
+                              btnText={message || "Message"}
                               phoneNo={referUser[item]}
                             />
                           }
@@ -62,11 +63,7 @@ export const RefTable: FC<IRefTable> = ({
                   }
                 })}
 
-                <td className="px-2.5 py-1.5">
-                  <Button variant="secondary" className="text-xs">
-                    Collect Mony
-                  </Button>
-                </td>
+                {actionBtn && <td className="px-2.5 py-1.5">{actionBtn}</td>}
               </tr>
             ))}
           </tbody>

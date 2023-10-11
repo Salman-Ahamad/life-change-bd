@@ -2,6 +2,6 @@
 
 import { ITHeader } from "@/interface";
 
-export const THeader = ({ title }: ITHeader) => (
-  <th className="p-2.5 capitalize text-center">{title}</th>
+export const THeader = ({ label }: ITHeader) => (
+  <th className="p-2.5 capitalize">{label}</th>
 );
