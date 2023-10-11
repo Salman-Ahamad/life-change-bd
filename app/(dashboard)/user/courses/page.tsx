@@ -1,11 +1,9 @@
 "use client";
 
 import { Header } from "@/components";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { useCurrentUser, useGetData } from "@/hooks";
 import { ICourse } from "@/interface";
 import { navData } from "@/lib/data";
-import { Button } from "@/universal";
-import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
