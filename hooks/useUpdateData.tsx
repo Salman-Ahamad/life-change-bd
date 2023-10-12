@@ -1,7 +1,7 @@
 import { Axios, loadingToast } from "@/utils";
 import { toast } from "react-toastify";
 
-export const updateData = (
+export const updateData = async (
   apiUrl: string,
   updatedData: object,
   toastOf: boolean = false
