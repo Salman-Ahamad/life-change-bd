@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import SingleStory from "./SingleStory";
+import Link from "next/link";
 
 const Story = () => {
   const recentImage = [
@@ -53,7 +54,12 @@ const Story = () => {
             <div className="bg-primary w-9 h-9 rounded-full grid place-items-center text-[24px] text-white mx-auto -mt-[20px] relative outline outline-[6px] outline-white">
               <AiOutlinePlus />
             </div>
-            <p className="text-center mt-2 font-medium">Create Story</p>
+            <Link
+              href="/user/photo-zone/create"
+              className="text-center mt-2 font-medium"
+            >
+              Create Story
+            </Link>
           </div>
         </div>
         {recentImage.map(({ title, img, postImg }, index) => {

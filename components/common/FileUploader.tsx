@@ -5,9 +5,13 @@ import React, { useState } from "react";
 
 interface ImageUploaderProps {
   fileType: string;
+  setFileUrl?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
+export const FileUploader: React.FC<ImageUploaderProps> = ({
+  fileType,
+  setFileUrl,
+}) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -49,7 +53,7 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
 
         console.log("File uploaded successfully:", url);
 
-        return url;
+        setFileUrl(url);
       } catch (error) {
         console.error("Error uploading file:", error);
         return;

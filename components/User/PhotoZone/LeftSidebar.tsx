@@ -17,8 +17,8 @@ const LeftSidebar = () => {
         />
 
         {/* Extra link section */}
-        <LeftSidebarLink image="/save.png" text="Saved" />
-        <LeftSidebarLink image="/pages.png" text="Pages" />
+        {/* <LeftSidebarLink image="/save.png" text="Saved" />
+        <LeftSidebarLink image="/pages.png" text="Pages" /> */}
 
         {/* Extra item if needed: This is for show more button */}
         {/* <div className="flex items-center gap-3 w-[300px] py-2 pl-1 cursor-pointer hover:bg-gray-300">

@@ -13,11 +13,11 @@ const RightSidebar = () => {
             <h1 className="font-semibold text-gray-600 text-[18px]">
               Contact List
             </h1>
-            <div className="flex gap-4">
+            {/* <div className="flex gap-4">
               <RiVideoAddFill className="text-gray-600" />
               <BiSearch />
               <BsThreeDots />
-            </div>
+            </div> */}
           </div>
 
           <Contact />
