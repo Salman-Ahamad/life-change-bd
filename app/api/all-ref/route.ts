@@ -10,19 +10,19 @@ connectDb();
 export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     // Get Current User
-    // const user = await getCurrentUser();
+    const user = await getCurrentUser();
     const collectInactive = nextUrl.searchParams.get("collectInactive");
 
-    // if (!user) {
-    //   return ApiResponse(404, "User not found❗");
-    // }
-    // if (
-    //   user.role !== UserRole.active &&
-    //   user.role !== UserRole.inactive &&
-    //   user.role !== UserRole.admin
-    // ) {
-    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    // }
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+    if (
+      user.role !== UserRole.active &&
+      user.role !== UserRole.inactive &&
+      user.role !== UserRole.admin
+    ) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
 
     const refList = await AllRefer.find({
       referredId: "6523f52df32839b523369fa1",

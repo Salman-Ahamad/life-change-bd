@@ -9,6 +9,7 @@ import { navData } from "@/lib";
 
 const RefList: NextPage = () => {
   const [searchData, setSearchData] = useState<ISearchData | {}>({});
+  console.log("🚀 ~ file: page.tsx:12 ~ searchData:", searchData);
 
   return (
     <>

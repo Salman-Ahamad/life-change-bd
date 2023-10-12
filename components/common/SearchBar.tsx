@@ -1,7 +1,7 @@
 "use client";
 
 import { ISearchBar } from "@/interface";
-import { Container } from "@/universal";
+import { Button, Container } from "@/universal";
 import { getLastThreeMonths } from "@/utils";
 import { FC, useState } from "react";
 
@@ -23,11 +23,11 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
 
   return (
     <Container className="my-5">
-      <section className="flex justify-center items-center gap-5">
+      <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
         <select
           value={selectYear}
           onChange={(e) => setSelectYear(e.target.value)}
-          className="focus:outline-none border border-primary p-2 rounded-md"
+          className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Choose Year</option>
           {years.map((year) => (
@@ -40,7 +40,7 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
         <select
           value={selectMonth}
           onChange={(e) => setSelectMonth(e.target.value)}
-          className="focus:outline-none border border-primary p-2 rounded-md"
+          className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Select Month</option>
           {lastThreeMonths.map((month, index) => (
@@ -49,21 +49,20 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
             </option>
           ))}
         </select>
-        <div className="flex border border-primary rounded-md text-base">
-          <input
-            type="text"
-            value={searchId}
-            placeholder="User Id"
-            onChange={(e) => setSearchId(e.target.value)}
-            className="py-2 px-2 border-none outline-none rounded-md"
-          />
-          <button
-            onClick={handleSubmit}
-            className="bg-primary hover:bg-secondary transition-all delay-100 px-2.5 text-white"
-          >
-            Search
-          </button>
-        </div>
+        <input
+          type="text"
+          value={searchId}
+          placeholder="User Id"
+          onChange={(e) => setSearchId(e.target.value)}
+          className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto"
+        />
+        <Button
+          variant="secondary"
+          className="py-2.5 px-5 w-full md:w-auto"
+          onClick={handleSubmit}
+        >
+          Search
+        </Button>
       </section>
     </Container>
   );
