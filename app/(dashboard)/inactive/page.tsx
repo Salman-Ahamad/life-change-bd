@@ -21,7 +21,7 @@ const Inactive = () => {
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
-      <FileUploader fileType="image/png" />
+      <FileUploader fileType="image/png, image/gif, image/jpeg" />
       <ImageUploadSection />
       <Support />
       <section className="bg-black">
