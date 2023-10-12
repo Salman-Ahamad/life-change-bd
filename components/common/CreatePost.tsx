@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { Axios } from "@/utils";
 
 export const CreatePost: React.FC<{
   show: boolean;
@@ -9,7 +10,6 @@ export const CreatePost: React.FC<{
 }> = ({ show, setShow }) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [postImg, setPostImg] = useState<string | null>(null);
   const [postText, setPostText] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +43,9 @@ export const CreatePost: React.FC<{
           throw new Error(`Failed to upload file: ${endpoint}`);
         }
         // File uploaded
-        const { url } = uploadRes.data;
-        setPostImg(url);
+        const { url } = await uploadRes.data;
+
+        await Axios.post("/photo-zone/post", { postImg: url, postText });
       } catch (error) {
         console.error("Error uploading file:", error);
         return;

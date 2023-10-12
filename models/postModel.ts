@@ -9,7 +9,7 @@ const postSchema = new Schema<IPostSchema>(
     },
     imageUrl: {
       type: String,
-      required: [true, "Please provide a valid image URL"],
+      default: "",
     },
     text: {
       type: String,
