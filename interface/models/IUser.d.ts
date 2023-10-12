@@ -18,6 +18,7 @@ export interface ISettings {
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
+  collectInactive: boolean;
 }
 export interface IUserSchema {
   firstName: string;
@@ -52,4 +53,5 @@ export interface IUser extends IUserSchema, IId {
   posts: string[];
   likes: string[];
   settings: ISettings;
+  createdAt: string;
 }

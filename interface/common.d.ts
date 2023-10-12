@@ -106,3 +106,17 @@ export interface IAPIResponse<T> {
   success: boolean;
   data: T;
 }
+
+export interface ITHeader {
+  label: string | JSX.Element;
+}
+
+export interface ITbody extends ITHeader {}
+
+export interface IRefTable {
+  tableHeaders: string[];
+  dataProperties: string[];
+  tableData: IAllRefer[];
+  message?: string;
+  actionBtn?: JSX.Element;
+}
