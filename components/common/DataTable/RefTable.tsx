@@ -10,6 +10,7 @@ export const RefTable: FC<IRefTable> = ({
   tableData,
   message,
   actionBtn,
+  setActionId,
 }) => {
   return (
     <div className="max-w-screen-md mx-auto p-4 md:p-8">
@@ -63,7 +64,14 @@ export const RefTable: FC<IRefTable> = ({
                   }
                 })}
 
-                {actionBtn && <td className="px-2.5 py-1.5">{actionBtn}</td>}
+                {actionBtn && (
+                  <td
+                    className="px-2.5 py-1.5"
+                    onClick={() => setActionId && setActionId(referUser.id)}
+                  >
+                    {actionBtn}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

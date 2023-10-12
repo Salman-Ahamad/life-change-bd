@@ -1,15 +1,27 @@
 "use client";
 
 import { Header, PageHeader, RefTable } from "@/components";
-import { useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { IAllRefer } from "@/interface";
 import { navData } from "@/lib/data";
 import { Button } from "@/universal";
+import { Types } from "mongoose";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IAllRefer[] | []>([]);
+  const [actionId, setActionId] = useState("");
   useGetData("/all-ref", setRefData);
+
+  const handleUpdate = (id: string) => {
+    console.log("🚀 ~ file: page.tsx:19 ~ handleUpdate ~ id:", id);
+    if (Types.ObjectId.isValid(id)) {
+      updateData(`/all-ref/${id}`, {});
+    } else {
+      toast.error("Invalid Id");
+    }
+  };
 
   return (
     <>
@@ -23,9 +35,10 @@ const MyReference = () => {
         tableHeaders={["id", "Name", "Joining Time"]}
         dataProperties={["id", "firstName", "createdAt", "phone"]}
         message="Message"
+        setActionId={handleUpdate}
         actionBtn={
           <Button variant="secondary" className="text-xs">
-            Collect Mony
+            Collect Money
           </Button>
         }
       />

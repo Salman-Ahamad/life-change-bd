@@ -1,5 +1,6 @@
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { connectDb } from "@/config";
+import { IUser } from "@/interface";
 import { User } from "@/models";
 import { getServerSession } from "next-auth/next";
 
@@ -7,7 +8,7 @@ export async function getSession() {
   return await getServerSession(options);
 }
 
-export default async function getCurrentUser() {
+export default async function getCurrentUser(): Promise<IUser | null> {
   const session = await getSession();
 
   if (!session?.user) {

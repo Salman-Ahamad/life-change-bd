@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 import { HTMLInputTypeAttribute } from "react";
-import { ICardData, IChildrenWithClassName, IClassName } from ".";
+import { IAllRefer, ICardData, IChildrenWithClassName, IClassName } from ".";
 
 export type IColor =
   | "black"
@@ -119,4 +119,5 @@ export interface IRefTable {
   tableData: IAllRefer[];
   message?: string;
   actionBtn?: JSX.Element;
+  setActionId?: (id: string) => void;
 }

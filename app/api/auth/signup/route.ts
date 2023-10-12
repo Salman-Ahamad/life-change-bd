@@ -55,14 +55,13 @@ export const POST = async (req: NextRequest) => {
           referredId: reference,
           referUser: savedUser._id,
         };
-        const newRef = await AllRefer.create(refData);
+        await AllRefer.create(refData);
 
         const refUser = await User.findOne({ _id: reference });
         const refList = await AllRefer.find({ referredId: reference })
           .populate("referUser")
           .sort({ createdAt: -1 })
           .limit(inactiveLimit + 1);
-
         if (refList.length <= inactiveLimit) {
           console.log("limit ase add hobe");
           refUser.balance++;
@@ -77,8 +76,6 @@ export const POST = async (req: NextRequest) => {
             console.log("limit ses");
           }
         }
-
-        // refUser.balance++;
         await refUser.save();
       }
     }
