@@ -18,6 +18,7 @@ export interface ISettings {
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
+  collectInactive: boolean;
 }
 export interface IUserSchema {
   firstName: string;

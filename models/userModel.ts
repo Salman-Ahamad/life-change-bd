@@ -92,9 +92,12 @@ const userSchema = new Schema<IUserSchema>(
         type: Schema.Types.ObjectId,
         ref: "users",
       },
+      collectInactive: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
-
   {
     timestamps: true,
     toJSON: {
