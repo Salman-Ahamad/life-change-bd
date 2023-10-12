@@ -1,24 +1,24 @@
 "use client";
 
-import { Header, PageHeader, RefTable } from "@/components";
-import { updateData, useGetData } from "@/hooks";
-import { IAllRefer } from "@/interface";
-import { navData } from "@/lib/data";
-import { Button } from "@/universal";
 import { Types } from "mongoose";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const MyReference = () => {
-  const [refData, setRefData] = useState<IAllRefer[] | []>([]);
-  const [refetch, setRefetch] = useState(false);
-  useGetData("/all-ref", setRefData, refetch);
+import { Header, PageHeader, RefTable } from "@/components";
+import { updateData, useGetData } from "@/hooks";
+import { IAllRefer } from "@/interface";
+import { navData } from "@/lib/data";
+import { Button, Title } from "@/universal";
 
-  const handleUpdate = (id: string) => {
-    console.log("🚀 ~ file: page.tsx:19 ~ handleUpdate ~ id:", id);
+const MyReference = () => {
+  const [refData, setRefData] = useState<IAllRefer[] | null>(null);
+  useGetData("/all-ref?collectInactive=false", setRefData);
+
+  const handleUpdate = async (id: string, refId: string) => {
     if (Types.ObjectId.isValid(id)) {
-      updateData(`/all-ref/${id}`, {});
-      setRefetch(true);
+      await updateData(`/all-ref/${id}`, {}).then(() =>
+        window.location.reload()
+      );
     } else {
       toast.error("Invalid Id");
     }
@@ -31,18 +31,24 @@ const MyReference = () => {
         title="My Reference Joining Info"
         notice="Last 3 Month Outbound"
       />
-      <RefTable
-        tableData={refData}
-        tableHeaders={["id", "Name", "Joining Time"]}
-        dataProperties={["id", "firstName", "createdAt", "phone"]}
-        message="Message"
-        setActionId={handleUpdate}
-        actionBtn={
-          <Button variant="secondary" className="text-xs">
-            Collect Money
-          </Button>
-        }
-      />
+      {refData === null ? (
+        <Title variant="H4" className="text-center capitalize my-10">
+          Loading... Please wait 🔃
+        </Title>
+      ) : (
+        <RefTable
+          tableData={refData}
+          tableHeaders={["id", "Name", "Joining Time"]}
+          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          message="Message"
+          setActionId={handleUpdate}
+          actionBtn={
+            <Button variant="secondary" className="text-xs">
+              Collect Money
+            </Button>
+          }
+        />
+      )}
     </>
   );
 };

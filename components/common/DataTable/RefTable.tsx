@@ -12,6 +12,10 @@ export const RefTable: FC<IRefTable> = ({
   actionBtn,
   setActionId,
 }) => {
+  const handleAction = (referUserId: string, refId: string) => {
+    setActionId && setActionId(referUserId, refId);
+    // setActionId && setActionId(referUserId);
+  };
   return (
     <div className="max-w-screen-md mx-auto p-4 md:p-8">
       <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
@@ -30,7 +34,7 @@ export const RefTable: FC<IRefTable> = ({
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {tableData.map(({ referUser }, idx) => (
+            {tableData.map(({ referUser, id }, idx) => (
               <tr key={idx}>
                 {dataProperties.map((item, i) => {
                   switch (item) {
@@ -67,7 +71,7 @@ export const RefTable: FC<IRefTable> = ({
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => setActionId && setActionId(referUser.id)}
+                    onClick={() => handleAction(referUser.id, id)}
                   >
                     {actionBtn}
                   </td>

@@ -119,5 +119,5 @@ export interface IRefTable {
   tableData: IAllRefer[];
   message?: string;
   actionBtn?: JSX.Element;
-  setActionId?: (id: string) => void;
+  setActionId?: (id: string, refId: string) => void;
 }

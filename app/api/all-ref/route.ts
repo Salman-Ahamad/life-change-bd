@@ -7,29 +7,41 @@ import { NextRequest } from "next/server";
 
 connectDb();
 
-export const GET = async () => {
+export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     // Get Current User
-    const user = await getCurrentUser();
+    // const user = await getCurrentUser();
+    const collectInactive = nextUrl.searchParams.get("collectInactive");
 
-    if (!user) {
-      return ApiResponse(404, "User not found❗");
-    }
-    if (
-      user.role !== UserRole.active &&
-      user.role !== UserRole.inactive &&
-      user.role !== UserRole.admin
-    ) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    }
+    // if (!user) {
+    //   return ApiResponse(404, "User not found❗");
+    // }
+    // if (
+    //   user.role !== UserRole.active &&
+    //   user.role !== UserRole.inactive &&
+    //   user.role !== UserRole.admin
+    // ) {
+    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    // }
 
     const refList = await AllRefer.find({
-      referredId: user.id,
+      referredId: "6523f52df32839b523369fa1",
     })
       .populate("referUser")
       .sort({ createdAt: -1 });
 
-    return ApiResponse(200, "User get successfully 👌", refList);
+    const filterableResult = refList.filter(({ referUser }) => {
+      if (collectInactive) {
+        if (collectInactive === "true") {
+          return referUser.settings.collectInactive;
+        } else if (collectInactive === "false") {
+          return !referUser.settings.collectInactive;
+        }
+      }
+      return referUser;
+    });
+
+    return ApiResponse(200, "User get successfully 👌", filterableResult);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

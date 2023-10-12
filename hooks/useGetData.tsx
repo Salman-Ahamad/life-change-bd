@@ -12,8 +12,6 @@ export const useGetData = (
   useEffect(() => {
     const id = toast.loading("Loading... 🔃");
 
-    console.log("🚀 ~ file: useGetData.tsx:15 ~ refetch:", refetch);
-
     Axios.get(apiUrl)
       .then(({ data }) => {
         loadingToast(id, data.message, "success");
