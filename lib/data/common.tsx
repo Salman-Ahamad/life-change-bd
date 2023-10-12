@@ -19,7 +19,7 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/user/courses",
+      link: "/courses",
     },
   ],
   inActive: [
