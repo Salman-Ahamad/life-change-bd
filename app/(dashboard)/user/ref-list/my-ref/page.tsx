@@ -11,13 +11,14 @@ import { toast } from "react-toastify";
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IAllRefer[] | []>([]);
-  const [actionId, setActionId] = useState("");
-  useGetData("/all-ref", setRefData);
+  const [refetch, setRefetch] = useState(false);
+  useGetData("/all-ref", setRefData, refetch);
 
   const handleUpdate = (id: string) => {
     console.log("🚀 ~ file: page.tsx:19 ~ handleUpdate ~ id:", id);
     if (Types.ObjectId.isValid(id)) {
       updateData(`/all-ref/${id}`, {});
+      setRefetch(true);
     } else {
       toast.error("Invalid Id");
     }

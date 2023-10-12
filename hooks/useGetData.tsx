@@ -6,10 +6,14 @@ import { toast } from "react-toastify";
 
 export const useGetData = (
   apiUrl: string,
-  setData: Dispatch<SetStateAction<any>>
+  setData: Dispatch<SetStateAction<any>>,
+  refetch?: boolean
 ) =>
   useEffect(() => {
     const id = toast.loading("Loading... 🔃");
+
+    console.log("🚀 ~ file: useGetData.tsx:15 ~ refetch:", refetch);
+
     Axios.get(apiUrl)
       .then(({ data }) => {
         loadingToast(id, data.message, "success");
@@ -19,4 +23,4 @@ export const useGetData = (
         loadingToast(id, response.data.message, "error");
         setData(undefined);
       });
-  }, [apiUrl, setData]);
+  }, [apiUrl, setData, refetch]);
