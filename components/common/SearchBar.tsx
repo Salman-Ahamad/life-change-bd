@@ -3,7 +3,9 @@
 import { ISearchBar } from "@/interface";
 import { Button, Container } from "@/universal";
 import { getLastThreeMonths } from "@/utils";
+import { Types } from "mongoose";
 import { FC, useState } from "react";
+import { toast } from "react-toastify";
 
 export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
   const [selectYear, setSelectYear] = useState<string>("");
@@ -15,6 +17,17 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
   const lastThreeMonths = getLastThreeMonths();
 
   const handleSubmit = () => {
+    if (searchId) {
+      if (Types.ObjectId.isValid(searchId)) {
+        toast.success("id thik ase");
+      } else {
+        toast.error("id thik nai");
+      }
+    } else if (selectYear && selectMonth) {
+      toast.success("year and month diase");
+    } else {
+      toast.error("please provide date or user id");
+    }
     setSearchData({ year: selectYear, month: selectMonth, id: searchId });
     setSelectYear("");
     setSelectMonth("");
@@ -23,6 +36,9 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
 
   return (
     <Container className="my-5">
+      <p className="text-center text-gray-500 mb-1">
+        Search by Year and Month Or User Id!
+      </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
         <select
           value={selectYear}
