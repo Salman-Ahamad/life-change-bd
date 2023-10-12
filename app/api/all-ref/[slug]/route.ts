@@ -50,23 +50,6 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       .sort({ createdAt: -1 })
       .limit(inactiveLimit + 1);
 
-    const updateAndSave = async () => {
-      const test1 = await User.updateOne(
-        { _id: logInUser.id },
-        { balance: user.balance++ }
-      );
-
-      const test2 = await User.updateOne(
-        { _id: id },
-        { "settings.collectInactive": true }
-      );
-
-      return ApiResponse(200, "Collect Money successfully ✅", {
-        test1,
-        test2,
-      });
-    };
-
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });
       await User.updateOne({ _id: id }, { "settings.collectInactive": true });
@@ -94,44 +77,3 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     return ApiResponse(400, error.message);
   }
 };
-
-// const user = await User.findOne({ _id: logInUser.id });
-// const refUser = await User.findOne({ _id: id });
-// const refList = await AllRefer.find({ referredId: logInUser.id })
-
-//   .populate("referUser")
-//   .sort({ createdAt: -1 })
-//   .limit(inactiveLimit + 1);
-
-// // console.log("🚀 ~ file: route.ts:54 ~ PATCH ~ refList:", { user, refUser });
-// // console.log("🚀 ~ file: route.ts:55 ~ PATCH ~ refList:", refList);
-
-// if (!refUser) {
-//   return ApiResponse(404, "User not found");
-// }
-
-// const updateAndSave = async () => {
-//   const test1 = await User.updateOne(
-//     { _id: logInUser.id },
-//     { balance: user.balance++ }
-//   );
-//   // user.balance++;
-//   const test2 = await User.updateOne(
-//     { _id: id },
-//     { "settings.collectInactive": true }
-//   );
-//   console.log("🚀 ~ file: route.ts:70 ~ updateAndSave ~ test1:", {
-//     test1,
-//     test2,
-//   });
-//   // refUser.settings.collectInactive = true;
-//   // await user.save();
-//   // await refUser.save();
-//   return ApiResponse(200, "Collect Money successfully ✅", {
-//     test1,
-//     test2,
-//   });
-// };
-
-// await user.save();
-// await refUser.save();
