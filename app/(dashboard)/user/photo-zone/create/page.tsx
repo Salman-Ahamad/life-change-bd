@@ -21,10 +21,10 @@ const Create: React.FC = () => {
 
   return (
     <div>
-      <FileUploader
+      {/* <FileUploader
         fileType="image/png, image/gif, image/jpeg"
         setFileUrl={setPhotoUrl}
-      />
+      /> */}
 
       <Button variant="secondary" onClick={() => handleCreatePost()}>
         Create Post

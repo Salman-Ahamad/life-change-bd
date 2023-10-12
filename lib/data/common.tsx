@@ -24,6 +24,10 @@ export const navData: INavData = {
   ],
   inActive: [
     {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
+    {
       label: "Profile",
       link: "/user/active/profile",
     },
@@ -47,7 +51,7 @@ export const navData: INavData = {
   active: [
     {
       label: <AiOutlineHome className="text-2xl" />,
-      link: "/",
+      link: "/user/active",
     },
     {
       label: "Profile",
@@ -115,6 +119,10 @@ export const navData: INavData = {
     },
   ],
   withdrawal: [
+    {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
     {
       label: "Profile",
       link: "/user/active/profile",
