@@ -1,3 +1,5 @@
+"use client";
+
 import { IImageCard } from "@/interface";
 import { Button } from "@/universal";
 import Image from "next/image";
