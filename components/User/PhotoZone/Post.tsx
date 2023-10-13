@@ -1,29 +1,29 @@
 "use client";
 
 import { updateData, useCurrentUser } from "@/hooks";
-import { IPostSchema } from "@/interface";
+import { IPostWithAuthor } from "@/interface";
 import { Types } from "mongoose";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
 // import { MdOutlineClose } from "react-icons/md";
 
-const Post = ({ data }: { data: IPostSchema }) => {
+const Post = ({ data }: { data: IPostWithAuthor }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const user = useCurrentUser();
-
-  console.log(isLiked);
 
   useEffect(() => {
     if (user?.id && data.likes) {
       // Convert user.id to ObjectId
       const userObjectId: Types.ObjectId = new Types.ObjectId(user.id);
       // const checkIsLiked = data.likes?.includes(new Types.ObjectId(user.id));
-      const index = data.likes.findIndex((like) => like.equals(userObjectId));
+      const index = data.likes.findIndex((like) => like === userObjectId);
 
-      if (index) {
+      if (index === -1) {
+        setIsLiked(false);
+      } else {
         setIsLiked(true);
       }
     }
@@ -36,7 +36,7 @@ const Post = ({ data }: { data: IPostSchema }) => {
       // Convert user.id to ObjectId
       const userObjectId: Types.ObjectId = new Types.ObjectId(user.id);
       // const checkIsLiked = data.likes?.includes(new Types.ObjectId(user.id));
-      const index = data.likes.findIndex((like) => like.equals(userObjectId));
+      const index = data.likes.findIndex((like) => like === userObjectId);
 
       if (index !== -1) {
         // User liked, remove ObjectId from likes
@@ -44,8 +44,8 @@ const Post = ({ data }: { data: IPostSchema }) => {
       } else {
         // User not liked, add ObjectId to likes
         const likesArr = data.likes.push(userObjectId);
-        console.log(likesArr);
-        console.log(data.likes);
+        // console.log(likesArr);
+        // console.log(data.likes);
 
         // updateData("/photo-zone/post", {
         //   likes: likesArr,
@@ -69,9 +69,15 @@ const Post = ({ data }: { data: IPostSchema }) => {
           )}
 
           <div>
-            <h1 className="text-[16px] font-semibold">{user?.firstName}</h1>
+            <h1 className="text-[16px] font-semibold">
+              {data?.author?.firstName}
+            </h1>
             <div className="text-gray-500 flex items-center gap-2">
-              <p>{data.createdAt}</p>
+              <p>
+                {data?.updatedAt
+                  ? new Date(data?.updatedAt).toLocaleString()
+                  : ""}
+              </p>
               <p>·</p>
               <FaGlobeAmericas />
             </div>

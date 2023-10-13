@@ -10,15 +10,15 @@ export const useGetData = (
   refetch?: boolean
 ) =>
   useEffect(() => {
-    const id = toast.loading("Loading... 🔃");
+    // const id = toast.loading("Loading... 🔃");
 
     Axios.get(apiUrl)
       .then(({ data }) => {
-        loadingToast(id, data.message, "success");
+        // loadingToast(id, data.message, "success");
         setData(data.data);
       })
       .catch(({ response }) => {
-        loadingToast(id, response.data.message, "error");
+        // loadingToast(id, response.data.message, "error");
         setData(undefined);
       });
   }, [apiUrl, setData, refetch]);

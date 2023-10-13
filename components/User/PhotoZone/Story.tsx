@@ -1,16 +1,17 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import SingleStory from "./SingleStory";
 import React, { useState } from "react";
-import { IPostSchema } from "@/interface";
+import { IPostWithAuthor } from "@/interface";
 import { CreatePost } from "@/components";
+import { useCurrentUser } from "@/hooks";
 
-const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
-  const { data: session } = useSession();
+const Story: React.FC<{ recentStory: IPostWithAuthor[] }> = ({
+  recentStory,
+}) => {
+  const user = useCurrentUser();
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
@@ -22,8 +23,8 @@ const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
             width={112}
             height={144}
             className="w-28 h-36 rounded-t-[15px] object-cover"
-            src={session?.user?.image || ""}
-            alt={session?.user?.firstName || ""}
+            src={user?.image || ""}
+            alt={user?.firstName || ""}
           />
           <div>
             <button
@@ -36,9 +37,9 @@ const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
           </div>
         </div>
         {recentStory &&
-          recentStory.map(({ author, imageUrl, text }, index) => {
-            return <SingleStory key={index} title={text} postImg={imageUrl} />;
-          })}
+          recentStory.map((storyData, idx) => (
+            <SingleStory key={idx} storyData={storyData} />
+          ))}
       </div>
     </div>
   );
