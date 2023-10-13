@@ -120,7 +120,7 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Select Month</option>
-          {filterDate.mounts.map((month, index) => (
+          {filterDate.mounts.reverse().map((month, index) => (
             <option key={index} value={month}>
               {month}
             </option>
