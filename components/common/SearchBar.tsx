@@ -14,7 +14,7 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
   const currentYear = new Date().getFullYear();
 
   const years = Array.from({ length: 3 }, (_, index) => currentYear - index);
-  const lastThreeMonths = getLastThreeMonths();
+  const filterDate = getLastThreeMonths();
 
   const handleSubmit = () => {
     if (searchId) {
@@ -46,7 +46,7 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Choose Year</option>
-          {years.map((year) => (
+          {filterDate.years.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
@@ -59,7 +59,7 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Select Month</option>
-          {lastThreeMonths.map((month, index) => (
+          {filterDate.mounts.map((month, index) => (
             <option key={index} value={month}>
               {month}
             </option>

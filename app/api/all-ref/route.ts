@@ -1,5 +1,4 @@
 import { connectDb } from "@/config";
-import { UserRole } from "@/lib";
 import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -12,17 +11,18 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
     const collectInactive = nextUrl.searchParams.get("collectInactive");
+    const date = nextUrl.searchParams.get("date");
 
-    if (!user) {
-      return ApiResponse(404, "User not found❗");
-    }
-    if (
-      user.role !== UserRole.active &&
-      user.role !== UserRole.inactive &&
-      user.role !== UserRole.admin
-    ) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    }
+    // if (!user) {
+    //   return ApiResponse(404, "User not found❗");
+    // }
+    // if (
+    //   user.role !== UserRole.active &&
+    //   user.role !== UserRole.inactive &&
+    //   user.role !== UserRole.admin
+    // ) {
+    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    // }
 
     const refList = await AllRefer.find({
       referredId: "6523f52df32839b523369fa1",
@@ -31,12 +31,21 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .sort({ createdAt: -1 });
 
     const filterableResult = refList.filter(({ referUser }) => {
+      console.log("🚀 ~ file: route.ts:42 ~ filterableResult ~ createdAt:", {
+        data: referUser.createdAt,
+        date,
+      });
       if (collectInactive) {
         if (collectInactive === "true") {
           return referUser.settings.collectInactive;
         } else if (collectInactive === "false") {
           return !referUser.settings.collectInactive;
         }
+      } else if (date) {
+        // console.log("🚀 ~ file: route.ts:42 ~ filterableResult ~ createdAt:", {
+        //   data: referUser.createdAt,
+        //   date,
+        // });
       }
       return referUser;
     });
