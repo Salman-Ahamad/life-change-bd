@@ -47,7 +47,7 @@ const Contact = () => {
       {/* <WhatsAppLink /> */}
       {/* <GoogleMeetLink meetId="" /> */}
       {/* <Slider slides={slides} /> */}
-      <FileUploader fileType="image/png, image/jpeg, image/jpg, image/gif" />
+      {/* <FileUploader fileType="image/png, image/jpeg, image/jpg, image/gif" /> */}
       <CopyToClipboard inputText="Copy me!" buttonText="Copy" />
     </Container>
   );
