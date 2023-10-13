@@ -4,7 +4,7 @@ import React from "react";
 
 export interface IDataTable {
   title?: string;
-  tableHeaders: string[];
+  tableHeaders?: string[];
   dataProperties: string[];
   tableData: Record<string, any>[];
 }

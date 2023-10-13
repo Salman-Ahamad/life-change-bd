@@ -106,6 +106,7 @@ const userSchema = new Schema<IUserSchema>(
     toJSON: {
       virtuals: true,
     },
+    strict: false,
   }
 );
 

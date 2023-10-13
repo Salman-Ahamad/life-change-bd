@@ -254,6 +254,24 @@ export const navData: INavData = {
       link: "/user/passbook",
     },
   ],
+  settings: [
+    {
+      label: <BackButton className="text-2xl" />,
+      link: "/user/active",
+    },
+    {
+      label: "Students",
+      link: "/user/settings/students",
+    },
+    {
+      label: "Reports",
+      link: "/user/settings/reports",
+    },
+    {
+      label: "Team Management",
+      link: "/user/settings/team-management",
+    },
+  ],
 };
 
 export const footerItems: IFooterData = {

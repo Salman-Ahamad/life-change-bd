@@ -19,15 +19,65 @@ export const GET = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (currentUser.role !== UserRole.admin) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    }
-
     const user = await User.findOne({ _id: id })
       .populate("courses")
+      .populate({
+        path: "controller",
+        select: "firstName lastName image id", // Specify the fields you want to include
+      })
+      .populate({
+        path: "consultant",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "teacher",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "gl",
+        select: "firstName lastName image id",
+      })
       .select("-password");
 
-    return ApiResponse(200, "User get successfully 👌", user);
+    // Set return based on user role
+
+    switch (currentUser.role) {
+      case "admin":
+        return ApiResponse(200, "User get successfully 👌", user);
+
+      case "controller":
+        if (currentUser.id === user?.controller?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "consultant":
+        if (currentUser.id === user?.consultant?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "gl":
+        if (currentUser.id === user?.gl?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "teacher":
+        if (currentUser.id === user?.teacher?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "active":
+        if (currentUser.id === user?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      default:
+        return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

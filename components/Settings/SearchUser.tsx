@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { avatarProfile } from "@/lib";
 import { Button, CommonText } from "@/universal";
@@ -8,21 +9,25 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 export const SearchUser: React.FC<{ role: string }> = ({ role }) => {
-  console.log(role);
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userId, setUserId] = useState("");
   const [user, setUser] = useState<IUser>();
 
   const fetchUser = async () => {
+    setIsLoading(true);
     // First check if user can search this user id based on the role
 
-    const fetchData = await Axios.get(
-      `http://localhost:3000/api/user/${userId}`
-    );
+    Axios.get(`/user/${userId}`)
+      .then(({ data }) => {
+        // loadingToast(id, data.message, "success");
+        setUser(data.data);
+      })
+      .catch(({ response }) => {
+        // loadingToast(id, response.data.message, "error");
+        setUser(undefined);
+      });
 
-    if (fetchData.statusText === "OK") {
-      setUser(fetchData.data.data);
-    }
+    setIsLoading(false);
   };
 
   const profileTitle = [
@@ -50,7 +55,7 @@ export const SearchUser: React.FC<{ role: string }> = ({ role }) => {
           className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
         />
         <Button variant="secondary" onClick={() => fetchUser()}>
-          Search
+          {!isLoading ? "Search" : "Loading..."}
         </Button>
       </div>
 
