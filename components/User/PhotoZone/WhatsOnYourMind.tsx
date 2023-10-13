@@ -3,16 +3,6 @@ import { GoSmiley } from "react-icons/go";
 import { MdOutlineClose, MdOutlinePhotoLibrary } from "react-icons/md";
 
 import { useSession } from "next-auth/react";
-
-// import {
-//   addDoc,
-//   collection,
-//   doc,
-//   serverTimestamp,
-//   updateDoc,
-// } from "firebase/firestore";
-// import { db, storage } from "../firebase";
-// import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { Button } from "@/universal";
 import Image from "next/image";
 

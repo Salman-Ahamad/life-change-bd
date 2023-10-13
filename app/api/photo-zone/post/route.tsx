@@ -40,8 +40,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    console.log(postImg, postText);
-
     const newPost = await Post.create({
       author: user.id,
       imageUrl: postImg,

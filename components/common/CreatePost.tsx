@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { Axios } from "@/utils";
 
@@ -46,6 +46,8 @@ export const CreatePost: React.FC<{
         const { url } = await uploadRes.data;
 
         await Axios.post("/photo-zone/post", { postImg: url, postText });
+
+        // Reset the form
       } catch (error) {
         console.error("Error uploading file:", error);
         return;

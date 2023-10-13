@@ -5,38 +5,13 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import SingleStory from "./SingleStory";
+import React, { useState } from "react";
+import { IPostSchema } from "@/interface";
+import { CreatePost } from "@/components";
 
-const Story = () => {
-  const recentImage = [
-    {
-      title: "Bill Gates",
-      img: "/bill_gates.jpg",
-      postImg: "bg-[url(/building.jpg)]",
-    },
-    {
-      title: "Elon Musk",
-      img: "/elon_musk.jpg",
-      postImg: "bg-[url(/gaming_mouse.jpg)]",
-    },
-
-    {
-      title: "Elon Musk",
-      img: "/elon_musk.jpg",
-      postImg: "bg-[url(/gaming_mouse.jpg)]",
-    },
-    {
-      title: "Bill Gates",
-      img: "/bill_gates.jpg",
-      postImg: "bg-[url(/building.jpg)]",
-    },
-    {
-      title: "Elon Musk",
-      img: "/elon_musk.jpg",
-      postImg: "bg-[url(/gaming_mouse.jpg)]",
-    },
-  ];
-
+const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
   const { data: session } = useSession();
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
     <div className="px-4 bg-white rounded-[17px] shadow-md">
@@ -50,22 +25,20 @@ const Story = () => {
             alt={session?.user?.name || ""}
           />
           <div>
-            <div className="bg-primary w-9 h-9 rounded-full grid place-items-center text-[24px] text-white mx-auto -mt-[20px] relative outline outline-[6px] outline-white">
+            <button
+              onClick={() => setShowCreateModal(!showCreateModal)}
+              className="bg-primary w-9 h-9 rounded-full grid place-items-center text-[24px] text-white mx-auto -mt-[20px] relative outline outline-[6px] outline-white cursor-pointer"
+            >
               <AiOutlinePlus />
-            </div>
+              <CreatePost show={showCreateModal} setShow={setShowCreateModal} />
+            </button>
             <p className="text-center mt-2 font-medium">Create Story</p>
           </div>
         </div>
-        {recentImage.map(({ title, img, postImg }, index) => {
-          return (
-            <SingleStory
-              key={index}
-              title={title}
-              img={img}
-              postImg={postImg}
-            />
-          );
-        })}
+        {recentStory &&
+          recentStory.map(({ author, imageUrl, text }, index) => {
+            return <SingleStory key={index} title={text} postImg={imageUrl} />;
+          })}
       </div>
     </div>
   );

@@ -4,26 +4,28 @@ import { useState } from "react";
 import Story from "./Story";
 import WhatsOnYourMind from "./WhatsOnYourMind";
 import { CreatePost } from "@/components";
-import { Button } from "@/universal";
+import Post from "./Post";
+import { useGetData } from "@/hooks";
+import { IPostSchema } from "@/interface";
 
 const Feed = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<IPostSchema[]>();
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  useGetData("/photo-zone/post", setPosts);
 
   return (
     <div className="mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">
-      <Story />
-      <Button
+      <Story recentStory={posts} />
+      {/* <Button
         variant="secondary"
         onClick={() => setShowCreateModal(!showCreateModal)}
       >
         Create New
-      </Button>
+      </Button> */}
       <CreatePost show={showCreateModal} setShow={setShowCreateModal} />
       <WhatsOnYourMind />
-      {/* {posts.map(({post}) => {
-        return <Post key={post.id} id={post.id} data={post.data()} />;
-      })} */}
+      {posts && posts.map((post, idx) => <Post key={idx} data={post} />)}
     </div>
   );
 };
