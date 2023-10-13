@@ -21,12 +21,12 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
       if (Types.ObjectId.isValid(searchId)) {
         toast.success("id thik ase");
       } else {
-        toast.error("id thik nai");
+        toast.error("Invalid user id 🚨");
       }
     } else if (selectYear && selectMonth) {
       toast.success("year and month diase");
     } else {
-      toast.error("please provide date or user id");
+      toast.error("Please Provide Date 🚨");
     }
     setSearchData({ year: selectYear, month: selectMonth, id: searchId });
     setSelectYear("");
