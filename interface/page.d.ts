@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { Dispatch, SetStateAction } from "react";
 
 export interface IUploadImage {
@@ -15,11 +16,7 @@ export interface IChangePassword {
   reTypePassword?: string;
 }
 
-export interface ISearchData {
-  year: string;
-  month: string;
-  id: string;
-}
+export type ISearchData = Date | Types.ObjectId;
 
 export interface ISearchBar extends ISetSearchData {
   setSearchData: Dispatch<SetStateAction<ISearchData>>;

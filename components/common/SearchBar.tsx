@@ -7,31 +7,90 @@ import { Types } from "mongoose";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
-export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
-  const [selectYear, setSelectYear] = useState<string>("");
-  const [selectMonth, setSelectMonth] = useState<string>("");
-  const [searchId, setSearchId] = useState<string>("");
-  const currentYear = new Date().getFullYear();
+export type IMonth =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December;";
 
-  const years = Array.from({ length: 3 }, (_, index) => currentYear - index);
+function createDate(year: number, month: number): Date | null {
+  // JavaScript months are 0-based, so we subtract 1 from the provided month
+  // to get the correct month value for the Date constructor
+  const date = new Date(year, month - 1);
+
+  // Validate if the provided month and year result in a valid date
+  if (isNaN(date.getTime())) {
+    return null; // Invalid date, return null
+  }
+
+  return date;
+}
+
+function getMonthNumber(month: IMonth): number {
+  const monthMap: { [key: string]: number } = {
+    January: 1,
+    February: 2,
+    March: 3,
+    April: 4,
+    May: 5,
+    June: 6,
+    July: 7,
+    August: 8,
+    September: 9,
+    October: 10,
+    November: 11,
+    December: 12,
+  };
+
+  return monthMap[month];
+}
+export interface IFiledDate {
+  year: string;
+  month: string;
+  id: Types.ObjectId | string;
+}
+export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
+  const [filedData, setFiledData] = useState<IFiledDate>({
+    year: "",
+    month: "",
+    id: "",
+  });
+
   const filterDate = getLastThreeMonths();
 
   const handleSubmit = () => {
-    if (searchId) {
-      if (Types.ObjectId.isValid(searchId)) {
-        toast.success("id thik ase");
+    if (filedData.id) {
+      if (Types.ObjectId.isValid(filedData.id)) {
+        setSearchData(filedData.id as Types.ObjectId);
       } else {
         toast.error("Invalid user id 🚨");
       }
-    } else if (selectYear && selectMonth) {
-      toast.success("year and month diase");
+    } else if (filedData.year && filedData.year) {
+      const year: number = Number(filedData.year);
+      const month: number = getMonthNumber(filedData.month as IMonth);
+      const date: Date | null = createDate(year, month);
+
+      if (date) {
+        setSearchData(date);
+      } else {
+        toast.error("Invalid date. Please provide valid year and month.");
+      }
     } else {
-      toast.error("Please Provide Date 🚨");
+      toast.error("Please Provide filter Data 🚨");
     }
-    setSearchData({ year: selectYear, month: selectMonth, id: searchId });
-    setSelectYear("");
-    setSelectMonth("");
-    setSearchId("");
+    setFiledData({
+      year: "",
+      month: "",
+      id: "",
+    });
   };
 
   return (
@@ -41,8 +100,8 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
       </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
         <select
-          value={selectYear}
-          onChange={(e) => setSelectYear(e.target.value)}
+          value={filedData.year}
+          onChange={(e) => setFiledData({ ...filedData, year: e.target.value })}
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Choose Year</option>
@@ -54,8 +113,10 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
         </select>
 
         <select
-          value={selectMonth}
-          onChange={(e) => setSelectMonth(e.target.value)}
+          value={filedData.month}
+          onChange={(e) =>
+            setFiledData({ ...filedData, month: e.target.value })
+          }
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Select Month</option>
@@ -67,9 +128,9 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
         </select>
         <input
           type="text"
-          value={searchId}
+          value={String(filedData.id)}
           placeholder="User Id"
-          onChange={(e) => setSearchId(e.target.value)}
+          onChange={(e) => setFiledData({ ...filedData, id: e.target.value })}
           className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto"
         />
         <Button
