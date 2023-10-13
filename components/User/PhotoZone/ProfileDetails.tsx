@@ -17,12 +17,12 @@ const ProfileDetails = () => {
           src={session?.user?.image || ""}
           width={140}
           height={140}
-          alt={session?.user?.name || ""}
+          alt={session?.user?.firstName || ""}
           className="rounded-full  border-2 p-2"
         />
       </div>
       <Title variant="H4" className="py-6">
-        {session?.user?.name}
+        {session?.user?.firstName}
       </Title>
     </div>
   );

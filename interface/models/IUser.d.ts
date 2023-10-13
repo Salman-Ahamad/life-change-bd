@@ -30,6 +30,7 @@ export interface IUserSchema {
   email: string;
   password: string;
   reference: string;
+  image: string;
 
   role?: IUserRole;
   balance?: number;

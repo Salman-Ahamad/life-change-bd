@@ -56,6 +56,33 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   }
 };
 
+export const PATCH = async (req: NextRequest, res: NextResponse) => {
+  try {
+    const { postId, likes } = await req.json();
+
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (!user.role) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
+
+    const result = await Post.updateOne(
+      { _id: postId },
+      { likes },
+      {
+        new: true,
+      }
+    );
+
+    return ApiResponse(200, "User update successfully 🛠️✅", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
+
 export const DELETE = async (req: NextRequest, res: NextResponse) => {
   try {
     const request = await req.json();

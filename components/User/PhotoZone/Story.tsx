@@ -17,12 +17,13 @@ const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
     <div className="px-4 bg-white rounded-[17px] shadow-md">
       <div className="flex gap-[10px] mt-5 pb-5 overflow-x-scroll scrollbar-hide">
         <div className="w-28 shadow-md rounded-[15px] pb-2 shrink-0">
+          <CreatePost show={showCreateModal} setShow={setShowCreateModal} />
           <Image
             width={112}
             height={144}
             className="w-28 h-36 rounded-t-[15px] object-cover"
             src={session?.user?.image || ""}
-            alt={session?.user?.name || ""}
+            alt={session?.user?.firstName || ""}
           />
           <div>
             <button
@@ -30,7 +31,6 @@ const Story: React.FC<{ recentStory: IPostSchema[] }> = ({ recentStory }) => {
               className="bg-primary w-9 h-9 rounded-full grid place-items-center text-[24px] text-white mx-auto -mt-[20px] relative outline outline-[6px] outline-white cursor-pointer"
             >
               <AiOutlinePlus />
-              <CreatePost show={showCreateModal} setShow={setShowCreateModal} />
             </button>
             <p className="text-center mt-2 font-medium">Create Story</p>
           </div>

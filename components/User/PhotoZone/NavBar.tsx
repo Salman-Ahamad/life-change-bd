@@ -14,7 +14,7 @@ const Navbar: FC = () => {
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">
       <div className="flex items-center gap-2">
         <p className="text-xl font-semibold px-4">
-          {session && session?.user?.name}
+          {session && session?.user?.firstName}
         </p>
 
         <div className="relative hidden sm:block">
@@ -64,7 +64,7 @@ const Navbar: FC = () => {
           width={40}
           height={40}
           className="w-10 h-10 cursor-pointer rounded-full"
-          alt={session?.user?.name || ""}
+          alt={session?.user?.firstName || ""}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ import { useGetData } from "@/hooks";
 import { IPostSchema } from "@/interface";
 
 const Feed = () => {
-  const [posts, setPosts] = useState<IPostSchema[]>();
+  const [posts, setPosts] = useState<IPostSchema[]>([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   useGetData("/photo-zone/post", setPosts);
