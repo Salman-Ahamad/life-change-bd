@@ -29,11 +29,11 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
 
     // Update user's enrolled array
     // Note: Consider using transactions for multiple database operations
-    await User.updateOne({ _id: user._id }, { courses: updatedEnrolled });
+    await User.updateOne({ _id: user.id }, { courses: updatedEnrolled });
 
     const result = await Course.findByIdAndUpdate(
       id,
-      { $addToSet: { enrolled: user._id } },
+      { $addToSet: { enrolled: user.id } },
       { new: true }
     );
 

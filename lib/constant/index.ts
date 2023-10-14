@@ -37,7 +37,7 @@ export const UserRole = {
   inactive: "inactive",
 };
 
-export const inactiveLimit: number = 10;
+export const inactiveLimit: number = 12;
 
 export const months = [
   "January",

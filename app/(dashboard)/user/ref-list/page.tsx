@@ -3,13 +3,12 @@
 import { NextPage } from "next";
 import { useState } from "react";
 
-import { Header, PageHeader } from "@/components";
-import { ISearchData } from "@/interface";
+import { Header, PageHeader, RefTable } from "@/components";
+import { IUser } from "@/interface";
 import { navData } from "@/lib";
 
 const RefList: NextPage = () => {
-  const [searchData, setSearchData] = useState<ISearchData | {}>({});
-  console.log("🚀 ~ file: page.tsx:12 ~ searchData:", searchData);
+  const [data, setData] = useState<IUser[] | null>(null);
 
   return (
     <>
@@ -17,8 +16,16 @@ const RefList: NextPage = () => {
       <PageHeader
         title="Reference List (Inactive)"
         notice="Last 3 Month Outbound"
-        setSearchData={setSearchData}
+        setData={setData}
       />
+      {data !== null && data.length !== 0 && (
+        <RefTable
+          tableData={data}
+          tableHeaders={["No", "id", "Name", "Joining Time"]}
+          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          message="Message"
+        />
+      )}
     </>
   );
 };

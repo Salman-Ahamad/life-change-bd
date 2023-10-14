@@ -10,6 +10,7 @@ export const useGetData = (
 ) =>
   useEffect(() => {
     const id = toast.loading("Loading... 🔃");
+
     Axios.get(apiUrl)
       .then(({ data }) => {
         loadingToast(id, data.message, "success");
@@ -20,3 +21,19 @@ export const useGetData = (
         setData(undefined);
       });
   }, [apiUrl, setData]);
+
+export const getDataFn = async (
+  apiUrl: string,
+  setData: Dispatch<SetStateAction<any>>
+) => {
+  const id = toast.loading("Loading... 🔃");
+  Axios.get(apiUrl)
+    .then(({ data }) => {
+      loadingToast(id, data.message, "success");
+      setData(data.data);
+    })
+    .catch(({ response }) => {
+      loadingToast(id, response.data.message, "error");
+      setData(null);
+    });
+};

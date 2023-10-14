@@ -75,15 +75,17 @@ export const options: NextAuthOptions = {
             ? "/inactive"
             : "/user/active";
 
-        if (currentUser.email === profile?.email) {
-          const updatedData = {
-            isVerified: true,
-            balance: currentUser.balance + 5,
-          };
-          await User.updateOne({ _id: currentUser.id }, updatedData, {
-            new: true,
-          });
-          return returnUrl;
+        if (currentUser) {
+          if (currentUser.email === profile?.email) {
+            const updatedData = {
+              isVerified: true,
+              balance: currentUser.balance + 5,
+            };
+            await User.updateOne({ _id: currentUser.id }, updatedData, {
+              new: true,
+            });
+            return returnUrl;
+          }
         }
         return returnUrl;
       }

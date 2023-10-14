@@ -1,12 +1,12 @@
 import { Axios, loadingToast } from "@/utils";
 import { toast } from "react-toastify";
 
-export const updateData = (
+export const updateData = async (
   apiUrl: string,
   updatedData: object,
   toastOf: boolean = false
 ) => {
-  const id = !toastOf && toast.loading("Profile Updating...");
+  const id = !toastOf && toast.loading("Updating...🔃");
 
   Axios.patch(apiUrl, updatedData)
     .then(({ data }) => {
@@ -14,7 +14,7 @@ export const updateData = (
     })
     .catch(({ response }) =>
       id
-        ? loadingToast(id, response.data.message, "error")
-        : toast.error(response.data.message)
+        ? loadingToast(id, response.data.message || "Error❌", "error")
+        : toast.error(response.data.message || "Error❌")
     );
 };
