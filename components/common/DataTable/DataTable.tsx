@@ -1,13 +1,8 @@
 "use client";
 
+import { IDataTable } from "@/interface";
 import React from "react";
 
-export interface IDataTable {
-  title?: string;
-  tableHeaders: string[];
-  dataProperties: string[];
-  tableData: Record<string, any>[];
-}
 export const DataTable: React.FC<IDataTable> = ({
   title,
   tableHeaders,

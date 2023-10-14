@@ -42,6 +42,9 @@ const userSchema = new Schema<IUserSchema>(
       type: String,
       default: "inactive",
     },
+    image: {
+      type: String,
+    },
     reference: {
       type: String,
       default: "-",
@@ -103,6 +106,7 @@ const userSchema = new Schema<IUserSchema>(
     toJSON: {
       virtuals: true,
     },
+    strict: false,
   }
 );
 

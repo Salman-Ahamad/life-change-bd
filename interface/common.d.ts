@@ -75,6 +75,7 @@ export interface INavData {
   sendWish: INavItem[];
   transferPoints: INavItem[];
   profileEdit: INavItem[];
+  settings: INavItem[];
 }
 
 export interface IInput extends IClassName {

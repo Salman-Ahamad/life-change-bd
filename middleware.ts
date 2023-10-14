@@ -49,5 +49,7 @@ export const config = {
     "/user/ref-list/my-ref",
     "/user/ref-list/send-wish",
     "/user/transfer-points",
+    "/user/photo-zone",
+    "/user/photo-zone/profile",
   ],
 };
