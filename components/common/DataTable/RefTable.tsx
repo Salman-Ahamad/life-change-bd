@@ -17,7 +17,7 @@ export const RefTable: FC<IRefTable> = ({
   };
 
   return (
-    <div className="max-w-screen-md mx-auto p-4 md:p-8">
+    <div className="max-w-screen-lg mx-auto p-4 md:p-8">
       <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
@@ -36,6 +36,7 @@ export const RefTable: FC<IRefTable> = ({
           <tbody className="text-gray-600 divide-y">
             {tableData.map((referUser, idx) => (
               <tr key={idx}>
+                <Tbody key={idx} label={String(idx + 1)} />
                 {dataProperties.map((item, i) => {
                   switch (item) {
                     case "firstName":
@@ -76,10 +77,7 @@ export const RefTable: FC<IRefTable> = ({
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => {
-                      console.log(referUser);
-                      handleAction(referUser.id);
-                    }}
+                    onClick={() => handleAction(referUser.id)}
                   >
                     {actionBtn}
                   </td>

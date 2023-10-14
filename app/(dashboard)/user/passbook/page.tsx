@@ -4,13 +4,13 @@ import { useState } from "react";
 
 import { Header, PageHeader, RefTable } from "@/components";
 import { useGetData } from "@/hooks";
-import { IAllRefer } from "@/interface";
+import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
 import { Title } from "@/universal";
 
 const Passbook = () => {
-  const [passbookData, setPassbookData] = useState<IAllRefer[] | null>(null);
-  useGetData("/all-ref?collectInactive=true", setPassbookData);
+  const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
+  useGetData("/all-ref/1?collectInactive=true", setPassbookData);
 
   return (
     <>
@@ -23,7 +23,7 @@ const Passbook = () => {
       ) : passbookData.length !== 0 ? (
         <RefTable
           tableData={passbookData}
-          tableHeaders={["id", "Name", "Joining Time"]}
+          tableHeaders={["No", "id", "Name", "Joining Time"]}
           dataProperties={["id", "firstName", "createdAt", "phone"]}
           message="Message"
         />
