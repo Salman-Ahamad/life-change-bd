@@ -13,13 +13,14 @@ export type IUserRole =
 
 export interface ISettings {
   activeNotice: boolean;
-  subAdmin: Types.ObjectId;
+  admin: Types.ObjectId;
   consultant: Types.ObjectId;
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
   collectInactive: boolean;
 }
+
 export interface IUserSchema {
   firstName: string;
   lastName: string;
@@ -30,9 +31,9 @@ export interface IUserSchema {
   email: string;
   password: string;
   reference: string;
-  image: string;
 
   role?: IUserRole;
+  image?: string;
   balance?: number;
   isVerified?: boolean;
 
@@ -53,9 +54,10 @@ export interface IUser extends IUserSchema, IId {
   courses: ICourse[];
   posts: string[];
   likes: string[];
+  image: string;
   settings: {
     activeNotice: boolean;
-    subAdmin: string;
+    admin: string;
     consultant: string;
     controller: string;
     teacher: string;

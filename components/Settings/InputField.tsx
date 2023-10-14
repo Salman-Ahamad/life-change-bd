@@ -1,13 +1,13 @@
 "use client";
 
-// components/ProfileInput.tsx
-import React, { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from "react";
 
-interface ProfileInputProps {
+export interface ProfileInputProps {
   label: string;
   name: string;
   defaultValue: string;
-  onChange: (value: string) => void;
+  onChange: (value: any) => void;
+  selectOption?: string[];
 }
 
 export const InputField: FC<ProfileInputProps> = ({
@@ -15,19 +15,43 @@ export const InputField: FC<ProfileInputProps> = ({
   name,
   defaultValue,
   onChange,
+  selectOption,
 }) => {
   return (
-    <div className="text-lg py-1 max-w-md w-full">
+    <div className="text-lg py-1 grid grid-cols-2 w-[98%]">
       <span className="font-semibold pl-2">{label}&nbsp;</span>
-      <input
-        type="text"
-        name={name}
-        defaultValue={defaultValue}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
-        }
-        className="outline-none pl-1.5 bg-gray-100 rounded-sm"
-      />
+      {selectOption ? (
+        <select
+          className="outline-none pl-1.5 bg-gray-100 rounded-sm"
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+            onChange(e.target.value)
+          }
+          // value={defaultValue}
+          defaultValue={defaultValue}
+          defaultChecked={true}
+        >
+          <option value={defaultValue}>{defaultValue}</option>
+
+          {selectOption.map(
+            (option) =>
+              option !== defaultValue && (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              )
+          )}
+        </select>
+      ) : (
+        <input
+          type="text"
+          name={name}
+          defaultValue={defaultValue}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange(e.target.value)
+          }
+          className="outline-none pl-1.5 bg-gray-100 rounded-sm"
+        />
+      )}
     </div>
   );
 };
