@@ -12,6 +12,9 @@ import { useCurrentUser } from "@/hooks";
 const WhatsOnYourMind: React.FC = () => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFileThumb, setSelectedFileThumb] = useState<string | null>(
+    null
+  );
   const [postText, setPostText] = useState<string>("");
   const [postImage, setPostImage] = useState<string>("");
 
@@ -22,6 +25,14 @@ const WhatsOnYourMind: React.FC = () => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
+
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        setSelectedFileThumb(event.target?.result as string);
+      };
+
+      reader.readAsDataURL(file);
     } else {
       console.error("Invalid file type. Please choose a valid file.");
     }
@@ -65,55 +76,6 @@ const WhatsOnYourMind: React.FC = () => {
     }
   };
 
-  // const [input, setInput] = useState("");
-  // const [loading, setLoading] = useState(false);
-
-  // const [selectedFile, setSelectedFile] = useState(null);
-
-  const fPicker = useRef(null);
-
-  // const { data: session } = useSession();
-
-  // const addImageToPost = (e: any) => {
-  //   const reader = new FileReader();
-  //   if (e.target.files[0]) {
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-
-  //   reader.onload = (readerEvent) => {
-  //       setSelectedFile(readerEvent.target.result);
-  //   };
-  // };
-
-  // const sendPost = async () => {
-  //   if (loading) return;
-
-  //   setLoading(true);
-
-  //   // const docRef = await addDoc(collection(db, "posts"), {
-  //   //   id: session.user.uid,
-  //   //   username: session.user.name,
-  //   //   userImg: session.user.image,
-  //   //   text: input,
-  //   //   timestamp: serverTimestamp(),
-  //   // });
-
-  //   // const imageRef = ref(storage, `posts/${docRef.id}/image`);
-
-  //   // if (selectedFile) {
-  //   //   await uploadString(imageRef, selectedFile, "data_url").then(async () => {
-  //   //     const downloadURL = await getDownloadURL(imageRef);
-  //   //     await updateDoc(doc(db, "posts", docRef.id), {
-  //   //       image: downloadURL,
-  //   //     });
-  //   //   });
-  //   // }
-
-  //   setLoading(false);
-  //   setInput("");
-  //   setSelectedFile(null);
-  // };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -138,16 +100,13 @@ const WhatsOnYourMind: React.FC = () => {
           placeholder="What's on your mind?"
         />
       </div>
-      {/* TODO: Add selected file thumbnail */}
+
       {postImage && (
         <div className="relative">
-          {/* <img src={postImage} alt="pic" /> */}
-          <p>{postImage}</p>
           <div
             className="bg-gray-300 text-gray-500 absolute top-0 right-0 m-[10px] text-[18px] h-[30px] w-[30px] rounded-full cursor-pointer grid place-items-center"
             onClick={() => {
               setPostImage("");
-              // fPicker.current.value = "";
             }}
           >
             <MdOutlineClose />
@@ -156,30 +115,31 @@ const WhatsOnYourMind: React.FC = () => {
       )}
 
       <div className="flex justify-between px-4 pt-6">
-        {/* <div className="flex items-center gap-2 cursor-pointer">
-          <IoVideocamSharp className="text-[#E42645] text-[30px]" />
-          <p className="text-gray-500 font-medium">Live Video</p>
-        </div> */}
-
         <label htmlFor="filePicker">
           <div className="flex items-center gap-2 cursor-pointer">
             <MdOutlinePhotoLibrary className="text-[#41B35D] text-[30px]" />
-            <p className="text-gray-500 font-medium">Photo/video</p>
+            <p className="text-gray-500 font-medium">Photo</p>
+            {selectedFileThumb && (
+              <Image
+                width={30}
+                height={50}
+                src={selectedFileThumb}
+                alt="file to upload"
+                className="rounded ml-2"
+              />
+            )}
           </div>
-
           <input
             type="file"
             name="filePicker"
             id="filePicker"
             accept="image/*"
             onChange={handleFileChange}
-            ref={fPicker}
             hidden
-          />
+          />{" "}
         </label>
       </div>
 
-      {/* <Button input={input} selectedFile={selectedFile} onClick={sendPost} /> */}
       <Button
         // disabled={!input.trim() && !selectedFile}
         disabled={uploading}

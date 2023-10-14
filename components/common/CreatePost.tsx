@@ -53,6 +53,7 @@ export const CreatePost: React.FC<{
         return;
       } finally {
         setUploading(false);
+        setShow(false);
       }
     } else {
       console.error("No file selected for upload.");
