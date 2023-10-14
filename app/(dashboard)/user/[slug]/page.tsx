@@ -3,10 +3,10 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 
-import { Header } from "@/components";
-import { updateData, useCurrentUser } from "@/hooks";
-import { IEditProfile, ISlugParams } from "@/interface";
-import { navData } from "@/lib";
+import { FileUploader, Header } from "@/components";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { IEditProfile, ISlugParams, IUser } from "@/interface";
+import { avatar, avatarProfile, navData } from "@/lib";
 import { Button, Container } from "@/universal";
 import { InputField } from "@/components/Settings";
 import Image from "next/image";
@@ -14,12 +14,26 @@ import Image from "next/image";
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
+  const [userData, setUserData] = useState<IUser>();
+  const [userImage, setUserImage] = useState<string>("");
   const [updatedData, setUpdatedData] = useState<IEditProfile>({});
   const [disabled, setDisabled] = useState(true);
   const user = useCurrentUser();
 
   useEffect(() => updatedData && setDisabled(false), [updatedData]);
+  // useEffect(() => {
+  //   if (userImage.length > 0) {
+  //     setUpdatedData((prev) => ({ ...prev, image: userImage }));
+  //   }
+  // }, [userImage]);
 
+  const updateImage = () => {
+    if (userImage.length > 0) {
+      setUpdatedData((prev) => ({ ...prev, image: userImage }));
+    }
+  };
+
+  useGetData(`/user/${slug}`, setUserData);
   const updateProfile = () => updateData(`/user/${slug}`, updatedData);
 
   return (
@@ -31,10 +45,35 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           Edit Profile
         </h1>
         <div className="flex flex-col justify-center items-center gap-2.5 pb-8">
+          <div className="flex gap-3">
+            {userData && (
+              <Image
+                src={userData.image || avatarProfile}
+                width={80}
+                height={80}
+                alt={userData.firstName}
+                className="rounded-full"
+              />
+            )}
+            <FileUploader
+              fileType="image/png, image/jpeg, image/jpg, image/gif"
+              setFileUrl={setUserImage}
+              updateImage={updateImage}
+            />
+            {/* <InputField
+              label="Photo:"
+              name="image"
+              defaultValue={(userData && userData.image) || ""}
+              onChange={(value) =>
+                setUpdatedData((prev) => ({ ...prev, image: value }))
+              }
+            /> */}
+          </div>
+
           <InputField
             label="First Name:"
             name="firstName"
-            defaultValue={user && user.firstName}
+            defaultValue={(userData && userData.firstName) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, firstName: value }))
             }
@@ -42,7 +81,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Last Name:"
             name="lastName"
-            defaultValue={user && user.lastName}
+            defaultValue={(userData && userData.lastName) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, lastName: value }))
             }
@@ -51,7 +90,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Email:"
             name="email"
-            defaultValue={user && user.email}
+            defaultValue={(userData && userData.email) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, email: value }))
             }
@@ -59,7 +98,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Phone:"
             name="phone"
-            defaultValue={user && user.phone}
+            defaultValue={(userData && userData.phone) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, phone: value }))
             }
@@ -67,7 +106,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Whatsapp:"
             name="whatsapp"
-            defaultValue={user && user.whatsapp}
+            defaultValue={(userData && userData.whatsapp) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, whatsapp: value }))
             }
@@ -75,7 +114,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Country:"
             name="country"
-            defaultValue={user && user.country}
+            defaultValue={(userData && userData.country) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, country: value }))
             }
@@ -83,7 +122,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Language:"
             name="language"
-            defaultValue={user && user.language}
+            defaultValue={(userData && userData.language) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, language: value }))
             }
@@ -91,34 +130,16 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Role:"
             name="role"
-            defaultValue={user && user.role}
+            defaultValue={(userData && userData.role) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, role: value }))
             }
           />
-          <div className="flex gap-3">
-            {user && (
-              <Image
-                src={user.image}
-                width={80}
-                height={80}
-                alt={user.firstName}
-                className="rounded-md"
-              />
-            )}
-            <InputField
-              label="Photo:"
-              name="image"
-              defaultValue={user && user.image}
-              onChange={(value) =>
-                setUpdatedData((prev) => ({ ...prev, image: value }))
-              }
-            />
-          </div>
+
           <InputField
             label="Controller:"
             name="controller"
-            defaultValue={user && user.settings.controller}
+            defaultValue={(userData && userData.settings.controller) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -131,7 +152,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Consultant:"
             name="consultant"
-            defaultValue={user && user.settings.consultant}
+            defaultValue={(userData && userData.settings.consultant) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -144,7 +165,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Teacher:"
             name="teacher"
-            defaultValue={user && user.settings.teacher}
+            defaultValue={(userData && userData.settings.teacher) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -157,7 +178,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Group Leader:"
             name="gl"
-            defaultValue={user && user.settings.gl}
+            defaultValue={(userData && userData.settings.gl) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,

@@ -6,7 +6,7 @@ import React, { ChangeEvent, FC } from "react";
 interface ProfileInputProps {
   label: string;
   name: string;
-  defaultValue: string | undefined;
+  defaultValue: string;
   onChange: (value: string) => void;
 }
 
@@ -17,7 +17,7 @@ export const InputField: FC<ProfileInputProps> = ({
   onChange,
 }) => {
   return (
-    <div className="text-lg py-1">
+    <div className="text-lg py-1 max-w-md w-full">
       <span className="font-semibold pl-2">{label}&nbsp;</span>
       <input
         type="text"

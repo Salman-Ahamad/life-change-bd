@@ -145,9 +145,10 @@ export interface IFiledDate {
   id: Types.ObjectId | string;
 }
 
-export interface ImageUploaderProps {
+export interface ImageUploaderProps extends IClassName {
   fileType: string;
   setFileUrl: Dispatch<SetStateAction<string>>;
+  updateImage?: () => void;
 }
 
 export interface IWaDeepLink {
