@@ -53,6 +53,14 @@ export interface IUser extends IUserSchema, IId {
   courses: ICourse[];
   posts: string[];
   likes: string[];
-  settings: ISettings;
+  settings: {
+    activeNotice: boolean;
+    subAdmin: string;
+    consultant: string;
+    controller: string;
+    teacher: string;
+    gl: string;
+    collectInactive: boolean;
+  };
   createdAt: string;
 }

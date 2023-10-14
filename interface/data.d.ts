@@ -47,10 +47,12 @@ export interface IDataTableWithImage {
 }
 
 export interface IUserDataForDataTable {
+  id: string;
   image: string;
   firstName: string;
   email: string;
   phone: string;
   lastName: string;
   balance: number;
+  status?: string;
 }

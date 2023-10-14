@@ -3,10 +3,13 @@
 import { ImageUploaderProps } from "@/interface";
 import axios from "axios";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export const FileUploader: FC<ImageUploaderProps> = ({
   fileType,
   setFileUrl,
+  className,
+  updateImage,
 }) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -48,6 +51,7 @@ export const FileUploader: FC<ImageUploaderProps> = ({
         const { url } = await uploadRes.data;
         if (url) {
           setFileUrl(url);
+          updateImage && updateImage();
         }
       } catch (error) {
         console.error("Error uploading file:", error);
@@ -62,7 +66,7 @@ export const FileUploader: FC<ImageUploaderProps> = ({
   };
 
   return (
-    <div className="flex flex-col max-w-lg p-8">
+    <div className={twMerge("flex flex-col max-w-lg p-8", className)}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input type="file" name="file" onChange={handleFileChange} />
         {uploading ? (

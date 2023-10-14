@@ -126,7 +126,9 @@ export interface ITHeader {
   label: string | JSX.Element;
 }
 
-export interface ITbody extends ITHeader {}
+export interface ITbody extends ITHeader {
+  href?: string;
+}
 
 export interface IRefTable {
   tableHeaders: string[];
@@ -143,9 +145,10 @@ export interface IFiledDate {
   id: Types.ObjectId | string;
 }
 
-export interface ImageUploaderProps {
+export interface ImageUploaderProps extends IClassName {
   fileType: string;
   setFileUrl: Dispatch<SetStateAction<string>>;
+  updateImage?: () => void;
 }
 
 export interface IWaDeepLink {

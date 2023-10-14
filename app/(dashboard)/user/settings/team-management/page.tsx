@@ -9,6 +9,7 @@ import React from "react";
 
 const tableItems: IUserDataForDataTable[] = [
   {
+    id: "1",
     image:
       "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697183246/upload/dfbaurmzjogt9235nqkp.jpg",
     firstName: "Liam",
@@ -18,6 +19,7 @@ const tableItems: IUserDataForDataTable[] = [
     balance: 1000,
   },
   {
+    id: "2",
     image:
       "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697172180/upload/nylfnq5gmnbxqbazb5ac.jpg",
     firstName: "Olivia",
@@ -27,6 +29,7 @@ const tableItems: IUserDataForDataTable[] = [
     balance: 900,
   },
   {
+    id: "3",
     image:
       "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697172180/upload/nylfnq5gmnbxqbazb5ac.jpg",
     firstName: "William",
