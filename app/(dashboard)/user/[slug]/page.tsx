@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { FileUploader, Header } from "@/components";
 import { InputField } from "@/components/Settings";
-import { updateData, useGetData } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, Container } from "@/universal";
@@ -18,14 +18,34 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
+  const user = useCurrentUser();
+  useGetData(`/user/${slug}`, setUserData);
+
+  const admin = [
+    UserRole.controller,
+    UserRole.consultant,
+    UserRole.teacher,
+    UserRole.gl,
+    UserRole.active,
+    UserRole.inactive,
+  ];
+  const controller = [
+    UserRole.consultant,
+    UserRole.teacher,
+    UserRole.gl,
+    UserRole.active,
+    UserRole.inactive,
+  ];
+  const consultant = [UserRole.teacher, UserRole.gl];
+
+  const selectOption =
+    (user?.role === UserRole.admin && admin) ||
+    (user?.role === UserRole.controller && controller) ||
+    (user?.role === UserRole.consultant && consultant) ||
+    [];
 
   useEffect(() => userData && setDisabled(false), [userData]);
-
-  useGetData(`/user/${slug}`, setUserData);
-  const updateProfile = () => {
-    console.log("🚀 ~ file: page.tsx:27 ~ updatedData:", updatedData);
-    updateData(`/user/${slug}`, updatedData);
-  };
+  const updateProfile = () => updateData(`/user/${slug}`, updatedData);
 
   return (
     <main>
@@ -35,25 +55,27 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           Edit Profile
         </h1>
         <div className="flex flex-col justify-center items-center gap-2.5 pb-8">
-          <div className="flex gap-3">
-            {
-              <Image
-                src={userImage || userData?.image || avatarProfile}
-                width={80}
-                height={80}
-                alt={userData?.firstName || ""}
-                className="rounded-full w-[80px] h-[80px]"
-              />
-            }
-            <FileUploader
-              fileType="image/png, image/jpeg, image/jpg, image/gif"
-              setFileUrl={setUserImage}
-              className="p-0 pb-8 max-w-none lg:max-w-xs"
-              setUpdatedData={setUpdatedData}
+          <div className="flex gap-3 pb-8 ">
+            <Image
+              src={userImage || userData?.image || avatarProfile}
+              width={80}
+              height={80}
+              alt={userData?.firstName || ""}
+              className="rounded-full w-[80px] h-[80px]"
             />
+
+            {user?.role === UserRole.admin && (
+              <FileUploader
+                fileType="image/png, image/jpeg, image/jpg, image/gif"
+                setFileUrl={setUserImage}
+                className="p-0 max-w-none lg:max-w-xs"
+                setUpdatedData={setUpdatedData}
+              />
+            )}
           </div>
 
           <InputField
+            onlyText={user?.role !== UserRole.admin}
             label="First Name:"
             name="firstName"
             defaultValue={(userData && userData.firstName) || ""}
@@ -62,6 +84,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={user?.role !== UserRole.admin}
             label="Last Name:"
             name="lastName"
             defaultValue={(userData && userData.lastName) || ""}
@@ -71,6 +94,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           />
 
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
             label="Email:"
             name="email"
             defaultValue={(userData && userData.email) || ""}
@@ -79,6 +106,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
             label="Phone:"
             name="phone"
             defaultValue={(userData && userData.phone) || ""}
@@ -87,6 +118,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
             label="Whatsapp:"
             name="whatsapp"
             defaultValue={(userData && userData.whatsapp) || ""}
@@ -96,16 +131,13 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           />
 
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
             label="Role:"
             name="role"
-            selectOption={[
-              UserRole.controller,
-              UserRole.consultant,
-              UserRole.teacher,
-              UserRole.gl,
-              UserRole.active,
-              UserRole.inactive,
-            ]}
+            selectOption={selectOption}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>
               setUpdatedData((prev) => ({ ...prev, role: value }))
@@ -113,6 +145,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           />
 
           <InputField
+            onlyText={user?.role !== UserRole.admin}
             label="Controller:"
             name="controller"
             defaultValue={(userData && userData.settings?.controller?.id) || ""}
@@ -124,6 +157,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
             label="Consultant:"
             name="consultant"
             defaultValue={(userData && userData.settings?.consultant?.id) || ""}
@@ -135,6 +172,11 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller &&
+              user?.role !== UserRole.consultant
+            }
             label="Teacher:"
             name="teacher"
             defaultValue={(userData && userData.settings?.teacher?.id) || ""}
@@ -146,6 +188,11 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller &&
+              user?.role !== UserRole.consultant
+            }
             label="Group Leader:"
             name="gl"
             defaultValue={(userData && userData.settings?.gl?.id) || ""}

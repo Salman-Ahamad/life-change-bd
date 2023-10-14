@@ -170,4 +170,5 @@ export interface ProfileInputProps {
   defaultValue: string;
   onChange: (value: any) => void;
   selectOption?: string[];
+  onlyText?: boolean;
 }
