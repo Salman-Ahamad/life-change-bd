@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 
 export const useGetData = (
   apiUrl: string,
-  setData: Dispatch<SetStateAction<any>>,
-  refetch?: boolean
+  setData: Dispatch<SetStateAction<any>>
 ) =>
   useEffect(() => {
     // const id = toast.loading("Loading... 🔃");
@@ -21,4 +20,20 @@ export const useGetData = (
         // loadingToast(id, response.data.message, "error");
         setData(undefined);
       });
-  }, [apiUrl, setData, refetch]);
+  }, [apiUrl, setData]);
+
+export const getDataFn = async (
+  apiUrl: string,
+  setData: Dispatch<SetStateAction<any>>
+) => {
+  const id = toast.loading("Loading... 🔃");
+  Axios.get(apiUrl)
+    .then(({ data }) => {
+      loadingToast(id, data.message, "success");
+      setData(data.data);
+    })
+    .catch(({ response }) => {
+      loadingToast(id, response.data.message, "error");
+      setData(null);
+    });
+};

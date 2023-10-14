@@ -1,6 +1,6 @@
 "use client";
 
-import { IRefTable } from "@/interface";
+import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
 
@@ -12,12 +12,12 @@ export const RefTable: FC<IRefTable> = ({
   actionBtn,
   setActionId,
 }) => {
-  const handleAction = (referUserId: string, refId: string) => {
-    setActionId && setActionId(referUserId, refId);
-    // setActionId && setActionId(referUserId);
+  const handleAction = (referUserId: string) => {
+    setActionId && setActionId(referUserId);
   };
+
   return (
-    <div className="max-w-screen-md mx-auto p-4 md:p-8">
+    <div className="max-w-screen-lg mx-auto p-4 md:p-8">
       <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
@@ -34,8 +34,9 @@ export const RefTable: FC<IRefTable> = ({
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {tableData.map(({ referUser, id }, idx) => (
+            {tableData.map((referUser, idx) => (
               <tr key={idx}>
+                <Tbody key={idx} label={String(idx + 1)} />
                 {dataProperties.map((item, i) => {
                   switch (item) {
                     case "firstName":
@@ -64,14 +65,19 @@ export const RefTable: FC<IRefTable> = ({
                         />
                       );
                     default:
-                      return <Tbody key={i} label={referUser[item]} />;
+                      return (
+                        <Tbody
+                          key={i}
+                          label={referUser[item as keyof IUser] as string}
+                        />
+                      );
                   }
                 })}
 
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.id, id)}
+                    onClick={() => handleAction(referUser.id)}
                   >
                     {actionBtn}
                   </td>

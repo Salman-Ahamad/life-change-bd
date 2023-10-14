@@ -1,37 +1,43 @@
 "use client";
 
-import { ISearchBar } from "@/interface";
-import { Button, Container } from "@/universal";
-import { getLastThreeMonths } from "@/utils";
 import { Types } from "mongoose";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
-export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
-  const [selectYear, setSelectYear] = useState<string>("");
-  const [selectMonth, setSelectMonth] = useState<string>("");
-  const [searchId, setSearchId] = useState<string>("");
-  const currentYear = new Date().getFullYear();
+import { getDataFn } from "@/hooks";
+import { IFiledDate, IMonth, ISearchBar } from "@/interface";
+import { Button, Container } from "@/universal";
+import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
 
-  const years = Array.from({ length: 3 }, (_, index) => currentYear - index);
-  const lastThreeMonths = getLastThreeMonths();
+export const SearchBar: FC<ISearchBar> = ({ setData }) => {
+  const [filedData, setFiledData] = useState<IFiledDate>({
+    year: "",
+    month: "",
+    id: "",
+  });
+  const filterDate = getLastThreeMonths();
 
-  const handleSubmit = () => {
-    if (searchId) {
-      if (Types.ObjectId.isValid(searchId)) {
-        toast.success("id thik ase");
+  const handleSubmit = async () => {
+    if (filedData.id) {
+      if (Types.ObjectId.isValid(filedData.id)) {
+        await getDataFn(`/all-ref/1?id=${filedData.id}`, setData);
       } else {
-        toast.error("id thik nai");
+        toast.error("Invalid user id 🚨");
       }
-    } else if (selectYear && selectMonth) {
-      toast.success("year and month diase");
+    } else if (filedData.year && filedData.year) {
+      const month = getMonthNumber(filedData.month as IMonth);
+      const date = createDate(Number(filedData.year), month);
+
+      if (date) {
+        await getDataFn(`/all-ref/1?date=${date}`, setData);
+      } else {
+        toast.error("Invalid date. Please provide valid year and month.");
+      }
     } else {
-      toast.error("please provide date or user id");
+      toast.error("Please Provide filter Data 🚨");
     }
-    setSearchData({ year: selectYear, month: selectMonth, id: searchId });
-    setSelectYear("");
-    setSelectMonth("");
-    setSearchId("");
+
+    setFiledData({ year: "", month: "", id: "" });
   };
 
   return (
@@ -41,12 +47,12 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
       </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
         <select
-          value={selectYear}
-          onChange={(e) => setSelectYear(e.target.value)}
+          value={filedData.year}
+          onChange={(e) => setFiledData({ ...filedData, year: e.target.value })}
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Choose Year</option>
-          {years.map((year) => (
+          {filterDate.years.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
@@ -54,12 +60,14 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
         </select>
 
         <select
-          value={selectMonth}
-          onChange={(e) => setSelectMonth(e.target.value)}
+          value={filedData.month}
+          onChange={(e) =>
+            setFiledData({ ...filedData, month: e.target.value })
+          }
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
         >
           <option value="">Select Month</option>
-          {lastThreeMonths.map((month, index) => (
+          {filterDate.mounts.reverse().map((month, index) => (
             <option key={index} value={month}>
               {month}
             </option>
@@ -67,9 +75,9 @@ export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
         </select>
         <input
           type="text"
-          value={searchId}
+          value={String(filedData.id)}
           placeholder="User Id"
-          onChange={(e) => setSearchId(e.target.value)}
+          onChange={(e) => setFiledData({ ...filedData, id: e.target.value })}
           className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto"
         />
         <Button

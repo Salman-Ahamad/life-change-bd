@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 import { HTMLInputTypeAttribute } from "react";
-import { IAllRefer, ICardData, IChildrenWithClassName, IClassName } from ".";
+import { ICardData, IChildrenWithClassName, IClassName, IUser } from ".";
 
 export type IColor =
   | "black"
@@ -9,6 +9,20 @@ export type IColor =
   | "primary"
   | "secondary"
   | "accent";
+
+export type IMonth =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December;";
 
 export type IFontWeight = "400" | "500" | "600" | "700" | "800" | "900";
 
@@ -117,8 +131,14 @@ export interface ITbody extends ITHeader {}
 export interface IRefTable {
   tableHeaders: string[];
   dataProperties: string[];
-  tableData: IAllRefer[];
+  tableData: IUser[];
   message?: string;
   actionBtn?: JSX.Element;
-  setActionId?: (id: string, refId: string) => void;
+  setActionId?: (id: string) => void;
+}
+
+export interface IFiledDate {
+  year: string;
+  month: string;
+  id: Types.ObjectId | string;
 }

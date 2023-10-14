@@ -2,14 +2,14 @@
 
 import { Header, PageHeader, RefTable } from "@/components";
 import { useGetData } from "@/hooks";
-import { IAllRefer } from "@/interface";
+import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
 import { Title } from "@/universal";
 import { useState } from "react";
 
 const SendWish = () => {
-  const [sendWishData, setSendWish] = useState<IAllRefer[] | null>(null);
-  useGetData("/all-ref", setSendWish);
+  const [sendWishData, setSendWish] = useState<IUser[] | null>(null);
+  useGetData("/all-ref/1", setSendWish);
 
   return (
     <>
@@ -22,8 +22,8 @@ const SendWish = () => {
       ) : (
         <RefTable
           tableData={sendWishData}
-          tableHeaders={["id"]}
-          dataProperties={["id", "phone"]}
+          tableHeaders={["no", "id", "Name"]}
+          dataProperties={["id", "firstName", "phone"]}
           message="SendWish"
         />
       )}
