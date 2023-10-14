@@ -18,6 +18,7 @@ export interface ISettingsSchema {
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
+  sendWish: boolean;
 }
 
 export interface ISettings {
