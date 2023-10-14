@@ -260,8 +260,8 @@ export const navData: INavData = {
       link: "/user/active",
     },
     {
-      label: "Students",
-      link: "/user/settings/students",
+      label: "Manage User",
+      link: "/user/settings/manage-user",
     },
     {
       label: "Reports",
@@ -270,6 +270,10 @@ export const navData: INavData = {
     {
       label: "Team Management",
       link: "/user/settings/team-management",
+    },
+    {
+      label: "Student",
+      link: "/user/settings/student",
     },
   ],
 };
