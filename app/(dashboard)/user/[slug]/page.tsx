@@ -30,7 +30,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
         <h1 className="text-4xl font-semibold my-10 text-center">
           Edit Profile
         </h1>
-        <div className="flex flex-col justify-center items-center gap-2.5">
+        <div className="flex flex-col justify-center items-center gap-2.5 pb-8">
           <InputField
             label="First Name:"
             name="firstName"
