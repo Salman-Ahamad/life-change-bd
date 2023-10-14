@@ -5,6 +5,7 @@ export interface IAppConfigSchema {
   baseFee: number;
   sliderImage: string[];
   meetings: string[];
+  whatsAppMessage: string;
 }
 
 export interface IAppConfig extends IAppConfigSchema, IId {}

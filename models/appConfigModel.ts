@@ -20,6 +20,10 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       type: [String],
       default: [],
     },
+    whatsAppMessage: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,
