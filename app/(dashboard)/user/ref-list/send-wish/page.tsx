@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
@@ -20,7 +20,7 @@ const SendWish = () => {
           Loading... Please wait 🔃
         </Title>
       ) : (
-        <RefTable
+        <DataTable
           tableData={sendWishData}
           tableHeaders={["no", "id", "Name"]}
           dataProperties={["id", "firstName", "phone"]}

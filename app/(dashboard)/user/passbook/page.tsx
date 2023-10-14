@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
@@ -21,7 +21,7 @@ const Passbook = () => {
           Loading... Please wait 🔃
         </Title>
       ) : passbookData.length !== 0 ? (
-        <RefTable
+        <DataTable
           tableData={passbookData}
           tableHeaders={["No", "id", "Name", "Joining Time"]}
           dataProperties={["id", "firstName", "createdAt", "phone"]}

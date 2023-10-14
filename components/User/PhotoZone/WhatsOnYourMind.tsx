@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { MdOutlineClose, MdOutlinePhotoLibrary } from "react-icons/md";
 
-import { useSession } from "next-auth/react";
-import { Button } from "@/universal";
-import Image from "next/image";
-import { Axios } from "@/utils";
 import { useCurrentUser } from "@/hooks";
+import { Button } from "@/universal";
+import { Axios } from "@/utils";
+import Image from "next/image";
 
 const WhatsOnYourMind: React.FC = () => {
   const [uploading, setUploading] = useState<boolean>(false);
@@ -136,12 +135,11 @@ const WhatsOnYourMind: React.FC = () => {
             accept="image/*"
             onChange={handleFileChange}
             hidden
-          />{" "}
+          />
         </label>
       </div>
 
       <Button
-        // disabled={!input.trim() && !selectedFile}
         disabled={uploading}
         type="submit"
         variant="primary"

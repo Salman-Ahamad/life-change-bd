@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { HTMLInputTypeAttribute } from "react";
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { ICardData, IChildrenWithClassName, IClassName, IUser } from ".";
 
 export type IColor =
@@ -143,4 +143,22 @@ export interface IFiledDate {
   year: string;
   month: string;
   id: Types.ObjectId | string;
+}
+
+export interface ImageUploaderProps {
+  fileType: string;
+  setFileUrl: Dispatch<SetStateAction<string>>;
+}
+
+export interface IWaDeepLink {
+  phoneNo: string;
+  btnText: string;
+  message?: string;
+  groupLink?: string;
+}
+
+export interface IGoogleMeetDeepLink {
+  meetId: string;
+  startTime?: string;
+  endTime?: string;
 }

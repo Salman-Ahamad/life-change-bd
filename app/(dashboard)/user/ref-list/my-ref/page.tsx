@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
@@ -36,7 +36,7 @@ const MyReference = () => {
           Loading... Please wait 🔃
         </Title>
       ) : (
-        <RefTable
+        <DataTable
           tableData={refData}
           tableHeaders={["no", "id", "Name", "Joining Time"]}
           dataProperties={["id", "firstName", "createdAt", "phone"]}

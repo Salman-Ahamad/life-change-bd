@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import { useState } from "react";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { IUser } from "@/interface";
 import { navData } from "@/lib";
 
@@ -19,7 +19,7 @@ const RefList: NextPage = () => {
         setData={setData}
       />
       {data !== null && data.length !== 0 && (
-        <RefTable
+        <DataTable
           tableData={data}
           tableHeaders={["No", "id", "Name", "Joining Time"]}
           dataProperties={["id", "firstName", "createdAt", "phone"]}

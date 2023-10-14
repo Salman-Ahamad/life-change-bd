@@ -1,14 +1,9 @@
 "use client";
 
+import { IWaDeepLink } from "@/interface";
 import { Button } from "@/universal";
+import { openWhatsappChat } from "@/utils";
 import { FC } from "react";
-
-interface IWaDeepLink {
-  phoneNo: string;
-  btnText: string;
-  message?: string;
-  groupLink?: string;
-}
 
 export const WhatsAppLink: FC<IWaDeepLink> = ({
   phoneNo,
@@ -16,21 +11,11 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
   message,
   groupLink,
 }) => {
-  // Component or Button click handler
-  const openWhatsappChat = () => {
-    const messageToSend = encodeURIComponent(message || "");
-    const url = phoneNo
-      ? `https://wa.me/+88${phoneNo}?text=${messageToSend}`
-      : groupLink
-      ? `https://chat.whatsapp.com/${groupLink}`
-      : "";
-    // const url = `https://chat.whatsapp.com/your-group-link`;
-
-    window.open(url, "_blank");
-  };
-
   return (
-    <Button variant="secondary" onClick={openWhatsappChat}>
+    <Button
+      variant="secondary"
+      onClick={() => openWhatsappChat(phoneNo, message, groupLink)}
+    >
       {btnText}
     </Button>
   );
