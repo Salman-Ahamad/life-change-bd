@@ -35,7 +35,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
     const filteringDate = new Date(Number(date));
     const filterOption = {
-      reference: user.reference,
+      reference: user.reference, //"6523f52df32839b523369fa1",
       createdAt: { $gte: filteringDate },
     };
     const filterById = { _id: id };
@@ -49,7 +49,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const refList = await User.find(option)
       .sort({ createdAt: -1 })
       .select({ password: 0 })
-      .lean()
       .exec();
 
     return ApiResponse(200, "User get successfully 👌", refList);

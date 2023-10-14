@@ -6,15 +6,15 @@ import { toast } from "react-toastify";
 
 import { Header, PageHeader, RefTable } from "@/components";
 import { updateData, useGetData } from "@/hooks";
-import { IAllRefer } from "@/interface";
+import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
 import { Button, Title } from "@/universal";
 
 const MyReference = () => {
-  const [refData, setRefData] = useState<IAllRefer[] | null>(null);
-  useGetData("/all-ref?collectInactive=false", setRefData);
+  const [refData, setRefData] = useState<IUser[] | null>(null);
+  useGetData("/all-ref/1?collectInactive=false", setRefData);
 
-  const handleUpdate = async (id: string, refId: string) => {
+  const handleUpdate = async (id: string) => {
     if (Types.ObjectId.isValid(id)) {
       await updateData(`/all-ref/${id}`, {}).then(() =>
         window.location.reload()
