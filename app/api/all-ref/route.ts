@@ -21,7 +21,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
     if (
       user.role !== UserRole.active &&
-      user.role !== UserRole.inactive &&
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.gl &&
       user.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
@@ -33,16 +36,25 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const collectInactiveOption = {
       "settings.collectInactive": collectInactiveValue,
     };
-    const filteringDate = new Date(Number(date));
-    const filterOption = {
+    const formattingDate = new Date(Number(date));
+    const dateFilter = {
       reference: user.id,
-      createdAt: { $gte: filteringDate },
+      createdAt: { $gte: formattingDate },
     };
     const filterById = { reference: user.id, _id: id };
+    const controller = { "settings.controller": user.id };
+    const consultant = { "settings.consultant": user.id };
+    const teacher = { "settings.teacher": user.id };
+    const gl = { "settings.gl": user.id };
 
     const option =
+      (user.role === UserRole.admin && {}) ||
+      (user.role === UserRole.controller && controller) ||
+      (user.role === UserRole.consultant && consultant) ||
+      (user.role === UserRole.teacher && teacher) ||
+      (user.role === UserRole.gl && gl) ||
       (collectInactive && collectInactiveOption) ||
-      (date && filterOption) ||
+      (date && dateFilter) ||
       (id && filterById) ||
       {};
 

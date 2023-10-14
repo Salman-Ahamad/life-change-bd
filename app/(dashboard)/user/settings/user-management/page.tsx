@@ -4,9 +4,9 @@ import { NextPage } from "next";
 import { useState } from "react";
 
 import { Header, PageHeader } from "@/components";
+import { RefTable } from "@/components/Settings/RefTable";
 import { IUser } from "@/interface";
 import { navData } from "@/lib";
-import { RefTable } from "@/components/Settings/RefTable";
 
 const UserManagement: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
@@ -15,7 +15,7 @@ const UserManagement: NextPage = () => {
     <>
       <Header navData={navData.refList} />
       <PageHeader
-        title="Reference List (Inactive)"
+        title="User Management"
         notice="Last 3 Month Outbound"
         setData={setData}
       />

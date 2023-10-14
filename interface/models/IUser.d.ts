@@ -3,7 +3,6 @@ import { ICourse } from ".";
 
 export type IUserRole =
   | "admin"
-  | "subAdmin"
   | "controller"
   | "consultant"
   | "teacher"
@@ -11,14 +10,24 @@ export type IUserRole =
   | "active"
   | "inactive";
 
-export interface ISettings {
+export interface ISettingsSchema {
   activeNotice: boolean;
+  collectInactive: boolean;
   admin: Types.ObjectId;
   consultant: Types.ObjectId;
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
+}
+
+export interface ISettings {
+  activeNotice: boolean;
   collectInactive: boolean;
+  admin: IUSer;
+  consultant: IUSer;
+  controller: IUSer;
+  teacher: IUSer;
+  gl: IUSer;
 }
 
 export interface IUserSchema {
@@ -40,7 +49,7 @@ export interface IUserSchema {
   courses?: Types.ObjectId[] | ICourse[];
   posts?: string[];
   likes?: string[];
-  settings?: ISettings;
+  settings?: ISettingsSchema;
 }
 
 export interface IId {
@@ -55,14 +64,6 @@ export interface IUser extends IUserSchema, IId {
   posts: string[];
   likes: string[];
   image: string;
-  settings: {
-    activeNotice: boolean;
-    admin: string;
-    consultant: string;
-    controller: string;
-    teacher: string;
-    gl: string;
-    collectInactive: boolean;
-  };
+  settings: ISettings;
   createdAt: string;
 }

@@ -163,3 +163,12 @@ export interface IGoogleMeetDeepLink {
   startTime?: string;
   endTime?: string;
 }
+
+export interface ProfileInputProps {
+  label: string;
+  name: string;
+  defaultValue: string;
+  onChange: (value: any) => void;
+  selectOption?: string[];
+  onlyText?: boolean;
+}

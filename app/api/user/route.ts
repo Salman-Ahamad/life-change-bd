@@ -23,6 +23,10 @@ export const GET = async () => {
     if (
       currentUser.role !== UserRole.active &&
       currentUser.role !== UserRole.inactive &&
+      currentUser.role !== UserRole.controller &&
+      currentUser.role !== UserRole.consultant &&
+      currentUser.role !== UserRole.teacher &&
+      currentUser.role !== UserRole.gl &&
       currentUser.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");

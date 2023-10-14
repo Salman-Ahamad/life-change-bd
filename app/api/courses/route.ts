@@ -44,7 +44,12 @@ export const POST = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.admin) {
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
@@ -65,7 +70,12 @@ export const PATCH = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.admin) {
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
