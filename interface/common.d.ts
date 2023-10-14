@@ -148,7 +148,7 @@ export interface IFiledDate {
 export interface ImageUploaderProps extends IClassName {
   fileType: string;
   setFileUrl: Dispatch<SetStateAction<string>>;
-  updateImage?: () => void;
+  setUpdatedData?: Dispatch<SetStateAction<object>>;
 }
 
 export interface IWaDeepLink {

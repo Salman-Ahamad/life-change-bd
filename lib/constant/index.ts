@@ -28,7 +28,6 @@ export const Languages: string[] = [
 
 export const UserRole = {
   admin: "admin",
-  subAdmin: "subAdmin",
   consultant: "consultant",
   controller: "controller",
   teacher: "teacher",

@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageUploaderProps } from "@/interface";
+import { Button } from "@/universal";
 import axios from "axios";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -9,7 +10,7 @@ export const FileUploader: FC<ImageUploaderProps> = ({
   fileType,
   setFileUrl,
   className,
-  updateImage,
+  setUpdatedData,
 }) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -51,7 +52,7 @@ export const FileUploader: FC<ImageUploaderProps> = ({
         const { url } = await uploadRes.data;
         if (url) {
           setFileUrl(url);
-          updateImage && updateImage();
+          setUpdatedData && setUpdatedData((prev) => ({ ...prev, image: url }));
         }
       } catch (error) {
         console.error("Error uploading file:", error);
@@ -68,22 +69,24 @@ export const FileUploader: FC<ImageUploaderProps> = ({
   return (
     <div className={twMerge("flex flex-col max-w-lg p-8", className)}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input type="file" name="file" onChange={handleFileChange} />
+        <input
+          type="file"
+          name="file"
+          className="w-full"
+          onChange={handleFileChange}
+        />
         {uploading ? (
           <p>Uploading...</p>
-        ) : selectedFile ? (
-          <input
-            type="submit"
-            value="Upload"
-            className="text-sm text-white text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 bg-accent hover:bg-primary rounded cursor-pointer"
-          />
         ) : (
-          <input
+          <Button
+            variant="secondary"
             type="submit"
-            value="Upload"
-            disabled
-            className="text-sm text-white text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 bg-gray-500 rounded"
-          />
+            className={
+              selectedFile ? "bg-accent hover:bg-primary" : "bg-gray-500"
+            }
+          >
+            Upload
+          </Button>
         )}
       </form>
     </div>
