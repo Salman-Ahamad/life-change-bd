@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 
 import { Header, Tost } from "@/components";
 import {
-  LiveEarningClass,
-  LiveLearningClass,
   ReferenceMeetingLink,
   SupportLink,
   SupportTeam,
@@ -45,13 +43,15 @@ const Active = () => {
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
-      <Container className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 content-center w-fit  py-12 px-6 mx-auto">
-        <SupportLink />
+      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
+        <div className="space-y-5">
+          <SupportLink />
+          <ReferenceMeetingLink />
+        </div>
         <SupportTeam />
-        <LiveEarningClass />
-        <LiveLearningClass />
-        <ReferenceMeetingLink />
       </Container>
+      {/* <LiveEarningClass /> */}
+      {/* <LiveLearningClass /> */}
     </main>
   );
 };
