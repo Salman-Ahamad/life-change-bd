@@ -2,6 +2,8 @@
 
 import { Header } from "@/components";
 import { ChangeBaseFee, LiveCourseLink } from "@/components/Settings";
+import { ChangeHelpLink } from "@/components/Settings/ChangeHelpLink";
+import { ChangeSupportLink } from "@/components/Settings/ChangeSupportLink";
 import { useCurrentUser } from "@/hooks";
 import { UserRole, navData } from "@/lib";
 import { Container, Title } from "@/universal";
@@ -22,6 +24,8 @@ const Settings: NextPage = () => {
           <div className="flex flex-col gap-5">
             <ChangeBaseFee />
             <LiveCourseLink />
+            <ChangeHelpLink />
+            <ChangeSupportLink />
           </div>
         )}
       </Container>
