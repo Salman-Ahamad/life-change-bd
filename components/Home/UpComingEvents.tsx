@@ -5,7 +5,7 @@ import { Container, Label, MainContainer, Title } from "@/universal";
 import { FC } from "react";
 
 export const UpComingEvents: FC = () => (
-  <MainContainer bgColor="black" className="py-10 lg:py-20 my-10 lg:my-20">
+  <MainContainer bgColor="black" className="py-10 lg:py-20">
     <Container className="text-white text-center flex flex-col justify-center items-center gap-5 lg:gap-8">
       <Title variant="H1">UPCOMING EVENTS</Title>
       <Label>

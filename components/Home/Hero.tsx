@@ -31,11 +31,14 @@ export const Hero: FC = () => {
             className="2xl:-ml-20"
             alt=""
           />
-          <span className="text-white text-[30px] text-left">BD</span>
+          {/* <span className="text-white text-[30px] text-left">BD</span> */}
         </div>
         <div className="flex flex-col justify-center items-start gap-4 mt-1.5">
-          <Title variant="H1" className="text-white text-[30px] text-left">
-            WELCOME TO LIFE CHANGE E-LEARNING PLATFORM
+          <Title
+            variant="H1"
+            className="text-white text-4xl font-bold text-left"
+          >
+            WELCOME TO LIFE CHANGE BD E-LEARNING PLATFORM
           </Title>
           <CommonText className="max-w-[640px] text-white text-base lg:text-xl">
             It’s an Bangladeshi trusted online platform. It is a learning and
