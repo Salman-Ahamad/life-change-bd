@@ -72,6 +72,10 @@ export const UserActivationTable: React.FC<IDataTableWithImage> = ({
     }
   };
 
+  const handleActivate = async () => {
+    console.log("Activate selected members clicked");
+  };
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-8">
@@ -81,7 +85,14 @@ export const UserActivationTable: React.FC<IDataTableWithImage> = ({
               {title}
             </h3>
           </div>
-          <div className="mt-3 md:mt-0"></div>
+          <div className="mt-3 md:mt-0">
+            <button
+              onClick={handleActivate}
+              className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            >
+              Activate Selected
+            </button>
+          </div>
         </div>
         <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
