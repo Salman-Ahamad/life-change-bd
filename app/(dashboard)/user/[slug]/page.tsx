@@ -8,13 +8,15 @@ import { InputField } from "@/components/Settings";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
-import { Button, Container } from "@/universal";
+import { Button, Container, Title } from "@/universal";
 import Image from "next/image";
+import { number } from "yup";
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
   const [userData, setUserData] = useState<IUser>();
+  const [dipositeAmount, setDipositeAmount] = useState<number>(0);
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
@@ -46,6 +48,12 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
 
   useEffect(() => userData && setDisabled(false), [userData]);
   const updateProfile = () => updateData(`/user/${slug}`, updatedData);
+
+  const depositeMoney = () => {
+    if (user && dipositeAmount > 0) {
+      updateData(`/user/${slug}`, { balance: user.balance + dipositeAmount });
+    }
+  };
 
   return (
     <main>
@@ -211,6 +219,28 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             disabled={disabled}
           >
             update profile
+          </Button>
+
+          <Title variant="H4" className="capitalize">
+            Deposit Money
+          </Title>
+          <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller
+            }
+            label="Deposit:"
+            name="deposit"
+            defaultValue=""
+            onChange={(value) => setDipositeAmount(value)}
+          />
+          <Button
+            variant="secondary"
+            className="capitalize mt-5 disabled:bg-opacity-50 disabled:cursor-not-allowed"
+            onClick={depositeMoney}
+            disabled={disabled}
+          >
+            Deposit
           </Button>
         </div>
       </Container>
