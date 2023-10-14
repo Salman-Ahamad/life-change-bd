@@ -137,6 +137,7 @@ export interface IRefTable {
   message?: string;
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
+  UpdateSendWish?: boolean;
 }
 
 export interface IFiledDate {
@@ -156,6 +157,11 @@ export interface IWaDeepLink {
   btnText: string;
   message?: string;
   groupLink?: string;
+}
+
+export interface ISendWish extends IWaDeepLink {
+  userId: string;
+  data: object;
 }
 
 export interface IGoogleMeetDeepLink {

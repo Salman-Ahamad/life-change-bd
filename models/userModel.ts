@@ -100,6 +100,10 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: false,
       },
+      sendWish: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
   {

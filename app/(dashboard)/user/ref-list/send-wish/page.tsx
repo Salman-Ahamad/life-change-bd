@@ -2,7 +2,7 @@
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
-import { IUser } from "@/interface";
+import { IChildren, IUser } from "@/interface";
 import { navData } from "@/lib/data";
 import { Title } from "@/universal";
 import { useState } from "react";
@@ -25,6 +25,7 @@ const SendWish = () => {
           tableHeaders={["no", "id", "Name"]}
           dataProperties={["id", "firstName", "phone"]}
           message="SendWish"
+          UpdateSendWish
         />
       )}
     </>

@@ -1,6 +1,7 @@
 "use client";
 
-import { IWaDeepLink } from "@/interface";
+import { updateData } from "@/hooks";
+import { ISendWish, IWaDeepLink } from "@/interface";
 import { Button } from "@/universal";
 import { openWhatsappChat } from "@/utils";
 import { FC } from "react";
@@ -21,6 +22,27 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
   );
 };
 
+export const SendWishMessage: FC<ISendWish> = ({
+  phoneNo,
+  btnText,
+  message,
+  groupLink,
+  data,
+  userId,
+}) => {
+  const handleSendWish = () => {
+    console.log({ userId, data });
+
+    updateData(`/send-wish/${userId}`, {
+      ...data,
+    }).then(() => openWhatsappChat(phoneNo, message, groupLink));
+  };
+  return (
+    <Button variant="secondary" onClick={handleSendWish}>
+      {btnText}
+    </Button>
+  );
+};
 // `
 
 // Hi...Md Nuralam Hossen
