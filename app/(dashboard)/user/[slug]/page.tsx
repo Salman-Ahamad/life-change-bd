@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { FileUploader, Header } from "@/components";
 import { InputField } from "@/components/Settings";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, Container } from "@/universal";
@@ -18,7 +18,6 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
-  const user = useCurrentUser();
 
   useEffect(() => userData && setDisabled(false), [userData]);
 
@@ -116,7 +115,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Controller:"
             name="controller"
-            defaultValue={(userData && userData.settings.controller) || ""}
+            defaultValue={(userData && userData.settings?.controller?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -127,7 +126,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Consultant:"
             name="consultant"
-            defaultValue={(userData && userData.settings.consultant) || ""}
+            defaultValue={(userData && userData.settings?.consultant?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -138,7 +137,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Teacher:"
             name="teacher"
-            defaultValue={(userData && userData.settings.teacher) || ""}
+            defaultValue={(userData && userData.settings?.teacher?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -149,7 +148,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <InputField
             label="Group Leader:"
             name="gl"
-            defaultValue={(userData && userData.settings.gl) || ""}
+            defaultValue={(userData && userData.settings?.gl?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
