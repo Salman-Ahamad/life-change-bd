@@ -1,9 +1,8 @@
 "use client";
 
-import { IAppConfig, IRefTable, IUser } from "@/interface";
-import { FC, useState } from "react";
-import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
-import { useGetData } from "@/hooks";
+import { IRefTable, IUser } from "@/interface";
+import { FC } from "react";
+import { THeader, Tbody, WhatsAppLink } from "..";
 
 export const DataTable: FC<IRefTable> = ({
   tableHeaders,
@@ -14,11 +13,8 @@ export const DataTable: FC<IRefTable> = ({
   setActionId,
   UpdateSendWish,
 }) => {
-  // const [config, setCinfig] = useState<IAppConfig>();
-  // useGetData("config", setCinfig);
-
-  const handleAction = (referUserId: string) => {
-    setActionId && setActionId(referUserId);
+  const handleAction = (id: string) => {
+    setActionId && setActionId(id);
   };
 
   return (
@@ -39,7 +35,7 @@ export const DataTable: FC<IRefTable> = ({
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {tableData.map((referUser, idx) => (
+            {tableData?.map((referUser, idx) => (
               <tr key={idx}>
                 <Tbody key={idx} label={String(idx + 1)} />
                 {dataProperties.map((item, i) => {
