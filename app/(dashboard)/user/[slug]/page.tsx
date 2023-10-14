@@ -8,6 +8,8 @@ import { updateData, useCurrentUser } from "@/hooks";
 import { IEditProfile, ISlugParams } from "@/interface";
 import { navData } from "@/lib";
 import { Button, Container } from "@/universal";
+import { InputField } from "@/components/Settings";
+import Image from "next/image";
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
@@ -29,40 +31,150 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           Edit Profile
         </h1>
         <div className="flex flex-col justify-center items-center gap-2.5">
-          <div className="text-lg py-1">
-            <span className="font-semibold pl-2">First Name:&nbsp;</span>
-            <input
-              type="text"
-              name="firstName"
-              defaultValue={user && user.firstName}
-              onChange={(e) =>
-                setUpdatedData((prv) => {
-                  return {
-                    ...prv,
-                    firstName: e.target.value,
-                  };
-                })
+          <InputField
+            label="First Name:"
+            name="firstName"
+            defaultValue={user && user.firstName}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, firstName: value }))
+            }
+          />
+          <InputField
+            label="Last Name:"
+            name="lastName"
+            defaultValue={user && user.lastName}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, lastName: value }))
+            }
+          />
+
+          <InputField
+            label="Email:"
+            name="email"
+            defaultValue={user && user.email}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, email: value }))
+            }
+          />
+          <InputField
+            label="Phone:"
+            name="phone"
+            defaultValue={user && user.phone}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, phone: value }))
+            }
+          />
+          <InputField
+            label="Whatsapp:"
+            name="whatsapp"
+            defaultValue={user && user.whatsapp}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, whatsapp: value }))
+            }
+          />
+          <InputField
+            label="Country:"
+            name="country"
+            defaultValue={user && user.country}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, country: value }))
+            }
+          />
+          <InputField
+            label="Language:"
+            name="language"
+            defaultValue={user && user.language}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, language: value }))
+            }
+          />
+          <InputField
+            label="Role:"
+            name="role"
+            defaultValue={user && user.role}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, role: value }))
+            }
+          />
+          <div className="flex gap-3">
+            {user && (
+              <Image
+                src={user.image}
+                width={80}
+                height={80}
+                alt={user.firstName}
+                className="rounded-md"
+              />
+            )}
+            <InputField
+              label="Photo:"
+              name="image"
+              defaultValue={user && user.image}
+              onChange={(value) =>
+                setUpdatedData((prev) => ({ ...prev, image: value }))
               }
-              className="outline-none pl-1.5 bg-gray-100 rounded-sm"
             />
           </div>
-          <div className="text-lg py-1">
-            <span className="font-semibold pl-2">Last Name:&nbsp;</span>
-            <input
-              type="text"
-              name="lastName"
-              defaultValue={user && user.lastName}
-              onChange={(e) =>
-                setUpdatedData((prv) => {
-                  return {
-                    ...prv,
-                    lastName: e.target.value,
-                  };
-                })
-              }
-              className="outline-none pl-1.5 bg-gray-100 rounded-sm"
-            />
-          </div>
+          <InputField
+            label="Controller:"
+            name="controller"
+            defaultValue={user && user.settings.controller}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                settings: {
+                  controller: value,
+                },
+              }))
+            }
+          />
+          <InputField
+            label="Consultant:"
+            name="consultant"
+            defaultValue={user && user.settings.consultant}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                settings: {
+                  consultant: value,
+                },
+              }))
+            }
+          />
+          <InputField
+            label="Teacher:"
+            name="teacher"
+            defaultValue={user && user.settings.teacher}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                settings: {
+                  teacher: value,
+                },
+              }))
+            }
+          />
+          <InputField
+            label="Group Leader:"
+            name="gl"
+            defaultValue={user && user.settings.gl}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                settings: {
+                  gl: value,
+                },
+              }))
+            }
+          />
+          {/* <InputField
+            label="xxx:"
+            name="xxx"
+            defaultValue={user && user.xxx}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, xxx: value }))
+            }
+          /> */}
 
           <Button
             variant="secondary"
