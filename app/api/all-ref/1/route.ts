@@ -1,4 +1,5 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -12,30 +13,39 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const user = await getCurrentUser();
     const collectInactive = nextUrl.searchParams.get("collectInactive");
     const date = nextUrl.searchParams.get("date");
+    const id = nextUrl.searchParams.get("id");
 
-    // if (!user) {
-    //   return ApiResponse(404, "User not found❗");
-    // }
-    // if (
-    //   user.role !== UserRole.active &&
-    //   user.role !== UserRole.inactive &&
-    //   user.role !== UserRole.admin
-    // ) {
-    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    // }
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+    if (
+      user.role !== UserRole.active &&
+      user.role !== UserRole.inactive &&
+      user.role !== UserRole.admin
+    ) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
 
-    let stringValue: string = collectInactive!;
-    let collectInactiveValue: boolean = JSON.parse(stringValue.toLowerCase());
+    let collectInactiveValue: boolean = JSON.parse(
+      collectInactive!.toLowerCase()
+    );
 
     const collectInactiveOption = {
       "settings.collectInactive": collectInactiveValue,
     };
     const filteringDate = new Date(Number(date));
     const filterOption = {
-      reference: "6523f52df32839b523369fa1",
+      reference: user.reference,
       createdAt: { $gte: filteringDate },
     };
-    const option = collectInactiveOption || filterOption;
+    const filterById = { _id: id };
+
+    const option =
+      (collectInactive && collectInactiveOption) ||
+      (date && filterOption) ||
+      (id && filterById) ||
+      {};
+
     const refList = await User.find(option)
       .sort({ createdAt: -1 })
       .select({ password: 0 })
