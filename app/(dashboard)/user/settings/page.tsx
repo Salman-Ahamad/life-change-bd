@@ -1,7 +1,7 @@
 "use client";
 
 import { Header } from "@/components";
-import { ChangeBaseFee } from "@/components/Settings";
+import { ChangeBaseFee, LiveCourseLink } from "@/components/Settings";
 import { useCurrentUser } from "@/hooks";
 import { UserRole, navData } from "@/lib";
 import { Container, Title } from "@/universal";
@@ -18,7 +18,12 @@ const Settings: NextPage = () => {
         Settings
       </Title>
       <Container>
-        {user?.role === UserRole.admin && <ChangeBaseFee />}
+        {user?.role === UserRole.admin && (
+          <div className="flex flex-col gap-5">
+            <ChangeBaseFee />
+            <LiveCourseLink />
+          </div>
+        )}
       </Container>
     </main>
   );

@@ -10,7 +10,7 @@ export const ChangeBaseFee: FC = () => {
   return (
     <section className="flex gap-5 items-end justify-center">
       <div>
-        <label>Base Fee: </label>
+        <label className="pl-1.5">Base Fee: </label>
         <input
           type="number"
           onChange={(e) => setBaseFee(Number(e.target.value))}
