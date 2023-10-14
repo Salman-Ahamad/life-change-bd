@@ -22,19 +22,19 @@ export const GET = async (req: NextRequest, { params }: ISlugParams) => {
     const user = await User.findOne({ _id: id })
       .populate("courses")
       .populate({
-        path: "controller",
+        path: "settings.controller",
         select: "firstName lastName image id", // Specify the fields you want to include
       })
       .populate({
-        path: "consultant",
+        path: "settings.consultant",
         select: "firstName lastName image id",
       })
       .populate({
-        path: "teacher",
+        path: "settings.teacher",
         select: "firstName lastName image id",
       })
       .populate({
-        path: "gl",
+        path: "settings.gl",
         select: "firstName lastName image id",
       })
       .select("-password");
@@ -46,25 +46,25 @@ export const GET = async (req: NextRequest, { params }: ISlugParams) => {
         return ApiResponse(200, "User get successfully 👌", user);
 
       case "controller":
-        if (currentUser.id === user?.controller?.id) {
+        if (currentUser.id === user?.settings?.controller?.id) {
           return ApiResponse(200, "User get successfully 👌", user);
         }
         break;
 
       case "consultant":
-        if (currentUser.id === user?.consultant?.id) {
+        if (currentUser.id === user?.settings?.consultant?.id) {
           return ApiResponse(200, "User get successfully 👌", user);
         }
         break;
 
       case "gl":
-        if (currentUser.id === user?.gl?.id) {
+        if (currentUser.id === user?.settings?.gl?.id) {
           return ApiResponse(200, "User get successfully 👌", user);
         }
         break;
 
       case "teacher":
-        if (currentUser.id === user?.teacher?.id) {
+        if (currentUser.id === user?.settings?.teacher?.id) {
           return ApiResponse(200, "User get successfully 👌", user);
         }
         break;
