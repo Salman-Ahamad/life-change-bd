@@ -4,12 +4,12 @@ import { IChildrenWithTitle } from "@/interface";
 import { googleMeet } from "@/lib/assets";
 import { Button, Title } from "@/universal";
 import Image from "next/image";
-import React, { FC } from "react";
+import { FC } from "react";
 
 export const ActivePageCard: FC<IChildrenWithTitle> = ({ title, children }) => {
   return (
     <div className="shadow-lg border p-4 h-fit space-y-2.5">
-      <Title variant="H5" className="pb-4">
+      <Title variant="H5" className="pb-4 capitalize">
         {title}
       </Title>
       {children}
