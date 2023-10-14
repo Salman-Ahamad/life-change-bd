@@ -23,13 +23,11 @@ export interface ISearchData {
 }
 
 export interface ISearchBar extends ISetSearchData {
-  setSearchData: Dispatch<SetStateAction<ISearchData>>;
   setData: Dispatch<SetStateAction<IUser[] | null>>;
 }
 
 export interface IPageHeader {
   title: string;
   notice: string;
-  setSearchData?: Dispatch<SetStateAction<ISearchData>>;
   setData?: Dispatch<SetStateAction<IUser[] | null>>;
 }

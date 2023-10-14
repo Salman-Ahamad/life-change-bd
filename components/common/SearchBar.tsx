@@ -58,7 +58,7 @@ export interface IFiledDate {
   month: string;
   id: Types.ObjectId | string;
 }
-export const SearchBar: FC<ISearchBar> = ({ setSearchData, setData }) => {
+export const SearchBar: FC<ISearchBar> = ({ setData }) => {
   const [filedData, setFiledData] = useState<IFiledDate>({
     year: "",
     month: "",
