@@ -18,9 +18,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const posts = await Post.find()
       .populate({
         path: "author",
-        select: "firstName lastName image id", // Specify the fields you want to include
+        select: "firstName lastName image id",
       })
-      .sort({ createdAt: -1 }); // Sort by createdAt in descending order;
+      .sort({ createdAt: -1 });
 
     if (!posts) {
       return ApiResponse(404, "Posts not found❗");

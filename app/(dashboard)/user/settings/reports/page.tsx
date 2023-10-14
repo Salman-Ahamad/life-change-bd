@@ -1,27 +1,15 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { updateData, useGetData } from "@/hooks";
+import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib";
 import { Title } from "@/universal";
-import { Types } from "mongoose";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1?collectInactive=true", setData);
-
-  const handleUpdate = async (id: string) => {
-    if (Types.ObjectId.isValid(id)) {
-      await updateData(`/all-ref/${id}`, {}).then(() =>
-        window.location.reload()
-      );
-    } else {
-      toast.error("Invalid Id");
-    }
-  };
+  useGetData("/all-ref?collectInactive=true", setData);
 
   return (
     <>

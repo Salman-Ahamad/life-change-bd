@@ -14,17 +14,17 @@ export const GET = async () => {
     const user = await getCurrentUser();
 
     if (!user) {
-      const courses = await Course.find();
+      const courses = await Course.find().select({
+        enrolled: 0,
+        certificates: 0,
+      });
       return ApiResponse(200, "Courses Get successfully 👌", courses);
-      // TODO: Handle this to show public data
-      // return ApiResponse(404, "User not found❗");
     }
 
     if (user.role === UserRole.admin) {
       const courses = await Course.find();
       return ApiResponse(200, "Courses Get successfully 👌", courses);
     } else {
-      // This will return after removing certificate and enrolled user
       const courses = await Course.find().select({
         enrolled: 0,
         certificates: 0,

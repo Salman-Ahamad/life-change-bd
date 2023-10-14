@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const SendWish = () => {
   const [sendWishData, setSendWish] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1", setSendWish);
+  useGetData("/all-ref", setSendWish);
 
   return (
     <>

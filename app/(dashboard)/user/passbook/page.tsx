@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { DataTable, Header, PageHeader } from "@/components";
+import { Header, PageHeader, DataTable } from "@/components";
 import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
@@ -10,7 +10,7 @@ import { Title } from "@/universal";
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1?collectInactive=true", setPassbookData);
+  useGetData("/all-ref?collectInactive=true", setPassbookData);
 
   return (
     <>

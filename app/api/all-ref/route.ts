@@ -1,4 +1,5 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { AllRefer, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -8,49 +9,49 @@ connectDb();
 
 export const GET = async ({ nextUrl }: NextRequest) => {
   try {
+    const id = nextUrl.searchParams.get("id");
+    const date = nextUrl.searchParams.get("date");
+    const collectInactive = nextUrl.searchParams.get("collectInactive");
+
     // Get Current User
     const user = await getCurrentUser();
-    const collectInactive = nextUrl.searchParams.get("collectInactive");
-    const date = nextUrl.searchParams.get("date");
 
-    // if (!user) {
-    //   return ApiResponse(404, "User not found❗");
-    // }
-    // if (
-    //   user.role !== UserRole.active &&
-    //   user.role !== UserRole.inactive &&
-    //   user.role !== UserRole.admin
-    // ) {
-    //   return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    // }
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+    if (
+      user.role !== UserRole.active &&
+      user.role !== UserRole.inactive &&
+      user.role !== UserRole.admin
+    ) {
+      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
 
-    const refList = await AllRefer.find({
-      referredId: "6523f52df32839b523369fa1",
-    })
-      .populate("referUser")
-      .sort({ createdAt: -1 });
+    let collectInactiveValue: boolean =
+      collectInactive && JSON.parse(collectInactive.toLowerCase());
 
-    const filterableResult = refList.filter(({ referUser }) => {
-      console.log("🚀 ~ file: route.ts:42 ~ filterableResult ~ createdAt:", {
-        data: referUser.createdAt,
-        date,
-      });
-      if (collectInactive) {
-        if (collectInactive === "true") {
-          return referUser.settings.collectInactive;
-        } else if (collectInactive === "false") {
-          return !referUser.settings.collectInactive;
-        }
-      } else if (date) {
-        // console.log("🚀 ~ file: route.ts:42 ~ filterableResult ~ createdAt:", {
-        //   data: referUser.createdAt,
-        //   date,
-        // });
-      }
-      return referUser;
-    });
+    const collectInactiveOption = {
+      "settings.collectInactive": collectInactiveValue,
+    };
+    const filteringDate = new Date(Number(date));
+    const filterOption = {
+      reference: user.id,
+      createdAt: { $gte: filteringDate },
+    };
+    const filterById = { reference: user.id, _id: id };
 
-    return ApiResponse(200, "User get successfully 👌", filterableResult);
+    const option =
+      (collectInactive && collectInactiveOption) ||
+      (date && filterOption) ||
+      (id && filterById) ||
+      {};
+
+    const refList = await User.find(option)
+      .sort({ createdAt: -1 })
+      .select({ password: 0 })
+      .exec();
+
+    return ApiResponse(200, "User get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
