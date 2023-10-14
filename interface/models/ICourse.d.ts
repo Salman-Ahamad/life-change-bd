@@ -17,6 +17,9 @@ export interface ICourseSchema {
   // others
   price: string;
   duration: string;
+  meetingId?: string;
 }
 
-export interface ICourse extends ICourseSchema, IId {}
+export interface ICourse extends ICourseSchema, IId {
+  meetingId: string;
+}
