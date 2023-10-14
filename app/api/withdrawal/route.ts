@@ -43,7 +43,7 @@ export const GET = async () => {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
-    const result = await Withdrawal.findOne({ for: UserRole.admin });
+    const result = await Withdrawal.find({ status: "pending" });
 
     return ApiResponse(200, "Config get successfully 👌", result);
   } catch (error: any) {
