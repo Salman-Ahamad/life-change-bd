@@ -3,6 +3,7 @@
 import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
+import Link from "next/link";
 
 export const RefTable: FC<IRefTable> = ({
   tableHeaders,
@@ -69,11 +70,11 @@ export const RefTable: FC<IRefTable> = ({
                         <Tbody
                           key={i}
                           label={referUser[item as keyof IUser] as string}
+                          href={`/user/${referUser.id}`}
                         />
                       );
                   }
                 })}
-
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"

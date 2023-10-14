@@ -3,7 +3,7 @@ import { Header, Tost } from "@/components";
 import { navData } from "@/lib";
 import { NextPage } from "next";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
-import { ChangeBaseFee, SearchUser } from "@/components/Settings";
+import { ChangeBaseFee } from "@/components/Settings";
 import { Title } from "@/universal";
 
 const Settings: NextPage = async () => {
@@ -14,11 +14,11 @@ const Settings: NextPage = async () => {
 
   return (
     <main>
-      <Header navData={navData.active} />
+      <Header navData={navData.settings} />
+
       <Title variant="H2" className="pt-8">
         Settings
       </Title>
-      <SearchUser role={userRoll} />
       {userRoll === "admin" && <ChangeBaseFee />}
 
       <div className="flex items-center justify-center py-12 px-6">

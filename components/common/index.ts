@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./AppDownload";
 export * from "./AuthProvider";
 export * from "./CopyToClipboard";
@@ -13,3 +15,4 @@ export * from "./PageHeader";
 export * from "./SearchBar";
 export * from "./Slider";
 export * from "./Tost";
+export * from "./CreatePost";

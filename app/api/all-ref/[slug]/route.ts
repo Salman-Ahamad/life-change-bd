@@ -19,7 +19,14 @@ export const GET = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (currentUser.role !== UserRole.admin) {
+    if (
+      currentUser.role !== UserRole.active &&
+      currentUser.role !== UserRole.controller &&
+      currentUser.role !== UserRole.consultant &&
+      currentUser.role !== UserRole.teacher &&
+      currentUser.role !== UserRole.gl &&
+      currentUser.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 

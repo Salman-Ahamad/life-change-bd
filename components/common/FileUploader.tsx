@@ -1,17 +1,21 @@
 "use client";
 
+import { ImageUploaderProps } from "@/interface";
+import { Button } from "@/universal";
 import axios from "axios";
-import React, { useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-interface ImageUploaderProps {
-  fileType: string;
-}
-
-export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
+export const FileUploader: FC<ImageUploaderProps> = ({
+  fileType,
+  setFileUrl,
+  className,
+  setUpdatedData,
+}) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     const file = event.target.files?.[0];
@@ -24,7 +28,7 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (selectedFile) {
@@ -34,7 +38,7 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
         const formData = new FormData();
 
         formData.set("file", selectedFile);
-        formData.append("upload_preset", "yydamwcw");
+        formData.append("upload_preset", "ebm0hyxo");
 
         const endpoint = process.env
           .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
@@ -45,11 +49,11 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
           throw new Error(`Failed to upload file: ${endpoint}`);
         }
 
-        const { url } = uploadRes.data;
-
-        console.log("File uploaded successfully:", url);
-
-        return url;
+        const { url } = await uploadRes.data;
+        if (url) {
+          setFileUrl(url);
+          setUpdatedData && setUpdatedData((prev) => ({ ...prev, image: url }));
+        }
       } catch (error) {
         console.error("Error uploading file:", error);
         return;
@@ -63,24 +67,26 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({ fileType }) => {
   };
 
   return (
-    <div className="flex flex-col max-w-lg p-8">
+    <div className={twMerge("flex flex-col max-w-lg p-8", className)}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input type="file" name="file" onChange={handleFileChange} />
+        <input
+          type="file"
+          name="file"
+          className="w-full"
+          onChange={handleFileChange}
+        />
         {uploading ? (
           <p>Uploading...</p>
-        ) : selectedFile ? (
-          <input
-            type="submit"
-            value="Upload"
-            className="text-sm text-white text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 bg-accent hover:bg-primary rounded cursor-pointer"
-          />
         ) : (
-          <input
+          <Button
+            variant="secondary"
             type="submit"
-            value="Upload"
-            disabled
-            className="text-sm text-white text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 bg-gray-500 rounded"
-          />
+            className={
+              selectedFile ? "bg-accent hover:bg-primary" : "bg-gray-500"
+            }
+          >
+            Upload
+          </Button>
         )}
       </form>
     </div>

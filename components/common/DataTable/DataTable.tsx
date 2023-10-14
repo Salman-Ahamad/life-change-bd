@@ -1,61 +1,87 @@
 "use client";
 
-import React from "react";
+import { IRefTable, IUser } from "@/interface";
+import { FC } from "react";
+import { THeader, Tbody, WhatsAppLink } from "..";
 
-export interface IDataTable {
-  title?: string;
-  tableHeaders: string[];
-  dataProperties: string[];
-  tableData: Record<string, any>[];
-}
-export const DataTable: React.FC<IDataTable> = ({
-  title,
+export const DataTable: FC<IRefTable> = ({
   tableHeaders,
   dataProperties,
   tableData,
+  message,
+  actionBtn,
+  setActionId,
 }) => {
+  const handleAction = (referUserId: string) => {
+    setActionId && setActionId(referUserId);
+  };
+
   return (
-    <div className="max-w-screen-xl mx-auto p-4 md:p-8">
-      <div className="max-w-lg">
-        <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">{title}</h3>
-      </div>
+    <div className="max-w-screen-lg mx-auto p-4 md:p-8">
       <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
               {tableHeaders
                 ? tableHeaders.map((header, idx) => (
-                    <th key={idx} className="py-3 px-6">
-                      {header}
-                    </th>
+                    <THeader key={idx} label={header} />
                   ))
-                : dataProperties
-                ? dataProperties.map((header, idx) => (
-                    <th key={idx} className="py-3 px-6">
-                      {header}
-                    </th>
-                  ))
-                : Object.entries(tableData[0]).map(([key, value]) => (
-                    <th key={key} className="py-3 px-6 capitalize">
-                      {key}
-                    </th>
+                : dataProperties.map((header, idx) => (
+                    <THeader key={idx} label={header} />
                   ))}
+              {message && <THeader label={message} />}
+              {actionBtn && <THeader label="Action" />}
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {tableData.map((item, idx) => (
+            {tableData.map((referUser, idx) => (
               <tr key={idx}>
-                {dataProperties
-                  ? dataProperties.map((key, i) => (
-                      <td key={i} className="px-6 py-4 whitespace-nowrap">
-                        {item[key]}
-                      </td>
-                    ))
-                  : Object.entries(item).map(([key, value]) => (
-                      <td key={key} className="px-6 py-4 whitespace-nowrap">
-                        {value}
-                      </td>
-                    ))}
+                <Tbody key={idx} label={String(idx + 1)} />
+                {dataProperties.map((item, i) => {
+                  switch (item) {
+                    case "firstName":
+                      return (
+                        <Tbody
+                          key={i}
+                          label={`${referUser[item]} ${referUser["lastName"]}`}
+                        />
+                      );
+                    case "createdAt":
+                      const date = new Date(
+                        referUser[item]
+                      ).toLocaleDateString();
+                      return <Tbody key={i} label={date} />;
+
+                    case "phone":
+                      return (
+                        <Tbody
+                          key={i}
+                          label={
+                            <WhatsAppLink
+                              btnText={message || "Message"}
+                              phoneNo={referUser[item]}
+                            />
+                          }
+                        />
+                      );
+                    default:
+                      return (
+                        <Tbody
+                          key={i}
+                          label={referUser[item as keyof IUser] as string}
+                        />
+                      );
+                  }
+                })}
+
+                {actionBtn && (
+                  <td
+                    className="px-2.5 py-1.5"
+                    onClick={() => handleAction(referUser.id)}
+                  >
+                    {actionBtn}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

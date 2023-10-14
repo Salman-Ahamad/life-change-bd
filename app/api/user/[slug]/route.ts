@@ -19,15 +19,65 @@ export const GET = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (currentUser.role !== UserRole.admin) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    }
-
     const user = await User.findOne({ _id: id })
       .populate("courses")
+      .populate({
+        path: "settings.controller",
+        select: "firstName lastName image id", // Specify the fields you want to include
+      })
+      .populate({
+        path: "settings.consultant",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.teacher",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.gl",
+        select: "firstName lastName image id",
+      })
       .select("-password");
 
-    return ApiResponse(200, "User get successfully 👌", user);
+    // Set return based on user role
+
+    switch (currentUser.role) {
+      case "admin":
+        return ApiResponse(200, "User get successfully 👌", user);
+
+      case "controller":
+        if (currentUser.id === user?.settings?.controller?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "consultant":
+        if (currentUser.id === user?.settings?.consultant?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "gl":
+        if (currentUser.id === user?.settings?.gl?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "teacher":
+        if (currentUser.id === user?.settings?.teacher?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      case "active":
+        if (currentUser.id === user?.id) {
+          return ApiResponse(200, "User get successfully 👌", user);
+        }
+        break;
+
+      default:
+        return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
+    }
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

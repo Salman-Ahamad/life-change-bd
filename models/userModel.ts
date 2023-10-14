@@ -42,6 +42,9 @@ const userSchema = new Schema<IUserSchema>(
       type: String,
       default: "inactive",
     },
+    image: {
+      type: String,
+    },
     reference: {
       type: String,
       default: "-",
@@ -72,9 +75,10 @@ const userSchema = new Schema<IUserSchema>(
         default: true,
       },
 
-      subAdmin: {
+      admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
+        default: "6527ecf7577ff95a96133786",
       },
       controller: {
         type: Schema.Types.ObjectId,

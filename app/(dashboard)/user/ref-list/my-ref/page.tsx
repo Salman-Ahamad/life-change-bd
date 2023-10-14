@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { navData } from "@/lib/data";
@@ -12,7 +12,7 @@ import { Button, Title } from "@/universal";
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1?collectInactive=false", setRefData);
+  useGetData("/all-ref?collectInactive=false", setRefData);
 
   const handleUpdate = async (id: string) => {
     if (Types.ObjectId.isValid(id)) {
@@ -36,7 +36,7 @@ const MyReference = () => {
           Loading... Please wait 🔃
         </Title>
       ) : (
-        <RefTable
+        <DataTable
           tableData={refData}
           tableHeaders={["no", "id", "Name", "Joining Time"]}
           dataProperties={["id", "firstName", "createdAt", "phone"]}

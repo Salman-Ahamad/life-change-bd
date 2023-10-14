@@ -19,10 +19,14 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/user/courses",
+      link: "/courses",
     },
   ],
   inActive: [
+    {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
     {
       label: "Profile",
       link: "/user/active/profile",
@@ -47,7 +51,7 @@ export const navData: INavData = {
   active: [
     {
       label: <AiOutlineHome className="text-2xl" />,
-      link: "/",
+      link: "/user/active",
     },
     {
       label: "Profile",
@@ -115,6 +119,10 @@ export const navData: INavData = {
     },
   ],
   withdrawal: [
+    {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
     {
       label: "Profile",
       link: "/user/active/profile",
@@ -244,6 +252,28 @@ export const navData: INavData = {
     {
       label: "Passbook",
       link: "/user/passbook",
+    },
+  ],
+  settings: [
+    {
+      label: <BackButton className="text-2xl" />,
+      link: "/user/active",
+    },
+    {
+      label: "User Management",
+      link: "/user/settings/user-management",
+    },
+    {
+      label: "Reports",
+      link: "/user/settings/reports",
+    },
+    {
+      label: "Team Management",
+      link: "/user/settings/team-management",
+    },
+    {
+      label: "Student",
+      link: "/user/settings/student",
     },
   ],
 };

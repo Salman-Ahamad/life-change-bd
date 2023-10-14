@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-import { HTMLInputTypeAttribute } from "react";
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
 import { ICardData, IChildrenWithClassName, IClassName, IUser } from ".";
 
 export type IColor =
@@ -75,6 +75,7 @@ export interface INavData {
   sendWish: INavItem[];
   transferPoints: INavItem[];
   profileEdit: INavItem[];
+  settings: INavItem[];
 }
 
 export interface IInput extends IClassName {
@@ -125,7 +126,9 @@ export interface ITHeader {
   label: string | JSX.Element;
 }
 
-export interface ITbody extends ITHeader {}
+export interface ITbody extends ITHeader {
+  href?: string;
+}
 
 export interface IRefTable {
   tableHeaders: string[];
@@ -140,4 +143,32 @@ export interface IFiledDate {
   year: string;
   month: string;
   id: Types.ObjectId | string;
+}
+
+export interface ImageUploaderProps extends IClassName {
+  fileType: string;
+  setFileUrl: Dispatch<SetStateAction<string>>;
+  setUpdatedData?: Dispatch<SetStateAction<object>>;
+}
+
+export interface IWaDeepLink {
+  phoneNo: string;
+  btnText: string;
+  message?: string;
+  groupLink?: string;
+}
+
+export interface IGoogleMeetDeepLink {
+  meetId: string;
+  startTime?: string;
+  endTime?: string;
+}
+
+export interface ProfileInputProps {
+  label: string;
+  name: string;
+  defaultValue: string;
+  onChange: (value: any) => void;
+  selectOption?: string[];
+  onlyText?: boolean;
 }

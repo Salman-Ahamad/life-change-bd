@@ -13,6 +13,7 @@ import { navData } from "@/lib/data";
 
 const Inactive = () => {
   const user = useCurrentUser();
+  console.log(user);
 
   return (
     <>
