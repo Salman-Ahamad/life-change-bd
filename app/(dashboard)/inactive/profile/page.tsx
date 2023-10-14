@@ -7,6 +7,7 @@ import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { IAppConfig, IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, CommonText } from "@/universal";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 
 const Profile = () => {
@@ -35,7 +36,7 @@ const Profile = () => {
         role: UserRole.active,
         balance: user.balance - config.baseFee,
       };
-      updateData("/all-ref", updatedData);
+      updateData("/all-ref", updatedData).then(() => signOut());
     }
   };
 

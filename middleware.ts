@@ -28,6 +28,7 @@ export default withAuth(
 export const config = {
   matcher: [
     "/inactive",
+    "/inactive/profile",
     "/user/[slug]",
     "/user/active",
     "/user/active/profile",

@@ -1,5 +1,5 @@
 import { IFooterData, INavData } from "@/interface";
-import { facebook, pinterest, twitter, youtube } from "@/lib/assets";
+import { facebook, youtube } from "@/lib/assets";
 import { BackButton } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -29,7 +29,7 @@ export const navData: INavData = {
     },
     {
       label: "Profile",
-      link: "/user/active/profile",
+      link: "/inactive/profile",
     },
     {
       label: "Courses",
