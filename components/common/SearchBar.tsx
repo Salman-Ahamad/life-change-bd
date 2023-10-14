@@ -1,63 +1,14 @@
 "use client";
 
-import { getDataFn } from "@/hooks";
-import { ISearchBar } from "@/interface";
-import { Button, Container } from "@/universal";
-import { getLastThreeMonths } from "@/utils";
 import { Types } from "mongoose";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
-export type IMonth =
-  | "January"
-  | "February"
-  | "March"
-  | "April"
-  | "May"
-  | "June"
-  | "July"
-  | "August"
-  | "September"
-  | "October"
-  | "November"
-  | "December;";
+import { getDataFn } from "@/hooks";
+import { IFiledDate, IMonth, ISearchBar } from "@/interface";
+import { Button, Container } from "@/universal";
+import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
 
-function createDate(year: number, month: number): Number {
-  // JavaScript months are 0-based, so we subtract 1 from the provided month
-  // to get the correct month value for the Date constructor
-  const date = new Date(year, month - 1);
-
-  // Validate if the provided month and year result in a valid date
-  // if (isNaN(date.getTime())) {
-  //   return null; // Invalid date, return null
-  // }
-
-  return date.getTime();
-}
-
-function getMonthNumber(month: IMonth): number {
-  const monthMap: { [key: string]: number } = {
-    January: 1,
-    February: 2,
-    March: 3,
-    April: 4,
-    May: 5,
-    June: 6,
-    July: 7,
-    August: 8,
-    September: 9,
-    October: 10,
-    November: 11,
-    December: 12,
-  };
-
-  return monthMap[month];
-}
-export interface IFiledDate {
-  year: string;
-  month: string;
-  id: Types.ObjectId | string;
-}
 export const SearchBar: FC<ISearchBar> = ({ setData }) => {
   const [filedData, setFiledData] = useState<IFiledDate>({
     year: "",

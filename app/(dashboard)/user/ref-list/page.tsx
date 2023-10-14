@@ -10,10 +10,6 @@ import { navData } from "@/lib";
 const RefList: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
 
-  if (data) {
-    console.log("🚀 ~ file: page.tsx:42 ~ refData:", data);
-  }
-
   return (
     <>
       <Header navData={navData.refList} />

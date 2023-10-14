@@ -10,6 +10,20 @@ export type IColor =
   | "secondary"
   | "accent";
 
+export type IMonth =
+  | "January"
+  | "February"
+  | "March"
+  | "April"
+  | "May"
+  | "June"
+  | "July"
+  | "August"
+  | "September"
+  | "October"
+  | "November"
+  | "December;";
+
 export type IFontWeight = "400" | "500" | "600" | "700" | "800" | "900";
 
 export type IFontFamily = "sora" | "poppins" | "source-Sans-3";
@@ -120,4 +134,10 @@ export interface IRefTable {
   message?: string;
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
+}
+
+export interface IFiledDate {
+  year: string;
+  month: string;
+  id: Types.ObjectId | string;
 }

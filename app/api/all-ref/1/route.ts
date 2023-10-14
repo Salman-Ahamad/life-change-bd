@@ -35,7 +35,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
     const filteringDate = new Date(Number(date));
     const filterOption = {
-      reference: user.id, // "6523f52df32839b523369fa1",
+      reference: user.id,
       createdAt: { $gte: filteringDate },
     };
     const filterById = { _id: id };
