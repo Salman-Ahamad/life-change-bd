@@ -1,5 +1,6 @@
 "use client";
 
+import { getDataFn } from "@/hooks";
 import { ISearchBar } from "@/interface";
 import { Button, Container } from "@/universal";
 import { getLastThreeMonths } from "@/utils";
@@ -21,17 +22,17 @@ export type IMonth =
   | "November"
   | "December;";
 
-function createDate(year: number, month: number): Date | null {
+function createDate(year: number, month: number): Number {
   // JavaScript months are 0-based, so we subtract 1 from the provided month
   // to get the correct month value for the Date constructor
   const date = new Date(year, month - 1);
 
   // Validate if the provided month and year result in a valid date
-  if (isNaN(date.getTime())) {
-    return null; // Invalid date, return null
-  }
+  // if (isNaN(date.getTime())) {
+  //   return null; // Invalid date, return null
+  // }
 
-  return date;
+  return date.getTime();
 }
 
 function getMonthNumber(month: IMonth): number {
@@ -57,40 +58,35 @@ export interface IFiledDate {
   month: string;
   id: Types.ObjectId | string;
 }
-export const SearchBar: FC<ISearchBar> = ({ setSearchData }) => {
+export const SearchBar: FC<ISearchBar> = ({ setSearchData, setData }) => {
   const [filedData, setFiledData] = useState<IFiledDate>({
     year: "",
     month: "",
     id: "",
   });
-
   const filterDate = getLastThreeMonths();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (filedData.id) {
       if (Types.ObjectId.isValid(filedData.id)) {
-        setSearchData(filedData.id as Types.ObjectId);
+        await getDataFn(`/all-ref/1?id=${filedData.id}`, setData);
       } else {
         toast.error("Invalid user id 🚨");
       }
     } else if (filedData.year && filedData.year) {
-      const year: number = Number(filedData.year);
-      const month: number = getMonthNumber(filedData.month as IMonth);
-      const date: Date | null = createDate(year, month);
+      const month = getMonthNumber(filedData.month as IMonth);
+      const date = createDate(Number(filedData.year), month);
 
       if (date) {
-        setSearchData(date);
+        await getDataFn(`/all-ref/1?date=${date}`, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
       }
     } else {
       toast.error("Please Provide filter Data 🚨");
     }
-    setFiledData({
-      year: "",
-      month: "",
-      id: "",
-    });
+
+    setFiledData({ year: "", month: "", id: "" });
   };
 
   return (
