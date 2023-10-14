@@ -16,12 +16,12 @@ import "swiper/css/pagination";
 
 export const Slider: FC<{ slides: string[] }> = ({ slides }) => {
   return (
-    <div className="p-4 w-full h-full">
+    <div className="p-4 w-full h-full bg-white">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 3500,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -34,7 +34,13 @@ export const Slider: FC<{ slides: string[] }> = ({ slides }) => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <Image src={slide} alt="" />
+            <Image
+              src={slide}
+              width={400}
+              height={400}
+              alt="Slide Image"
+              className="bg-white w-full h-full object-cover"
+            />
           </SwiperSlide>
         ))}
       </Swiper>

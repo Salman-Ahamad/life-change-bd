@@ -1,20 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, Tost } from "@/components";
+import { Header, Slider, Tost } from "@/components";
 import {
+  ActivePageCard,
   ReferenceMeetingLink,
   SupportLink,
   SupportTeam,
 } from "@/components/User/Active";
-import { updateData, useCurrentUser } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { navData } from "@/lib/data";
 import { Container } from "@/universal";
+import { IAppConfig } from "@/interface";
 
 const Active = () => {
+  const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
+
+  useGetData("/config", setConfig, true);
+
+  console.log(config?.sliderImage);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
@@ -49,6 +56,15 @@ const Active = () => {
           <ReferenceMeetingLink />
         </div>
         <SupportTeam />
+      </Container>
+      <Container className="flex justify-center">
+        <div className="max-w-lg w-full">
+          {config?.sliderImage && (
+            <ActivePageCard title="">
+              <Slider slides={config?.sliderImage} />
+            </ActivePageCard>
+          )}
+        </div>
       </Container>
       {/* <LiveEarningClass /> */}
       {/* <LiveLearningClass /> */}
