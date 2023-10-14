@@ -10,7 +10,7 @@ export const ChangeHelpLink: FC = () => {
   return (
     <section className="flex gap-5 items-end justify-center">
       <div>
-        <label className="pl-1.5">Support Link: </label>
+        <label className="pl-1.5">Help Link: </label>
         <input
           type="number"
           onChange={(e) => setHelpLink(e.target.value)}
