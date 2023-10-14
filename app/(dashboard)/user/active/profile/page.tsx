@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { Header } from "@/components";
-import { updateData, useCurrentUser } from "@/hooks";
+import { useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
-import { Button, CommonText } from "@/universal";
+import { CommonText } from "@/universal";
 
 const Profile = () => {
   const [baseFee, setBaseFee] = useState(0);
@@ -21,6 +21,7 @@ const Profile = () => {
     "whatsapp",
     "role",
     "reference",
+    "balance",
   ];
 
   const tableTitle = user?.reference
