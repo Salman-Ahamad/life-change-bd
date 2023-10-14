@@ -260,8 +260,8 @@ export const navData: INavData = {
       link: "/user/active",
     },
     {
-      label: "Manage User",
-      link: "/user/settings/manage-user",
+      label: "User Management",
+      link: "/user/settings/user-management",
     },
     {
       label: "Reports",
