@@ -20,7 +20,7 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
   const handleSubmit = async () => {
     if (filedData.id) {
       if (Types.ObjectId.isValid(filedData.id)) {
-        await getDataFn(`/all-ref/1?id=${filedData.id}`, setData);
+        await getDataFn(`/all-ref?id=${filedData.id}`, setData);
       } else {
         toast.error("Invalid user id 🚨");
       }
@@ -29,7 +29,7 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
       const date = createDate(Number(filedData.year), month);
 
       if (date) {
-        await getDataFn(`/all-ref/1?date=${date}`, setData);
+        await getDataFn(`/all-ref?date=${date}`, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
       }

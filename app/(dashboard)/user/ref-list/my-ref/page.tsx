@@ -12,7 +12,7 @@ import { Button, Title } from "@/universal";
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1?collectInactive=false", setRefData);
+  useGetData("/all-ref?collectInactive=false", setRefData);
 
   const handleUpdate = async (id: string) => {
     if (Types.ObjectId.isValid(id)) {
