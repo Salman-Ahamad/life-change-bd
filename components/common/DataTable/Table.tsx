@@ -2,7 +2,7 @@
 
 import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
-import { THeader, Tbody, WhatsAppLink } from "..";
+import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 
 export const DataTable: FC<IRefTable> = ({
   tableHeaders,
