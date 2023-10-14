@@ -1,21 +1,17 @@
 "use client";
 
+import { ImageUploaderProps } from "@/interface";
 import axios from "axios";
-import React, { useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 
-interface ImageUploaderProps {
-  fileType: string;
-  setFileUrl: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export const FileUploader: React.FC<ImageUploaderProps> = ({
+export const FileUploader: FC<ImageUploaderProps> = ({
   fileType,
   setFileUrl,
 }) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     const file = event.target.files?.[0];
@@ -28,7 +24,7 @@ export const FileUploader: React.FC<ImageUploaderProps> = ({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (selectedFile) {

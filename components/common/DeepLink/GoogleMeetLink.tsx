@@ -1,13 +1,8 @@
 "use client";
 
+import { IGoogleMeetDeepLink } from "@/interface";
 import { Button } from "@/universal";
-import React, { FC } from "react";
-
-interface IGoogleMeetDeepLink {
-  meetId: string;
-  startTime?: string;
-  endTime?: string;
-}
+import { FC } from "react";
 
 export const GoogleMeetLink: FC<IGoogleMeetDeepLink> = ({ meetId }) => {
   const openJoinMeeting = () => {

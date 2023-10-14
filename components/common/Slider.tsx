@@ -1,11 +1,13 @@
 "use client";
 
-import React, { FC, useRef, useState } from "react";
+import Image from "next/image";
+import { FC } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
-import { EffectFade, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -26,14 +28,13 @@ export const Slider: FC<{ slides: string[] }> = ({ slides }) => {
           clickable: true,
         }}
         loop={true}
-        // navigation={true}
         modules={[EffectFade, Autoplay, Pagination]}
         className="mySwiper"
         effect={"fade"}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <img src={slide} />
+            <Image src={slide} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

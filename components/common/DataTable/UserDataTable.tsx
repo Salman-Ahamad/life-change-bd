@@ -1,9 +1,8 @@
 "use client";
 
-import { IDataTable, IDataTableWithImage } from "@/interface";
+import { IDataTableWithImage } from "@/interface";
 import { Button } from "@/universal";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 export const UserDataTable: React.FC<IDataTableWithImage> = ({

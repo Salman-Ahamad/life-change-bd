@@ -1,18 +1,25 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import axios from "axios";
 import { Axios } from "@/utils";
+import axios from "axios";
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
 
-export const CreatePost: React.FC<{
+export const CreatePost: FC<{
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setShow: Dispatch<SetStateAction<boolean>>;
 }> = ({ show, setShow }) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [postText, setPostText] = useState<string | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const file = event.target.files?.[0];
     if (file) {
@@ -22,7 +29,7 @@ export const CreatePost: React.FC<{
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (selectedFile) {
