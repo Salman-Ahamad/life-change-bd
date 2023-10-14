@@ -59,13 +59,12 @@ export const DataTable: FC<IRefTable> = ({
                           key={i}
                           label={
                             UpdateSendWish ? (
-                              <>
-                                <SendWishMessage
-                                  btnText={message || "Message"}
-                                  phoneNo={referUser[item]}
-                                  userId={referUser.id}
-                                  data={{ "settings.sendWish": true }}
-                                  message={`
+                              <SendWishMessage
+                                btnText={message || "Message"}
+                                phoneNo={referUser[item]}
+                                userId={referUser.id}
+                                data={{ "settings.sendWish": true }}
+                                message={`
 
 Hi...${referUser.firstName} ${referUser.lastName}
 
@@ -88,8 +87,7 @@ From
 Lifechange Bd e-learning platform
                               
                               `}
-                                />
-                              </>
+                              />
                             ) : (
                               <WhatsAppLink
                                 btnText={message || "Message"}
