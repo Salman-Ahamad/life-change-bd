@@ -13,7 +13,7 @@ export const ChangeHelpLink: FC = () => {
         <label className="pl-1.5">Help Link</label>
         <div className="flex gap-2.5">
           <input
-            type="number"
+            type="text"
             onChange={(e) => setHelpLink(e.target.value)}
             className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
           />
