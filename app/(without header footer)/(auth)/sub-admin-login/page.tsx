@@ -58,7 +58,7 @@ const AdminLogin: FC = () => {
           //   } else {
           //     signOut();
           //   }
-          //   loadingToast(id, "Login Successfully ✅", "success");
+          loadingToast(id, "Login Successfully ✅", "success");
           // } else {
           //   const error = JSON.parse(res.error);
           //   loadingToast(id, error.message, "warning");
