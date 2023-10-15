@@ -1,6 +1,12 @@
 import { StaticImageData } from "next/image";
 import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
-import { ICardData, IChildrenWithClassName, IClassName, IUser } from ".";
+import {
+  ICardData,
+  IChildren,
+  IChildrenWithClassName,
+  IClassName,
+  IUser,
+} from ".";
 
 export type IColor =
   | "black"
@@ -137,6 +143,7 @@ export interface IRefTable {
   message?: string;
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
+  UpdateSendWish?: boolean;
 }
 
 export interface IFiledDate {
@@ -158,7 +165,12 @@ export interface IWaDeepLink {
   groupLink?: string;
 }
 
-export interface IGoogleMeetDeepLink {
+export interface ISendWish extends IWaDeepLink {
+  userId: string;
+  data: object;
+}
+
+export interface IGoogleMeetDeepLink extends IChildren {
   meetId: string;
   startTime?: string;
   endTime?: string;

@@ -1,22 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, Tost } from "@/components";
+import { Header, Slider, Tost } from "@/components";
 import {
-  LiveEarningClass,
-  LiveLearningClass,
-  ReferenceMeetingLink,
-  SupportLink,
+  ActivePageCard,
+  HelpLink,
+  MeetingLink,
   SupportTeam,
 } from "@/components/User/Active";
-import { updateData, useCurrentUser } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { navData } from "@/lib/data";
 import { Container } from "@/universal";
+import { IAppConfig } from "@/interface";
 
 const Active = () => {
+  const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
+  useGetData("/config", setConfig);
+
+  useGetData("/config", setConfig);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
@@ -45,13 +49,26 @@ const Active = () => {
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
-      <Container className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 content-center w-fit  py-12 px-6 mx-auto">
-        <SupportLink />
-        <SupportTeam />
-        <LiveEarningClass />
-        <LiveLearningClass />
-        <ReferenceMeetingLink />
+      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
+        {config && (
+          <div className="space-y-5">
+            <HelpLink meetId={config.support.help} />
+            <MeetingLink meetId={config.support.meeting} />
+          </div>
+        )}
+        {config && <SupportTeam support={config.whatsAppMessage} />}
       </Container>
+      <Container className="flex justify-center">
+        <div className="max-w-lg w-full">
+          {config?.sliderImage && (
+            <ActivePageCard title="">
+              <Slider slides={config?.sliderImage} />
+            </ActivePageCard>
+          )}
+        </div>
+      </Container>
+      {/* <LiveEarningClass /> */}
+      {/* <LiveLearningClass /> */}
     </main>
   );
 };

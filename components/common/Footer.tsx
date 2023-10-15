@@ -43,7 +43,7 @@ export const Footer: FC = () => (
           ))}
 
           <div className="flex flex-col gap-5 mt-5">
-            <Button variant="secondary">SubAdmin Login</Button>
+            <Button variant="secondary">Admin Login</Button>
             <Button variant="secondary">SubAdmin Login</Button>
           </div>
         </div>

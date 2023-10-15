@@ -1,5 +1,5 @@
 import { IFooterData, INavData } from "@/interface";
-import { facebook, pinterest, twitter } from "@/lib/assets";
+import { facebook, youtube } from "@/lib/assets";
 import { BackButton } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -29,7 +29,7 @@ export const navData: INavData = {
     },
     {
       label: "Profile",
-      link: "/user/active/profile",
+      link: "/inactive/profile",
     },
     {
       label: "Courses",
@@ -268,8 +268,8 @@ export const navData: INavData = {
       link: "/user/settings/reports",
     },
     {
-      label: "Team Management",
-      link: "/user/settings/team-management",
+      label: "Action",
+      link: "/user/settings/action",
     },
     {
       label: "Student",
@@ -308,8 +308,10 @@ export const footerItems: IFooterData = {
     },
   ],
   socialIcons: [
-    { icon: facebook, href: "#" },
-    { icon: twitter, href: "#" },
-    { icon: pinterest, href: "#" },
+    {
+      icon: facebook,
+      href: "https://www.facebook.com/profile.php?id=61552165711237&mibextid=ZbWKwL",
+    },
+    { icon: youtube, href: "https://www.youtube.com/@lifechangebd" },
   ],
 };

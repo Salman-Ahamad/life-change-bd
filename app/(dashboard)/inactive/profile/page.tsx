@@ -1,17 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { Header } from "@/components";
-import { useCurrentUser } from "@/hooks";
-import { IUser } from "@/interface";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { IAppConfig, IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
-import { CommonText } from "@/universal";
+import { Button, CommonText } from "@/universal";
+import { signOut } from "next-auth/react";
+import { useState } from "react";
 
 const Profile = () => {
-  const [baseFee, setBaseFee] = useState(0);
+  const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
+  useGetData("/config", setConfig);
 
   const profileTitle = [
     "email",
@@ -28,12 +30,22 @@ const Profile = () => {
     ? profileTitle
     : profileTitle.filter((i) => i !== "reference");
 
+  const handleActivation = () => {
+    if (user && config) {
+      const updatedData = {
+        role: UserRole.active,
+        balance: user.balance - config.baseFee,
+      };
+      updateData("/all-ref", updatedData).then(() => signOut());
+    }
+  };
+
   return (
     <main>
       <Header navData={navData.profile} />
 
       {user ? (
-        <section>
+        <section className="flex flex-col justify-center items-center">
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
               src={avatarProfile}
@@ -80,6 +92,24 @@ const Profile = () => {
               ))}
             </div>
           </div>
+          {user && config && user.role === UserRole.inactive && (
+            <div className="my-5">
+              {user.balance <= config.baseFee ? (
+                <CommonText>
+                  Please Deposit &#2547; {config.baseFee - user.balance} to
+                  Activate❗
+                </CommonText>
+              ) : (
+                <Button
+                  variant="secondary"
+                  className="mx-auto"
+                  onClick={handleActivation}
+                >
+                  Request to Activate
+                </Button>
+              )}
+            </div>
+          )}
         </section>
       ) : (
         <section className="max-w-sm w-full mx-auto">
@@ -101,18 +131,6 @@ const Profile = () => {
                 />
               ))}
             </div>
-          </div>
-        </section>
-      )}
-
-      {user?.role === UserRole.admin && (
-        <section className="max-w-sm w-full mx-auto px-4 mt-20">
-          <div className="flex gap-5">
-            <input
-              type="number"
-              onChange={(e) => setBaseFee(Number(e.target.value))}
-              className="outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-1 px-2"
-            />
           </div>
         </section>
       )}

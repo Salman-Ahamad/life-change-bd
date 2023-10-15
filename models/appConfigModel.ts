@@ -16,9 +16,21 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       type: [String],
       default: [],
     },
-    meetings: {
-      type: [String],
-      default: [],
+    support: {
+      type: {
+        whatsApp: String,
+        meeting: String,
+        help: String,
+      },
+      default: {
+        whatsApp: "",
+        meeting: "",
+        help: "",
+      },
+    },
+    whatsAppMessage: {
+      type: String,
+      default: "",
     },
   },
   {

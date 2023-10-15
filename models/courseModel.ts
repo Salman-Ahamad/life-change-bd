@@ -36,6 +36,9 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid duration"],
     },
+    meetingId: {
+      type: String,
+    },
     footerDes: {
       type: String,
       default: "",
