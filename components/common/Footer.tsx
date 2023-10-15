@@ -5,7 +5,13 @@ import { FC } from "react";
 
 import { bnsLogo } from "@/lib/assets";
 import { footerItems } from "@/lib/data";
-import { Button, CommonText, MainContainer, Title } from "@/universal";
+import {
+  Button,
+  CommonText,
+  LinkButton,
+  MainContainer,
+  Title,
+} from "@/universal";
 import { AppDownload } from ".";
 import Link from "next/link";
 
@@ -43,8 +49,18 @@ export const Footer: FC = () => (
           ))}
 
           <div className="flex flex-col gap-5 mt-5">
-            <Button variant="secondary">Admin Login</Button>
-            <Button variant="secondary">SubAdmin Login</Button>
+            <LinkButton
+              href="/admin-login"
+              className="px-3 py-1.5 bg-accent hover:bg-primary rounded"
+            >
+              Admin Login
+            </LinkButton>
+            <LinkButton
+              href="/sub-admin-login"
+              className="px-3 py-1.5 bg-accent hover:bg-primary rounded"
+            >
+              SubAdmin Login
+            </LinkButton>
           </div>
         </div>
       </section>

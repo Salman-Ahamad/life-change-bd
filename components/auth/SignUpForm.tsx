@@ -11,6 +11,7 @@ import { Button, CTA, CommonText } from "@/universal";
 import { Axios, loadingToast } from "@/utils";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import { CompanyName } from "../common/Brand";
 
 export const SignUpForm = () => {
   const [agree, setAgree] = useState(false);
@@ -166,7 +167,7 @@ export const SignUpForm = () => {
               className="accent-primary mt-1 cursor-pointer"
             />
             <CommonText className="pr-5">
-              By clicking Register, you agree to My Business Union Learning
+              By clicking Register, you agree to <CompanyName /> Learning
               Platform&rsquo;s&nbsp;
               <Link
                 href="/terms-conditions"

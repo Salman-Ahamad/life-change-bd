@@ -36,7 +36,7 @@ export const Support: FC = () => (
               variant="H4"
               className="capitalize text-center lg:text-start"
             >
-              My Business UnionTrainer, GL, SGL
+              My Life Change Bd Trainer, GL, SGL
             </Title>
             <LinkImage
               href="/"
