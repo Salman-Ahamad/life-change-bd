@@ -3,10 +3,14 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, Tost } from "@/components";
-import { HelpLink, MeetingLink, SupportTeam } from "@/components/User/Active";
+import { Header, Slider, Tost } from "@/components";
+import {
+  ActivePageCard,
+  HelpLink,
+  MeetingLink,
+  SupportTeam,
+} from "@/components/User/Active";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
-import { IAppConfig } from "@/interface";
 import { navData } from "@/lib/data";
 import { Container } from "@/universal";
 import { IAppConfig } from "@/interface";
