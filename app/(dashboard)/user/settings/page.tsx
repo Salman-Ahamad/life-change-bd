@@ -21,11 +21,11 @@ const Settings: NextPage = () => {
       </Title>
       <Container>
         {user?.role === UserRole.admin && (
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 w-80 justify-center items-center mx-auto">
             <ChangeBaseFee />
-            <LiveCourseLink />
-            <ChangeHelpLink />
             <ChangeSupportLink />
+            <ChangeHelpLink />
+            <LiveCourseLink />
           </div>
         )}
       </Container>

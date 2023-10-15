@@ -3,14 +3,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, Slider, Tost } from "@/components";
-import {
-  ActivePageCard,
-  ReferenceMeetingLink,
-  SupportLink,
-  SupportTeam,
-} from "@/components/User/Active";
+import { Header, Tost } from "@/components";
+import { HelpLink, MeetingLink, SupportTeam } from "@/components/User/Active";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { IAppConfig } from "@/interface";
 import { navData } from "@/lib/data";
 import { Container } from "@/universal";
 import { IAppConfig } from "@/interface";
@@ -18,6 +14,7 @@ import { IAppConfig } from "@/interface";
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
+  useGetData("/config", setConfig);
 
   useGetData("/config", setConfig);
 
@@ -49,11 +46,13 @@ const Active = () => {
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        <div className="space-y-5">
-          <SupportLink />
-          <ReferenceMeetingLink />
-        </div>
-        <SupportTeam />
+        {config && (
+          <div className="space-y-5">
+            <HelpLink meetId={config.support.help} />
+            <MeetingLink meetId={config.support.meeting} />
+          </div>
+        )}
+        {config && <SupportTeam support={config.whatsAppMessage} />}
       </Container>
       <Container className="flex justify-center">
         <div className="max-w-lg w-full">

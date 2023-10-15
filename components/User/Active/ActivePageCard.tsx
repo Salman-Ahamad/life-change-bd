@@ -1,15 +1,16 @@
 "use client";
 
+import { WhatsAppLink } from "@/components";
 import { IChildrenWithTitle } from "@/interface";
 import { googleMeet } from "@/lib/assets";
-import { Button, Title } from "@/universal";
+import { Title } from "@/universal";
 import Image from "next/image";
-import React, { FC } from "react";
+import { FC } from "react";
 
 export const ActivePageCard: FC<IChildrenWithTitle> = ({ title, children }) => {
   return (
     <div className="shadow-lg border p-4 h-fit space-y-2.5">
-      <Title variant="H5" className="pb-4">
+      <Title variant="H5" className="pb-4 capitalize">
         {title}
       </Title>
       {children}
@@ -17,11 +18,18 @@ export const ActivePageCard: FC<IChildrenWithTitle> = ({ title, children }) => {
   );
 };
 
-export const DataRow: FC<{
+export interface IDataRow {
   title: string;
   btnText?: string;
   icon?: boolean;
-}> = ({ title, btnText = "Message", icon }) => {
+  phoneNo?: string;
+}
+export const DataRow: FC<IDataRow> = ({
+  title,
+  btnText = "Message",
+  icon,
+  phoneNo,
+}) => {
   return (
     <div className="flex justify-between items-center gap-2.5 py-2 hover:bg-gray-100">
       {icon && (
@@ -32,7 +40,7 @@ export const DataRow: FC<{
         />
       )}
       <p>{title}</p>
-      <Button variant="secondary">{btnText}</Button>
+      <WhatsAppLink btnText={btnText} phoneNo={phoneNo as string} />
     </div>
   );
 };
