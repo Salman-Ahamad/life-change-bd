@@ -96,8 +96,8 @@ const Profile = () => {
             <div className="my-5">
               {user.balance <= config.baseFee ? (
                 <CommonText>
-                  Please Deposit &#2547; {config.baseFee - user.balance} to
-                  Activate❗
+                  {/* Please Deposit &#2547; {config.baseFee - user.balance} to
+                  Activate❗ */}
                 </CommonText>
               ) : (
                 <Button

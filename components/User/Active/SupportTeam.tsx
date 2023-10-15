@@ -18,8 +18,12 @@ export const SupportTeam: FC<{ support: string }> = ({ support }) => {
   if (data)
     return (
       <ActivePageCard title="Life change Support Team">
-        <DataRow title="Your Consultant" phoneNo={data.consultant.phone} />
-        <DataRow title="Your Group Leader" phoneNo={data.gl.phone} />
+        <DataRow
+          title="My Consultant"
+          phoneNo={data.consultant.phone}
+          btnText="WhatsApp"
+        />
+        <DataRow title="My Group Leader" phoneNo={data.gl.phone} />
         <DataRow title="Life Change BD Support" phoneNo={support} />
       </ActivePageCard>
     );

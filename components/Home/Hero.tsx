@@ -1,6 +1,6 @@
 "use client";
 
-import { banner2, bnsLogo } from "@/lib/assets";
+import { banner3, bnsLogo } from "@/lib/assets";
 import {
   BackgroundImg,
   CommonText,
@@ -17,7 +17,7 @@ export const Hero: FC = () => {
 
   return (
     <BackgroundImg
-      img={banner2}
+      img={banner3}
       className="h-auto pb-5 lg:pb-0 lg:h-screen"
       overflow
       overlay
@@ -36,7 +36,7 @@ export const Hero: FC = () => {
         <div className="flex flex-col justify-center items-start gap-4 mt-1.5">
           <Title
             variant="H1"
-            className="text-white text-4xl font-bold text-left"
+            className="text-white text-3xl md:text-4xl font-bold text-left"
           >
             WELCOME TO LIFE CHANGE BD E-LEARNING PLATFORM
           </Title>

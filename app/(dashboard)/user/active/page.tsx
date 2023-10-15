@@ -12,7 +12,7 @@ import {
 } from "@/components/User/Active";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { navData } from "@/lib/data";
-import { Container } from "@/universal";
+import { Container, Title } from "@/universal";
 import { IAppConfig } from "@/interface";
 
 const Active = () => {
@@ -49,6 +49,11 @@ const Active = () => {
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
+
+      <div className="max-w-lg w-full mx-auto py-6">
+        <Title variant="H3">Welcome to Life Change Bd</Title>
+        {config?.sliderImage && <Slider slides={config?.sliderImage} />}
+      </div>
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
         {config && (
           <div className="space-y-5">
@@ -58,15 +63,7 @@ const Active = () => {
         )}
         {config && <SupportTeam support={config.whatsAppMessage} />}
       </Container>
-      <Container className="flex justify-center">
-        <div className="max-w-lg w-full">
-          {config?.sliderImage && (
-            <ActivePageCard title="">
-              <Slider slides={config?.sliderImage} />
-            </ActivePageCard>
-          )}
-        </div>
-      </Container>
+
       {/* <LiveEarningClass /> */}
       {/* <LiveLearningClass /> */}
     </main>
