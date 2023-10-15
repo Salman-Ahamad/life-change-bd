@@ -19,9 +19,7 @@ const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
 
-  useGetData("/config", setConfig, true);
-
-  console.log(config?.sliderImage);
+  useGetData("/config", setConfig);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
