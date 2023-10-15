@@ -10,8 +10,6 @@ const Courses = () => {
   const [courses, setCourses] = useState<ICourse[] | null>(null);
   useGetData("/courses", setCourses);
 
-  console.log("Courses", courses);
-
   return (
     <section className="py-12">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
