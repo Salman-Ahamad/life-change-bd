@@ -1,6 +1,12 @@
 import { StaticImageData } from "next/image";
 import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
-import { ICardData, IChildrenWithClassName, IClassName, IUser } from ".";
+import {
+  ICardData,
+  IChildren,
+  IChildrenWithClassName,
+  IClassName,
+  IUser,
+} from ".";
 
 export type IColor =
   | "black"
@@ -164,7 +170,7 @@ export interface ISendWish extends IWaDeepLink {
   data: object;
 }
 
-export interface IGoogleMeetDeepLink {
+export interface IGoogleMeetDeepLink extends IChildren {
   meetId: string;
   startTime?: string;
   endTime?: string;
