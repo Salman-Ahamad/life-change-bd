@@ -13,7 +13,7 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { CompanyName } from "../common/Brand";
 
-export const SignUpForm = ({ referal }: { referal: string }) => {
+export const SignUpForm = ({ referral }: { referral: string }) => {
   const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
     firstName: "",
@@ -24,17 +24,15 @@ export const SignUpForm = ({ referal }: { referal: string }) => {
     phone: "",
     email: "",
     password: "",
-    reference: referal, // TODO: Which line is ok
+    reference: referral, // TODO: Which line is ok
   };
-
-  console.log(referal);
 
   const handleSubmit = (
     values: ISignUpFormValue,
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
     const id = toast.loading("Loading... 🔃");
-    // values.reference = referal; // TODO: Which line is ok
+    // values.reference = referral; // TODO: Which line is ok
     values.reference.length === 0 && (values.reference = "-");
 
     Axios.post("/auth/signup", values)

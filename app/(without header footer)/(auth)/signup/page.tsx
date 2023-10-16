@@ -3,10 +3,18 @@
 import { SignUpForm } from "@/components";
 import { CommonText, Title } from "@/universal";
 import Link from "next/link";
+import React from "react";
 
-const SignUp = ({ searchParams }) => {
-  const { referal } = searchParams;
-  console.log("Search Param: ", referal);
+interface SignUpProps {
+  searchParams: {
+    referral?: string;
+    // Add other properties if needed
+  };
+}
+
+const SignUp: React.FC<SignUpProps> = ({ searchParams }) => {
+  const { referral } = searchParams;
+  console.log("Search Param: ", referral);
 
   return (
     <main className="min-h-screen flex justify-between items-center px-5">
@@ -18,7 +26,7 @@ const SignUp = ({ searchParams }) => {
           Provide your necessary <br /> information here
         </CommonText>
 
-        <SignUpForm referal={referal} />
+        <SignUpForm referral={referral || "-"} />
 
         <CommonText className="text-center mt-5">
           Have already an account?&nbsp;
