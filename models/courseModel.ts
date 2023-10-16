@@ -45,7 +45,7 @@ const courseSchema = new Schema<ICourseSchema>(
     },
     status: {
       type: String,
-      default: "active",
+      default: "enroll",
     },
     enrolled: {
       type: [String],
