@@ -2,6 +2,7 @@
 
 import { ImageUploaderProps } from "@/interface";
 import { Button } from "@/universal";
+import { getFileUploader } from "@/utils/actions/getFileUploade";
 import axios from "axios";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -20,7 +21,7 @@ export const FileUploader: FC<ImageUploaderProps> = ({
 
     const file = event.target.files?.[0];
 
-    if (file && fileType.includes(file.type)) {
+    if (file && fileType && fileType.includes(file.type)) {
       setSelectedFile(file);
     } else {
       // Handle invalid file type
@@ -34,23 +35,8 @@ export const FileUploader: FC<ImageUploaderProps> = ({
     if (selectedFile) {
       try {
         setUploading(true);
-
-        const formData = new FormData();
-
-        formData.set("file", selectedFile);
-        formData.append("upload_preset", "ebm0hyxo");
-
-        const endpoint = process.env
-          .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
-
-        const uploadRes = await axios.post(endpoint, formData);
-
-        if (!endpoint) {
-          throw new Error(`Failed to upload file: ${endpoint}`);
-        }
-
-        const { url } = await uploadRes.data;
-        if (url) {
+        const { url } = await getFileUploader(selectedFile);
+        if (url && setFileUrl) {
           setFileUrl(url);
           setUpdatedData && setUpdatedData((prev) => ({ ...prev, image: url }));
         }

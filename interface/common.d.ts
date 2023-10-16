@@ -153,8 +153,8 @@ export interface IFiledDate {
 }
 
 export interface ImageUploaderProps extends IClassName {
-  fileType: string;
-  setFileUrl: Dispatch<SetStateAction<string>>;
+  fileType?: string;
+  setFileUrl?: Dispatch<SetStateAction<string>>;
   setUpdatedData?: Dispatch<SetStateAction<object>>;
 }
 
