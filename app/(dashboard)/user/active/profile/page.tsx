@@ -74,7 +74,7 @@ const Profile = () => {
                   }`}
                 >
                   {item === "reference"
-                    ? user.reference.userId
+                    ? user.reference.userId || "-"
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}

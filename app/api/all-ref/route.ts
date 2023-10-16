@@ -32,20 +32,46 @@ export const GET = async ({ nextUrl }: NextRequest) => {
 
     let collectInactiveValue: boolean =
       collectInactive && JSON.parse(collectInactive.toLowerCase());
+    const formattingDate = new Date(Number(date));
+
+    let dateFilter = {};
+    let filterById = {};
+    let option = {};
+    // let dateFilter = {
+    //   reference: user.id,
+    //   createdAt: { $gte: formattingDate },
+    // };
+    // let filterById = {
+    //   userId: id,
+    //   // reference: user.id,
+    //   role: UserRole.active,
+    // };
 
     const collectInactiveOption = {
       role: UserRole.active,
       "settings.collectInactive": collectInactiveValue,
     };
-    const formattingDate = new Date(Number(date));
-    const dateFilter = {
-      reference: user.id,
-      createdAt: { $gte: formattingDate },
-    };
-    const filterById = {
-      userId: id,
-      reference: user.id,
-      role: UserRole.active,
+
+    switch (user.role) {
+      case UserRole.admin:
+        const idFilter = { userId: id };
+        const dateFilter = { createdAt: { $gte: formattingDate } };
+        option =
+          (id && { ...idFilter, "settings.admin": user.id }) ||
+          (date && { ...dateFilter, "settings.admin": user.id }) ||
+          (collectInactive && {
+            ...collectInactiveOption,
+            "settings.admin": user.id,
+          }) ||
+          {};
+        break;
+
+      default:
+        break;
+    }
+
+    const admin = {
+      "settings.admin": user.id,
     };
     const controller = {
       "settings.controller": user.id,
@@ -64,12 +90,14 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       role: UserRole.active,
     };
 
-    const option =
-      (user.role === UserRole.admin && {}) ||
+    const option2 =
+      (user.role === UserRole.admin && admin) ||
       (user.role === UserRole.controller && controller) ||
       (user.role === UserRole.consultant && consultant) ||
       (user.role === UserRole.teacher && teacher) ||
       (user.role === UserRole.gl && gl) ||
+      {};
+    const filter =
       (collectInactive && collectInactiveOption) ||
       (date && dateFilter) ||
       (id && filterById) ||
