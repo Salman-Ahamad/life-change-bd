@@ -62,8 +62,6 @@ export const PATCH = async (req: NextRequest) => {
     // Get Current User
     const user = await getCurrentUser();
 
-    console.log("User From API", user);
-
     if (!user) {
       return ApiResponse(404, "User not found❗");
     } else if (!user.role) {

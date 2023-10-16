@@ -14,7 +14,6 @@ interface SignUpProps {
 
 const SignUp: React.FC<SignUpProps> = ({ searchParams }) => {
   const { referral } = searchParams;
-  console.log("Search Param: ", referral);
 
   return (
     <main className="min-h-screen flex justify-between items-center px-5">

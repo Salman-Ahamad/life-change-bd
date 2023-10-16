@@ -104,7 +104,6 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       .populate("referUser")
       .sort({ createdAt: -1 })
       .limit(inactiveLimit + 1);
-    console.log("🚀 ~ file: route.ts:106 ~ PATCH ~ refList:", refList);
 
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });

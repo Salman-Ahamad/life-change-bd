@@ -10,7 +10,6 @@ export async function getSession() {
 
 export default async function getCurrentUser(): Promise<IUser | null> {
   const session = await getSession();
-  console.log("session", session);
 
   if (!session?.user) {
     console.error("Session user not found");
