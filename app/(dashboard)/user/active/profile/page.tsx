@@ -34,7 +34,7 @@ const Profile = () => {
         <section>
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
-              src={avatarProfile}
+              src={user.image || avatarProfile}
               width={80}
               height={80}
               className="rounded-full shadow-lg w-[80px] h-[80px]"
@@ -77,7 +77,7 @@ const Profile = () => {
                   }`}
                 >
                   {item === "reference"
-                    ? user[item as keyof IUser]
+                    ? user.reference.userId
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}

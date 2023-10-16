@@ -9,6 +9,7 @@ import { navData } from "@/lib";
 
 const RefList: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
+  console.log("🚀 ~ file: page.tsx:12 ~ data:", data);
 
   return (
     <>
