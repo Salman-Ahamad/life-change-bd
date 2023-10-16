@@ -50,7 +50,6 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
 
   const depositMoney = () => {
     if (user && diopsideAmount > 0) {
-      const newBalance = Number(user.balance) + Number(diopsideAmount);
       updateData(`/user/deposit/`, {
         id: slug,
         diopsideAmount: Number(diopsideAmount),
