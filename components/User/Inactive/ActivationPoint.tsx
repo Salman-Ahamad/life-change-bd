@@ -12,8 +12,6 @@ export const ActivationPoint = () => {
   const user = useCurrentUser();
   useGetData("/config", setConfig);
 
-  // console.log(user.balance <= config.baseFee);
-
   const profileTitle = [
     "email",
     "country",
@@ -64,7 +62,6 @@ export const ActivationPoint = () => {
                 //   Activate❗
                 // </CommonText>
                 <CommonText>
-                  {console.log(config.baseFee - user.balance)}
                   You need more {config.baseFee - user.balance} to Activate❗
                 </CommonText>
               ) : (
