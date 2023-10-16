@@ -1,11 +1,11 @@
 import { User } from "@/models";
 
 export const findLastStudentId = async (): Promise<string | undefined> => {
-  const lastStudent = await User.findOne({}, { id: 1, _id: 0 }).sort({
+  const lastStudent = await User.findOne({}, { userId: 1, _id: 0 }).sort({
     createdAt: -1,
   });
 
-  return lastStudent?.id ? lastStudent.id.substring(3) : undefined;
+  return lastStudent?.userId ? lastStudent.userId.substring(3) : undefined;
 };
 
 export const generateStudentId = async (): Promise<string> => {
