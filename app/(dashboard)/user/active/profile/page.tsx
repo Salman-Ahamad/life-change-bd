@@ -10,7 +10,6 @@ import { CommonText } from "@/universal";
 
 const Profile = () => {
   const user = useCurrentUser();
-  console.log("🚀 ~ file: page.tsx:13 ~ Profile ~ user:", user);
 
   const profileTitle = [
     "email",
@@ -35,7 +34,7 @@ const Profile = () => {
         <section>
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
-              src={avatarProfile}
+              src={user.image || avatarProfile}
               width={80}
               height={80}
               className="rounded-full shadow-lg w-[80px] h-[80px]"
