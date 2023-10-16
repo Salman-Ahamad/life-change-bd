@@ -6,6 +6,7 @@ const userSchema = new Schema<IUserSchema>(
     userId: {
       type: String,
       required: true,
+      unique: true,
     },
     firstName: {
       type: String,
@@ -118,4 +119,4 @@ const userSchema = new Schema<IUserSchema>(
   }
 );
 
-export const User = models.users || model<IUserSchema>("users", userSchema);
+export const User = models?.users || model<IUserSchema>("users", userSchema);

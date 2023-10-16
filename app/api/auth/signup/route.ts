@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
 import { User } from "@/models";
-import { ApiResponse } from "@/utils";
+import { ApiResponse, generateStudentId } from "@/utils";
 
 connectDb();
 
@@ -18,9 +18,9 @@ export const POST = async (req: NextRequest) => {
     } = await req.json();
 
     //check if user already exists
-    const user = await User.findOne({ email });
+    const checkUserExists = await User.findOne({ email });
 
-    if (user) {
+    if (checkUserExists) {
       return ApiResponse(400, "User already exists 🙋🏻‍♂️🙋🏻‍♂️🙋🏻‍♂️");
     }
 
@@ -39,17 +39,24 @@ export const POST = async (req: NextRequest) => {
     const salt = await genSalt(10);
     const hashedPassword = await hash(userPass, salt);
 
-    const newUser = await User.create({
+    const user = {
       ...userData,
       email,
       password: hashedPassword,
       reference,
-    });
+    };
 
-    if (newUser) {
+    const id = await generateStudentId();
+
+    user.userId = id;
+
+    const result = await User.create(user);
+
+    if (!result.id) {
+      return ApiResponse(404, "Wrong reference Id❗");
     }
 
-    const finalResult = await User.findOne({ _id: newUser.id }).select(
+    const finalResult = await User.findOne({ id: result.id }).select(
       "-password"
     );
 
