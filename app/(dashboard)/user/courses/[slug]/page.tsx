@@ -72,6 +72,7 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
 };
 
 export default Assignment;
+
 /**
  * courseId: id
  * userId: 230001,
