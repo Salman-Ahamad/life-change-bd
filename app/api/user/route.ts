@@ -3,6 +3,7 @@ import { UserRole } from "@/lib";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
+import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 connectDb();
@@ -34,11 +35,19 @@ export const GET = async () => {
 
     const user = await User.findOne({ _id: currentUser.id })
       .populate("courses")
-      .populate({
-        path: "reference",
-        select: "userId",
-      })
       .select("-password");
+
+    if (user.reference !== "-" && Types.ObjectId.isValid(user.reference)) {
+      const result = await User.findOne({ _id: currentUser.id })
+        .populate("courses")
+        .populate({
+          path: "reference",
+          select: "userId",
+        })
+        .select("-password");
+
+      return ApiResponse(200, "User get successfully 👌", result);
+    }
 
     return ApiResponse(200, "User get successfully 👌", user);
   } catch (error: any) {

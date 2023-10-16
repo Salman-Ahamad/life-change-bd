@@ -77,10 +77,8 @@ const Profile = () => {
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
-                  {item === "reference" && user.reference
-                    ? user.reference.userId
-                    : item === "reference" && !user.reference
-                    ? "-"
+                  {item === "reference"
+                    ? user.reference.userId || "-"
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}
