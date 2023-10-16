@@ -39,7 +39,7 @@ const MyReference = () => {
         <DataTable
           tableData={refData}
           tableHeaders={["no", "id", "Name", "Joining Time"]}
-          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"
           setActionId={handleUpdate}
           actionBtn={

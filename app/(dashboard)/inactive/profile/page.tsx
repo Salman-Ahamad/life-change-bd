@@ -61,7 +61,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full capitalize`}>
-                {user.id}
+                {user.userId}
               </CommonText>
             </div>
           </div>
@@ -96,8 +96,8 @@ const Profile = () => {
             <div className="my-5">
               {user.balance <= config.baseFee ? (
                 <CommonText>
-                  Please Deposit &#2547; {config.baseFee - user.balance} to
-                  Activate❗
+                  {/* Please Deposit &#2547; {config.baseFee - user.balance} to
+                  Activate❗ */}
                 </CommonText>
               ) : (
                 <Button

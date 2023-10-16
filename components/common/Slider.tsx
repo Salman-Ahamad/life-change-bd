@@ -16,30 +16,27 @@ import "swiper/css/pagination";
 
 export const Slider: FC<{ slides: string[] }> = ({ slides }) => {
   return (
-    <div className="p-4 w-full h-full bg-white">
+    <div className="p-4 w-full flex justify-center">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 3500,
+          delay: 4500,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
         loop={true}
-        modules={[EffectFade, Autoplay, Pagination]}
-        className="mySwiper"
+        modules={[EffectFade, Autoplay]}
+        className="mySwiper flex justify-center"
         effect={"fade"}
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="flex justify-center">
             <Image
               src={slide}
               width={400}
               height={400}
               alt="Slide Image"
-              className="bg-white w-full h-full object-cover"
+              className="bg-white w-[400px] h-[400px] mx-auto rounded-md"
             />
           </SwiperSlide>
         ))}

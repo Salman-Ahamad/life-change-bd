@@ -8,33 +8,81 @@ import { NextRequest } from "next/server";
 
 connectDb();
 
-export const GET = async (req: NextRequest, { params }: ISlugParams) => {
+export const GET = async ({ nextUrl }: NextRequest) => {
   try {
-    const id = params.slug;
+    const id = nextUrl.searchParams.get("id");
+    const date = nextUrl.searchParams.get("date");
+    const collectInactive = nextUrl.searchParams.get("collectInactive");
 
     // Get Current User
-    const currentUser = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    if (!currentUser) {
+    if (!user) {
       return ApiResponse(404, "User not found❗");
     }
-
     if (
-      currentUser.role !== UserRole.active &&
-      currentUser.role !== UserRole.controller &&
-      currentUser.role !== UserRole.consultant &&
-      currentUser.role !== UserRole.teacher &&
-      currentUser.role !== UserRole.gl &&
-      currentUser.role !== UserRole.admin
+      user.role !== UserRole.active &&
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.gl &&
+      user.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: id })
-      .populate("courses")
-      .select("-password");
+    let collectInactiveValue: boolean =
+      collectInactive && JSON.parse(collectInactive.toLowerCase());
 
-    return ApiResponse(200, "User get successfully 👌", user);
+    const collectInactiveOption = {
+      role: UserRole.active,
+      "settings.collectInactive": collectInactiveValue,
+    };
+    const formattingDate = new Date(Number(date));
+    const dateFilter = {
+      reference: user.id,
+      createdAt: { $gte: formattingDate },
+      role: UserRole.active,
+    };
+    const filterById = {
+      userId: id,
+      reference: user.id,
+      role: UserRole.active,
+    };
+    const controller = {
+      "settings.controller": user.id,
+      role: UserRole.active,
+    };
+    const consultant = {
+      "settings.consultant": user.id,
+      role: UserRole.active,
+    };
+    const teacher = {
+      "settings.teacher": user.id,
+      role: UserRole.active,
+    };
+    const gl = {
+      "settings.gl": user.id,
+      role: UserRole.active,
+    };
+
+    const option =
+      (user.role === UserRole.admin && {}) ||
+      (user.role === UserRole.controller && controller) ||
+      (user.role === UserRole.consultant && consultant) ||
+      (user.role === UserRole.teacher && teacher) ||
+      (user.role === UserRole.gl && gl) ||
+      (collectInactive && collectInactiveOption) ||
+      (date && dateFilter) ||
+      (id && filterById) ||
+      {};
+
+    const refList = await User.find(option)
+      .sort({ createdAt: -1 })
+      .select({ password: 0 })
+      .exec();
+
+    return ApiResponse(200, "User get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
@@ -60,6 +108,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });
       await User.updateOne({ _id: id }, { "settings.collectInactive": true });
+
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
       const active = refList.find(

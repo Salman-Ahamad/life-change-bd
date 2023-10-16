@@ -32,6 +32,7 @@ export interface ISettings {
 }
 
 export interface IUserSchema {
+  userId: string;
   firstName: string;
   lastName: string;
   language: string;
@@ -67,4 +68,7 @@ export interface IUser extends IUserSchema, IId {
   image: string;
   settings: ISettings;
   createdAt: string;
+  reference: {
+    userId: string;
+  };
 }

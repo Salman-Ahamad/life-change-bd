@@ -31,4 +31,5 @@ const WithdrawalSchema = new Schema<IWithdrawalSchema>(
 );
 
 export const Withdrawal =
-  models.Withdrawal || model<IWithdrawalSchema>("Withdrawal", WithdrawalSchema);
+  models?.Withdrawal ||
+  model<IWithdrawalSchema>("Withdrawal", WithdrawalSchema);

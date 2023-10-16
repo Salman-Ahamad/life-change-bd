@@ -11,8 +11,9 @@ import { Button, CTA, CommonText } from "@/universal";
 import { Axios, loadingToast } from "@/utils";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import { CompanyName } from "../common/Brand";
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ referral }: { referral: string }) => {
   const [agree, setAgree] = useState(false);
   const initialValues: ISignUpFormValue = {
     firstName: "",
@@ -23,7 +24,7 @@ export const SignUpForm = () => {
     phone: "",
     email: "",
     password: "",
-    reference: "",
+    reference: referral, // TODO: Which line is ok
   };
 
   const handleSubmit = (
@@ -31,6 +32,7 @@ export const SignUpForm = () => {
     { resetForm }: FormikHelpers<ISignUpFormValue>
   ) => {
     const id = toast.loading("Loading... 🔃");
+    // values.reference = referral; // TODO: Which line is ok
     values.reference.length === 0 && (values.reference = "-");
 
     Axios.post("/auth/signup", values)
@@ -162,11 +164,11 @@ export const SignUpForm = () => {
             <input
               onClick={() => setAgree((prv) => !prv)}
               type="checkbox"
-              checked={agree}
+              defaultChecked={agree}
               className="accent-primary mt-1 cursor-pointer"
             />
             <CommonText className="pr-5">
-              By clicking Register, you agree to My Business Union Learning
+              By clicking Register, you agree to <CompanyName /> Learning
               Platform&rsquo;s&nbsp;
               <Link
                 href="/terms-conditions"

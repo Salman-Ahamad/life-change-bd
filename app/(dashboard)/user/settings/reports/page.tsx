@@ -1,15 +1,25 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { useGetData } from "@/hooks";
+import { useCurrentUser, useGetData } from "@/hooks";
 import { IUser } from "@/interface";
-import { navData } from "@/lib";
+import { UserRole, navData } from "@/lib";
 import { Title } from "@/universal";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/all-ref?collectInactive=true", setData);
+
+  const user = useCurrentUser();
+
+  // TODO: Change the approach
+  if (user?.role === UserRole.inactive) {
+    redirect("/inactive");
+  } else if (user?.role === UserRole.active) {
+    redirect("/user/active");
+  }
 
   return (
     <>
@@ -22,7 +32,7 @@ const Report = () => {
       ) : (
         <DataTable
           tableHeaders={["no", "id", "Name", "Joining Time", "Message"]}
-          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
           tableData={data}
         />
       )}

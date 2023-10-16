@@ -11,7 +11,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const collectInactive = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("collectInactive");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -31,32 +31,67 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     let collectInactiveValue: boolean =
-      collectInactive && JSON.parse(collectInactive.toLowerCase());
+      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
+    const formattingDate = new Date(Number(date));
 
-    const collectInactiveOption = {
+    let option = {};
+    const inactiveBonusOption = {
       "settings.collectInactive": collectInactiveValue,
     };
-    const formattingDate = new Date(Number(date));
-    const dateFilter = {
-      reference: user.id,
-      createdAt: { $gte: formattingDate },
+    const optionFn = (option: object) => {
+      const idFilter = { userId: id };
+      const dateFilter = { createdAt: { $gte: formattingDate } };
+      const active = { role: UserRole.active };
+      return (
+        (id && { ...idFilter, ...active, ...option }) ||
+        (date && { ...dateFilter, ...active, ...option }) ||
+        (inactiveBonus && {
+          ...inactiveBonusOption,
+          ...option,
+        }) ||
+        {}
+      );
     };
-    const filterById = { reference: user.id, _id: id };
-    const controller = { "settings.controller": user.id };
-    const consultant = { "settings.consultant": user.id };
-    const teacher = { "settings.teacher": user.id };
-    const gl = { "settings.gl": user.id };
 
-    const option =
-      (user.role === UserRole.admin && {}) ||
-      (user.role === UserRole.controller && controller) ||
-      (user.role === UserRole.consultant && consultant) ||
-      (user.role === UserRole.teacher && teacher) ||
-      (user.role === UserRole.gl && gl) ||
-      (collectInactive && collectInactiveOption) ||
-      (date && dateFilter) ||
-      (id && filterById) ||
-      {};
+    switch (user.role) {
+      case UserRole.admin:
+        const admin = { "settings.admin": user.id };
+        option = optionFn(admin);
+        break;
+      case UserRole.controller:
+        const controller = {
+          "settings.controller": user.id,
+        };
+        option = optionFn(controller);
+        break;
+      case UserRole.consultant:
+        const consultant = {
+          "settings.consultant": user.id,
+        };
+        option = optionFn(consultant);
+        break;
+      case UserRole.teacher:
+        const teacher = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(teacher);
+        break;
+      case UserRole.gl:
+        const gl = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(gl);
+        break;
+      case UserRole.active:
+        const active = {
+          reference: user.userId,
+        };
+        option = optionFn(active);
+        break;
+
+      default:
+        break;
+    }
 
     const refList = await User.find(option)
       .sort({ createdAt: -1 })

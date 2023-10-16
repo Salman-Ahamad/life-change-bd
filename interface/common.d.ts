@@ -153,8 +153,8 @@ export interface IFiledDate {
 }
 
 export interface ImageUploaderProps extends IClassName {
-  fileType: string;
-  setFileUrl: Dispatch<SetStateAction<string>>;
+  fileType?: string;
+  setFileUrl?: Dispatch<SetStateAction<string>>;
   setUpdatedData?: Dispatch<SetStateAction<object>>;
 }
 
@@ -168,6 +168,10 @@ export interface IWaDeepLink {
 export interface ISendWish extends IWaDeepLink {
   userId: string;
   data: object;
+}
+
+export interface IWaShareLink extends IWaDeepLink {
+  userId: string;
 }
 
 export interface IGoogleMeetDeepLink extends IChildren {

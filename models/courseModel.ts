@@ -45,7 +45,7 @@ const courseSchema = new Schema<ICourseSchema>(
     },
     status: {
       type: String,
-      default: "active",
+      default: "enroll",
     },
     enrolled: {
       type: [String],
@@ -65,4 +65,4 @@ const courseSchema = new Schema<ICourseSchema>(
 );
 
 export const Course =
-  models.courses || model<ICourseSchema>("courses", courseSchema);
+  models?.courses || model<ICourseSchema>("courses", courseSchema);

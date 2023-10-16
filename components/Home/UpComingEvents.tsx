@@ -7,7 +7,9 @@ import { FC } from "react";
 export const UpComingEvents: FC = () => (
   <MainContainer bgColor="black" className="py-10 lg:py-20">
     <Container className="text-white text-center flex flex-col justify-center items-center gap-5 lg:gap-8">
-      <Title variant="H1">UPCOMING EVENTS</Title>
+      <Title variant="H1" className="text-3xl md:text-4xl">
+        UPCOMING EVENTS
+      </Title>
       <Label>
         LIFE CHANGE BD PLATFORM GIVES YOU A CORPORATE ENVIRONMENT AND HELPFULL
         DIGITAL MARKETING COMMUNITY

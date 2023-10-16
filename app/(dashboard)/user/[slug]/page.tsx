@@ -10,13 +10,12 @@ import { ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, Container, Title } from "@/universal";
 import Image from "next/image";
-import { number } from "yup";
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
   const [userData, setUserData] = useState<IUser>();
-  const [dipositeAmount, setDipositeAmount] = useState<number>(0);
+  const [diopsideAmount, setDipositeAmount] = useState<number>(0);
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
@@ -49,9 +48,12 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   useEffect(() => userData && setDisabled(false), [userData]);
   const updateProfile = () => updateData(`/user/${slug}`, updatedData);
 
-  const depositeMoney = () => {
-    if (user && dipositeAmount > 0) {
-      updateData(`/user/${slug}`, { balance: user.balance + dipositeAmount });
+  const depositMoney = () => {
+    if (user && diopsideAmount > 0) {
+      updateData(`/user/deposit/`, {
+        id: slug,
+        diopsideAmount: Number(diopsideAmount),
+      });
     }
   };
 
@@ -237,7 +239,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
           <Button
             variant="secondary"
             className="capitalize mt-5 disabled:bg-opacity-50 disabled:cursor-not-allowed"
-            onClick={depositeMoney}
+            onClick={depositMoney}
             disabled={disabled}
           >
             Deposit
