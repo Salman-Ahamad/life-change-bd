@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest) => {
       password: hashedPassword,
     };
 
-    if (reference !== "") {
+    if (reference !== "-") {
       const refUser = await User.findOne({ userId: reference });
       if (refUser) {
         user.reference = refUser._id;
