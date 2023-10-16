@@ -11,6 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// TODO: Change to edge later
+// export const fetchCache = "";
+// export const runtime = "nodejs";
+// 'edge' | 'nodejs'
+
 export const metadata: Metadata = {
   title: "Life Change BD",
   description:

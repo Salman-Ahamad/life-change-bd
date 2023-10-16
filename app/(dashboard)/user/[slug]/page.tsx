@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 
 import { FileUploader, Header } from "@/components";
 import { InputField } from "@/components/Settings";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { getDataFn, updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
 import { Button, Container, Title } from "@/universal";
 import Image from "next/image";
-import { number } from "yup";
+
+// TODO: May need to change, this will force to catch data for 10 second only
+// export const revalidate = 10;
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
@@ -51,7 +53,18 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
 
   const depositeMoney = () => {
     if (user && dipositeAmount > 0) {
-      updateData(`/user/${slug}`, { balance: user.balance + dipositeAmount });
+      console.log(user.balance);
+      console.log(dipositeAmount);
+
+      const newBalance = Number(user.balance) + Number(dipositeAmount);
+
+      console.log(newBalance);
+
+      updateData(`/user/${slug}`, {
+        balance: Number(user.balance) + Number(dipositeAmount),
+      }).then(() => getDataFn(`/user/${slug}`, setUserData));
+
+      window.location.reload();
     }
   };
 
