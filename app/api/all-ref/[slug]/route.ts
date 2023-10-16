@@ -11,7 +11,9 @@ connectDb();
 export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
+    console.log("🚀 ~ file: route.ts:14 ~ GET ~ id:", { id });
     const date = nextUrl.searchParams.get("date");
+    console.log("🚀 ~ file: route.ts:16 ~ GET ~ date:", { date });
     const collectInactive = nextUrl.searchParams.get("collectInactive");
 
     // Get Current User
@@ -42,10 +44,11 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const dateFilter = {
       reference: user.id,
       createdAt: { $gte: formattingDate },
+      role: UserRole.active,
     };
     const filterById = {
       userId: id,
-      reference: user.userId,
+      reference: user.id,
       role: UserRole.active,
     };
     const controller = {
@@ -103,6 +106,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       .populate("referUser")
       .sort({ createdAt: -1 })
       .limit(inactiveLimit + 1);
+    console.log("🚀 ~ file: route.ts:106 ~ PATCH ~ refList:", refList);
 
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });

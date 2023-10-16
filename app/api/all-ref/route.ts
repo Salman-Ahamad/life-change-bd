@@ -44,7 +44,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
     const filterById = {
       userId: id,
-      reference: user.userId,
+      reference: user.id,
       role: UserRole.active,
     };
     const controller = {
