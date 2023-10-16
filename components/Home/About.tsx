@@ -9,7 +9,7 @@ import { FC } from "react";
 export const About: FC = () => (
   <MainContainer>
     <Container>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-5 lg:gap-14 mt-[30px]  lg:-mt-20">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-5 lg:gap-14 mt-[30px] lg:-mt-20">
         <Link
           href="/courses"
           className="bg-black w-full lg:w-96 h-28 lg:h-40 flex justify-start items-center gap-10 text-white p-[30px] rounded-xl"
