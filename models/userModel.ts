@@ -3,6 +3,10 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema<IUserSchema>(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a First Name"],
