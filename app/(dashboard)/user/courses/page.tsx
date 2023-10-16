@@ -34,7 +34,7 @@ const Courses: NextPage = () => {
                         alt={title}
                         width={320}
                         height={208}
-                        className="rounded-t-lg object-cover w-80 h-52"
+                        className="rounded-t-lg object-fit w-80 h-52 bg-black"
                       />
 
                       <div className="space-y-2 p-2">
