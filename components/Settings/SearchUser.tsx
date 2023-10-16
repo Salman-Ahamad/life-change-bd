@@ -1,12 +1,11 @@
 "use client";
 
-import { useGetData } from "@/hooks";
 import { IUser } from "@/interface";
 import { avatarProfile } from "@/lib";
 import { Button, CommonText } from "@/universal";
 import { Axios } from "@/utils";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export const SearchUser: React.FC<{ role: string }> = ({ role }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

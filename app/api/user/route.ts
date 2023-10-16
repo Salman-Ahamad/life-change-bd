@@ -34,6 +34,10 @@ export const GET = async () => {
 
     const user = await User.findOne({ _id: currentUser.id })
       .populate("courses")
+      .populate({
+        path: "reference",
+        select: "userId",
+      })
       .select("-password");
 
     return ApiResponse(200, "User get successfully 👌", user);

@@ -56,8 +56,14 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       "settings.consultant": user.id,
       role: UserRole.active,
     };
-    const teacher = { "settings.teacher": user.id, role: UserRole.active };
-    const gl = { "settings.gl": user.id, role: UserRole.active };
+    const teacher = {
+      "settings.teacher": user.id,
+      role: UserRole.active,
+    };
+    const gl = {
+      "settings.gl": user.id,
+      role: UserRole.active,
+    };
 
     const option =
       (user.role === UserRole.admin && {}) ||
