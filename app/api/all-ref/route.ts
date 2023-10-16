@@ -11,7 +11,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const collectInactive = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("collectInactive");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -31,10 +31,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     let collectInactiveValue: boolean =
-      collectInactive && JSON.parse(collectInactive.toLowerCase());
+      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     const formattingDate = new Date(Number(date));
 
-    let dateFilter = {};
+    // let dateFilter = {};
     let filterById = {};
     let option = {};
     // let dateFilter = {
@@ -47,21 +47,36 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     //   role: UserRole.active,
     // };
 
-    const collectInactiveOption = {
+    const inactiveBonusOption = {
       role: UserRole.active,
       "settings.collectInactive": collectInactiveValue,
     };
+    const idFilter = { userId: id };
+    const dateFilter = { createdAt: { $gte: formattingDate } };
 
     switch (user.role) {
       case UserRole.admin:
-        const idFilter = { userId: id };
-        const dateFilter = { createdAt: { $gte: formattingDate } };
+        const admin = { "settings.admin": user.id };
         option =
-          (id && { ...idFilter, "settings.admin": user.id }) ||
-          (date && { ...dateFilter, "settings.admin": user.id }) ||
-          (collectInactive && {
-            ...collectInactiveOption,
-            "settings.admin": user.id,
+          (id && { ...idFilter, ...admin }) ||
+          (date && { ...dateFilter, ...admin }) ||
+          (inactiveBonus && {
+            ...inactiveBonusOption,
+            ...admin,
+          }) ||
+          {};
+        break;
+      case UserRole.controller:
+        const controller = {
+          "settings.controller": user.id,
+          role: UserRole.active,
+        };
+        option =
+          (id && { ...idFilter, ...controller }) ||
+          (date && { ...dateFilter, ...controller }) ||
+          (inactiveBonus && {
+            ...inactiveBonusOption,
+            ...controller,
           }) ||
           {};
         break;
@@ -98,7 +113,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       (user.role === UserRole.gl && gl) ||
       {};
     const filter =
-      (collectInactive && collectInactiveOption) ||
+      (inactiveBonus && inactiveBonus) ||
       (date && dateFilter) ||
       (id && filterById) ||
       {};
