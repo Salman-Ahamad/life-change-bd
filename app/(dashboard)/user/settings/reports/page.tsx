@@ -22,7 +22,7 @@ const Report = () => {
       ) : (
         <DataTable
           tableHeaders={["no", "id", "Name", "Joining Time", "Message"]}
-          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
           tableData={data}
         />
       )}

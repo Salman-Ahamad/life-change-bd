@@ -83,7 +83,7 @@ const userSchema = new Schema<IUserSchema>(
       admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
-        default: "6527ecf7577ff95a96133786",
+        default: "230001",
       },
       controller: {
         type: Schema.Types.ObjectId,

@@ -70,7 +70,7 @@ const Action: React.FC = () => {
         <DataTable
           tableData={data}
           tableHeaders={["no", "id", "amount", "method", "status"]}
-          dataProperties={["id", "amount", "method", "status"]}
+          dataProperties={["userId", "amount", "method", "status"]}
           setActionId={handleAction}
           actionBtn={
             <Button variant="secondary" className="text-xs">

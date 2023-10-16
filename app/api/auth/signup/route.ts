@@ -1,5 +1,4 @@
 import { genSalt, hash } from "bcryptjs";
-import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
@@ -24,17 +23,6 @@ export const POST = async (req: NextRequest) => {
       return ApiResponse(400, "User already exists 🙋🏻‍♂️🙋🏻‍♂️🙋🏻‍♂️");
     }
 
-    if (reference !== "-") {
-      if (Types.ObjectId.isValid(reference)) {
-        const refUser = await User.findOne({ _id: reference });
-        if (!refUser) {
-          return ApiResponse(404, "reference user notfound❗");
-        }
-      } else {
-        return ApiResponse(404, "Wrong reference Id❗");
-      }
-    }
-
     //hash password
     const salt = await genSalt(10);
     const hashedPassword = await hash(userPass, salt);
@@ -43,11 +31,18 @@ export const POST = async (req: NextRequest) => {
       ...userData,
       email,
       password: hashedPassword,
-      reference,
     };
 
-    const id = await generateStudentId();
+    if (reference !== "-") {
+      const refUser = await User.findOne({ userId: reference });
+      if (refUser) {
+        user.reference = refUser._id;
+      } else {
+        return ApiResponse(404, "Invalid Refer Id notfound❗");
+      }
+    }
 
+    const id = await generateStudentId();
     user.userId = id;
 
     const result = await User.create(user);

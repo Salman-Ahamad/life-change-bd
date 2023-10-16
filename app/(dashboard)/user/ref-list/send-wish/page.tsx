@@ -23,7 +23,7 @@ const SendWish = () => {
         <DataTable
           tableData={sendWishData}
           tableHeaders={["no", "id", "Name"]}
-          dataProperties={["id", "firstName", "phone"]}
+          dataProperties={["userId", "firstName", "phone"]}
           message="SendWish"
           UpdateSendWish
         />
