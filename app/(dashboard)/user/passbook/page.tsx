@@ -20,7 +20,7 @@ const Passbook = () => {
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃
         </Title>
-      ) : passbookData.length !== 0 ? (
+      ) : passbookData?.length !== 0 ? (
         <DataTable
           tableData={passbookData}
           tableHeaders={["No", "id", "Name", "Joining Time"]}

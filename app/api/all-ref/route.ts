@@ -39,14 +39,30 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
     const formattingDate = new Date(Number(date));
     const dateFilter = {
-      reference: user.userId,
+      reference: user.id,
       createdAt: { $gte: formattingDate },
     };
-    const filterById = { reference: user.userId, _id: id };
-    const controller = { "settings.controller": user.userId };
-    const consultant = { "settings.consultant": user.userId };
-    const teacher = { "settings.teacher": user.userId };
-    const gl = { "settings.gl": user.userId };
+    const filterById = {
+      userId: id,
+      reference: user.userId,
+      role: UserRole.active,
+    };
+    const controller = {
+      "settings.controller": user.id,
+      role: UserRole.active,
+    };
+    const consultant = {
+      "settings.consultant": user.id,
+      role: UserRole.active,
+    };
+    const teacher = {
+      "settings.teacher": user.id,
+      role: UserRole.active,
+    };
+    const gl = {
+      "settings.gl": user.id,
+      role: UserRole.active,
+    };
 
     const option =
       (user.role === UserRole.admin && {}) ||

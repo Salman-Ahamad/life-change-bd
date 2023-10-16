@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { Header, ShareReferLink } from "@/components";
 import { useCurrentUser } from "@/hooks";
@@ -10,7 +9,6 @@ import { UserRole, avatarProfile, navData } from "@/lib";
 import { CommonText } from "@/universal";
 
 const Profile = () => {
-  const [baseFee, setBaseFee] = useState(0);
   const user = useCurrentUser();
 
   const profileTitle = [
@@ -78,7 +76,9 @@ const Profile = () => {
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
-                  {user[item as keyof IUser]}
+                  {item === "reference"
+                    ? user[item as keyof IUser]
+                    : user[item as keyof IUser]}
                 </CommonText>
               ))}
               <ShareReferLink
