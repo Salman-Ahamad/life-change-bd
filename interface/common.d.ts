@@ -170,6 +170,10 @@ export interface ISendWish extends IWaDeepLink {
   data: object;
 }
 
+export interface IWaShareLink extends IWaDeepLink {
+  userId: string;
+}
+
 export interface IGoogleMeetDeepLink extends IChildren {
   meetId: string;
   startTime?: string;
