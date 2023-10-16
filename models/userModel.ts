@@ -52,6 +52,7 @@ const userSchema = new Schema<IUserSchema>(
     },
     reference: {
       type: String,
+      default: "-",
       ref: "users",
     },
     balance: {
