@@ -11,9 +11,13 @@ export const Footer = () => (
     </Title>
     <div className="flex justify-center items-center gap-5 lg:gap-10 mt-14">
       {footerItems.socialIcons.map((item, i) => (
-        <Link key={i} href={item.href}>
+        // <Link key={i} href={item.href}>
+        //   <Image src={item.icon} className="w-10" alt={item.href} />
+        // </Link>
+
+        <a target="_blank" href={item.href} rel="noopener noreferrer" key={i}>
           <Image src={item.icon} className="w-10" alt={item.href} />
-        </Link>
+        </a>
       ))}
     </div>
   </footer>

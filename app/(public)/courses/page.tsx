@@ -10,6 +10,8 @@ const Courses = () => {
   const [courses, setCourses] = useState<ICourse[] | null>(null);
   useGetData("/courses", setCourses);
 
+  console.log(courses);
+
   return (
     <section className="py-12">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
@@ -26,7 +28,7 @@ const Courses = () => {
                       alt={title}
                       width={320}
                       height={208}
-                      className="rounded-t-lg object-fit w-80 h-52 bg-black"
+                      className="rounded-t-lg object-fit w-80 h-52 bg-white"
                     />
 
                     <div className="space-y-2 p-2">

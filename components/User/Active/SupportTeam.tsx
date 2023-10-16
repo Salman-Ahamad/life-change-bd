@@ -19,12 +19,21 @@ export const SupportTeam: FC<{ support: string }> = ({ support }) => {
     return (
       <ActivePageCard title="Life change Support Team">
         <DataRow
-          title="My Consultant"
+          title="My Group Leader"
+          phoneNo={data.gl.phone}
+          btnText="WhatsApp"
+        />
+        <DataRow
+          title="My Trainer"
           phoneNo={data.consultant.phone}
           btnText="WhatsApp"
         />
-        <DataRow title="My Group Leader" phoneNo={data.gl.phone} />
-        <DataRow title="Life Change BD Support" phoneNo={support} />
+
+        <DataRow
+          title="Support WhatsApp Group"
+          phoneNo={support}
+          btnText="Join"
+        />
       </ActivePageCard>
     );
 };

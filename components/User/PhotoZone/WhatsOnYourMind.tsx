@@ -7,6 +7,7 @@ import { useCurrentUser } from "@/hooks";
 import { Button } from "@/universal";
 import { Axios } from "@/utils";
 import Image from "next/image";
+import { getFileUploader } from "@/utils/actions/getFileUploade";
 
 const WhatsOnYourMind: React.FC = () => {
   const [uploading, setUploading] = useState<boolean>(false);
@@ -44,23 +45,26 @@ const WhatsOnYourMind: React.FC = () => {
       try {
         setUploading(true);
 
-        const formData = new FormData();
+        // const formData = new FormData();
 
-        formData.set("file", selectedFile);
-        formData.append("upload_preset", "ebm0hyxo");
+        // formData.set("file", selectedFile);
+        // formData.append("upload_preset", "ebm0hyxo");
 
-        const endpoint = process.env
-          .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
+        // const endpoint = process.env
+        //   .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
 
-        const uploadRes = await Axios.post(endpoint, formData);
+        // const uploadRes = await Axios.post(endpoint, formData);
 
-        if (!endpoint) {
-          throw new Error(`Failed to upload file: ${endpoint}`);
-        }
-        // File uploaded
-        const { url } = await uploadRes.data;
+        // if (!endpoint) {
+        //   throw new Error(`Failed to upload file: ${endpoint}`);
+        // }
+        // // File uploaded
+        // const { url } = await uploadRes.data;
+        const { url } = await getFileUploader(selectedFile);
 
-        await Axios.post("/photo-zone/post", { postImg: url, postText });
+        await Axios.post("/photo-zone/post", { postImg: url, postText }).then(
+          () => window.location.reload()
+        );
 
         // Reset the form
       } catch (error) {

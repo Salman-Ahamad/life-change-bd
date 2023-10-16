@@ -38,7 +38,8 @@ export const Hero: FC = () => {
             variant="H1"
             className="text-white text-3xl md:text-4xl font-bold text-left"
           >
-            WELCOME TO LIFE CHANGE BD E-LEARNING PLATFORM
+            WELCOME TO <br className="sm:hidden" /> LIFE CHANGE BD{" "}
+            <br className="sm:hidden md:flex lg:hidden" /> E-LEARNING PLATFORM
           </Title>
           <CommonText className="max-w-[640px] text-white text-base lg:text-xl">
             It’s an Bangladeshi trusted online platform. It is a learning and
