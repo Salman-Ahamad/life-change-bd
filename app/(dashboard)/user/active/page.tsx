@@ -7,6 +7,8 @@ import { Header, Slider, Tost } from "@/components";
 import {
   ActivePageCard,
   HelpLink,
+  LiveEarningClass,
+  LiveLearningClass,
   MeetingLink,
   SupportTeam,
 } from "@/components/User/Active";
@@ -50,7 +52,7 @@ const Active = () => {
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}
 
-      <div className="max-w-lg w-full mx-auto py-6">
+      <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
         <Title variant="H3">Welcome to Life Change Bd</Title>
         {config?.sliderImage && <Slider slides={config?.sliderImage} />}
       </div>
@@ -64,8 +66,10 @@ const Active = () => {
         {config && <SupportTeam support={config.whatsAppMessage} />}
       </Container>
 
-      {/* <LiveEarningClass /> */}
-      {/* <LiveLearningClass /> */}
+      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
+        {/* TODO: Add course ive link list */}
+        <LiveLearningClass />
+      </Container>
     </main>
   );
 };
