@@ -109,6 +109,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });
       await User.updateOne({ _id: id }, { "settings.collectInactive": true });
+
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
       const active = refList.find(
