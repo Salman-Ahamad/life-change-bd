@@ -10,6 +10,7 @@ import { CommonText } from "@/universal";
 
 const Profile = () => {
   const user = useCurrentUser();
+  console.log("🚀 ~ file: page.tsx:13 ~ Profile ~ user:", user);
 
   const profileTitle = [
     "email",
@@ -74,7 +75,7 @@ const Profile = () => {
                   }`}
                 >
                   {item === "reference"
-                    ? user[item as keyof IUser]
+                    ? user.reference.userId
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}

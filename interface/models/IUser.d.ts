@@ -68,4 +68,7 @@ export interface IUser extends IUserSchema, IId {
   image: string;
   settings: ISettings;
   createdAt: string;
+  reference: {
+    userId: string;
+  };
 }
