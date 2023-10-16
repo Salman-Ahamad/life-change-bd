@@ -13,7 +13,7 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
   overflow,
   overlay,
 }) => (
-  <div
+  <section
     className={twMerge(
       `relative w-full ${overflow && "overflow-hidden"}`,
       className
@@ -42,5 +42,5 @@ export const BackgroundImg: FC<IBackgroundImage> = ({
       <div className="absolute inset-0 bg-gradient-to-r from-accent to-transparent"></div>
     )}
     <div className="relative z-10">{children}</div>
-  </div>
+  </section>
 );

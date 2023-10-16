@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { Header } from "@/components";
+import { Header, ShareReferLink } from "@/components";
 import { useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
@@ -47,6 +47,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full`}>
+                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
                 {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>
@@ -64,6 +65,9 @@ const Profile = () => {
                   {item}
                 </CommonText>
               ))}
+              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
+                Referral Link:{" "}
+              </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">
               {tableTitle.map((item, i) => (
@@ -78,6 +82,12 @@ const Profile = () => {
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}
+              <ShareReferLink
+                phoneNo={user.phone}
+                btnText="Share"
+                message=""
+                userId={user.userId}
+              />
             </div>
           </div>
         </section>

@@ -33,7 +33,7 @@ export const Hero: FC = () => {
           />
           {/* <span className="text-white text-[30px] text-left">BD</span> */}
         </div>
-        <div className="flex flex-col justify-center items-start gap-4 mt-1.5">
+        <div className="flex flex-col justify-center items-start gap-4 mt-1.5 md:mb-4 lg:mb-24 xl:mb-8">
           <Title
             variant="H1"
             className="text-white text-3xl md:text-4xl font-bold text-left"

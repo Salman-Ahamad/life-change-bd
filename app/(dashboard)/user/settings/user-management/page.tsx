@@ -6,10 +6,21 @@ import { useState } from "react";
 import { Header, PageHeader } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { IUser } from "@/interface";
-import { navData } from "@/lib";
+import { UserRole, navData } from "@/lib";
+import { useCurrentUser } from "@/hooks";
+import { redirect } from "next/navigation";
 
 const UserManagement: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
+
+  const user = useCurrentUser();
+
+  // TODO: Change the approach
+  if (user?.role === UserRole.inactive) {
+    redirect("/inactive");
+  } else if (user?.role === UserRole.active) {
+    redirect("/user/active");
+  }
 
   return (
     <>

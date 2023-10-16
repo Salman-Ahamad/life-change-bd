@@ -1,11 +1,12 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { updateData, useGetData } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { IUser, IUserDataForDataTable } from "@/interface";
-import { navData } from "@/lib";
+import { UserRole, navData } from "@/lib";
 import { Button, Title } from "@/universal";
 import { Types } from "mongoose";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -45,6 +46,15 @@ const tableItems: IUserDataForDataTable[] = [
 const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData);
+
+  const user = useCurrentUser();
+
+  // TODO: Change the approach
+  if (user?.role === UserRole.inactive) {
+    redirect("/inactive");
+  } else if (user?.role === UserRole.active) {
+    redirect("/user/active");
+  }
 
   const handleAction = (id: string) => {
     if (Types.ObjectId.isValid(id)) {
