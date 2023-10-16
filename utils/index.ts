@@ -2,6 +2,7 @@ export * from "./Axios";
 export * from "./Response";
 export * from "./copyToClipboard";
 export * from "./createDate";
+export * from "./generateStudentId";
 export * from "./getLastThreeMonths";
 export * from "./getMonthNumber";
 export * from "./getRandomNumber";

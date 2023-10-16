@@ -3,6 +3,11 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema<IUserSchema>(
   {
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a First Name"],
@@ -114,4 +119,4 @@ const userSchema = new Schema<IUserSchema>(
   }
 );
 
-export const User = models.users || model<IUserSchema>("users", userSchema);
+export const User = models?.users || model<IUserSchema>("users", userSchema);

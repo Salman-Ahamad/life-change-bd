@@ -163,7 +163,7 @@ export const SignUpForm = () => {
             <input
               onClick={() => setAgree((prv) => !prv)}
               type="checkbox"
-              checked={agree}
+              defaultChecked={agree}
               className="accent-primary mt-1 cursor-pointer"
             />
             <CommonText className="pr-5">

@@ -32,6 +32,7 @@ export interface ISettings {
 }
 
 export interface IUserSchema {
+  userId: string;
   firstName: string;
   lastName: string;
   language: string;

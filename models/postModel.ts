@@ -28,4 +28,4 @@ const postSchema = new Schema<IPostSchema>(
   }
 );
 
-export const Post = models.posts || model<IPostSchema>("posts", postSchema);
+export const Post = models?.posts || model<IPostSchema>("posts", postSchema);
