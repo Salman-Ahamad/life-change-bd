@@ -61,7 +61,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full capitalize`}>
-                {user.id}
+                {user.userId}
               </CommonText>
             </div>
           </div>

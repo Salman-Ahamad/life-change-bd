@@ -23,7 +23,7 @@ const UserManagement: NextPage = () => {
         <RefTable
           tableData={data}
           tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"
         />
       )}

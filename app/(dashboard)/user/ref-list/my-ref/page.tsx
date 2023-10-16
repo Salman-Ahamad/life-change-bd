@@ -16,7 +16,7 @@ const MyReference = () => {
 
   const handleUpdate = async (id: string) => {
     if (Types.ObjectId.isValid(id)) {
-      await updateData(`/all-ref/${id}`, {}).then(() =>
+      await updateData(`/all-ref/id=${id}`, {}).then(() =>
         window.location.reload()
       );
     } else {
@@ -39,7 +39,7 @@ const MyReference = () => {
         <DataTable
           tableData={refData}
           tableHeaders={["no", "id", "Name", "Joining Time"]}
-          dataProperties={["id", "firstName", "createdAt", "phone"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"
           setActionId={handleUpdate}
           actionBtn={

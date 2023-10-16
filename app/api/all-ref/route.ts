@@ -34,18 +34,19 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       collectInactive && JSON.parse(collectInactive.toLowerCase());
 
     const collectInactiveOption = {
+      role: UserRole.active,
       "settings.collectInactive": collectInactiveValue,
     };
     const formattingDate = new Date(Number(date));
     const dateFilter = {
-      reference: user.id,
+      reference: user.userId,
       createdAt: { $gte: formattingDate },
     };
-    const filterById = { reference: user.id, _id: id };
-    const controller = { "settings.controller": user.id };
-    const consultant = { "settings.consultant": user.id };
-    const teacher = { "settings.teacher": user.id };
-    const gl = { "settings.gl": user.id };
+    const filterById = { reference: user.userId, _id: id };
+    const controller = { "settings.controller": user.userId };
+    const consultant = { "settings.consultant": user.userId };
+    const teacher = { "settings.teacher": user.userId };
+    const gl = { "settings.gl": user.userId };
 
     const option =
       (user.role === UserRole.admin && {}) ||

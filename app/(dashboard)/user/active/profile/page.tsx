@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Header } from "@/components";
 import { useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
-import { avatarProfile, navData } from "@/lib";
+import { UserRole, avatarProfile, navData } from "@/lib";
 import { CommonText } from "@/universal";
 
 const Profile = () => {
@@ -48,8 +48,8 @@ const Profile = () => {
               >
                 {user.firstName} {user?.lastName}
               </p>
-              <CommonText className={`text-start w-full capitalize`}>
-                {user.id}
+              <CommonText className={`text-start w-full`}>
+                {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>
           </div>
@@ -71,7 +71,7 @@ const Profile = () => {
               {tableTitle.map((item, i) => (
                 <CommonText
                   key={i}
-                  className={`text-start w-full px-2 py-1.5 capitalize ${
+                  className={`text-start w-full px-2 py-1.5 ${
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
