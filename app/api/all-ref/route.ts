@@ -34,89 +34,64 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     const formattingDate = new Date(Number(date));
 
-    // let dateFilter = {};
-    let filterById = {};
     let option = {};
-    // let dateFilter = {
-    //   reference: user.id,
-    //   createdAt: { $gte: formattingDate },
-    // };
-    // let filterById = {
-    //   userId: id,
-    //   // reference: user.id,
-    //   role: UserRole.active,
-    // };
-
     const inactiveBonusOption = {
-      role: UserRole.active,
       "settings.collectInactive": collectInactiveValue,
     };
-    const idFilter = { userId: id };
-    const dateFilter = { createdAt: { $gte: formattingDate } };
+    const optionFn = (option: object) => {
+      const idFilter = { userId: id };
+      const dateFilter = { createdAt: { $gte: formattingDate } };
+      const active = { role: UserRole.active };
+      return (
+        (id && { ...idFilter, ...active, ...option }) ||
+        (date && { ...dateFilter, ...active, ...option }) ||
+        (inactiveBonus && {
+          ...inactiveBonusOption,
+          ...option,
+        }) ||
+        {}
+      );
+    };
 
     switch (user.role) {
       case UserRole.admin:
         const admin = { "settings.admin": user.id };
-        option =
-          (id && { ...idFilter, ...admin }) ||
-          (date && { ...dateFilter, ...admin }) ||
-          (inactiveBonus && {
-            ...inactiveBonusOption,
-            ...admin,
-          }) ||
-          {};
+        option = optionFn(admin);
         break;
       case UserRole.controller:
         const controller = {
           "settings.controller": user.id,
-          role: UserRole.active,
         };
-        option =
-          (id && { ...idFilter, ...controller }) ||
-          (date && { ...dateFilter, ...controller }) ||
-          (inactiveBonus && {
-            ...inactiveBonusOption,
-            ...controller,
-          }) ||
-          {};
+        option = optionFn(controller);
+        break;
+      case UserRole.consultant:
+        const consultant = {
+          "settings.consultant": user.id,
+        };
+        option = optionFn(consultant);
+        break;
+      case UserRole.teacher:
+        const teacher = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(teacher);
+        break;
+      case UserRole.gl:
+        const gl = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(gl);
+        break;
+      case UserRole.active:
+        const active = {
+          reference: user.userId,
+        };
+        option = optionFn(active);
         break;
 
       default:
         break;
     }
-
-    const admin = {
-      "settings.admin": user.id,
-    };
-    const controller = {
-      "settings.controller": user.id,
-      role: UserRole.active,
-    };
-    const consultant = {
-      "settings.consultant": user.id,
-      role: UserRole.active,
-    };
-    const teacher = {
-      "settings.teacher": user.id,
-      role: UserRole.active,
-    };
-    const gl = {
-      "settings.gl": user.id,
-      role: UserRole.active,
-    };
-
-    const option2 =
-      (user.role === UserRole.admin && admin) ||
-      (user.role === UserRole.controller && controller) ||
-      (user.role === UserRole.consultant && consultant) ||
-      (user.role === UserRole.teacher && teacher) ||
-      (user.role === UserRole.gl && gl) ||
-      {};
-    const filter =
-      (inactiveBonus && inactiveBonus) ||
-      (date && dateFilter) ||
-      (id && filterById) ||
-      {};
 
     const refList = await User.find(option)
       .sort({ createdAt: -1 })
