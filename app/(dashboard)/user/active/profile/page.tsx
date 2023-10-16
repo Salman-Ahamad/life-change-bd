@@ -47,6 +47,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full`}>
+                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
                 {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>
@@ -76,8 +77,10 @@ const Profile = () => {
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
-                  {item === "reference"
+                  {item === "reference" && user.reference
                     ? user.reference.userId
+                    : item === "reference" && !user.reference
+                    ? "-"
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}

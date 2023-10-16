@@ -33,7 +33,7 @@ export const SignUpForm = ({ referral }: { referral: string }) => {
   ) => {
     const id = toast.loading("Loading... 🔃");
     // values.reference = referral; // TODO: Which line is ok
-    values.reference.length === 0 && (values.reference = "-");
+    values.reference.length === 0 && (values.reference = "");
 
     Axios.post("/auth/signup", values)
       .then(({ data }) => {

@@ -26,7 +26,7 @@ const SignUp: React.FC<SignUpProps> = ({ searchParams }) => {
           Provide your necessary <br /> information here
         </CommonText>
 
-        <SignUpForm referral={referral || "-"} />
+        <SignUpForm referral={referral || ""} />
 
         <CommonText className="text-center mt-5">
           Have already an account?&nbsp;

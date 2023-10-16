@@ -52,7 +52,6 @@ const userSchema = new Schema<IUserSchema>(
     },
     reference: {
       type: String,
-      default: "-",
       ref: "users",
     },
     balance: {
@@ -84,7 +83,7 @@ const userSchema = new Schema<IUserSchema>(
       admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
-        default: "6527ecf7577ff95a96133786",
+        default: "652d04093f0816bfc3928d78",
       },
       controller: {
         type: Schema.Types.ObjectId,

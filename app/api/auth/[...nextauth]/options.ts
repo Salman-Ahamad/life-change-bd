@@ -84,6 +84,9 @@ export const options: NextAuthOptions = {
             await User.updateOne({ _id: currentUser.id }, updatedData, {
               new: true,
             });
+
+            // TODO: Need to update this rules, show toast and the get sign out.
+
             return returnUrl;
           }
         }
