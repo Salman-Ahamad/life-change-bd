@@ -11,9 +11,7 @@ connectDb();
 export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
-    console.log("🚀 ~ file: route.ts:14 ~ GET ~ id:", { id });
     const date = nextUrl.searchParams.get("date");
-    console.log("🚀 ~ file: route.ts:16 ~ GET ~ date:", { date });
     const collectInactive = nextUrl.searchParams.get("collectInactive");
 
     // Get Current User
