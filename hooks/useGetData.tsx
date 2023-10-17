@@ -6,34 +6,41 @@ import { toast } from "react-toastify";
 
 export const useGetData = (
   apiUrl: string,
-  setData: Dispatch<SetStateAction<any>>
+  setData: Dispatch<SetStateAction<any>>,
+  toastOf: boolean = false
 ) =>
   useEffect(() => {
-    // const id = toast.loading("Loading... 🔃");
+    const id = !toastOf && toast.loading("Loading...🔃");
 
     Axios.get(apiUrl)
       .then(({ data }) => {
-        // loadingToast(id, data.message, "success");
         setData(data.data);
+        if (data.data) id && loadingToast(id, data.message, "success");
       })
       .catch(({ response }) => {
-        // loadingToast(id, response.data.message, "error");
         setData(undefined);
+        id
+          ? loadingToast(id, response.data.message || "Error❌", "error")
+          : toast.error(response.data.message || "Error❌");
       });
-  }, [apiUrl, setData]);
+  }, [apiUrl, setData, toastOf]);
 
 export const getDataFn = async (
   apiUrl: string,
-  setData: Dispatch<SetStateAction<any>>
+  setData: Dispatch<SetStateAction<any>>,
+  toastOf: boolean = false
 ) => {
-  const id = toast.loading("Loading... 🔃");
+  const id = !toastOf && toast.loading("Loading...🔃");
+
   Axios.get(apiUrl)
     .then(({ data }) => {
-      loadingToast(id, data.message, "success");
       setData(data.data);
+      if (data.data) id && loadingToast(id, data.message, "success");
     })
     .catch(({ response }) => {
-      loadingToast(id, response.data.message, "error");
       setData(null);
+      id
+        ? loadingToast(id, response.data.message || "Error❌", "error")
+        : toast.error(response.data.message || "Error❌");
     });
 };
