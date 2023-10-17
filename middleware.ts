@@ -1,14 +1,9 @@
-// Ref: https://next-auth.js.org/configuration/nextjs#advanced-usage
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { UserRole } from "./lib";
 
 export default withAuth(
-  // `withAuth` augments your `Request` with the user's token.
   function middleware(request: NextRequestWithAuth) {
-    // console.log(request.nextUrl.pathname);
-    // console.log(request.nextauth.token)
-
     if (
       request.nextUrl.pathname.includes("/user") &&
       request.nextauth.token?.role === UserRole.inactive
@@ -30,24 +25,35 @@ export default withAuth(
   }
 );
 
-// Applies next-auth only to matching routes - can be regex
-// Ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
   matcher: [
     "/inactive",
+    "/inactive/profile",
+    "/user/[slug]",
     "/user/active",
     "/user/active/profile",
-    "/user/change-password",
+    "/user/active/profile/edit",
     "/user/active/withdrawal",
+    "/user/change-password",
+    "/user/courses",
     "/user/messages",
     "/user/notification",
     "/user/notification/memo",
     "/user/passbook",
     "/user/payment-method",
+    "/user/photo-zone",
+    "/user/photo-zone/profile",
+    "/user/photo-zone/user-profile/[slug]",
     "/user/redeem-list",
     "/user/ref-list",
     "/user/ref-list/my-ref",
     "/user/ref-list/send-wish",
+    "/user/settings",
+    "/user/settings/reports",
+    "/user/settings/students",
+    "/user/settings/team-management",
+    "/user/settings/user-management",
     "/user/transfer-points",
+    "/user/video-zone",
   ],
 };

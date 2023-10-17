@@ -1,20 +1,18 @@
 "use client";
 
 import { Header } from "@/components";
-import { useCurrentUser, useGetData } from "@/hooks";
+import { useGetData } from "@/hooks";
 import { ICourse } from "@/interface";
 import { navData } from "@/lib/data";
+import { LinkButton } from "@/universal";
 import { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 const Courses: NextPage = () => {
-  const [courses, setCourses] = useState<ICourse[]>([]);
+  const [courses, setCourses] = useState<ICourse[] | null>();
 
   useGetData("/courses", setCourses);
-
-  const userData = useCurrentUser();
 
   return (
     <>
@@ -22,11 +20,11 @@ const Courses: NextPage = () => {
       <section className="py-12">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
           <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">
-            {courses && courses.length > 0
-              ? courses.map(({ image, title, slug, id }, key: number) => (
+            {courses
+              ? courses.map(({ image, title, status, slug }, i) => (
                   <li
                     className="mx-auto group sm:max-w-sm shadow-md rounded-lg"
-                    key={key}
+                    key={i}
                   >
                     <div>
                       <Image
@@ -34,7 +32,7 @@ const Courses: NextPage = () => {
                         alt={title}
                         width={320}
                         height={208}
-                        className="rounded-t-lg object-cover w-80 h-52"
+                        className="rounded-t-lg object-fit w-80 h-52 bg-black"
                       />
 
                       <div className="space-y-2 p-2">
@@ -42,18 +40,14 @@ const Courses: NextPage = () => {
                           {title}
                         </h3>
                       </div>
-                      <div className="m-4 pt-4 border-t items-end text-right flex justify-between">
-                        {userData?.courses.some((obj) => obj.id === id) ? (
-                          <p className="text-green-600">Enrolled</p>
-                        ) : (
-                          <p></p>
-                        )}
-                        <Link
-                          href={`/courses/${slug}`}
-                          className="text-sm text-white text-center font-sora font-semibold transition-all delay-75 px-3 py-1.5 bg-accent hover:bg-primary rounded"
+                      <div className="w-full flex justify-end items-end">
+                        <LinkButton
+                          href={`/user/courses/${slug}`}
+                          variant="secondary"
+                          className="m-4 border-t"
                         >
-                          View Details
-                        </Link>
+                          {status}
+                        </LinkButton>
                       </div>
                     </div>
                   </li>

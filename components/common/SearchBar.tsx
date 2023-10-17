@@ -1,6 +1,5 @@
 "use client";
 
-import { Types } from "mongoose";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -19,17 +18,13 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
 
   const handleSubmit = async () => {
     if (filedData.id) {
-      if (Types.ObjectId.isValid(filedData.id)) {
-        await getDataFn(`/all-ref/1?id=${filedData.id}`, setData);
-      } else {
-        toast.error("Invalid user id 🚨");
-      }
-    } else if (filedData.year && filedData.year) {
+      await getDataFn(`/all-ref?id=${filedData.id}`, setData);
+    } else if (filedData.year && filedData.month) {
       const month = getMonthNumber(filedData.month as IMonth);
       const date = createDate(Number(filedData.year), month);
 
       if (date) {
-        await getDataFn(`/all-ref/1?date=${date}`, setData);
+        await getDataFn(`/all-ref?date=${date}`, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
       }

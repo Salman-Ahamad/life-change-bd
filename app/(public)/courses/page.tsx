@@ -7,14 +7,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Courses = () => {
-  const [courses, setCourses] = useState<ICourse[]>([]);
+  const [courses, setCourses] = useState<ICourse[] | null>(null);
   useGetData("/courses", setCourses);
 
   return (
     <section className="py-12">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
         <ul className="grid gap-x-8 gap-y-24 mt-8 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.length > 0
+          {courses
             ? courses.map(({ image, title, slug }, key: number) => (
                 <li
                   className="mx-auto group sm:max-w-sm shadow-md rounded-lg"
@@ -26,7 +26,7 @@ const Courses = () => {
                       alt={title}
                       width={320}
                       height={208}
-                      className="rounded-t-lg object-cover w-80 h-52"
+                      className="rounded-t-lg object-fit w-80 h-52 bg-white"
                     />
 
                     <div className="space-y-2 p-2">

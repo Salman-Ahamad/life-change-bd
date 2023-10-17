@@ -1,11 +1,9 @@
 import { genSalt, hash } from "bcryptjs";
-import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 import { connectDb } from "@/config";
-import { UserRole, inactiveLimit } from "@/lib";
-import { AllRefer, User } from "@/models";
-import { ApiResponse } from "@/utils";
+import { User } from "@/models";
+import { ApiResponse, generateStudentId } from "@/utils";
 
 connectDb();
 
@@ -19,68 +17,41 @@ export const POST = async (req: NextRequest) => {
     } = await req.json();
 
     //check if user already exists
-    const user = await User.findOne({ email });
+    const checkUserExists = await User.findOne({ email });
 
-    if (user) {
+    if (checkUserExists) {
       return ApiResponse(400, "User already exists 🙋🏻‍♂️🙋🏻‍♂️🙋🏻‍♂️");
-    }
-
-    if (reference !== "-") {
-      if (Types.ObjectId.isValid(reference)) {
-        const refUser = await User.findOne({ _id: reference });
-        if (!refUser) {
-          return ApiResponse(404, "reference user notfound❗");
-        }
-      } else {
-        return ApiResponse(404, "Wrong reference Id❗");
-      }
     }
 
     //hash password
     const salt = await genSalt(10);
     const hashedPassword = await hash(userPass, salt);
 
-    const newUser = new User({
+    const user = {
       ...userData,
       email,
       password: hashedPassword,
-      reference,
-    });
+    };
 
-    const savedUser = await newUser.save();
+    if (reference !== "-") {
+      const refUser = await User.findOne({ userId: reference });
+      if (refUser) {
+        user.reference = refUser._id;
+      } else {
+        return ApiResponse(404, "Invalid Refer Id notfound❗");
+      }
+    }
 
-    // if (reference !== "-") {
-    //   if (Types.ObjectId.isValid(reference)) {
-    //     const refData = {
-    //       referredId: reference,
-    //       referUser: savedUser._id,
-    //     };
-    //     await AllRefer.create(refData);
+    const id = await generateStudentId();
+    user.userId = id;
 
-    //     const refUser = await User.findOne({ _id: reference });
-    //     const refList = await AllRefer.find({ referredId: reference })
-    //       .populate("referUser")
-    //       .sort({ createdAt: -1 })
-    //       .limit(inactiveLimit + 1);
-    //     if (refList.length <= inactiveLimit) {
-    //       console.log("limit ase add hobe");
-    //       refUser.balance++;
-    //     } else {
-    //       const active = refList.find(
-    //         ({ referUser }) => referUser.role === UserRole.active
-    //       );
-    //       if (active) {
-    //         console.log("active ase add hobe");
-    //         refUser.balance++;
-    //       } else {
-    //         console.log("limit ses");
-    //       }
-    //     }
-    //     await refUser.save();
-    //   }
-    // }
+    const result = await User.create(user);
 
-    const finalResult = await User.findOne({ _id: savedUser._id }).select(
+    if (!result.id) {
+      return ApiResponse(404, "Wrong reference Id❗");
+    }
+
+    const finalResult = await User.findOne({ id: result.id }).select(
       "-password"
     );
 

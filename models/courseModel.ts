@@ -36,13 +36,16 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid duration"],
     },
+    meetingId: {
+      type: String,
+    },
     footerDes: {
       type: String,
       default: "",
     },
     status: {
       type: String,
-      default: "active",
+      default: "enroll",
     },
     enrolled: {
       type: [String],
@@ -62,4 +65,4 @@ const courseSchema = new Schema<ICourseSchema>(
 );
 
 export const Course =
-  models.courses || model<ICourseSchema>("courses", courseSchema);
+  models?.courses || model<ICourseSchema>("courses", courseSchema);

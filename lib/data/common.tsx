@@ -1,5 +1,5 @@
 import { IFooterData, INavData } from "@/interface";
-import { facebook, pinterest, twitter } from "@/lib/assets";
+import { facebook, youtube } from "@/lib/assets";
 import { BackButton } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -19,13 +19,17 @@ export const navData: INavData = {
     },
     {
       label: "Courses",
-      link: "/user/courses",
+      link: "/courses",
     },
   ],
   inActive: [
     {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
+    {
       label: "Profile",
-      link: "/user/active/profile",
+      link: "/inactive/profile",
     },
     {
       label: "Courses",
@@ -47,7 +51,7 @@ export const navData: INavData = {
   active: [
     {
       label: <AiOutlineHome className="text-2xl" />,
-      link: "/",
+      link: "/user/active",
     },
     {
       label: "Profile",
@@ -115,6 +119,10 @@ export const navData: INavData = {
     },
   ],
   withdrawal: [
+    {
+      label: <AiOutlineHome className="text-2xl" />,
+      link: "/user/active",
+    },
     {
       label: "Profile",
       link: "/user/active/profile",
@@ -246,6 +254,28 @@ export const navData: INavData = {
       link: "/user/passbook",
     },
   ],
+  settings: [
+    {
+      label: <BackButton className="text-2xl" />,
+      link: "/user/active",
+    },
+    {
+      label: "User Management",
+      link: "/user/settings/user-management",
+    },
+    {
+      label: "Reports",
+      link: "/user/settings/reports",
+    },
+    {
+      label: "Action",
+      link: "/user/settings/action",
+    },
+    {
+      label: "Student",
+      link: "/user/settings/student",
+    },
+  ],
 };
 
 export const footerItems: IFooterData = {
@@ -278,8 +308,10 @@ export const footerItems: IFooterData = {
     },
   ],
   socialIcons: [
-    { icon: facebook, href: "#" },
-    { icon: twitter, href: "#" },
-    { icon: pinterest, href: "#" },
+    {
+      icon: facebook,
+      href: "https://www.facebook.com/profile.php?id=61552165711237&mibextid=ZbWKwL",
+    },
+    { icon: youtube, href: "https://www.youtube.com/@lifechangebd" },
   ],
 };

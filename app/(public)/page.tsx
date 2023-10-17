@@ -4,7 +4,7 @@ import {
   About,
   FAQ,
   Hero,
-  OurServices,
+  // OurServices,
   PopularCourses,
   UpComingEvents,
 } from "@/components/Home";
@@ -17,7 +17,7 @@ const Home = () => {
       <Hero />
       <About />
       <PopularCourses />
-      <OurServices />
+      {/* <OurServices /> */}
       <UpComingEvents />
       <FAQ />
     </>

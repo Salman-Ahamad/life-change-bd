@@ -42,9 +42,30 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-export const PATCH = async (req: NextRequest) => {
+export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
   try {
-    return ApiResponse(200, "Course slut not found ❌");
+    const courseId = params.slug;
+    const updatedData = await req.json();
+
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin
+    ) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
+
+    const result = await Course.updateOne({ _id: courseId }, updatedData, {
+      new: true,
+    });
+
+    return ApiResponse(200, "Course update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

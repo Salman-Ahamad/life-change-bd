@@ -34,8 +34,6 @@ export const GET = async () => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.admin) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
     const appConfig = await AppConfig.findOne({ for: UserRole.admin });

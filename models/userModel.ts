@@ -3,6 +3,11 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema<IUserSchema>(
   {
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a First Name"],
@@ -42,9 +47,13 @@ const userSchema = new Schema<IUserSchema>(
       type: String,
       default: "inactive",
     },
+    image: {
+      type: String,
+    },
     reference: {
       type: String,
       default: "-",
+      ref: "users",
     },
     balance: {
       type: Number,
@@ -72,9 +81,10 @@ const userSchema = new Schema<IUserSchema>(
         default: true,
       },
 
-      subAdmin: {
+      admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
+        default: "6527ecf7577ff95a96133786",
       },
       controller: {
         type: Schema.Types.ObjectId,
@@ -96,6 +106,10 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: false,
       },
+      sendWish: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
   {
@@ -106,4 +120,4 @@ const userSchema = new Schema<IUserSchema>(
   }
 );
 
-export const User = models.users || model<IUserSchema>("users", userSchema);
+export const User = models?.users || model<IUserSchema>("users", userSchema);

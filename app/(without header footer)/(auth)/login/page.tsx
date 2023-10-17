@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -16,7 +16,12 @@ const Login: FC = () => {
   useEffect(() => {
     if (session?.user) {
       if (session.user.role === UserRole.inactive) redirect("/inactive");
-      if (session.user.role !== UserRole.inactive) redirect("/user/active");
+      if (session.user.role === UserRole.active) redirect("/user/active");
+      if (session.user.role === UserRole.admin) signOut();
+      if (session.user.role === UserRole.consultant) signOut();
+      if (session.user.role === UserRole.controller) signOut();
+      if (session.user.role === UserRole.gl) signOut();
+      if (session.user.role === UserRole.teacher) signOut();
     }
   }, [session]);
 

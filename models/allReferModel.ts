@@ -21,4 +21,4 @@ const AllReferSchema = new Schema<IAllReferSchema>(
 );
 
 export const AllRefer =
-  models.AllRefer || model<IAllReferSchema>("AllRefer", AllReferSchema);
+  models?.AllRefer || model<IAllReferSchema>("AllRefer", AllReferSchema);

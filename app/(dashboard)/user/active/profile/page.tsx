@@ -1,16 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
-import { Header } from "@/components";
-import { updateData, useCurrentUser } from "@/hooks";
+import { Header, ShareReferLink } from "@/components";
+import { useCurrentUser } from "@/hooks";
 import { IUser } from "@/interface";
 import { UserRole, avatarProfile, navData } from "@/lib";
-import { Button, CommonText } from "@/universal";
+import { CommonText } from "@/universal";
 
 const Profile = () => {
-  const [baseFee, setBaseFee] = useState(0);
   const user = useCurrentUser();
 
   const profileTitle = [
@@ -21,6 +19,7 @@ const Profile = () => {
     "whatsapp",
     "role",
     "reference",
+    "balance",
   ];
 
   const tableTitle = user?.reference
@@ -35,7 +34,7 @@ const Profile = () => {
         <section>
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
-              src={avatarProfile}
+              src={user.image || avatarProfile}
               width={80}
               height={80}
               className="rounded-full shadow-lg w-[80px] h-[80px]"
@@ -47,8 +46,9 @@ const Profile = () => {
               >
                 {user.firstName} {user?.lastName}
               </p>
-              <CommonText className={`text-start w-full capitalize`}>
-                {user.id}
+              <CommonText className={`text-start w-full`}>
+                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
+                {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>
           </div>
@@ -65,18 +65,29 @@ const Profile = () => {
                   {item}
                 </CommonText>
               ))}
+              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
+                Referral Link:{" "}
+              </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">
               {tableTitle.map((item, i) => (
                 <CommonText
                   key={i}
-                  className={`text-start w-full px-2 py-1.5 capitalize ${
+                  className={`text-start w-full px-2 py-1.5 ${
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
-                  {user[item as keyof IUser]}
+                  {item === "reference"
+                    ? user.reference.userId || "-"
+                    : user[item as keyof IUser]}
                 </CommonText>
               ))}
+              <ShareReferLink
+                phoneNo={user.phone}
+                btnText="Share"
+                message=""
+                userId={user.userId}
+              />
             </div>
           </div>
         </section>
@@ -100,18 +111,6 @@ const Profile = () => {
                 />
               ))}
             </div>
-          </div>
-        </section>
-      )}
-
-      {user?.role === UserRole.admin && (
-        <section className="max-w-sm w-full mx-auto px-4 mt-20">
-          <div className="flex gap-5">
-            <input
-              type="number"
-              onChange={(e) => setBaseFee(Number(e.target.value))}
-              className="outline-none text-black text-base md:text-lg w-full border border-primary rounded-[5px] py-1 px-2"
-            />
           </div>
         </section>
       )}

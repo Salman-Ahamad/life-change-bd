@@ -16,6 +16,10 @@ export interface ILoginFormValue {
   randomNum: string;
 }
 
+export interface ISubAdminLoginFormValue extends ILoginFormValue {
+  role: string;
+}
+
 export interface IForgotPasswordValue {
   newPassword: string;
   retypeNewPassword: string;

@@ -1,15 +1,15 @@
 "use client";
 
-import { Header, PageHeader, RefTable } from "@/components";
+import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
-import { IUser } from "@/interface";
+import { IChildren, IUser } from "@/interface";
 import { navData } from "@/lib/data";
 import { Title } from "@/universal";
 import { useState } from "react";
 
 const SendWish = () => {
   const [sendWishData, setSendWish] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/1", setSendWish);
+  useGetData("/all-ref", setSendWish);
 
   return (
     <>
@@ -20,11 +20,12 @@ const SendWish = () => {
           Loading... Please wait 🔃
         </Title>
       ) : (
-        <RefTable
+        <DataTable
           tableData={sendWishData}
           tableHeaders={["no", "id", "Name"]}
-          dataProperties={["id", "firstName", "phone"]}
+          dataProperties={["userId", "firstName", "phone"]}
           message="SendWish"
+          UpdateSendWish
         />
       )}
     </>

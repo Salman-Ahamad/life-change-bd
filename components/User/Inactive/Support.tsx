@@ -23,10 +23,11 @@ export const Support: FC = () => (
             >
               For Consultation Support Group
             </Title>
+            {/* TODO: Add Link */}
             <LinkImage
               href="/"
               src={globe}
-              className="w-20 h-20 my-5 mx-auto md:mx-0"
+              className="w-24 h-24 my-5 mx-auto md:mx-0"
               alt="For Consultation Support Group"
             />
           </div>
@@ -36,12 +37,13 @@ export const Support: FC = () => (
               variant="H4"
               className="capitalize text-center lg:text-start"
             >
-              My Business UnionTrainer, GL, SGL
+              My Life Change Bd Trainer, GL, SGL
             </Title>
+            {/* TODO: Add Link */}
             <LinkImage
               href="/"
               src={globe}
-              className="w-20 h-20 my-5 mx-auto md:mx-0"
+              className="w-24 h-24 my-5 mx-auto md:mx-0"
               alt="For Consultation Support Group"
             />
           </div>
@@ -55,6 +57,7 @@ export const Support: FC = () => (
           alt=""
         />
         <div className="col-span-2">
+          {/* TODO: Add Link */}
           <Link href="/">Consultation Support</Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { banner2, bnsLogo } from "@/lib/assets";
+import { banner3, bnsLogo } from "@/lib/assets";
 import {
   BackgroundImg,
   CommonText,
@@ -17,7 +17,7 @@ export const Hero: FC = () => {
 
   return (
     <BackgroundImg
-      img={banner2}
+      img={banner3}
       className="h-auto pb-5 lg:pb-0 lg:h-screen"
       overflow
       overlay
@@ -31,11 +31,15 @@ export const Hero: FC = () => {
             className="2xl:-ml-20"
             alt=""
           />
-          <span className="text-white text-[30px] text-left">BD</span>
+          {/* <span className="text-white text-[30px] text-left">BD</span> */}
         </div>
-        <div className="flex flex-col justify-center items-start gap-4 mt-1.5">
-          <Title variant="H1" className="text-white text-[30px] text-left">
-            WELCOME TO LIFE CHANGE E-LEARNING PLATFORM
+        <div className="flex flex-col justify-center items-start gap-4 mt-1.5 md:mb-4 lg:mb-24 xl:mb-8">
+          <Title
+            variant="H1"
+            className="text-white text-3xl md:text-4xl font-bold text-left"
+          >
+            WELCOME TO <br className="sm:hidden" /> LIFE CHANGE BD{" "}
+            <br className="sm:hidden md:flex lg:hidden" /> E-LEARNING PLATFORM
           </Title>
           <CommonText className="max-w-[640px] text-white text-base lg:text-xl">
             It’s an Bangladeshi trusted online platform. It is a learning and

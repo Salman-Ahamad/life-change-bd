@@ -17,7 +17,7 @@ const VideoZone = () => {
       <section className="py-12">
         <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
           <ul className="grid gap-x-8 gap-y-10 mt-8 sm:grid-cols-2 lg:grid-cols-3">
-            {courses && courses.length > 0
+            {courses
               ? courses.map(({ image, title, slug, id }, key: number) => (
                   <li
                     className="mx-auto group sm:max-w-sm shadow-md rounded-lg"

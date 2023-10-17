@@ -1,4 +1,4 @@
-import course1 from "./course1.jpg";
+import course1 from "./course1.jpeg";
 import course2 from "./course2.jpg";
 import course3 from "./course3.jpg";
 import course4 from "./course4.jpg";
