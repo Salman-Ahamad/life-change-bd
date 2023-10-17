@@ -1,6 +1,6 @@
 "use client";
 
-import { IRefTable, IUser } from "@/interface";
+import { ICourse, IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 

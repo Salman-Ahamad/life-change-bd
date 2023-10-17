@@ -8,9 +8,17 @@ import { useCurrentUser } from "@/hooks";
 import { UserRole, navData } from "@/lib";
 import { Container, Title } from "@/universal";
 import { NextPage } from "next";
+import { redirect } from "next/navigation";
 
 const Settings: NextPage = () => {
   const user = useCurrentUser();
+
+  // TODO: Change the approach
+  if (user?.role === UserRole.inactive) {
+    redirect("/inactive");
+  } else if (user?.role === UserRole.active) {
+    redirect("/user/active");
+  }
 
   return (
     <main>

@@ -3,13 +3,21 @@
 import { Header } from "@/components";
 import { SearchUser } from "@/components/Settings";
 import { useCurrentUser } from "@/hooks";
-import { navData } from "@/lib";
+import { UserRole, navData } from "@/lib";
 import { Title } from "@/universal";
+import { redirect } from "next/navigation";
 import React, { use } from "react";
 
 const Students = () => {
   const user = useCurrentUser();
   const userRoll = user?.role || "inactive";
+
+  // TODO: Change the approach
+  if (user?.role === UserRole.inactive) {
+    redirect("/inactive");
+  } else if (user?.role === UserRole.active) {
+    redirect("/user/active");
+  }
 
   return (
     <main>
