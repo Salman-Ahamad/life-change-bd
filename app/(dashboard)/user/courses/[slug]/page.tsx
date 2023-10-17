@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 
 import { GoogleMeetLink, Header } from "@/components";
-import { useGetData } from "@/hooks";
+import { createData, useGetData } from "@/hooks";
 import { ICourse, ISlugParams } from "@/interface";
 import { navData } from "@/lib";
 import { Button, Container, Title } from "@/universal";
@@ -12,8 +12,15 @@ import { Button, Container, Title } from "@/universal";
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
   const [data, setData] = useState<ICourse | undefined>();
   const [url, setUrl] = useState("");
+
   const { slug } = params;
   useGetData(`/courses/${slug}`, setData);
+
+  const handlePostUrl = () =>
+    createData("/assignment", {
+      courseId: data?.id,
+      postLink: url,
+    }).then(() => setUrl(""));
 
   return (
     <main>
@@ -48,6 +55,7 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
               <Button
                 className="ml-2.5 py-[7px] lg:py-2.5 px-3"
                 variant="secondary"
+                onClick={handlePostUrl}
               >
                 Post Url
               </Button>

@@ -1,5 +1,5 @@
 import { connectDb } from "@/config";
-import { Course } from "@/models";
+import { Assignment } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -15,8 +15,8 @@ export const POST = async (req: NextRequest) => {
     if (!user) {
       return ApiResponse(404, "User not found❗");
     }
-
-    const result = await Course.create(assignmentData);
+    assignmentData.userId = user.id;
+    const result = await Assignment.create(assignmentData);
 
     return ApiResponse(200, "Course created successfully 👌", result);
   } catch (error: any) {

@@ -9,7 +9,8 @@ const AssignmentSchema = new Schema<IAssignmentSchema>(
       required: [true, "Please provide a valid courseId"],
     },
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "users",
       required: [true, "Please provide a valid userId"],
     },
     postLink: {
