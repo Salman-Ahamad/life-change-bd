@@ -3,9 +3,10 @@
 import { WhatsAppLink } from "@/components";
 import { IChildrenWithTitle } from "@/interface";
 import { googleMeet } from "@/lib/assets";
-import { Title } from "@/universal";
+import { Button, Title } from "@/universal";
 import Image from "next/image";
 import { FC } from "react";
+import { MeetingLink } from ".";
 
 export const ActivePageCard: FC<IChildrenWithTitle> = ({ title, children }) => {
   return (
@@ -23,12 +24,14 @@ export interface IDataRow {
   btnText?: string;
   icon?: boolean;
   phoneNo?: string;
+  meetLink?: string;
 }
 export const DataRow: FC<IDataRow> = ({
   title,
   btnText = "Message",
   icon,
   phoneNo,
+  meetLink,
 }) => {
   return (
     <div className="flex justify-between items-center gap-2.5 py-2 hover:bg-gray-100">
@@ -40,7 +43,13 @@ export const DataRow: FC<IDataRow> = ({
         />
       )}
       <p>{title}</p>
-      <WhatsAppLink btnText={btnText} phoneNo={phoneNo as string} />
+      {meetLink ? (
+        <MeetingLink meetId={meetLink} />
+      ) : phoneNo ? (
+        <WhatsAppLink btnText={btnText} phoneNo={phoneNo as string} />
+      ) : (
+        <Button variant="secondary">Start soon</Button>
+      )}
     </div>
   );
 };

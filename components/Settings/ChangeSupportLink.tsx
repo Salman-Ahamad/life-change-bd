@@ -22,7 +22,7 @@ export const ChangeSupportLink: FC = () => {
             variant="secondary"
             className="py-[7px] lg:py-2.5 px-3"
             onClick={() =>
-              updateData("/config", { "support.meeting": meetingLink })
+              updateData("/config", { "support.meeting": meetingLink }, true)
             }
           >
             Save
@@ -41,7 +41,11 @@ export const ChangeSupportLink: FC = () => {
             variant="secondary"
             className="py-[7px] lg:py-2.5 px-3"
             onClick={() =>
-              updateData("/config", { "support.whatsApp": whatsAppSupportLink })
+              updateData(
+                "/config",
+                { "support.whatsApp": whatsAppSupportLink },
+                true
+              )
             }
           >
             Save

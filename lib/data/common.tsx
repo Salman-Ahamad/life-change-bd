@@ -81,10 +81,10 @@ export const navData: INavData = {
       label: "Video Zone",
       link: "/user/video-zone",
     },
-    {
-      label: "Settings",
-      link: "/user/settings",
-    },
+    // {
+    //   label: "Settings",
+    //   link: "/user/settings",
+    // },
   ],
   profile: [
     {
@@ -142,44 +142,6 @@ export const navData: INavData = {
       link: "/user/active",
     },
   ],
-  messages: [
-    {
-      label: <AiOutlineHome className="text-2xl" />,
-      link: "/user/active",
-    },
-    {
-      label: "Profile",
-      link: "/user/active/profile",
-    },
-    {
-      label: "Notification",
-      link: "/user/notification",
-    },
-  ],
-  notification: [
-    {
-      label: <BackButton className="text-2xl" />,
-      link: "/user/active",
-    },
-    {
-      label: "Memo",
-      link: "/user/notification/memo",
-    },
-    {
-      label: "Message",
-      link: "/user/messages",
-    },
-  ],
-  memo: [
-    {
-      label: <BackButton className="text-2xl" />,
-      link: "/user/notification",
-    },
-    {
-      label: <AiOutlineHome className="text-2xl" />,
-      link: "/user/active",
-    },
-  ],
   passbook: [
     {
       label: <BackButton className="text-2xl" />,
@@ -196,16 +158,6 @@ export const navData: INavData = {
     {
       label: "Reference",
       link: "/user/ref-list",
-    },
-  ],
-  paymentMethod: [
-    {
-      label: <BackButton className="text-2xl" />,
-      link: "/user/active/withdrawal",
-    },
-    {
-      label: "Profile",
-      link: "/user/active/profile",
     },
   ],
   redeemList: [

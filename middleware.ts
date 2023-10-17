@@ -14,6 +14,11 @@ export default withAuth(
       request.nextauth.token?.role === UserRole.active
     ) {
       return NextResponse.redirect(`${process.env.BASE_URL}/user/active`);
+    } else if (
+      request.nextUrl.pathname.includes("/admin") &&
+      request.nextauth.token?.role !== UserRole.admin
+    ) {
+      return NextResponse.redirect(`${process.env.BASE_URL}/admin-login`);
     }
   },
   {
@@ -27,6 +32,15 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/admin",
+    "/admin/action",
+    "/admin/reports",
+    "/admin/settings",
+    "/admin/user-management",
+    "/admin/user-management/ref-list",
+    "/admin/user-management/ref-list/my-ref",
+    "/admin/user-management/ref-list/send-wish",
+    "/adminuser-management/student",
     "/inactive",
     "/inactive/profile",
     "/user/[slug]",
