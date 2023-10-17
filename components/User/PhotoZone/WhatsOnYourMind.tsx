@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { MdOutlineClose, MdOutlinePhotoLibrary } from "react-icons/md";
-
 import { useCurrentUser } from "@/hooks";
 import { Button } from "@/universal";
 import { Axios } from "@/utils";

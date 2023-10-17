@@ -9,7 +9,6 @@ import { INavItem } from "@/interface";
 import { UserRole } from "@/lib";
 import { Container, Title } from "@/universal";
 import { NextPage } from "next";
-import { redirect } from "next/navigation";
 import { AiOutlineHome } from "react-icons/ai";
 
 const adminNav: INavItem[] = [

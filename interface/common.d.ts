@@ -64,24 +64,24 @@ export interface INav {
 }
 
 export interface INavData {
-  common: INavItem[];
-  inActive: INavItem[];
-  active: INavItem[];
-  profile: INavItem[];
-  withdrawal: INavItem[];
-  courses: INavItem[];
+  common?: INavItem[];
+  inActive?: INavItem[];
+  active?: INavItem[];
+  profile?: INavItem[];
+  withdrawal?: INavItem[];
+  courses?: INavItem[];
   messages?: INavItem[];
   notification?: INavItem[];
   memo?: INavItem[];
-  passbook: INavItem[];
+  passbook?: INavItem[];
   paymentMethod?: INavItem[];
-  redeemList: INavItem[];
-  refList: INavItem[];
-  myRef: INavItem[];
-  sendWish: INavItem[];
-  transferPoints: INavItem[];
-  profileEdit: INavItem[];
-  settings: INavItem[];
+  redeemList?: INavItem[];
+  refList?: INavItem[];
+  myRef?: INavItem[];
+  sendWish?: INavItem[];
+  transferPoints?: INavItem[];
+  profileEdit?: INavItem[];
+  settings?: INavItem[];
 }
 
 export interface IInput extends IClassName {

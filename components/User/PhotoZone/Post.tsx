@@ -1,6 +1,6 @@
 "use client";
 
-import { updateData, useCurrentUser } from "@/hooks";
+import { useCurrentUser } from "@/hooks";
 import { IPostWithAuthor } from "@/interface";
 import { Types } from "mongoose";
 import Image from "next/image";
@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
-// import { MdOutlineClose } from "react-icons/md";
 
 const Post = ({ data }: { data: IPostWithAuthor }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);

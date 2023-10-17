@@ -1,3 +1,5 @@
+"use client";
+
 import { Axios, loadingToast } from "@/utils";
 import { toast } from "react-toastify";
 

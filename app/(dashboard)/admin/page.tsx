@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Header, Slider } from "@/components";
 
-import { useCurrentUser, useGetData } from "@/hooks";
+import { useGetData } from "@/hooks";
 import { IAppConfig, INavItem } from "@/interface";
 import { AiOutlineHome } from "react-icons/ai";
 import SlideUploader from "@/components/Admin/SlideUploader";
@@ -33,10 +33,7 @@ const adminNav: INavItem[] = [
 
 const Dashboard = () => {
   const [config, setConfig] = useState<IAppConfig>();
-
-  const user = useCurrentUser();
-  useGetData("/config", setConfig);
-  // useGetData("/config", setConfig);
+  useGetData("/config", setConfig, true);
 
   return (
     <main>

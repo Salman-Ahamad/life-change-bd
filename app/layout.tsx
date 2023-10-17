@@ -17,7 +17,8 @@ export const metadata: Metadata = {
     "It is an Bangladeshi trusted online platform. It is a learning and earning process by using your valuable free time at home through your smart phone only It is a very easy process and you can learn this process on your own mother tongue and you can earn from our community with selling some Courses Services or product also. Here you make your career smoothly.",
   openGraph: {
     title: "Life Change BD",
-    description: "The React Framework for the Web",
+    description:
+      "It is an Bangladeshi trusted online platform. It is a learning and earning process by using your valuable free time at home through your smart phone only It is a very easy process and you can learn this process on your own mother tongue and you can earn from our community with selling some Courses Services or product also. Here you make your career smoothly.",
     url: "https://www.lifechangebd.com/logo-life_change_bd.png",
     siteName: "Life Change BD",
     images: [

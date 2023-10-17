@@ -73,7 +73,7 @@ export const options: NextAuthOptions = {
         const returnUrl =
           currentUser?.role === UserRole.inactive
             ? "/inactive"
-            : "/user/active";
+            : "/active/user";
 
         if (currentUser) {
           if (currentUser.email === profile?.email) {

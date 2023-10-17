@@ -16,7 +16,7 @@ const Login: FC = () => {
   useEffect(() => {
     if (session?.user) {
       if (session.user.role === UserRole.inactive) redirect("/inactive");
-      if (session.user.role === UserRole.active) redirect("/user/active");
+      if (session.user.role === UserRole.active) redirect("/active/user");
       if (session.user.role === UserRole.admin) signOut();
       if (session.user.role === UserRole.consultant) signOut();
       if (session.user.role === UserRole.controller) signOut();

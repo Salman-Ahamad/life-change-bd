@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
@@ -54,7 +54,7 @@ const AdminLogin: FC = () => {
         .then((res) => {
           // if (!res?.error) {
           //   if (session?.role === role.toLowerCase()) {
-          //     redirect("/user/active");
+          //     redirect("/active/user");
           //   } else {
           //     signOut();
           //   }
@@ -75,11 +75,11 @@ const AdminLogin: FC = () => {
         console.log("Your role is no ", adminRole);
 
         // signOut();
-        // redirect("/user/active")
+        // redirect("/active/user");
       } else {
         console.log("Your role is ", adminRole);
 
-        redirect("/user/active");
+        redirect("/active/user");
       }
     }
   }, [session, adminRole]);

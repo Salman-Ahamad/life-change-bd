@@ -5,15 +5,15 @@ import { UserRole } from "./lib";
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     if (
-      request.nextUrl.pathname.includes("/user") &&
+      request.nextUrl.pathname.startsWith("/user") &&
       request.nextauth.token?.role === UserRole.inactive
     ) {
       return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
     } else if (
-      request.nextUrl.pathname.includes("/inactive") &&
+      request.nextUrl.pathname.startsWith("/inactive") &&
       request.nextauth.token?.role === UserRole.active
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/user/active`);
+      return NextResponse.redirect(`${process.env.BASE_URL}/active/user`);
     } else if (
       request.nextUrl.pathname.includes("/admin") &&
       request.nextauth.token?.role !== UserRole.admin
@@ -32,6 +32,18 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/active",
+    "/active/change-password",
+    "/active/courses",
+    "/active/my-ref",
+    "/active/passbook",
+    "/active/ref-list",
+    "/active/user",
+    "/active/user/[slug]",
+    "/active/user/profile",
+    "/active/user/profile/edit",
+    "/active/user/withdrawal",
+    "/active/photo-zone",
     "/admin",
     "/admin/action",
     "/admin/reports",
@@ -43,31 +55,8 @@ export const config = {
     "/adminuser-management/student",
     "/inactive",
     "/inactive/profile",
-    "/user/[slug]",
-    "/user/active",
-    "/user/active/profile",
-    "/user/active/profile/edit",
-    "/user/active/withdrawal",
-    "/user/change-password",
-    "/user/courses",
-    "/user/messages",
-    "/user/notification",
-    "/user/notification/memo",
-    "/user/passbook",
-    "/user/payment-method",
-    "/user/photo-zone",
-    "/user/photo-zone/profile",
-    "/user/photo-zone/user-profile/[slug]",
-    "/user/redeem-list",
-    "/user/ref-list",
-    "/user/ref-list/my-ref",
-    "/user/ref-list/send-wish",
-    "/user/settings",
-    "/user/settings/reports",
-    "/user/settings/students",
-    "/user/settings/team-management",
-    "/user/settings/user-management",
-    "/user/transfer-points",
-    "/user/video-zone",
+    "/photo-zone",
+    "/photo-zone/profile",
+    "/photo-zone/user-profile/[slug]",
   ],
 };
