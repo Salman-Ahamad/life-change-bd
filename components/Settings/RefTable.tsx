@@ -12,6 +12,7 @@ export const RefTable: FC<IRefTable> = ({
   message,
   actionBtn,
   setActionId,
+  slugUrl,
 }) => {
   const handleAction = (referUserId: string) => {
     setActionId && setActionId(referUserId);
@@ -70,7 +71,11 @@ export const RefTable: FC<IRefTable> = ({
                         <Tbody
                           key={i}
                           label={referUser[item as keyof IUser] as string}
-                          href={`/user/${referUser.id}`}
+                          href={
+                            slugUrl
+                              ? `${slugUrl}${referUser.id}`
+                              : `/user/${referUser.id}`
+                          }
                         />
                       );
                   }

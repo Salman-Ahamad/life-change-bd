@@ -144,6 +144,7 @@ export interface IRefTable {
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
   UpdateSendWish?: boolean;
+  slugUrl?: string;
 }
 
 export interface IFiledDate {

@@ -20,7 +20,7 @@ export const ChangeBaseFee: FC = () => {
           <Button
             variant="secondary"
             className="py-[7px] lg:py-2.5 px-3"
-            onClick={() => updateData("/config", { baseFee: baseFee })}
+            onClick={() => updateData("/config", { baseFee: baseFee }, true)}
           >
             Save
           </Button>

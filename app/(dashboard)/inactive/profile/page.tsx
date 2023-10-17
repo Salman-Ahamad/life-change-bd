@@ -13,7 +13,7 @@ import { useState } from "react";
 const Profile = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
-  useGetData("/config", setConfig);
+  useGetData("/config", setConfig, true);
 
   const profileTitle = [
     "email",
