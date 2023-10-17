@@ -15,7 +15,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
   const [userData, setUserData] = useState<IUser>();
-  const [diopsideAmount, setDipositeAmount] = useState<number>(0);
+  const [diopsideAmount, setDepositAmount] = useState<number>(0);
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
@@ -234,7 +234,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             label="Deposit:"
             name="deposit"
             defaultValue=""
-            onChange={(value) => setDipositeAmount(value)}
+            onChange={(value) => setDepositAmount(value)}
           />
           <Button
             variant="secondary"
