@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { ActivePageCard, DataRow } from ".";
+import { ActivePageCard, DataRow, MeetingLink } from ".";
 import { useGetData } from "@/hooks";
 import { ICourse, ICourseData } from "@/interface";
+import { GoogleMeetLink } from "@/components";
+import { Title } from "@/universal";
 
 export const LiveLearningClass = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
@@ -12,7 +14,12 @@ export const LiveLearningClass = () => {
   console.log(courses);
 
   return (
-    <ActivePageCard title="Join Live Training Class">
+    <ActivePageCard title="">
+      <div className="pb-6 hover:bg-gray-100 flex items-center justify-center gap-4 w-full border-b-2">
+        <Title variant="H5">Welcome Class</Title>
+        <GoogleMeetLink meetId="">Join Class</GoogleMeetLink>
+      </div>
+
       {courses ? (
         <>
           {courses.map((course, idx) => (
