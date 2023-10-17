@@ -13,7 +13,7 @@ export interface IGlConsultant {
 }
 export const SupportTeam: FC<{ support: string }> = ({ support }) => {
   const [data, setData] = useState<IGlConsultant>();
-  useGetData("/config/support", setData);
+  useGetData("/config/support", setData, true);
 
   if (data)
     return (

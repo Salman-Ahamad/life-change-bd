@@ -17,9 +17,8 @@ const AdminLogin: FC = () => {
     if (session?.user) {
       if (session.user.role !== UserRole.admin) {
         signOut();
-        // redirect("/user/active")
       } else {
-        redirect("/user/active");
+        redirect("/admin");
       }
     }
   }, [session]);

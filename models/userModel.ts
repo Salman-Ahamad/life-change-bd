@@ -80,7 +80,6 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: true,
       },
-
       admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
@@ -103,6 +102,10 @@ const userSchema = new Schema<IUserSchema>(
         ref: "users",
       },
       collectInactive: {
+        type: Boolean,
+        default: false,
+      },
+      activeBonos: {
         type: Boolean,
         default: false,
       },

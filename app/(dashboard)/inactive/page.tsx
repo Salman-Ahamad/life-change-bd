@@ -12,7 +12,7 @@ import { useCurrentUser } from "@/hooks";
 import { navData } from "@/lib/data";
 
 const Inactive = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <>

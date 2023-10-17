@@ -1,19 +1,38 @@
 "use client";
 
 import { NextPage } from "next";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { HiOutlineExternalLink } from "react-icons/hi";
 
-import { GoogleMeetLink, Header } from "@/components";
-import { useGetData } from "@/hooks";
-import { ICourse, ISlugParams } from "@/interface";
+import { GoogleMeetLink, Header, THeader, Tbody } from "@/components";
+import { createData, getDataFn, useGetData } from "@/hooks";
+import { IAssignment, ICourse, ISlugParams } from "@/interface";
 import { navData } from "@/lib";
-import { Button, Container, Title } from "@/universal";
+import { Button, Container, LinkButton, Title } from "@/universal";
+import { BiEditAlt } from "react-icons/bi";
 
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
   const [data, setData] = useState<ICourse | undefined>();
+  const [assignment, setAssignment] = useState<IAssignment[] | undefined>();
   const [url, setUrl] = useState("");
+
   const { slug } = params;
-  useGetData(`/courses/${slug}`, setData);
+
+  useGetData(`/courses/${slug}`, setData, true);
+
+  useEffect(() => {
+    if (data?.id) getDataFn(`/assignment/${data?.id}`, setAssignment, true);
+  }, [data?.id]);
+
+  const handlePostUrl = () =>
+    createData("/assignment", {
+      courseId: data?.id,
+      postLink: url,
+    }).then(() => {
+      window.location.reload();
+      setUrl("");
+    });
 
   return (
     <main>
@@ -28,30 +47,83 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
               Watch Video
             </GoogleMeetLink>
 
-            <div>
-              <Title variant="H4" className="capitalize">
-                List of Previous URL&rsquo;s
-              </Title>
-            </div>
+            {assignment && assignment.length !== 0 && (
+              <div>
+                <Title variant="H4" className="capitalize">
+                  List of Previous URL&rsquo;s
+                </Title>
+                <table className="w-full">
+                  <thead className="bg-gray-600 text-gray-50 font-medium border-b rounded-t-md">
+                    <tr>
+                      <THeader label="No" />
+                      <THeader label="Url" />
+                      <THeader label="Status" />
+                      {assignment.map(
+                        (as, i) =>
+                          as.status === "reject" && (
+                            <THeader key={i} label="Action" />
+                          )
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-600 divide-y">
+                    {assignment.map((assignment, i) => (
+                      <tr key={assignment.id}>
+                        <Tbody label={String(i + 1)} />
+                        <Tbody
+                          label={
+                            <Link
+                              href={assignment.postLink}
+                              target="_blank"
+                              className="flex justify-center items-center gap-1 bg-gray-200 px-2 py-0.5 rounded-md"
+                            >
+                              Open <HiOutlineExternalLink />
+                            </Link>
+                          }
+                        />
+                        <Tbody label={assignment.status} />
+                        {assignment.status === "reject" && (
+                          <Tbody
+                            label={
+                              <LinkButton
+                                href={`/user/courses/${slug}/${assignment.id}`}
+                                variant="secondary"
+                                className="bg-sky-400 hover:bg-sky-500 transition-all delay-200 px-4"
+                              >
+                                <BiEditAlt />
+                              </LinkButton>
+                            }
+                          />
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
-            <div>
-              <Title variant="H4" className="capitalize mb-5">
-                Submit new URL
-              </Title>
+            {assignment && assignment?.length < 10 && (
+              <div>
+                <Title variant="H4" className="capitalize mb-5">
+                  Submit new URL
+                </Title>
 
-              <input
-                type="url"
-                onChange={(e) => setUrl(e.target.value)}
-                className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
-              />
+                <input
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
+                />
 
-              <Button
-                className="ml-2.5 py-[7px] lg:py-2.5 px-3"
-                variant="secondary"
-              >
-                Post Url
-              </Button>
-            </div>
+                <Button
+                  className="ml-2.5 py-[7px] lg:py-2.5 px-3"
+                  variant="secondary"
+                  onClick={handlePostUrl}
+                >
+                  Post Url
+                </Button>
+              </div>
+            )}
           </div>
         ) : (
           <section className="max-w-sm w-full mx-auto">
@@ -72,10 +144,3 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
 };
 
 export default Assignment;
-
-/**
- * courseId: id
- * userId: 230001,
- * postLink: http://fb
- * status: pending
- */

@@ -13,7 +13,7 @@ import { useState } from "react";
 const Profile = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser();
-  useGetData("/config", setConfig);
+  useGetData("/config", setConfig, true);
 
   const profileTitle = [
     "email",
@@ -83,7 +83,7 @@ const Profile = () => {
               {tableTitle.map((item, i) => (
                 <CommonText
                   key={i}
-                  className={`text-start w-full px-2 py-1.5 capitalize ${
+                  className={`text-start w-full px-2 py-1.5 ${
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >

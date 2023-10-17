@@ -70,11 +70,11 @@ export interface INavData {
   profile: INavItem[];
   withdrawal: INavItem[];
   courses: INavItem[];
-  messages: INavItem[];
-  notification: INavItem[];
-  memo: INavItem[];
+  messages?: INavItem[];
+  notification?: INavItem[];
+  memo?: INavItem[];
   passbook: INavItem[];
-  paymentMethod: INavItem[];
+  paymentMethod?: INavItem[];
   redeemList: INavItem[];
   refList: INavItem[];
   myRef: INavItem[];
@@ -144,6 +144,7 @@ export interface IRefTable {
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
   UpdateSendWish?: boolean;
+  slugUrl?: string;
 }
 
 export interface IFiledDate {
@@ -181,10 +182,12 @@ export interface IGoogleMeetDeepLink extends IChildren {
 }
 
 export interface ProfileInputProps {
-  label: string;
   name: string;
-  defaultValue: string;
-  onChange: (value: any) => void;
-  selectOption?: string[];
+  label: string;
   onlyText?: boolean;
+  isActive?: boolean;
+  defaultValue: string;
+  selectOption?: string[];
+  onChange: (value: any) => void;
+  setFieldValue?: Dispatch<SetStateAction<string>>;
 }
