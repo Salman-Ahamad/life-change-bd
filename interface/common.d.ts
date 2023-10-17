@@ -185,7 +185,7 @@ export interface ProfileInputProps {
   name: string;
   label: string;
   onlyText?: boolean;
-  isActive: boolean;
+  isActive?: boolean;
   defaultValue: string;
   selectOption?: string[];
   onChange: (value: any) => void;
