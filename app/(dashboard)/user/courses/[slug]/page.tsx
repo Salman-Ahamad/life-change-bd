@@ -9,7 +9,7 @@ import { GoogleMeetLink, Header, THeader, Tbody } from "@/components";
 import { createData, getDataFn, useGetData } from "@/hooks";
 import { IAssignment, ICourse, ISlugParams } from "@/interface";
 import { navData } from "@/lib";
-import { Button, Container, Title } from "@/universal";
+import { Button, Container, LinkButton, Title } from "@/universal";
 import { BiEditAlt } from "react-icons/bi";
 
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
@@ -85,12 +85,13 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                         {assignment.status === "reject" && (
                           <Tbody
                             label={
-                              <Button
+                              <LinkButton
+                                href={`/user/courses/${slug}/${assignment.id}`}
                                 variant="secondary"
                                 className="bg-sky-400 hover:bg-sky-500 transition-all delay-200 px-4"
                               >
                                 <BiEditAlt />
-                              </Button>
+                              </LinkButton>
                             }
                           />
                         )}
