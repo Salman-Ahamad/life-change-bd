@@ -29,7 +29,10 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
     createData("/assignment", {
       courseId: data?.id,
       postLink: url,
-    }).then(() => setUrl(""));
+    }).then(() => {
+      window.location.reload();
+      setUrl("");
+    });
 
   return (
     <main>
@@ -64,9 +67,9 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                     </tr>
                   </thead>
                   <tbody className="text-gray-600 divide-y">
-                    {assignment.map((assignment, idx) => (
-                      <tr key={idx}>
-                        <Tbody label={String(idx + 1)} />
+                    {assignment.map((assignment, i) => (
+                      <tr key={assignment.id}>
+                        <Tbody label={String(i + 1)} />
                         <Tbody
                           label={
                             <Link
@@ -78,10 +81,9 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                             </Link>
                           }
                         />
-                        <Tbody key={idx} label={assignment.status} />
+                        <Tbody label={assignment.status} />
                         {assignment.status === "reject" && (
                           <Tbody
-                            key={idx}
                             label={
                               <Button
                                 variant="secondary"
@@ -99,25 +101,28 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
               </div>
             )}
 
-            <div>
-              <Title variant="H4" className="capitalize mb-5">
-                Submit new URL
-              </Title>
+            {assignment && assignment?.length < 10 && (
+              <div>
+                <Title variant="H4" className="capitalize mb-5">
+                  Submit new URL
+                </Title>
 
-              <input
-                type="url"
-                onChange={(e) => setUrl(e.target.value)}
-                className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
-              />
+                <input
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
+                />
 
-              <Button
-                className="ml-2.5 py-[7px] lg:py-2.5 px-3"
-                variant="secondary"
-                onClick={handlePostUrl}
-              >
-                Post Url
-              </Button>
-            </div>
+                <Button
+                  className="ml-2.5 py-[7px] lg:py-2.5 px-3"
+                  variant="secondary"
+                  onClick={handlePostUrl}
+                >
+                  Post Url
+                </Button>
+              </div>
+            )}
           </div>
         ) : (
           <section className="max-w-sm w-full mx-auto">

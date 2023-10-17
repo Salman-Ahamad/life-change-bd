@@ -11,10 +11,19 @@ export const POST = async (req: NextRequest) => {
     const assignmentData = await req.json();
     // Get Current User
     const user = await getCurrentUser();
-
     if (!user) {
       return ApiResponse(404, "User not found❗");
     }
+
+    const max10 = await Assignment.find({
+      userId: user.id,
+      courseId: assignmentData.courseId,
+    });
+
+    if (max10.length >= 10) {
+      return ApiResponse(400, "Max task limit 10❗");
+    }
+
     assignmentData.userId = user.id;
     const result = await Assignment.create(assignmentData);
 
