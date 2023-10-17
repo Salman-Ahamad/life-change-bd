@@ -19,8 +19,22 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
-  const user = useCurrentUser();
+  const [selectFieldValue, setSelectFieldValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
+
+  const user = useCurrentUser(true);
   useGetData(`/user/${slug}`, setUserData);
+
+  console.log("🚀 ~ file: page.tsx:35 ~ useEffect ~ active:", isActive);
+  useEffect(() => {
+    if (userData) {
+      // const active =
+      //   (userData.role === UserRole.active ||
+      //     selectFieldValue === UserRole.active) &&
+      //   !userData.settings.activeBonos;
+      // setIsActive(active);
+    }
+  }, [userData, selectFieldValue]);
 
   const admin = [
     UserRole.controller,
@@ -88,6 +102,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             onlyText={user?.role !== UserRole.admin}
             label="First Name:"
             name="firstName"
+            isActive={isActive}
             defaultValue={(userData && userData.firstName) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, firstName: value }))
@@ -97,6 +112,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             onlyText={user?.role !== UserRole.admin}
             label="Last Name:"
             name="lastName"
+            isActive={isActive}
             defaultValue={(userData && userData.lastName) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, lastName: value }))
@@ -110,6 +126,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Email:"
             name="email"
+            isActive={isActive}
             defaultValue={(userData && userData.email) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, email: value }))
@@ -122,6 +139,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Phone:"
             name="phone"
+            isActive={isActive}
             defaultValue={(userData && userData.phone) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, phone: value }))
@@ -134,6 +152,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Whatsapp:"
             name="whatsapp"
+            isActive={isActive}
             defaultValue={(userData && userData.whatsapp) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, whatsapp: value }))
@@ -145,9 +164,11 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               user?.role !== UserRole.admin &&
               user?.role !== UserRole.controller
             }
-            label="Role:"
             name="role"
+            label="Role:"
+            isActive={isActive}
             selectOption={selectOption}
+            setFieldValue={setSelectFieldValue}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>
               setUpdatedData((prev) => ({ ...prev, role: value }))
@@ -158,6 +179,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             onlyText={user?.role !== UserRole.admin}
             label="Controller:"
             name="controller"
+            isActive={isActive}
             defaultValue={(userData && userData.settings?.controller?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
@@ -173,6 +195,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Consultant:"
             name="consultant"
+            isActive={isActive}
             defaultValue={(userData && userData.settings?.consultant?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
@@ -189,6 +212,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Teacher:"
             name="teacher"
+            isActive={isActive}
             defaultValue={(userData && userData.settings?.teacher?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
@@ -205,6 +229,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Group Leader:"
             name="gl"
+            isActive={isActive}
             defaultValue={(userData && userData.settings?.gl?.id) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
@@ -231,6 +256,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               user?.role !== UserRole.admin &&
               user?.role !== UserRole.controller
             }
+            isActive={isActive}
             label="Deposit:"
             name="deposit"
             defaultValue=""

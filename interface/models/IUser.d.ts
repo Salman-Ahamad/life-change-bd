@@ -13,6 +13,7 @@ export type IUserRole =
 export interface ISettingsSchema {
   activeNotice: boolean;
   collectInactive: boolean;
+  activeBonos: boolean;
   admin: Types.ObjectId;
   consultant: Types.ObjectId;
   controller: Types.ObjectId;
@@ -24,6 +25,7 @@ export interface ISettingsSchema {
 export interface ISettings {
   activeNotice: boolean;
   collectInactive: boolean;
+  activeBonos: boolean;
   admin: IUSer;
   consultant: IUSer;
   controller: IUSer;
