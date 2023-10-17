@@ -1,13 +1,34 @@
 "use client";
 
-import { Button } from "@/universal";
-import React from "react";
+import React, { useState } from "react";
 import { ActivePageCard, DataRow } from ".";
+import { useGetData } from "@/hooks";
+import { ICourse, ICourseData } from "@/interface";
 
 export const LiveLearningClass = () => {
+  const [courses, setCourses] = useState<ICourse[]>([]);
+  useGetData("/courses", setCourses, true);
+
+  console.log(courses);
+
   return (
     <ActivePageCard title="Join Live Training Class">
-      <DataRow title="Photo Editing & Sharing Class" btnText="ViewClass" icon />
+      {courses ? (
+        <>
+          {courses.map((course, idx) => (
+            <DataRow
+              key={idx}
+              title={course.title}
+              meetLink={course.meetingId || ""}
+              btnText="Join Class"
+              icon
+            />
+          ))}
+        </>
+      ) : (
+        <p></p>
+      )}
+
       <DataRow title="Lead Generation Class" btnText="ViewClass" icon />
     </ActivePageCard>
   );

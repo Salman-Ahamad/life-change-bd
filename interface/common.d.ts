@@ -70,11 +70,11 @@ export interface INavData {
   profile: INavItem[];
   withdrawal: INavItem[];
   courses: INavItem[];
-  messages: INavItem[];
-  notification: INavItem[];
-  memo: INavItem[];
+  messages?: INavItem[];
+  notification?: INavItem[];
+  memo?: INavItem[];
   passbook: INavItem[];
-  paymentMethod: INavItem[];
+  paymentMethod?: INavItem[];
   redeemList: INavItem[];
   refList: INavItem[];
   myRef: INavItem[];
