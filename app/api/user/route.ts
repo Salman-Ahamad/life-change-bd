@@ -35,6 +35,26 @@ export const GET = async () => {
 
     const user = await User.findOne({ _id: currentUser.id })
       .populate("courses")
+      .populate({
+        path: "settings.admin",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.controller",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.consultant",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.teacher",
+        select: "firstName lastName image id",
+      })
+      .populate({
+        path: "settings.gl",
+        select: "firstName lastName image id",
+      })
       .select("-password");
 
     if (user.reference !== "-" && Types.ObjectId.isValid(user.reference)) {
