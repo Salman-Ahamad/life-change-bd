@@ -1,4 +1,3 @@
-import { UserRole } from "@/lib";
 import { Withdrawal } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
