@@ -47,8 +47,6 @@ const Active = () => {
   const user = useCurrentUser();
   useGetData("/config", setConfig);
 
-  console.log({ config });
-
   useEffect(() => {
     if (user?.settings.activeNotice) {
       toast.info("You are an active Seller 🏅, well done!✅", {

@@ -15,8 +15,6 @@ export const SupportTeam: FC<{ support: string }> = ({ support }) => {
   const [data, setData] = useState<IGlConsultant>();
   useGetData("/config/support", setData, true);
 
-  console.log("Support WA", { support });
-
   if (data)
     return (
       <ActivePageCard title="Life change Support Team">
