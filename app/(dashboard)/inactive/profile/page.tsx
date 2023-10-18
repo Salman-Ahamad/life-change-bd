@@ -15,26 +15,6 @@ const navData: INavItem[] = [
     label: <BackButton className="text-2xl" />,
     link: "/active",
   },
-  {
-    label: "Edit Profile",
-    link: "/active/user/profile/edit",
-  },
-  {
-    label: "Change Password",
-    link: "/active/change-password",
-  },
-  {
-    label: "Passbook",
-    link: "/active/passbook",
-  },
-  {
-    label: "Withdrawal",
-    link: "/active/user/withdrawal",
-  },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
-  },
 ];
 
 const Profile = () => {

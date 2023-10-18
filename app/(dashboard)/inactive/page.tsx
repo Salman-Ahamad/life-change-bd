@@ -22,21 +22,9 @@ const navData: INavItem[] = [
     link: "/inactive/profile",
   },
   {
-    label: "Courses",
-    link: "/active/courses",
-  },
-  {
-    label: "References",
-    link: "/active/user/ref-list",
-  },
-  {
     label: "Photo Zone",
     link: "/photo-zone",
   },
-  // {
-  //   label: "Video Zone",
-  //   link: "/active/video-zone",
-  // },
 ];
 
 const Inactive = () => {
