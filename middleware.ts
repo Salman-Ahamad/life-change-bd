@@ -4,22 +4,53 @@ import { UserRole } from "./lib";
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
-    if (
-      request.nextUrl.pathname.startsWith("/user") &&
-      request.nextauth.token?.role === UserRole.inactive
-    ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
+    const userRole = request.nextauth.token?.role;
+
+    if (!userRole) {
+      return NextResponse.redirect(new URL("/", request.url));
     } else if (
-      request.nextUrl.pathname.startsWith("/inactive") &&
-      request.nextauth.token?.role === UserRole.active
+      userRole === UserRole.active &&
+      !request.nextUrl.pathname.startsWith("/active")
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/active`);
+      return NextResponse.redirect(new URL("/active", request.url));
     } else if (
-      request.nextUrl.pathname.includes("/admin") &&
-      request.nextauth.token?.role !== UserRole.admin
+      userRole === UserRole.inactive &&
+      !request.nextUrl.pathname.startsWith("/inactive")
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/admin-login`);
+      return NextResponse.redirect(new URL("/inactive", request.url));
+    } else if (
+      userRole === UserRole.admin &&
+      !request.nextUrl.pathname.startsWith("/admin")
+    ) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    } else if (
+      (userRole === UserRole.controller ||
+        userRole === UserRole.consultant ||
+        userRole === UserRole.gl ||
+        userRole === UserRole.teacher) &&
+      !request.nextUrl.pathname.startsWith("/subadmin")
+    ) {
+      console.log("User Log from Middleware: ", userRole);
+      return NextResponse.redirect(new URL("/subadmin", request.url));
     }
+
+    // if (
+    //   request.nextUrl.pathname.startsWith("/active") &&
+    //   request.nextauth.token?.role === UserRole.inactive
+    // ) {
+    //   return NextResponse.redirect(new URL("/inactive", request.url));
+    //   // return NextResponse.redirect(`/inactive`);
+    // } else if (
+    //   request.nextUrl.pathname.startsWith("/inactive") &&
+    //   request.nextauth.token?.role === UserRole.active
+    // ) {
+    //   return NextResponse.redirect(`/active`);
+    // } else if (
+    //   request.nextUrl.pathname.startsWith("/admin") &&
+    //   request.nextauth.token?.role !== UserRole.admin
+    // ) {
+    //   return NextResponse.redirect(`/admin-login`);
+    // }
   },
   {
     callbacks: {
@@ -58,5 +89,6 @@ export const config = {
     "/photo-zone",
     "/photo-zone/profile",
     "/photo-zone/user-profile/[slug]",
+    "/subadmin",
   ],
 };

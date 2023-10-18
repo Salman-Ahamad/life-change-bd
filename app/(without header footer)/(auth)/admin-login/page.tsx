@@ -22,7 +22,7 @@ const AdminLogin: FC = () => {
   return (
     <main className="h-screen flex justify-between items-center">
       <section className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
-        <LoginForm />
+        <LoginForm title="Admin login" />
       </section>
     </main>
   );

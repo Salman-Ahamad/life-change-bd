@@ -3,7 +3,7 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { ILoginFormValue } from "@/interface";
@@ -12,7 +12,7 @@ import { Button, CTA, Title } from "@/universal";
 import { getRandomNumber, loadingToast } from "@/utils";
 import { Input } from "..";
 
-export const LoginForm = () => {
+export const LoginForm: FC<{ title?: string }> = ({ title }) => {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const { data: session } = useSession();
@@ -71,7 +71,7 @@ export const LoginForm = () => {
       {({ isSubmitting, isValid }) => (
         <Form>
           <Title variant="H3" className="mb-10 normal-case">
-            Welcome back
+            {title ? title : "Welcome back"}
           </Title>
 
           <CTA className="mt-2.5">Phone Number with Country code</CTA>
