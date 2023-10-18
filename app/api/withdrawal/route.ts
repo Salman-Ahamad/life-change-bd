@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { Withdrawal } from "@/models";
+import { User, Withdrawal } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -9,17 +9,27 @@ connectDb();
 
 export const POST = async (req: NextRequest) => {
   try {
-    const withdrawalData = await req.json();
+    const { amount, ...withdrawalData } = await req.json();
     // Get Current User
     const user = await getCurrentUser();
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
     }
+    const amountToNumber = Number(amount);
+
+    await User.findOneAndUpdate(
+      { _id: user.id },
+      { $inc: { balance: -amountToNumber } },
+      { new: true }
+    );
+
     const option = {
       userId: user.id,
+      amount: amountToNumber,
       ...withdrawalData,
     };
+
     const result = await Withdrawal.create(option);
 
     return ApiResponse(200, "withdraw Request successfully 👌", result);

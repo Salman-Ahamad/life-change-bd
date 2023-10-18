@@ -1,11 +1,12 @@
 "use client";
 
 import { Header } from "@/components";
-import { createData, updateData, useCurrentUser } from "@/hooks";
+import { createData, useCurrentUser } from "@/hooks";
 import { INavItem } from "@/interface";
 import { BackButton, Button, Container, Title } from "@/universal";
 import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -26,11 +27,16 @@ const Withdrawal = () => {
 
   const handleWithdraw = () => {
     if (user) {
-      updateData("/user", { balance: user.balance - amount }, true).then(() =>
-        createData(`/withdrawal`, { amount, method, number })
-      );
+      if (number.length === 11) {
+        createData(`/withdrawal`, { amount, method, number }).then(() =>
+          window.location.reload()
+        );
+      } else {
+        toast.error("Number must be 11 characters");
+      }
     }
   };
+
   return (
     <>
       <Header navData={navData} />
@@ -39,17 +45,25 @@ const Withdrawal = () => {
       </Title>
 
       <Container className="flex gap-5 items-end justify-center mt-10">
-        <div className="w-auto">
+        <div className="w-auto flex flex-col gap-5">
           <div>
-            <label className="pl-1.5">Withdrawal Amount </label>
+            <label className="pl-1.5">Amount</label>
             <input
               type="number"
               onChange={(e) => setAmount(Number(e.target.value))}
               className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
             />
           </div>
+          <div>
+            <label className="pl-1.5">Number</label>
+            <input
+              type="text"
+              onChange={(e) => setNumber(e.target.value)}
+              className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
+            />
+          </div>
 
-          <div className="flex flex-col justify-center items-start mt-2.5">
+          <div className="flex flex-col justify-center items-start">
             <label className="pl-1.5">Method </label>
 
             <select
@@ -64,23 +78,14 @@ const Withdrawal = () => {
               <option value="Rocket">Rocket</option>
             </select>
           </div>
-
-          <div>
-            <label className="pl-1.5">Number</label>
-            <input
-              type="text"
-              onChange={(e) => setNumber(e.target.value)}
-              className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
-            />
-          </div>
+          <Button
+            variant="secondary"
+            className="py-[7px] lg:py-2.5 px-3 w-full"
+            onClick={handleWithdraw}
+          >
+            Save
+          </Button>
         </div>
-        <Button
-          variant="secondary"
-          className="py-[7px] lg:py-2.5 px-3"
-          onClick={handleWithdraw}
-        >
-          Save
-        </Button>
       </Container>
     </>
   );
