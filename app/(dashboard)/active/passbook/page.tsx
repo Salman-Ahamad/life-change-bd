@@ -7,8 +7,6 @@ import { useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
 import { BackButton, Button, Title } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
-import { Axios, loadingToast } from "@/utils";
-import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -23,30 +21,13 @@ const navData: INavItem[] = [
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
+  const [passbookDebitData, setPassbookDebitData] = useState<IUser[] | null>(
+    null
+  );
   const [dataType, setDataType] = useState<string>("credit");
 
-  // useGetData("/all-ref/?collectInactive=true", setPassbookData);
-
-  useEffect(() => {
-    const route =
-      dataType === "credit"
-        ? "/all-ref/?collectInactive=true"
-        : "/withdrawal/passbook";
-
-    const id = toast.loading("Loading...🔃");
-
-    Axios.get(route)
-      .then(({ data }) => {
-        setPassbookData(data.data);
-        if (data.data) id && loadingToast(id, data.message, "success");
-      })
-      .catch(({ response }) => {
-        setPassbookData(null);
-        id
-          ? loadingToast(id, response.data.message || "Error❌", "error")
-          : toast.error(response.data.message || "Error❌");
-      });
-  }, [dataType]);
+  useGetData("/all-ref/?collectInactive=true", setPassbookData);
+  useGetData("/withdrawal/passbook", setPassbookDebitData);
 
   return (
     <>
@@ -64,9 +45,16 @@ const Passbook = () => {
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃
         </Title>
-      ) : passbookData?.length !== 0 ? (
+      ) : dataType === "credit" && passbookData?.length !== 0 ? (
         <DataTable
           tableData={passbookData}
+          tableHeaders={["No", "id", "Name", "Joining Time"]}
+          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          message="Message"
+        />
+      ) : dataType === "debit" && passbookDebitData?.length !== 0 ? (
+        <DataTable
+          tableData={passbookDebitData}
           tableHeaders={["No", "id", "Name", "Joining Time"]}
           dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"

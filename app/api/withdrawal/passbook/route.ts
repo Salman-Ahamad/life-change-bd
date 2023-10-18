@@ -10,11 +10,6 @@ export const GET = async () => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (
-      user.role !== UserRole.admin &&
-      user.role !== UserRole.controller
-    ) {
-      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
     const result = await Withdrawal.find({ userId: user.id });
