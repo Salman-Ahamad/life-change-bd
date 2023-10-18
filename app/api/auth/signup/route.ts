@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
     if (reference !== "-") {
       const refUser = await User.findOne({ userId: reference });
       if (refUser) {
-        user.reference = refUser._id;
+        user.reference = refUser.userId;
       } else {
         return ApiResponse(404, "Invalid Refer Id notfound❗");
       }
