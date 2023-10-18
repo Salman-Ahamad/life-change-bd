@@ -20,7 +20,6 @@ export const InputField: FC<ProfileInputProps> = ({
       <p className="pl-1.5 bg-gray-100 rounded-sm col-span-5">{defaultValue}</p>
     ) : selectOption ? (
       <>
-        {console.log(isActive)}
         <select
           className={`outline-none pl-1.5 bg-gray-100 rounded-sm cursor-pointer ${
             isActive === true ? "col-span-3" : "col-span-5"
@@ -44,7 +43,10 @@ export const InputField: FC<ProfileInputProps> = ({
           )}
         </select>
         {isActive === true && (
-          <Button variant="accent" className="col-span-2 ml-1">
+          <Button
+            variant="accent"
+            className="col-span-2 ml-1 lg:ml-1.5 text-xs lg:text-sm"
+          >
             Sand Bonus
           </Button>
         )}

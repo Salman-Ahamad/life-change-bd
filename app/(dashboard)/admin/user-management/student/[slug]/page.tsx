@@ -19,15 +19,32 @@ const navData: INavItem[] = [
 ];
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
-  const { slug } = params;
+  const id = params.slug;
 
   const [userData, setUserData] = useState<IUser>();
-  const [diopsideAmount, setDipositeAmount] = useState<number>(0);
+  useGetData(`/user/${id}`, setUserData);
+
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
+  const [depositAmount, setDepositAmount] = useState<number>(0);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
+  const [selectFieldValue, setSelectFieldValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
+
   const user = useCurrentUser();
-  useGetData(`/user/${slug}`, setUserData);
+
+  useEffect(() => {
+    if (userData) {
+      if (selectFieldValue) {
+        const active = selectFieldValue === UserRole.active;
+        setIsActive(active);
+      } else if (selectFieldValue.length === 0) {
+        const active =
+          userData.role === UserRole.active && !userData.settings.activeBonus;
+        setIsActive(active);
+      }
+    }
+  }, [userData, selectFieldValue]);
 
   const admin = [
     UserRole.controller,
@@ -53,13 +70,15 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     [];
 
   useEffect(() => userData && setDisabled(false), [userData]);
-  const updateProfile = () => updateData(`/user/${slug}`, updatedData);
+  const sendActiveBonus = {};
+  const addActiveBonus = () => updateData(`/user/${id}`, updatedData, true);
+  const updateProfile = () => updateData(`/user/${id}`, updatedData, true);
 
   const depositMoney = () => {
-    if (user && diopsideAmount > 0) {
+    if (user && depositAmount > 0) {
       updateData(`/user/deposit/`, {
-        id: slug,
-        diopsideAmount: Number(diopsideAmount),
+        id: id,
+        diopsideAmount: Number(depositAmount),
       });
     }
   };
@@ -155,6 +174,8 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             label="Role:"
             name="role"
             selectOption={selectOption}
+            isActive={isActive}
+            setFieldValue={setSelectFieldValue}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>
               setUpdatedData((prev) => ({ ...prev, role: value }))
@@ -241,7 +262,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             label="Deposit:"
             name="deposit"
             defaultValue=""
-            onChange={(value) => setDipositeAmount(value)}
+            onChange={(value) => setDepositAmount(value)}
           />
           <Button
             variant="secondary"
