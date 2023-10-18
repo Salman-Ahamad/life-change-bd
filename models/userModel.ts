@@ -105,7 +105,7 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: false,
       },
-      activeBonos: {
+      activeBonus: {
         type: Boolean,
         default: false,
       },

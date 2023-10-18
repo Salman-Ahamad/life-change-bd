@@ -190,4 +190,5 @@ export interface ProfileInputProps {
   selectOption?: string[];
   onChange: (value: any) => void;
   setFieldValue?: Dispatch<SetStateAction<string>>;
+  addActiveBonus?: () => void;
 }

@@ -38,10 +38,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const inactiveBonusOption = {
       "settings.collectInactive": collectInactiveValue,
     };
-    const optionFn = (option: object) => {
+    const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = { createdAt: { $gte: formattingDate } };
-      const active = { role: UserRole.active };
+      const active = activeId ? { role: UserRole.active } : {};
       return (
         (id && { ...idFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
@@ -56,7 +56,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     switch (user.role) {
       case UserRole.admin:
         const admin = { "settings.admin": user.id };
-        option = optionFn(admin);
+        option = optionFn(admin, false);
         break;
       case UserRole.controller:
         const controller = {

@@ -12,6 +12,10 @@ const WithdrawalSchema = new Schema<IWithdrawalSchema>(
       type: Number,
       required: [true, "Please provide a amount"],
     },
+    number: {
+      type: String,
+      required: [true, "Please provide a number"],
+    },
     method: {
       type: String,
       required: [true, "Please provide a method"],
