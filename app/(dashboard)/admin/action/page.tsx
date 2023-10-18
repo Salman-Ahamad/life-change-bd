@@ -28,7 +28,7 @@ const adminNav: INavItem[] = [
   },
   {
     label: "Student",
-    link: "/admin/student",
+    link: "/admin/settings",
   },
 ];
 
