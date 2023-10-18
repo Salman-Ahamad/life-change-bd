@@ -82,7 +82,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "User get successfully 👌", refList);
+    return ApiResponse(200, "Regerance list get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

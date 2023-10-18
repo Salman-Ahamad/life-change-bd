@@ -32,7 +32,7 @@ const navData: INavItem[] = [
 ];
 
 const Profile = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   const profileTitle = [
     "email",

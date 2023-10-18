@@ -36,7 +36,7 @@ const navData: INavItem[] = [
 ];
 
 const VideoZone = () => {
-  const userData = useCurrentUser();
+  const userData = useCurrentUser(true);
   const courses = userData?.courses;
 
   return (

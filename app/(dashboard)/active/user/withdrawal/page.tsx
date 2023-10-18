@@ -20,7 +20,7 @@ const navData: INavItem[] = [
 ];
 
 const Withdrawal = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   const [amount, setAmount] = useState(0);
   const [method, setMethod] = useState("");
   const [number, setNumber] = useState("");

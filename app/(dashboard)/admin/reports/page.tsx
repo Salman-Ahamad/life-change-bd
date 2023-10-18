@@ -19,7 +19,7 @@ const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/all-ref?collectInactive=true", setData);
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   // TODO: Change the approach
   if (user?.role === UserRole.inactive) {

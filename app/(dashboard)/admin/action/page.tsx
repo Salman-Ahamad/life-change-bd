@@ -36,7 +36,7 @@ const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData);
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   const handleAction = (id: string) => {
     if (Types.ObjectId.isValid(id)) {

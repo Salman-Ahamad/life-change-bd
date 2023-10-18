@@ -5,7 +5,7 @@ import { Title } from "@/universal";
 import Image from "next/image";
 
 const ProfileDetails = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <div className="px-4 bg-white rounded-[17px] shadow-md mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">

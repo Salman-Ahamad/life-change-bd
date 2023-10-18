@@ -9,7 +9,7 @@ import { FC } from "react";
 import { AiFillHome, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar: FC = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">

@@ -29,7 +29,7 @@ const Edit: NextPage = () => {
     null
   );
   const [disabled, setDisabled] = useState(true);
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();

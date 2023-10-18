@@ -19,7 +19,7 @@ const navData: INavItem[] = [
 
 const Profile = () => {
   const [config, setConfig] = useState<IAppConfig>();
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   useGetData("/config", setConfig, true);
 
   const profileTitle = [

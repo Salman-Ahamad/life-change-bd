@@ -44,7 +44,7 @@ const navData: INavItem[] = [
 
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   useGetData("/config", setConfig);
 
   useEffect(() => {
