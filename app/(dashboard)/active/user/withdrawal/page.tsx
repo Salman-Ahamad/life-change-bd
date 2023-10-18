@@ -6,6 +6,7 @@ import { INavItem } from "@/interface";
 import { BackButton, Button, Container, Title } from "@/universal";
 import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -26,7 +27,13 @@ const Withdrawal = () => {
 
   const handleWithdraw = () => {
     if (user) {
-      createData(`/withdrawal`, { amount, method, number });
+      if (number.length === 11) {
+        createData(`/withdrawal`, { amount, method, number }).then(() =>
+          window.location.reload()
+        );
+      } else {
+        toast.error("Number must be 11 characters");
+      }
     }
   };
 
