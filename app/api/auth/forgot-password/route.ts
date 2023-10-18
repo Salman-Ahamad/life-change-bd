@@ -29,13 +29,6 @@ export const PATCH = async (req: NextRequest) => {
       }
     );
 
-    console.log(
-      "Password Change successfully",
-      newPassword,
-      hashedPassword,
-      result
-    );
-
     return ApiResponse(200, "Password Change successfully", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);

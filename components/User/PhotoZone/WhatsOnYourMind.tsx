@@ -17,7 +17,7 @@ const WhatsOnYourMind: React.FC = () => {
   const [postText, setPostText] = useState<string>("");
   const [postImage, setPostImage] = useState<string>("");
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();

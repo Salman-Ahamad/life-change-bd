@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
-import { INavItem, IUser } from "@/interface";
-import { BackButton, Title } from "@/universal";
+import { INavItem, IUser, IWithdrawal } from "@/interface";
+import { BackButton, Button, Title } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
@@ -21,22 +21,49 @@ const navData: INavItem[] = [
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
+  const [passbookDebitData, setPassbookDebitData] = useState<
+    IWithdrawal[] | null
+  >(null);
+  const [dataType, setDataType] = useState<string>("credit");
+
   useGetData("/all-ref/?inactiveBonus=true", setPassbookData);
+  // useGetData("/passbook/credit", setPassbookData);
+  useGetData("/passbook/debit", setPassbookDebitData);
 
   return (
     <>
       <Header navData={navData} />
       <PageHeader title="Passbook" notice="Last 3 Month Outbound" />
+      <div className="flex justify-center gap-4 py-6">
+        <Button onClick={() => setDataType("credit")} variant="secondary">
+          Credit History
+        </Button>
+        <Button onClick={() => setDataType("debit")} variant="secondary">
+          Debit History
+        </Button>
+      </div>
       {passbookData === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃
         </Title>
-      ) : passbookData?.length !== 0 ? (
+      ) : dataType === "credit" && passbookData?.length !== 0 ? (
         <DataTable
           tableData={passbookData}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          tableHeaders={["Date", "id", "Name", "Joining Time"]}
+          dataProperties={["createdAt", "firstName", "createdAt", "phone"]}
           message="Message"
+        />
+      ) : // <DataTable
+      //   tableData={passbookData}
+      //   tableHeaders={["No", "Date", "Amount", "Description"]}
+      //   dataProperties={["createdAt", "amount", "comments"]}
+      // />
+      // TODO: Update this later
+      dataType === "debit" && passbookDebitData ? (
+        <DataTable
+          tableData={passbookDebitData}
+          tableHeaders={["no", "Date", "amount", "method", "Number", "status"]}
+          dataProperties={["createdAt", "amount", "method", "number", "status"]}
         />
       ) : (
         <Title variant="H3" className="text-center capitalize my-10">

@@ -44,9 +44,7 @@ const navData: INavItem[] = [
 
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
-  const user = useCurrentUser();
-  useGetData("/config", setConfig);
-
+  const user = useCurrentUser(true);
   useGetData("/config", setConfig);
 
   useEffect(() => {
@@ -88,7 +86,7 @@ const Active = () => {
             <MeetingLink meetId={config.support.meeting} />
           </div>
         )}
-        {config && <SupportTeam support={config.whatsAppMessage} />}
+        {config && <SupportTeam support={config.support.whatsApp} />}
       </Container>
 
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">

@@ -35,7 +35,7 @@ const adminNav: INavItem[] = [
 ];
 
 const Settings: NextPage = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <main>

@@ -29,14 +29,10 @@ const navData: INavItem[] = [
     label: "Withdrawal",
     link: "/active/user/withdrawal",
   },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
-  },
 ];
 
 const Profile = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   const profileTitle = [
     "email",

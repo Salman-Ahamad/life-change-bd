@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export const ActivationPoint = () => {
   const [config, setConfig] = useState<IAppConfig>();
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   useGetData("/config", setConfig, true);
 
   const profileTitle = [

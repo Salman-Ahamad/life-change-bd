@@ -6,6 +6,7 @@ import {
   IChildrenWithClassName,
   IClassName,
   IUser,
+  IWithdrawal,
 } from ".";
 
 export type IColor =
@@ -139,7 +140,7 @@ export interface ITbody extends ITHeader {
 export interface IRefTable {
   tableHeaders: string[];
   dataProperties: string[];
-  tableData: IUser[];
+  tableData: any[];
   message?: string;
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;

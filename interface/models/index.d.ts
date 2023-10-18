@@ -6,3 +6,4 @@ export * from "./ICourse";
 export * from "./IPost";
 export * from "./IUser";
 export * from "./IWithdrawal";
+export * from "./IEarning";
