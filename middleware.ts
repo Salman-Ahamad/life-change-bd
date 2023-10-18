@@ -6,24 +6,25 @@ export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     const userRole = request.nextauth.token?.role;
 
-    if (!userRole) {
-      return NextResponse.redirect(new URL("/", request.url));
-    } else if (
+    if (
       userRole === UserRole.active &&
       !request.nextUrl.pathname.startsWith("/active") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone")
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/active", request.url));
     } else if (
       userRole === UserRole.inactive &&
       !request.nextUrl.pathname.startsWith("/inactive") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone")
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/inactive", request.url));
     } else if (
       userRole === UserRole.admin &&
       !request.nextUrl.pathname.startsWith("/admin") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone")
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/admin", request.url));
     } else if (
@@ -32,9 +33,9 @@ export default withAuth(
         userRole === UserRole.gl ||
         userRole === UserRole.teacher) &&
       !request.nextUrl.pathname.startsWith("/subadmin") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone")
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
-      console.log("User Log from Middleware: ", userRole);
       return NextResponse.redirect(new URL("/subadmin", request.url));
     }
 

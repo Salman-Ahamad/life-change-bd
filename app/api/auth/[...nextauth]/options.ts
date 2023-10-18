@@ -70,8 +70,15 @@ export const options: NextAuthOptions = {
       if (account?.provider === "google") {
         // TODO: Need to update this rules for error handling
         const currentUser = await getCurrentUser();
-        const returnUrl =
-          currentUser?.role === UserRole.inactive ? "/inactive" : "/active";
+        const returnUrl = !currentUser
+          ? "/"
+          : currentUser?.role === "admin"
+          ? "/admin"
+          : currentUser?.role === "active"
+          ? "/active"
+          : currentUser?.role === "inactive"
+          ? "/inactive"
+          : "/subadmin";
 
         if (currentUser) {
           if (currentUser.email === profile?.email) {
@@ -87,7 +94,22 @@ export const options: NextAuthOptions = {
 
             return returnUrl;
           }
+        } else {
+          // // Check if there any user exist with the same email
+          // const checkUser = await User.findOne({ email: profile?.email }); // Problem with this line
+          // console.log("Checked User", checkUser);
+
+          // if (!checkUser) {
+          //   console.log("No User Found");
+          //   // TODO: Pass some error tooltip
+          //   return false;
+          // }
+
+          // If a user exist with the same email
+          // Need to authorize now to pass session and allow to update data
+          return true;
         }
+
         return returnUrl;
       }
       return true; // Do different verification for other providers that don't have `email_verified`

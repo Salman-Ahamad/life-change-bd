@@ -3,12 +3,13 @@
 import { banner3, bnsLogo } from "@/lib/assets";
 import {
   BackgroundImg,
+  Button,
   CommonText,
   Container,
   LinkButton,
   Title,
 } from "@/universal";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { FC } from "react";
 
@@ -52,7 +53,10 @@ export const Hero: FC = () => {
 
           <div className="flex justify-center lg:justify-start items-center gap-1.5 w-full">
             {sessions?.user ? (
-              <LinkButton href="/active">Dashboard</LinkButton>
+              <>
+                <LinkButton href="/active">Dashboard</LinkButton>
+                <Button onClick={() => signOut()}>SignOut</Button>
+              </>
             ) : (
               <>
                 <LinkButton href="/login">Login</LinkButton>
