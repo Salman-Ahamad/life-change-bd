@@ -1,9 +1,9 @@
 "use client";
 
 import { Header } from "@/components";
-import { createData, useCurrentUser } from "@/hooks";
-import { INavItem } from "@/interface";
-import { BackButton, Button, Container, Title } from "@/universal";
+import { createData, updateData, useCurrentUser, useGetData } from "@/hooks";
+import { IAppConfig, INavItem } from "@/interface";
+import { BackButton, Button, CommonText, Container, Title } from "@/universal";
 import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -24,6 +24,9 @@ const Withdrawal = () => {
   const [amount, setAmount] = useState(0);
   const [method, setMethod] = useState("");
   const [number, setNumber] = useState("");
+  const [config, setConfig] = useState<IAppConfig>();
+
+  useGetData("/config", setConfig, true);
 
   const handleWithdraw = () => {
     if (user) {
@@ -34,6 +37,14 @@ const Withdrawal = () => {
       } else {
         toast.error("Number must be 11 characters");
       }
+    }
+  };
+
+  const handleAddPending = () => {
+    if (user && user.balance >= 200) {
+      updateData("/user/withdrawal-fee", {});
+    } else {
+      toast.error("Below minimum balance 🤑200");
     }
   };
 
@@ -80,13 +91,30 @@ const Withdrawal = () => {
           </div>
           <Button
             variant="secondary"
-            className="py-[7px] lg:py-2.5 px-3 w-full"
             onClick={handleWithdraw}
+            disabled={!user?.settings.withdrawalFee}
+            className="py-[7px] lg:py-2.5 px-3 w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Save
+            withdraw
           </Button>
         </div>
       </Container>
+      {!user?.settings.withdrawalFee && (
+        <Container className="flex flex-col justify-center items-center gap-2.5 mt-5">
+          <CommonText className="text-center text-green-600">
+            Before withdraw, please <br />
+            pay pending fee &#2547;
+            {config?.withdrawalFee}
+          </CommonText>
+          <Button
+            variant="secondary"
+            className="px-10"
+            onClick={handleAddPending}
+          >
+            Accept
+          </Button>
+        </Container>
+      )}
     </>
   );
 };
