@@ -55,8 +55,8 @@ const Passbook = () => {
       ) : dataType === "debit" && passbookDebitData ? (
         <DataTable
           tableData={passbookDebitData}
-          tableHeaders={["no", "id", "amount", "method", "Number", "status"]}
-          dataProperties={["userId", "amount", "method", "number", "status"]}
+          tableHeaders={["no", "amount", "method", "Number", "status"]}
+          dataProperties={["amount", "method", "number", "status"]}
         />
       ) : (
         <Title variant="H3" className="text-center capitalize my-10">

@@ -14,7 +14,7 @@ export const GET = async () => {
 
     const result = await Withdrawal.find({ userId: user.id });
 
-    return ApiResponse(200, "Config get successfully 👌", result);
+    return ApiResponse(200, "Withdrawal data get successfully 👌", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
