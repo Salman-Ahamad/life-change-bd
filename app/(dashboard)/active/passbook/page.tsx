@@ -21,7 +21,7 @@ const navData: INavItem[] = [
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/?collectInactive=true", setPassbookData);
+  useGetData("/all-ref/?inactiveBonus=true", setPassbookData);
 
   return (
     <>

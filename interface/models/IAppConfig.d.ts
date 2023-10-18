@@ -4,6 +4,7 @@ export interface IAppConfigSchema {
   for: "admin";
   baseFee: number;
   sliderImage: string[];
+  withdrawalFee: number;
   support: {
     whatsApp: string;
     meeting: string;

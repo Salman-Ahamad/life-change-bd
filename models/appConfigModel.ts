@@ -12,6 +12,10 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       type: Number,
       default: 0,
     },
+    withdrawalFee: {
+      type: Number,
+      default: 0,
+    },
     sliderImage: {
       type: [String],
       default: [],

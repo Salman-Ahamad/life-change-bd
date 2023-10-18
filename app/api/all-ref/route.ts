@@ -11,7 +11,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const inactiveBonus = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -30,13 +30,13 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    let collectInactiveValue: boolean =
+    let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     const formattingDate = new Date(Number(date));
 
     let option = {};
     const inactiveBonusOption = {
-      "settings.collectInactive": collectInactiveValue,
+      "settings.inactiveBonus": inactiveBonusValue,
     };
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
