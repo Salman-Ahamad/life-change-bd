@@ -50,7 +50,7 @@ export const LoginForm = () => {
             if (session?.role === "inactive") {
               redirect("/inactive");
             } else {
-              redirect("/active/user");
+              redirect("/active");
             }
           } else {
             const error = JSON.parse(res.error);

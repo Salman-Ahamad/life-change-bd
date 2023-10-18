@@ -34,7 +34,7 @@ const Navbar: FC = () => {
       </Link>
 
       <div className="hidden lg:flex items-center gap-[100px] text-[30px] text-gray-500">
-        <Link href="/active/user" className="relative flex gap-4">
+        <Link href="/active" className="relative flex gap-4">
           <AiFillHome className="text-primary" />
         </Link>
       </div>

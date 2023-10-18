@@ -13,7 +13,7 @@ export default withAuth(
       request.nextUrl.pathname.startsWith("/inactive") &&
       request.nextauth.token?.role === UserRole.active
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/active/user`);
+      return NextResponse.redirect(`${process.env.BASE_URL}/active`);
     } else if (
       request.nextUrl.pathname.includes("/admin") &&
       request.nextauth.token?.role !== UserRole.admin

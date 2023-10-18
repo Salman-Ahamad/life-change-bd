@@ -14,7 +14,7 @@ import { BiEditAlt } from "react-icons/bi";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active",
   },
 ];
 

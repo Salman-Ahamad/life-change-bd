@@ -3,26 +3,18 @@
 import { Header } from "@/components";
 import { createData, updateData, useCurrentUser } from "@/hooks";
 import { INavItem } from "@/interface";
-import { Button, Container, Title } from "@/universal";
+import { BackButton, Button, Container, Title } from "@/universal";
 import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
-    link: "/active/user",
-  },
-  {
-    label: "Profile",
+    label: <BackButton className="text-2xl" />,
     link: "/active/user/profile",
   },
   {
-    label: "Courses",
-    link: "/active/courses",
-  },
-  {
-    label: "Reference",
-    link: "/active/ref-list",
+    label: <AiOutlineHome className="text-2xl" />,
+    link: "/active",
   },
 ];
 

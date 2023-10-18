@@ -6,32 +6,17 @@ import { BackButton, Button, Container } from "@/universal";
 import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import { AiOutlineHome } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active/user/profile",
   },
   {
-    label: "Edit Profile",
-    link: "/active/user/profile/edit",
-  },
-  {
-    label: "Change Password",
-    link: "/active/change-password",
-  },
-  {
-    label: "Passbook",
-    link: "/active/passbook",
-  },
-  {
-    label: "Withdrawal",
-    link: "/active/user/withdrawal",
-  },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
+    label: <AiOutlineHome className="text-2xl" />,
+    link: "/active",
   },
 ];
 

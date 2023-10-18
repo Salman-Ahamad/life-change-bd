@@ -71,9 +71,7 @@ export const options: NextAuthOptions = {
         // TODO: Need to update this rules for error handling
         const currentUser = await getCurrentUser();
         const returnUrl =
-          currentUser?.role === UserRole.inactive
-            ? "/inactive"
-            : "/active/user";
+          currentUser?.role === UserRole.inactive ? "/inactive" : "/active";
 
         if (currentUser) {
           if (currentUser.email === profile?.email) {

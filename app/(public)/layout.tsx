@@ -7,7 +7,7 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: "Home",
-    link: "/active/user",
+    link: "/active",
   },
   {
     label: "About",

@@ -52,7 +52,7 @@ export const Hero: FC = () => {
 
           <div className="flex justify-center lg:justify-start items-center gap-1.5 w-full">
             {sessions?.user ? (
-              <LinkButton href="/active/user">Dashboard</LinkButton>
+              <LinkButton href="/active">Dashboard</LinkButton>
             ) : (
               <>
                 <LinkButton href="/login">Login</LinkButton>

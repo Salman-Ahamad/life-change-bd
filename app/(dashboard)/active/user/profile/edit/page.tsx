@@ -10,11 +10,16 @@ import { BackButton, Button, Container } from "@/universal";
 import Image from "next/image";
 import { getFileUploader } from "@/utils/actions/getFileUploade";
 import { INavItem } from "@/interface";
+import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active/user/profile",
+  },
+  {
+    label: <AiOutlineHome className="text-2xl" />,
+    link: "/active",
   },
 ];
 

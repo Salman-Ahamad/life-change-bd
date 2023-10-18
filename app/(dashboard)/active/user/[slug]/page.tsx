@@ -14,7 +14,7 @@ import Image from "next/image";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active",
   },
 ];
 

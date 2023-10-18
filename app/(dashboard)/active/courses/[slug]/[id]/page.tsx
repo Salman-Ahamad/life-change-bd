@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active",
   },
 ];
 

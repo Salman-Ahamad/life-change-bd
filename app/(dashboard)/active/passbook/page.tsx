@@ -6,23 +6,16 @@ import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
 import { BackButton, Title } from "@/universal";
+import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
-  },
-  {
-    label: "Profile",
     link: "/active/user/profile",
   },
   {
-    label: "Courses",
-    link: "/active/courses",
-  },
-  {
-    label: "Reference",
-    link: "/active/ref-list",
+    label: <AiOutlineHome className="text-2xl" />,
+    link: "/active",
   },
 ];
 

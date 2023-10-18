@@ -54,7 +54,7 @@ const AdminLogin: FC = () => {
         .then((res) => {
           // if (!res?.error) {
           //   if (session?.role === role.toLowerCase()) {
-          //     redirect("/active/user");
+          //     redirect("/active");
           //   } else {
           //     signOut();
           //   }
@@ -75,11 +75,11 @@ const AdminLogin: FC = () => {
         console.log("Your role is no ", adminRole);
 
         // signOut();
-        // redirect("/active/user");
+        // redirect("/active");
       } else {
         console.log("Your role is ", adminRole);
 
-        redirect("/active/user");
+        redirect("/active");
       }
     }
   }, [session, adminRole]);
