@@ -1,8 +1,8 @@
+"use client";
+
 import { footerItems } from "@/lib";
-import { facebook, pinterest, twitter } from "@/lib/assets";
 import { Title } from "@/universal";
 import Image from "next/image";
-import Link from "next/link";
 
 export const Footer = () => (
   <footer className="bg-primary py-20 text-white">

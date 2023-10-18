@@ -9,9 +9,7 @@ connectDb();
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { slides } = await req.json();
-
-    console.log("Uploaded Image", slides);
+    const { url, index } = await req.json();
 
     // Get Current User
     const user = await getCurrentUser();
@@ -24,11 +22,23 @@ export const PATCH = async (req: NextRequest) => {
 
     const result = await AppConfig.updateOne(
       { for: UserRole.admin },
-      { sliderImage: slides },
+      {
+        $set: {
+          [`sliderImage.${index}`]: url,
+        },
+      },
       {
         new: true,
       }
     );
+
+    // const result = await AppConfig.updateOne(
+    //   { for: UserRole.admin },
+    //   { sliderImage: slides },
+    //   {
+    //     new: true,
+    //   }
+    // );
 
     // return ApiResponse(200, imageUrl);
     return ApiResponse(200, "Config update successfully 🛠️✅", result);

@@ -1,17 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { ActivePageCard, DataRow, MeetingLink } from ".";
+import { ActivePageCard, DataRow } from ".";
 import { useGetData } from "@/hooks";
-import { ICourse, ICourseData } from "@/interface";
+import { ICourse } from "@/interface";
 import { GoogleMeetLink } from "@/components";
 import { Title } from "@/universal";
 
 export const LiveLearningClass = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   useGetData("/courses", setCourses, true);
-
-  console.log(courses);
 
   return (
     <ActivePageCard title="">

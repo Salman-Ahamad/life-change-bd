@@ -12,7 +12,6 @@ export default async function getCurrentUser(): Promise<IUser | null> {
   const session = await getSession();
 
   if (!session?.user) {
-    console.error("Session user not found");
     return null;
   }
 

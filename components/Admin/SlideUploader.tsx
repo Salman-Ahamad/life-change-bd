@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
-import { Header } from "@/components";
+import React from "react";
 import { updateData } from "@/hooks";
 import { uploadImg } from "@/lib";
-import { Button, Container } from "@/universal";
 import Image from "next/image";
 import { getFileUploader } from "@/utils/actions/getFileUploade";
 
@@ -24,10 +21,10 @@ const SlideUploader: React.FC<{
     if (selectedFile) {
       const uploadedFile = await getFileUploader(selectedFile);
       if (uploadedFile) {
-        slides[slideNo] = uploadedFile;
-        updateData("/config/upload-slide", { slides }).then(() =>
-          window.location.reload()
-        );
+        updateData("/config/upload-slide", {
+          url: uploadedFile,
+          index: slideNo,
+        }).then(() => window.location.reload());
       }
     }
   };

@@ -51,7 +51,6 @@ export const ShareReferLink: FC<IWaShareLink> = ({
   userId,
 }) => {
   const handleSendWish = () => {
-    console.log("Send Share Clicked");
     const referalLink = `https://lifechangebd.com/signup?referral=${userId}`;
     openWhatsappChat(phoneNo, referalLink, groupLink);
   };

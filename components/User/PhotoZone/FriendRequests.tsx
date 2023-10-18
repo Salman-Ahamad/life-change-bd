@@ -1,10 +1,15 @@
+"use client";
+
+import Image from "next/image";
 import React from "react";
 
 const FriendRequests = () => {
   return (
     <div>
       <div className="flex gap-2 w-[100%]">
-        <img
+        <Image
+          width={50}
+          height={50}
           className="h-[50px] w-[50px] rounded-full object-cover"
           src="/elon_musk.jpg"
           alt="dp"

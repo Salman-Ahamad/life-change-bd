@@ -4,22 +4,58 @@ import { UserRole } from "./lib";
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
+    const userRole = request.nextauth.token?.role;
+
     if (
-      request.nextUrl.pathname.includes("/user") &&
-      request.nextauth.token?.role === UserRole.inactive
+      userRole === UserRole.active &&
+      !request.nextUrl.pathname.startsWith("/active") &&
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/inactive`);
+      return NextResponse.redirect(new URL("/active", request.url));
     } else if (
-      request.nextUrl.pathname.includes("/inactive") &&
-      request.nextauth.token?.role === UserRole.active
+      userRole === UserRole.inactive &&
+      !request.nextUrl.pathname.startsWith("/inactive") &&
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/user/active`);
+      return NextResponse.redirect(new URL("/inactive", request.url));
     } else if (
-      request.nextUrl.pathname.includes("/admin") &&
-      request.nextauth.token?.role !== UserRole.admin
+      userRole === UserRole.admin &&
+      !request.nextUrl.pathname.startsWith("/admin") &&
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
     ) {
-      return NextResponse.redirect(`${process.env.BASE_URL}/admin-login`);
+      return NextResponse.redirect(new URL("/admin", request.url));
+    } else if (
+      (userRole === UserRole.controller ||
+        userRole === UserRole.consultant ||
+        userRole === UserRole.gl ||
+        userRole === UserRole.teacher) &&
+      !request.nextUrl.pathname.startsWith("/subadmin") &&
+      !request.nextUrl.pathname.startsWith("/photo-zone") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password")
+    ) {
+      return NextResponse.redirect(new URL("/subadmin", request.url));
     }
+
+    // if (
+    //   request.nextUrl.pathname.startsWith("/active") &&
+    //   request.nextauth.token?.role === UserRole.inactive
+    // ) {
+    //   return NextResponse.redirect(new URL("/inactive", request.url));
+    //   // return NextResponse.redirect(`/inactive`);
+    // } else if (
+    //   request.nextUrl.pathname.startsWith("/inactive") &&
+    //   request.nextauth.token?.role === UserRole.active
+    // ) {
+    //   return NextResponse.redirect(`/active`);
+    // } else if (
+    //   request.nextUrl.pathname.startsWith("/admin") &&
+    //   request.nextauth.token?.role !== UserRole.admin
+    // ) {
+    //   return NextResponse.redirect(`/admin-login`);
+    // }
   },
   {
     callbacks: {
@@ -32,6 +68,18 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/active",
+    "/active/change-password",
+    "/active/courses",
+    "/active/my-ref",
+    "/active/passbook",
+    "/active/ref-list",
+    "/active/user",
+    "/active/user/[slug]",
+    "/active/user/profile",
+    "/active/user/profile/edit",
+    "/active/user/withdrawal",
+    "/active/photo-zone",
     "/admin",
     "/admin/action",
     "/admin/reports",
@@ -43,31 +91,10 @@ export const config = {
     "/adminuser-management/student",
     "/inactive",
     "/inactive/profile",
-    "/user/[slug]",
-    "/user/active",
-    "/user/active/profile",
-    "/user/active/profile/edit",
-    "/user/active/withdrawal",
-    "/user/change-password",
-    "/user/courses",
-    "/user/messages",
-    "/user/notification",
-    "/user/notification/memo",
-    "/user/passbook",
-    "/user/payment-method",
-    "/user/photo-zone",
-    "/user/photo-zone/profile",
-    "/user/photo-zone/user-profile/[slug]",
-    "/user/redeem-list",
-    "/user/ref-list",
-    "/user/ref-list/my-ref",
-    "/user/ref-list/send-wish",
-    "/user/settings",
-    "/user/settings/reports",
-    "/user/settings/students",
-    "/user/settings/team-management",
-    "/user/settings/user-management",
-    "/user/transfer-points",
-    "/user/video-zone",
+    "/photo-zone",
+    "/photo-zone/profile",
+    "/photo-zone/user-profile/[slug]",
+    "/subadmin",
+    "/forgot-password",
   ],
 };

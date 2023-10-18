@@ -3,32 +3,47 @@
 import { Form, Formik, FormikHelpers } from "formik";
 
 import { Input } from "@/components";
-import { IForgotPasswordValue } from "@/interface";
 import { forgotPasswordValidationSchema } from "@/lib/validation";
 import { Button, CTA } from "@/universal";
+import { IChangePasswordValue } from "@/interface";
+import { updateData } from "@/hooks";
+import { signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export const ForgotPasswordForm = () => {
-  const initialValues: IForgotPasswordValue = {
+  const [isChanged, setIsChanged] = useState<boolean>(false);
+  const initialValues: IChangePasswordValue = {
     newPassword: "",
     retypeNewPassword: "",
   };
 
   const handleSubmit = (
-    values: IForgotPasswordValue,
+    values: IChangePasswordValue,
     {
       resetForm,
       setFieldError,
       setSubmitting,
-    }: FormikHelpers<IForgotPasswordValue>
+    }: FormikHelpers<IChangePasswordValue>
   ) => {
     if (values.newPassword !== values.retypeNewPassword) {
       setFieldError("retypeNewPassword", "Password didn't match!");
       setSubmitting(false);
     } else {
-      console.log(values);
+      updateData("/auth/forgot-password", {
+        newPassword: values.newPassword,
+      }).then(() => {
+        setIsChanged(true);
+      });
+
       resetForm();
     }
   };
+
+  useEffect(() => {
+    if (isChanged) {
+      signOut();
+    }
+  }, [isChanged]);
 
   return (
     <Formik

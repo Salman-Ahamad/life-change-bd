@@ -4,11 +4,18 @@ import Image from "next/image";
 
 import { Header } from "@/components";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
-import { IAppConfig, IUser } from "@/interface";
-import { UserRole, avatarProfile, navData } from "@/lib";
-import { Button, CommonText } from "@/universal";
+import { IAppConfig, INavItem, IUser } from "@/interface";
+import { UserRole, avatarProfile } from "@/lib";
+import { BackButton, Button, CommonText } from "@/universal";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
+
+const navData: INavItem[] = [
+  {
+    label: <BackButton className="text-2xl" />,
+    link: "/active",
+  },
+];
 
 const Profile = () => {
   const [config, setConfig] = useState<IAppConfig>();
@@ -42,7 +49,7 @@ const Profile = () => {
 
   return (
     <main>
-      <Header navData={navData.profile} />
+      <Header navData={navData} />
 
       {user ? (
         <section className="flex flex-col justify-center items-center">

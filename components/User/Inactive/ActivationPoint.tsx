@@ -1,3 +1,5 @@
+"use client";
+
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { IAppConfig } from "@/interface";
 import { UserRole } from "@/lib";
