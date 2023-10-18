@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { BackButton, Title } from "@/universal";
+import { BackButton, Button, Title } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
+import { Axios, loadingToast } from "@/utils";
+import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -21,12 +23,43 @@ const navData: INavItem[] = [
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref/?collectInactive=true", setPassbookData);
+  const [dataType, setDataType] = useState<string>("credit");
+
+  // useGetData("/all-ref/?collectInactive=true", setPassbookData);
+
+  useEffect(() => {
+    const route =
+      dataType === "credit"
+        ? "/all-ref/?collectInactive=true"
+        : "/withdrawal/passbook";
+
+    const id = toast.loading("Loading...🔃");
+
+    Axios.get(route)
+      .then(({ data }) => {
+        setPassbookData(data.data);
+        if (data.data) id && loadingToast(id, data.message, "success");
+      })
+      .catch(({ response }) => {
+        setPassbookData(null);
+        id
+          ? loadingToast(id, response.data.message || "Error❌", "error")
+          : toast.error(response.data.message || "Error❌");
+      });
+  }, [dataType]);
 
   return (
     <>
       <Header navData={navData} />
       <PageHeader title="Passbook" notice="Last 3 Month Outbound" />
+      <div className="flex justify-center gap-4 py-6">
+        <Button onClick={() => setDataType("credit")} variant="secondary">
+          Credit History
+        </Button>
+        <Button onClick={() => setDataType("debit")} variant="secondary">
+          Debit History
+        </Button>
+      </div>
       {passbookData === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃
