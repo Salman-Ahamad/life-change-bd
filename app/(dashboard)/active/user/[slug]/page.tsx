@@ -25,12 +25,13 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
   const [userData, setUserData] = useState<IUser>();
-  const [diopsideAmount, setDipositeAmount] = useState<number>(0);
+  const [diopsideAmount, setDepositAmount] = useState<number>(0);
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
-  const user = useCurrentUser();
-  useGetData(`/active/user/${slug}`, setUserData);
+
+  const user = useCurrentUser(true);
+  useGetData(`/user/${slug}`, setUserData);
 
   const admin = [
     UserRole.controller,
@@ -155,8 +156,8 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               user?.role !== UserRole.admin &&
               user?.role !== UserRole.controller
             }
-            label="Role:"
             name="role"
+            label="Role:"
             selectOption={selectOption}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>
@@ -244,7 +245,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             label="Deposit:"
             name="deposit"
             defaultValue=""
-            onChange={(value) => setDipositeAmount(value)}
+            onChange={(value) => setDepositAmount(value)}
           />
           <Button
             variant="secondary"

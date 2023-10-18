@@ -90,7 +90,7 @@ const Profile = () => {
               {tableTitle.map((item, i) => (
                 <CommonText
                   key={i}
-                  className={`text-start w-full px-2 py-1.5 capitalize ${
+                  className={`text-start w-full px-2 py-1.5 ${
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >

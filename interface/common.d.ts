@@ -182,10 +182,13 @@ export interface IGoogleMeetDeepLink extends IChildren {
 }
 
 export interface ProfileInputProps {
-  label: string;
   name: string;
-  defaultValue: string;
-  onChange: (value: any) => void;
-  selectOption?: string[];
+  label: string;
   onlyText?: boolean;
+  isActive?: boolean;
+  defaultValue: string;
+  selectOption?: string[];
+  onChange: (value: any) => void;
+  setFieldValue?: Dispatch<SetStateAction<string>>;
+  addActiveBonus?: () => void;
 }

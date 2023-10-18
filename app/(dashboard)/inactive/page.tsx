@@ -28,7 +28,7 @@ const navData: INavItem[] = [
 ];
 
 const Inactive = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <>

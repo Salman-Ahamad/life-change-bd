@@ -19,15 +19,34 @@ const navData: INavItem[] = [
 ];
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
-  const { slug } = params;
+  const id = params.slug;
 
   const [userData, setUserData] = useState<IUser>();
-  const [diopsideAmount, setDipositeAmount] = useState<number>(0);
+  useGetData(`/user/${id}`, setUserData);
+
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
+  const [depositAmount, setDepositAmount] = useState<number>(0);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
-  const user = useCurrentUser();
-  useGetData(`/user/${slug}`, setUserData);
+  const [selectFieldValue, setSelectFieldValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
+
+  const user = useCurrentUser(true);
+
+  useEffect(() => {
+    if (userData && userData.reference !== "-") {
+      if (selectFieldValue) {
+        const active =
+          selectFieldValue === UserRole.active &&
+          !userData.settings.activeBonus;
+        setIsActive(active);
+      } else if (selectFieldValue.length === 0) {
+        const active =
+          userData.role === UserRole.active && !userData.settings.activeBonus;
+        setIsActive(active);
+      }
+    }
+  }, [userData, selectFieldValue]);
 
   const admin = [
     UserRole.controller,
@@ -51,15 +70,23 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     (user?.role === UserRole.controller && controller) ||
     (user?.role === UserRole.consultant && consultant) ||
     [];
-
   useEffect(() => userData && setDisabled(false), [userData]);
-  const updateProfile = () => updateData(`/user/${slug}`, updatedData);
+
+  const addActiveBonus = () => {
+    if (userData?.reference && userData?.reference !== "-") {
+      updateData(`/user/active-bonus`, {
+        refId: userData.reference,
+        userId: userData.id,
+      }).then(() => setIsActive(false));
+    }
+  };
+  const updateProfile = () => updateData(`/user/${id}`, updatedData, true);
 
   const depositMoney = () => {
-    if (user && diopsideAmount > 0) {
+    if (user && depositAmount > 0) {
       updateData(`/user/deposit/`, {
-        id: slug,
-        diopsideAmount: Number(diopsideAmount),
+        id: id,
+        diopsideAmount: Number(depositAmount),
       });
     }
   };
@@ -152,9 +179,12 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               user?.role !== UserRole.admin &&
               user?.role !== UserRole.controller
             }
-            label="Role:"
             name="role"
+            label="Role:"
+            isActive={isActive}
             selectOption={selectOption}
+            addActiveBonus={addActiveBonus}
+            setFieldValue={setSelectFieldValue}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>
               setUpdatedData((prev) => ({ ...prev, role: value }))
@@ -241,7 +271,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             label="Deposit:"
             name="deposit"
             defaultValue=""
-            onChange={(value) => setDipositeAmount(value)}
+            onChange={(value) => setDepositAmount(value)}
           />
           <Button
             variant="secondary"
