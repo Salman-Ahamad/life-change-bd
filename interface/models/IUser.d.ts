@@ -12,20 +12,18 @@ export type IUserRole =
 
 export interface ISettingsSchema {
   activeNotice: boolean;
-  collectInactive: boolean;
+  inactiveBonus: boolean;
   activeBonus: boolean;
+  withdrawalFee: boolean;
+  sendWish: boolean;
   admin: Types.ObjectId;
   consultant: Types.ObjectId;
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
-  sendWish: boolean;
 }
 
-export interface ISettings {
-  activeNotice: boolean;
-  collectInactive: boolean;
-  activeBonus: boolean;
+export interface ISettings extends ISettingsSchema {
   admin: IUSer;
   consultant: IUSer;
   controller: IUSer;
@@ -74,5 +72,5 @@ export interface IUser extends IUserSchema, IId {
     | {
         userId: string;
       }
-    | "-";
+    | string;
 }

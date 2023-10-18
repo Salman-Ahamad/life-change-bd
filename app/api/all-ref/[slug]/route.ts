@@ -12,7 +12,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const collectInactive = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -31,12 +31,12 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    let collectInactiveValue: boolean =
-      collectInactive && JSON.parse(collectInactive.toLowerCase());
+    let inactiveBonusValue: boolean =
+      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
 
-    const collectInactiveOption = {
+    const inactiveBonusOption = {
       role: UserRole.active,
-      "settings.collectInactive": collectInactiveValue,
+      "settings.inactiveBonus": inactiveBonusValue,
     };
     const formattingDate = new Date(Number(date));
     const dateFilter = {
@@ -72,7 +72,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       (user.role === UserRole.consultant && consultant) ||
       (user.role === UserRole.teacher && teacher) ||
       (user.role === UserRole.gl && gl) ||
-      (collectInactive && collectInactiveOption) ||
+      (inactiveBonus && inactiveBonusOption) ||
       (date && dateFilter) ||
       (id && filterById) ||
       {};
@@ -106,10 +106,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
 
     if (refList.length <= inactiveLimit) {
       await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
-      await User.updateOne(
-        { userId: id },
-        { "settings.collectInactive": true }
-      );
+      await User.updateOne({ userId: id }, { "settings.inactiveBonus": true });
 
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
@@ -121,7 +118,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
         await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
         await User.updateOne(
           { userId: id },
-          { "settings.collectInactive": true }
+          { "settings.inactiveBonus": true }
         );
         return ApiResponse(200, "Collect Money successfully ✅", {});
       } else {

@@ -26,7 +26,7 @@ const Passbook = () => {
   >(null);
   const [dataType, setDataType] = useState<string>("credit");
 
-  useGetData("/all-ref/?collectInactive=true", setPassbookData);
+  useGetData("/all-ref/?inactiveBonus=true", setPassbookData);
   // useGetData("/passbook/credit", setPassbookData);
   useGetData("/passbook/debit", setPassbookDebitData);
 
