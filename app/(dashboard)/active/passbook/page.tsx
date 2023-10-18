@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { useGetData } from "@/hooks";
-import { INavItem, IUser } from "@/interface";
+import { INavItem, IUser, IWithdrawal } from "@/interface";
 import { BackButton, Button, Title } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -21,9 +21,9 @@ const navData: INavItem[] = [
 
 const Passbook = () => {
   const [passbookData, setPassbookData] = useState<IUser[] | null>(null);
-  const [passbookDebitData, setPassbookDebitData] = useState<IUser[] | null>(
-    null
-  );
+  const [passbookDebitData, setPassbookDebitData] = useState<
+    IWithdrawal[] | null
+  >(null);
   const [dataType, setDataType] = useState<string>("credit");
 
   useGetData("/all-ref/?collectInactive=true", setPassbookData);
@@ -48,16 +48,15 @@ const Passbook = () => {
       ) : dataType === "credit" && passbookData?.length !== 0 ? (
         <DataTable
           tableData={passbookData}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          tableHeaders={["Date", "id", "Name", "Joining Time"]}
+          dataProperties={["createdAt", "firstName", "createdAt", "phone"]}
           message="Message"
         />
-      ) : dataType === "debit" && passbookDebitData?.length !== 0 ? (
+      ) : dataType === "debit" && passbookDebitData ? (
         <DataTable
           tableData={passbookDebitData}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
-          message="Message"
+          tableHeaders={["no", "id", "amount", "method", "Number", "status"]}
+          dataProperties={["userId", "amount", "method", "number", "status"]}
         />
       ) : (
         <Title variant="H3" className="text-center capitalize my-10">
