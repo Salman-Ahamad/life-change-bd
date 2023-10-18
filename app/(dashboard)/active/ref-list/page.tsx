@@ -12,6 +12,10 @@ const navData: INavItem[] = [
     label: <BackButton className="text-2xl" />,
     link: "/active",
   },
+  {
+    label: "My Reference",
+    link: "/active/ref-list/my-ref",
+  },
 ];
 
 const RefList: NextPage = () => {
