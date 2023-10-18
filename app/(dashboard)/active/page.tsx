@@ -47,7 +47,7 @@ const Active = () => {
   const user = useCurrentUser();
   useGetData("/config", setConfig);
 
-  useGetData("/config", setConfig);
+  console.log({ config });
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
@@ -88,7 +88,7 @@ const Active = () => {
             <MeetingLink meetId={config.support.meeting} />
           </div>
         )}
-        {config && <SupportTeam support={config.whatsAppMessage} />}
+        {config && <SupportTeam support={config.support.whatsApp} />}
       </Container>
 
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">

@@ -29,10 +29,6 @@ const navData: INavItem[] = [
     label: "Withdrawal",
     link: "/active/user/withdrawal",
   },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
-  },
 ];
 
 const Profile = () => {
