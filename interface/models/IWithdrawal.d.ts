@@ -6,6 +6,7 @@ export type IMethod = "bKash" | "Nagad" | "Rocket";
 export interface IWithdrawalSchema {
   userId: string;
   amount: number;
+  number: string;
   method: IMethod;
   status: IStatus;
 }

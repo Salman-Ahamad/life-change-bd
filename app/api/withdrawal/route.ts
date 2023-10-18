@@ -9,7 +9,7 @@ connectDb();
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { amount, method } = await req.json();
+    const withdrawalData = await req.json();
     // Get Current User
     const user = await getCurrentUser();
 
@@ -17,9 +17,8 @@ export const POST = async (req: NextRequest) => {
       return ApiResponse(404, "User not found❗");
     }
     const option = {
-      amount,
-      method,
       userId: user.id,
+      ...withdrawalData,
     };
     const result = await Withdrawal.create(option);
 

@@ -10,11 +10,12 @@ const Withdrawal = () => {
   const user = useCurrentUser();
   const [amount, setAmount] = useState(0);
   const [method, setMethod] = useState("");
+  const [number, setNumber] = useState("");
 
   const handleWithdraw = () => {
     if (user) {
       updateData("/user", { balance: user.balance - amount }, true).then(() =>
-        createData(`/withdrawal`, { amount, method })
+        createData(`/withdrawal`, { amount, method, number })
       );
     }
   };
@@ -35,6 +36,7 @@ const Withdrawal = () => {
               className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
             />
           </div>
+
           <div className="flex flex-col justify-center items-start mt-2.5">
             <label className="pl-1.5">Method </label>
 
@@ -49,6 +51,15 @@ const Withdrawal = () => {
               <option value="Nagad">Nagad</option>
               <option value="Rocket">Rocket</option>
             </select>
+          </div>
+
+          <div>
+            <label className="pl-1.5">Number</label>
+            <input
+              type="text"
+              onChange={(e) => setNumber(e.target.value)}
+              className="outline-none text-black text-base md:text-lg w-full max-w-xs border border-primary rounded-[5px] py-1 px-2"
+            />
           </div>
         </div>
         <Button

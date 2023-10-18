@@ -19,21 +19,9 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
-  const [selectFieldValue, setSelectFieldValue] = useState("");
-  const [isActive, setIsActive] = useState(false);
 
   const user = useCurrentUser(true);
   useGetData(`/user/${slug}`, setUserData);
-
-  useEffect(() => {
-    if (userData) {
-      // const active =
-      //   (userData.role === UserRole.active ||
-      //     selectFieldValue === UserRole.active) &&
-      //   !userData.settings.activeBonus;
-      // setIsActive(active);
-    }
-  }, [userData, selectFieldValue]);
 
   const admin = [
     UserRole.controller,
