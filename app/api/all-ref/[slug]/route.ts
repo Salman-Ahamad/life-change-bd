@@ -99,7 +99,6 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    const user = await User.findOne({ userId: id });
     const refList = await AllRefer.find({ referredId: logInUser.id })
       .populate("referUser")
       .sort({ createdAt: -1 })
