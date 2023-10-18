@@ -11,7 +11,7 @@ import { useCurrentUser } from "@/hooks";
 const Story: React.FC<{ recentStory: IPostWithAuthor[] }> = ({
   recentStory,
 }) => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (

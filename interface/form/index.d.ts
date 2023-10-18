@@ -20,7 +20,7 @@ export interface ISubAdminLoginFormValue extends ILoginFormValue {
   role: string;
 }
 
-export interface IForgotPasswordValue {
+export interface IChangePasswordValue {
   newPassword: string;
   retypeNewPassword: string;
 }

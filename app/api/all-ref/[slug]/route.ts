@@ -12,7 +12,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const collectInactive = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -31,12 +31,12 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    let collectInactiveValue: boolean =
-      collectInactive && JSON.parse(collectInactive.toLowerCase());
+    let inactiveBonusValue: boolean =
+      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
 
-    const collectInactiveOption = {
+    const inactiveBonusOption = {
       role: UserRole.active,
-      "settings.collectInactive": collectInactiveValue,
+      "settings.inactiveBonus": inactiveBonusValue,
     };
     const formattingDate = new Date(Number(date));
     const dateFilter = {
@@ -72,7 +72,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       (user.role === UserRole.consultant && consultant) ||
       (user.role === UserRole.teacher && teacher) ||
       (user.role === UserRole.gl && gl) ||
-      (collectInactive && collectInactiveOption) ||
+      (inactiveBonus && inactiveBonusOption) ||
       (date && dateFilter) ||
       (id && filterById) ||
       {};
@@ -82,7 +82,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "User get successfully 👌", refList);
+    return ApiResponse(200, "Regerance list get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
@@ -99,15 +99,14 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    const user = await User.findOne({ _id: logInUser.id });
     const refList = await AllRefer.find({ referredId: logInUser.id })
       .populate("referUser")
       .sort({ createdAt: -1 })
       .limit(inactiveLimit + 1);
 
     if (refList.length <= inactiveLimit) {
-      await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });
-      await User.updateOne({ _id: id }, { "settings.collectInactive": true });
+      await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
+      await User.updateOne({ userId: id }, { "settings.inactiveBonus": true });
 
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
@@ -116,11 +115,11 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       );
 
       if (active) {
+        await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
         await User.updateOne(
-          { _id: logInUser.id },
-          { balance: user.balance++ }
+          { userId: id },
+          { "settings.inactiveBonus": true }
         );
-        await User.updateOne({ _id: id }, { "settings.collectInactive": true });
         return ApiResponse(200, "Collect Money successfully ✅", {});
       } else {
         return ApiResponse(

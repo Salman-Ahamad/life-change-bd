@@ -2,14 +2,10 @@
 
 import { useCurrentUser } from "@/hooks";
 import { Title } from "@/universal";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect } from "react";
 
 const ProfileDetails = () => {
-  const user = useCurrentUser();
-
-  // useEffect(() => {}, []);
+  const user = useCurrentUser(true);
 
   return (
     <div className="px-4 bg-white rounded-[17px] shadow-md mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">

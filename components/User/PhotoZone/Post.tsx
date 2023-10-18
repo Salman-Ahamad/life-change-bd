@@ -1,6 +1,6 @@
 "use client";
 
-import { updateData, useCurrentUser } from "@/hooks";
+import { useCurrentUser } from "@/hooks";
 import { IPostWithAuthor } from "@/interface";
 import { Types } from "mongoose";
 import Image from "next/image";
@@ -8,17 +8,15 @@ import { useEffect, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
-// import { MdOutlineClose } from "react-icons/md";
 
-const Post = ({ data }: { data: IPostWithAuthor }) => {
+const Post = ({ data, userId }: { userId: string; data: IPostWithAuthor }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const user = useCurrentUser();
 
   useEffect(() => {
-    if (user?.id && data.likes) {
-      // Convert user.id to ObjectId
-      const userObjectId: Types.ObjectId = new Types.ObjectId(user.id);
-      // const checkIsLiked = data.likes?.includes(new Types.ObjectId(user.id));
+    if (userId && data.likes) {
+      // Convert userId to ObjectId
+      const userObjectId: Types.ObjectId = new Types.ObjectId(userId);
+      // const checkIsLiked = data.likes?.includes(new Types.ObjectId(userId));
       const index = data.likes.findIndex((like) => like === userObjectId);
 
       if (index === -1) {
@@ -27,14 +25,14 @@ const Post = ({ data }: { data: IPostWithAuthor }) => {
         setIsLiked(true);
       }
     }
-  }, [user, data.likes]);
+  }, [userId, data.likes]);
 
   const handleLike = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (user && data.likes) {
+    if (userId && data.likes) {
       // Convert user.id to ObjectId
-      const userObjectId: Types.ObjectId = new Types.ObjectId(user.id);
+      const userObjectId: Types.ObjectId = new Types.ObjectId(userId);
       // const checkIsLiked = data.likes?.includes(new Types.ObjectId(user.id));
       const index = data.likes.findIndex((like) => like === userObjectId);
 

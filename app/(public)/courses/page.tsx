@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const Courses = () => {
   const [courses, setCourses] = useState<ICourse[] | null>(null);
-  useGetData("/courses", setCourses);
+  useGetData("/courses", setCourses, true);
 
   return (
     <section className="py-12">

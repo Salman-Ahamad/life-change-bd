@@ -6,6 +6,7 @@ import {
   IChildrenWithClassName,
   IClassName,
   IUser,
+  IWithdrawal,
 } from ".";
 
 export type IColor =
@@ -64,24 +65,24 @@ export interface INav {
 }
 
 export interface INavData {
-  common: INavItem[];
-  inActive: INavItem[];
-  active: INavItem[];
-  profile: INavItem[];
-  withdrawal: INavItem[];
-  courses: INavItem[];
+  common?: INavItem[];
+  inActive?: INavItem[];
+  active?: INavItem[];
+  profile?: INavItem[];
+  withdrawal?: INavItem[];
+  courses?: INavItem[];
   messages?: INavItem[];
   notification?: INavItem[];
   memo?: INavItem[];
-  passbook: INavItem[];
+  passbook?: INavItem[];
   paymentMethod?: INavItem[];
-  redeemList: INavItem[];
-  refList: INavItem[];
-  myRef: INavItem[];
-  sendWish: INavItem[];
-  transferPoints: INavItem[];
-  profileEdit: INavItem[];
-  settings: INavItem[];
+  redeemList?: INavItem[];
+  refList?: INavItem[];
+  myRef?: INavItem[];
+  sendWish?: INavItem[];
+  transferPoints?: INavItem[];
+  profileEdit?: INavItem[];
+  settings?: INavItem[];
 }
 
 export interface IInput extends IClassName {
@@ -139,7 +140,7 @@ export interface ITbody extends ITHeader {
 export interface IRefTable {
   tableHeaders: string[];
   dataProperties: string[];
-  tableData: IUser[];
+  tableData: any[];
   message?: string;
   actionBtn?: JSX.Element;
   setActionId?: (id: string) => void;
@@ -190,4 +191,5 @@ export interface ProfileInputProps {
   selectOption?: string[];
   onChange: (value: any) => void;
   setFieldValue?: Dispatch<SetStateAction<string>>;
+  addActiveBonus?: () => void;
 }

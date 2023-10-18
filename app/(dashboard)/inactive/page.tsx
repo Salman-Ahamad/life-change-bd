@@ -9,14 +9,30 @@ import {
   Support,
 } from "@/components/User/Inactive";
 import { useCurrentUser } from "@/hooks";
-import { navData } from "@/lib/data";
+import { INavItem } from "@/interface";
+import { AiOutlineHome } from "react-icons/ai";
+
+const navData: INavItem[] = [
+  {
+    label: <AiOutlineHome className="text-2xl" />,
+    link: "/active",
+  },
+  {
+    label: "Profile",
+    link: "/inactive/profile",
+  },
+  {
+    label: "Photo Zone",
+    link: "/photo-zone",
+  },
+];
 
 const Inactive = () => {
   const user = useCurrentUser(true);
 
   return (
     <>
-      <Header navData={navData.inActive} />
+      <Header navData={navData} />
       {user && !user.isVerified && (
         <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
       )}

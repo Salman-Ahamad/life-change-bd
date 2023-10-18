@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { RiVideoAddFill } from "react-icons/ri";
 import { BiSearch, BiEdit } from "react-icons/bi";

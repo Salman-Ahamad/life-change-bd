@@ -11,7 +11,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const inactiveBonus = nextUrl.searchParams.get("collectInactive");
+    const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
     const user = await getCurrentUser();
@@ -30,18 +30,18 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    let collectInactiveValue: boolean =
+    let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     const formattingDate = new Date(Number(date));
 
     let option = {};
     const inactiveBonusOption = {
-      "settings.collectInactive": collectInactiveValue,
+      "settings.inactiveBonus": inactiveBonusValue,
     };
-    const optionFn = (option: object) => {
+    const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = { createdAt: { $gte: formattingDate } };
-      const active = { role: UserRole.active };
+      const active = activeId ? { role: UserRole.active } : {};
       return (
         (id && { ...idFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
@@ -56,7 +56,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     switch (user.role) {
       case UserRole.admin:
         const admin = { "settings.admin": user.id };
-        option = optionFn(admin);
+        option = optionFn(admin, false);
         break;
       case UserRole.controller:
         const controller = {
@@ -98,7 +98,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "User get successfully 👌", refList);
+    return ApiResponse(200, "Referance List get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

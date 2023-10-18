@@ -76,10 +76,6 @@ const userSchema = new Schema<IUserSchema>(
       default: false,
     },
     settings: {
-      activeNotice: {
-        type: Boolean,
-        default: true,
-      },
       admin: {
         type: Schema.Types.ObjectId,
         ref: "users",
@@ -101,11 +97,19 @@ const userSchema = new Schema<IUserSchema>(
         type: Schema.Types.ObjectId,
         ref: "users",
       },
-      collectInactive: {
+      activeNotice: {
+        type: Boolean,
+        default: true,
+      },
+      inactiveBonus: {
         type: Boolean,
         default: false,
       },
-      activeBonos: {
+      activeBonus: {
+        type: Boolean,
+        default: false,
+      },
+      withdrawalFee: {
         type: Boolean,
         default: false,
       },

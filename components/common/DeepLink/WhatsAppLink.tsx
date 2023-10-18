@@ -5,7 +5,7 @@ import { ISendWish, IWaDeepLink, IWaShareLink } from "@/interface";
 import { Button } from "@/universal";
 import { openWhatsappChat } from "@/utils";
 import { FC } from "react";
-import { RiShareForwardBoxFill } from "react-icons/ri";
+import { FaShareSquare } from "react-icons/fa";
 
 export const WhatsAppLink: FC<IWaDeepLink> = ({
   phoneNo,
@@ -51,7 +51,6 @@ export const ShareReferLink: FC<IWaShareLink> = ({
   userId,
 }) => {
   const handleSendWish = () => {
-    console.log("Send Share Clicked");
     const referalLink = `https://lifechangebd.com/signup?referral=${userId}`;
     openWhatsappChat(phoneNo, referalLink, groupLink);
   };
@@ -61,8 +60,8 @@ export const ShareReferLink: FC<IWaShareLink> = ({
       onClick={handleSendWish}
       className="flex gap-2 items-center"
     >
-      <RiShareForwardBoxFill className="w-6 h-6" />
       {btnText}
+      <FaShareSquare className="" />
     </Button>
   );
 };

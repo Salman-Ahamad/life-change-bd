@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -8,7 +8,7 @@ import { FC, useEffect } from "react";
 
 import { LoginForm } from "@/components";
 import { UserRole, loginBanner } from "@/lib";
-import { CommonText } from "@/universal";
+import { Button, CommonText } from "@/universal";
 
 const Login: FC = () => {
   const { data: session } = useSession();
@@ -16,8 +16,8 @@ const Login: FC = () => {
   useEffect(() => {
     if (session?.user) {
       if (session.user.role === UserRole.inactive) redirect("/inactive");
-      if (session.user.role === UserRole.active) redirect("/user/active");
-      if (session.user.role === UserRole.admin) signOut();
+      if (session.user.role === UserRole.active) redirect("/active");
+      if (session.user.role === UserRole.admin) signOut(); //TODO: Add toast
       if (session.user.role === UserRole.consultant) signOut();
       if (session.user.role === UserRole.controller) signOut();
       if (session.user.role === UserRole.gl) signOut();
@@ -30,11 +30,12 @@ const Login: FC = () => {
       <section className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
         <LoginForm />
 
-        <Link href="/forgot-password">
-          <CommonText className="mt-2.5 text-orange-400">
-            Forgot password?
-          </CommonText>
-        </Link>
+        <p
+          onClick={() => signIn("google", { callbackUrl: "/forgot-password" })}
+          className="mt-2.5 text-orange-400 cursor-pointer w-40"
+        >
+          Forgot password?
+        </p>
 
         <CommonText className="text-center mt-5">
           Don&rsquo;t have an account?&nbsp;

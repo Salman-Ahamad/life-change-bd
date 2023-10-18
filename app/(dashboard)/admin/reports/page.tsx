@@ -11,15 +11,15 @@ import { useState } from "react";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active/user",
+    link: "/active",
   },
 ];
 
 const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref?collectInactive=true", setData);
+  useGetData("/all-ref?inactiveBonus=true", setData);
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   // TODO: Change the approach
   if (user?.role === UserRole.inactive) {

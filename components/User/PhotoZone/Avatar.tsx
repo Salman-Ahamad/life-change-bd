@@ -1,5 +1,6 @@
-import Image from "next/image";
+"use client";
 
+import Image from "next/image";
 import { FC } from "react";
 
 export interface IAvatar {

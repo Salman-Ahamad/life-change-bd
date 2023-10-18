@@ -38,7 +38,7 @@ export const GET = async () => {
       .select({ phone: 1 })
       .exec();
 
-    return ApiResponse(200, "User get successfully 👌", {
+    return ApiResponse(200, "Sub-admin get successfully 👌", {
       consultant,
       gl,
     });

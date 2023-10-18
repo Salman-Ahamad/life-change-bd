@@ -21,9 +21,10 @@ export const ChangeSupportLink: FC = () => {
           <Button
             variant="secondary"
             className="py-[7px] lg:py-2.5 px-3"
-            onClick={() =>
-              updateData("/config", { "support.meeting": meetingLink }, true)
-            }
+            onClick={() => {
+              updateData("/config", { "support.meeting": meetingLink }, true);
+              setMeetingSupportLink("");
+            }}
           >
             Save
           </Button>

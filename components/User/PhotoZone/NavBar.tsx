@@ -2,18 +2,18 @@
 
 import { useCurrentUser } from "@/hooks";
 import { Button } from "@/universal";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import { AiFillHome, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar: FC = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   return (
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">
-      <Link href="/user/photo-zone/profile" className="flex items-center gap-2">
+      <Link href="/photo-zone/profile" className="flex items-center gap-2">
         <Image
           src={user?.image || ""}
           width={40}
@@ -34,7 +34,7 @@ const Navbar: FC = () => {
       </Link>
 
       <div className="hidden lg:flex items-center gap-[100px] text-[30px] text-gray-500">
-        <Link href="/user/active" className="relative flex gap-4">
+        <Link href="/active" className="relative flex gap-4">
           <AiFillHome className="text-primary" />
         </Link>
       </div>

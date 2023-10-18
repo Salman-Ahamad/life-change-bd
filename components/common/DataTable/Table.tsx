@@ -1,6 +1,6 @@
 "use client";
 
-import { ICourse, IRefTable, IUser } from "@/interface";
+import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 
@@ -92,29 +92,6 @@ Lifechange Bd e-learning platform
                               <WhatsAppLink
                                 btnText={message || "Message"}
                                 phoneNo={referUser[item]}
-                                message={`
-
-Hi...${referUser.firstName} ${referUser.lastName}
-
-আপনার স্টুডেন্ট আইডি:${referUser.id}
-
-আমি কনসালটেন্ট মিটিং এর জন্য আপনার আবেদনপত্র পেয়েছি
-
-আমি আপনাকে ফ্রিতে বিস্তারিত জানিয়ে দিবো।এবং আরো কাজের বিষয়ে জানার জন্য আপনাকে একটা কনসালটেন্ট মিটিং এ জইন করতে হবে।
-
-              বাংলাদেশ মিটিং সময়
-
-              11:00am       2:30pm
-              5:00pm        7:00pm
-              9:00pm
-
-উপরের সময় গুলো থেকে আপনার ফ্রি সময় টা বলুন যে সময় আপনি মিটিং এ জইন করতে পারবেন।
-
-আমি আপনার কনসালটেন্ট
-From
-Lifechange Bd e-learning platform
-                              
-                              `}
                               />
                             )
                           }
@@ -133,7 +110,7 @@ Lifechange Bd e-learning platform
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.id)}
+                    onClick={() => handleAction(referUser.userId)}
                   >
                     {actionBtn}
                   </td>

@@ -10,7 +10,7 @@ const ProfileFeed: React.FC = () => {
   const [posts, setPosts] = useState<IPostWithAuthor[]>([]);
   const [myPosts, setMyPosts] = useState<IPostWithAuthor[]>([]);
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
   useGetData("/photo-zone/post", setPosts);
 
   useEffect(() => {
@@ -25,7 +25,11 @@ const ProfileFeed: React.FC = () => {
   return (
     <div className="mx-auto mt-4 max-w-[600px] 2xl:max-w-[800px] mb-10">
       <WhatsOnYourMind />
-      {myPosts && myPosts.map((post, idx) => <Post key={idx} data={post} />)}
+      {myPosts &&
+        user &&
+        myPosts.map((post, idx) => (
+          <Post key={idx} data={post} userId={user?.id} />
+        ))}
     </div>
   );
 };

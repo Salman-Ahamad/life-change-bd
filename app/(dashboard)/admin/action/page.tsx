@@ -3,10 +3,8 @@
 import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { UserRole } from "@/lib";
 import { Button, Title } from "@/universal";
 import { Types } from "mongoose";
-import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -30,7 +28,7 @@ const adminNav: INavItem[] = [
   },
   {
     label: "Student",
-    link: "/admin/student",
+    link: "/admin/settings",
   },
 ];
 
@@ -38,14 +36,7 @@ const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData);
 
-  const user = useCurrentUser();
-
-  // TODO: Change the approach
-  if (user?.role === UserRole.inactive) {
-    redirect("/inactive");
-  } else if (user?.role === UserRole.active) {
-    redirect("/active/user");
-  }
+  const user = useCurrentUser(true);
 
   const handleAction = (id: string) => {
     if (Types.ObjectId.isValid(id)) {

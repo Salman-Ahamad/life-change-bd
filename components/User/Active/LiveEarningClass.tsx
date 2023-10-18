@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/universal";
 import React from "react";
 import { ActivePageCard, DataRow } from ".";
 
