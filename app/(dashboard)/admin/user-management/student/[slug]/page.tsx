@@ -31,12 +31,14 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [selectFieldValue, setSelectFieldValue] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  const user = useCurrentUser();
+  const user = useCurrentUser(true);
 
   useEffect(() => {
-    if (userData) {
+    if (userData && userData.reference !== "-") {
       if (selectFieldValue) {
-        const active = selectFieldValue === UserRole.active;
+        const active =
+          selectFieldValue === UserRole.active &&
+          !userData.settings.activeBonus;
         setIsActive(active);
       } else if (selectFieldValue.length === 0) {
         const active =
@@ -68,10 +70,16 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     (user?.role === UserRole.controller && controller) ||
     (user?.role === UserRole.consultant && consultant) ||
     [];
-
   useEffect(() => userData && setDisabled(false), [userData]);
-  const sendActiveBonus = {};
-  const addActiveBonus = () => updateData(`/user/${id}`, updatedData, true);
+
+  const addActiveBonus = () => {
+    if (userData?.reference && userData?.reference !== "-") {
+      updateData(`/user/active-bonus`, {
+        refId: userData.reference,
+        userId: userData.id,
+      }).then(() => setIsActive(false));
+    }
+  };
   const updateProfile = () => updateData(`/user/${id}`, updatedData, true);
 
   const depositMoney = () => {
@@ -171,10 +179,11 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               user?.role !== UserRole.admin &&
               user?.role !== UserRole.controller
             }
-            label="Role:"
             name="role"
-            selectOption={selectOption}
+            label="Role:"
             isActive={isActive}
+            selectOption={selectOption}
+            addActiveBonus={addActiveBonus}
             setFieldValue={setSelectFieldValue}
             defaultValue={(userData && userData.role) || ""}
             onChange={(value: IUserRole) =>

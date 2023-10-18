@@ -5,14 +5,15 @@ import { Button } from "@/universal";
 import { ChangeEvent, FC } from "react";
 
 export const InputField: FC<ProfileInputProps> = ({
-  label,
   name,
+  label,
   onlyText,
   isActive,
   onChange,
   defaultValue,
   selectOption,
   setFieldValue,
+  addActiveBonus,
 }) => (
   <div className="text-lg py-1 grid grid-cols-8 w-full">
     <span className="font-semibold pl-2 col-span-3">{label}&nbsp;</span>
@@ -45,6 +46,7 @@ export const InputField: FC<ProfileInputProps> = ({
         {isActive === true && (
           <Button
             variant="accent"
+            onClick={addActiveBonus}
             className="col-span-2 ml-1 lg:ml-1.5 text-xs lg:text-sm"
           >
             Sand Bonus
