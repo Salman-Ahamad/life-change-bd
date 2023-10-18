@@ -1,8 +1,6 @@
 "use client";
 
-import { Types } from "mongoose";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useGetData } from "@/hooks";
@@ -21,13 +19,7 @@ const MyReference = () => {
   useGetData("/all-ref?collectInactive=false", setRefData);
 
   const handleUpdate = async (id: string) => {
-    if (Types.ObjectId.isValid(id)) {
-      await updateData(`/all-ref/${id}`, {}).then(() =>
-        window.location.reload()
-      );
-    } else {
-      toast.error("Invalid Id");
-    }
+    await updateData(`/all-ref/${id}`, {}).then(() => window.location.reload());
   };
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { ICourse, IRefTable, IUser } from "@/interface";
+import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 
@@ -110,7 +110,7 @@ Lifechange Bd e-learning platform
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.id)}
+                    onClick={() => handleAction(referUser.userId)}
                   >
                     {actionBtn}
                   </td>

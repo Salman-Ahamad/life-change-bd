@@ -99,15 +99,18 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    const user = await User.findOne({ _id: logInUser.id });
+    const user = await User.findOne({ userId: id });
     const refList = await AllRefer.find({ referredId: logInUser.id })
       .populate("referUser")
       .sort({ createdAt: -1 })
       .limit(inactiveLimit + 1);
 
     if (refList.length <= inactiveLimit) {
-      await User.updateOne({ _id: logInUser.id }, { balance: user.balance++ });
-      await User.updateOne({ _id: id }, { "settings.collectInactive": true });
+      await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
+      await User.updateOne(
+        { userId: id },
+        { "settings.collectInactive": true }
+      );
 
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
@@ -116,11 +119,11 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       );
 
       if (active) {
+        await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
         await User.updateOne(
-          { _id: logInUser.id },
-          { balance: user.balance++ }
+          { userId: id },
+          { "settings.collectInactive": true }
         );
-        await User.updateOne({ _id: id }, { "settings.collectInactive": true });
         return ApiResponse(200, "Collect Money successfully ✅", {});
       } else {
         return ApiResponse(
