@@ -11,8 +11,6 @@ export const LiveLearningClass = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   useGetData("/courses", setCourses, true);
 
-  console.log(courses);
-
   return (
     <ActivePageCard title="">
       <div className="pb-6 hover:bg-gray-100 flex items-center justify-center gap-4 w-full border-b-2">

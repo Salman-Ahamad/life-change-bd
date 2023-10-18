@@ -15,7 +15,7 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/user/active",
+    link: "/active/user",
   },
   {
     label: "Profile",
@@ -23,19 +23,19 @@ const navData: INavItem[] = [
   },
   {
     label: "Courses",
-    link: "/user/courses",
+    link: "/active/courses",
   },
   {
     label: "References",
-    link: "/user/ref-list",
+    link: "/active/user/ref-list",
   },
   {
     label: "Photo Zone",
-    link: "/user/photo-zone",
+    link: "/photo-zone",
   },
   {
     label: "Video Zone",
-    link: "/user/video-zone",
+    link: "/active/video-zone",
   },
 ];
 

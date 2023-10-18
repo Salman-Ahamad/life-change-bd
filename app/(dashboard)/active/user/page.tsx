@@ -30,7 +30,7 @@ const navData: INavItem[] = [
   },
   {
     label: "References",
-    link: "/active/user/ref-list",
+    link: "/active/ref-list",
   },
   {
     label: "Photo Zone",
@@ -38,7 +38,7 @@ const navData: INavItem[] = [
   },
   {
     label: "Video Zone",
-    link: "/user/video-zone",
+    link: "/active/video-zone",
   },
 ];
 

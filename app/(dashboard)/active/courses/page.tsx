@@ -11,7 +11,7 @@ import { useState } from "react";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/user/active",
+    link: "/active/user",
   },
 ];
 
@@ -48,7 +48,7 @@ const Courses: NextPage = () => {
                       </div>
                       <div className="w-full flex justify-end items-end">
                         <LinkButton
-                          href={`/user/courses/${slug}`}
+                          href={`/active/courses/${slug}`}
                           variant="secondary"
                           className="m-4 border-t"
                         >

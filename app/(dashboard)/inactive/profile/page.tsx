@@ -13,27 +13,27 @@ import { useState } from "react";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/user/active",
+    link: "/active/user",
   },
   {
     label: "Edit Profile",
-    link: "/user/active/profile/edit",
+    link: "/active/user/profile/edit",
   },
   {
     label: "Change Password",
-    link: "/user/change-password",
+    link: "/active/change-password",
   },
   {
     label: "Passbook",
-    link: "/user/passbook",
+    link: "/active/passbook",
   },
   {
     label: "Withdrawal",
-    link: "/user/active/withdrawal",
+    link: "/active/user/withdrawal",
   },
   {
     label: "Photo Zone",
-    link: "/user/ref-list",
+    link: "/photo-zone",
   },
 ];
 

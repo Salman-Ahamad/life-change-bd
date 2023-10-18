@@ -13,7 +13,7 @@ const Navbar: FC = () => {
 
   return (
     <div className="py-2 px-4 bg-white shadow-md flex justify-between items-center top-0 sticky z-50">
-      <Link href="/user/photo-zone/profile" className="flex items-center gap-2">
+      <Link href="/photo-zone/profile" className="flex items-center gap-2">
         <Image
           src={user?.image || ""}
           width={40}

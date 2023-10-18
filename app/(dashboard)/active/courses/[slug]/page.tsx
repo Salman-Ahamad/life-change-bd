@@ -14,7 +14,7 @@ import { BiEditAlt } from "react-icons/bi";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/user/active",
+    link: "/active/user",
   },
 ];
 
@@ -92,7 +92,7 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                           <Tbody
                             label={
                               <LinkButton
-                                href={`/user/courses/${slug}/${assignment.id}`}
+                                href={`/active/courses/${slug}/${assignment.id}`}
                                 variant="secondary"
                                 className="bg-sky-400 hover:bg-sky-500 transition-all delay-200 px-4"
                               >
