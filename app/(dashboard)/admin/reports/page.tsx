@@ -17,7 +17,7 @@ const navData: INavItem[] = [
 
 const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref?inactiveBonus=true", setData);
+  useGetData("/user/active", setData);
 
   const user = useCurrentUser(true);
 

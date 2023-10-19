@@ -14,7 +14,7 @@ export const GET = async () => {
 
     const result = await User.find({ "settings.sendWish": false });
 
-    return ApiResponse(200, "Config get successfully 👌", result);
+    return ApiResponse(200, "New User get successfully 👌", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
