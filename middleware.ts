@@ -4,27 +4,35 @@ import { UserRole } from "./lib";
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
-    const userRole = request.nextauth.token?.role;
+    const { token } = request.nextauth;
+    const { pathname } = request.nextUrl;
+
+    if (!token) {
+      // User is not logged in, redirect to home page
+      return NextResponse.redirect("/");
+    }
+
+    const userRole = token.role;
 
     if (
       userRole === UserRole.active &&
-      !request.nextUrl.pathname.startsWith("/active") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone") &&
-      !request.nextUrl.pathname.startsWith("/forgot-password")
+      !pathname.startsWith("/active") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/active", request.url));
     } else if (
       userRole === UserRole.inactive &&
-      !request.nextUrl.pathname.startsWith("/inactive") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone") &&
-      !request.nextUrl.pathname.startsWith("/forgot-password")
+      !pathname.startsWith("/inactive") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/inactive", request.url));
     } else if (
       userRole === UserRole.admin &&
-      !request.nextUrl.pathname.startsWith("/admin") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone") &&
-      !request.nextUrl.pathname.startsWith("/forgot-password")
+      !pathname.startsWith("/admin") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/admin", request.url));
     } else if (
@@ -32,29 +40,46 @@ export default withAuth(
         userRole === UserRole.consultant ||
         userRole === UserRole.gl ||
         userRole === UserRole.teacher) &&
-      !request.nextUrl.pathname.startsWith("/subadmin") &&
-      !request.nextUrl.pathname.startsWith("/photo-zone") &&
-      !request.nextUrl.pathname.startsWith("/forgot-password")
+      !pathname.startsWith("/subadmin") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/subadmin", request.url));
     }
 
+    // const userRole = request.nextauth.token?.role;
+
     // if (
-    //   request.nextUrl.pathname.startsWith("/active") &&
-    //   request.nextauth.token?.role === UserRole.inactive
+    //   userRole === UserRole.active &&
+    //   !request.nextUrl.pathname.startsWith("/active") &&
+    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
+    //   !request.nextUrl.pathname.startsWith("/forgot-password")
+    // ) {
+    //   return NextResponse.redirect(new URL("/active", request.url));
+    // } else if (
+    //   userRole === UserRole.inactive &&
+    //   !request.nextUrl.pathname.startsWith("/inactive") &&
+    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
+    //   !request.nextUrl.pathname.startsWith("/forgot-password")
     // ) {
     //   return NextResponse.redirect(new URL("/inactive", request.url));
-    //   // return NextResponse.redirect(`/inactive`);
     // } else if (
-    //   request.nextUrl.pathname.startsWith("/inactive") &&
-    //   request.nextauth.token?.role === UserRole.active
+    //   userRole === UserRole.admin &&
+    //   !request.nextUrl.pathname.startsWith("/admin") &&
+    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
+    //   !request.nextUrl.pathname.startsWith("/forgot-password")
     // ) {
-    //   return NextResponse.redirect(`/active`);
+    //   return NextResponse.redirect(new URL("/admin", request.url));
     // } else if (
-    //   request.nextUrl.pathname.startsWith("/admin") &&
-    //   request.nextauth.token?.role !== UserRole.admin
+    //   (userRole === UserRole.controller ||
+    //     userRole === UserRole.consultant ||
+    //     userRole === UserRole.gl ||
+    //     userRole === UserRole.teacher) &&
+    //   !request.nextUrl.pathname.startsWith("/subadmin") &&
+    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
+    //   !request.nextUrl.pathname.startsWith("/forgot-password")
     // ) {
-    //   return NextResponse.redirect(`/admin-login`);
+    //   return NextResponse.redirect(new URL("/subadmin", request.url));
     // }
   },
   {

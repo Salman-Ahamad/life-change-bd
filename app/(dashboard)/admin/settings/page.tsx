@@ -7,30 +7,13 @@ import { ChangeSupportLink } from "@/components/Settings/ChangeSupportLink";
 import { useCurrentUser } from "@/hooks";
 import { INavItem } from "@/interface";
 import { UserRole } from "@/lib";
-import { Container, Title } from "@/universal";
+import { BackButton, Container, Title } from "@/universal";
 import { NextPage } from "next";
-import { AiOutlineHome } from "react-icons/ai";
 
 const adminNav: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
+    label: <BackButton className="text-2xl" />,
     link: "/admin",
-  },
-  {
-    label: "User Management",
-    link: "/admin/user-management",
-  },
-  {
-    label: "Reports",
-    link: "/admin/reports",
-  },
-  {
-    label: "Action",
-    link: "/admin/action",
-  },
-  {
-    label: "Settings",
-    link: "/admin/settings",
   },
 ];
 

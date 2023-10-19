@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
 import { BackButton, Button, Title } from "@/universal";
 import { Types } from "mongoose";
@@ -19,13 +19,9 @@ const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData);
 
-  const user = useCurrentUser(true);
-
   const handleAction = (id: string, isReject?: boolean) => {
     if (Types.ObjectId.isValid(id)) {
       if (!isReject) {
-        console.log("Accepted");
-
         updateData("/withdrawal", { id, status: "complete" }).then(() =>
           window.location.reload()
         );
@@ -43,8 +39,8 @@ const Action: React.FC = () => {
     <main>
       <Header navData={adminNav} />
       <PageHeader
-        title="My Reference Joining Info"
-        notice="Last 3 Month Outbound"
+        title="Pending Withdrawal Requests"
+        notice="Please take action to accept or reject the requests!"
       />
       {data === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
