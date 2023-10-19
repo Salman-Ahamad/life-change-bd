@@ -2,15 +2,17 @@ import { IId } from ".";
 
 export interface IAppConfigSchema {
   for: "admin";
+  mainBalance: number;
+  totalPendingFee: number;
+  totalWithdraw: number;
   baseFee: number;
-  sliderImage: string[];
   withdrawalFee: number;
+  sliderImage: string[];
   support: {
     whatsApp: string;
     meeting: string;
     help: string;
   };
-  whatsAppMessage: string;
 }
 
 export interface IAppConfig extends IAppConfigSchema, IId {}

@@ -8,6 +8,18 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       default: "admin",
       unique: true,
     },
+    mainBalance: {
+      type: Number,
+      default: 500000,
+    },
+    totalPendingFee: {
+      type: Number,
+      default: 0,
+    },
+    totalWithdraw: {
+      type: Number,
+      default: 0,
+    },
     baseFee: {
       type: Number,
       default: 0,
@@ -31,10 +43,6 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
         meeting: "",
         help: "",
       },
-    },
-    whatsAppMessage: {
-      type: String,
-      default: "",
     },
   },
   {
