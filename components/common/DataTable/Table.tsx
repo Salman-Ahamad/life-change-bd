@@ -10,11 +10,12 @@ export const DataTable: FC<IRefTable> = ({
   tableData,
   message,
   actionBtn,
+  rejectBtn,
   setActionId,
   UpdateSendWish,
 }) => {
-  const handleAction = (id: string) => {
-    setActionId && setActionId(id);
+  const handleAction = (id: string, isReject?: boolean) => {
+    setActionId && setActionId(id, isReject);
   };
 
   return (
@@ -110,9 +111,17 @@ Lifechange Bd e-learning platform
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.userId)}
+                    onClick={() => handleAction(referUser._id)}
                   >
                     {actionBtn}
+                  </td>
+                )}
+                {rejectBtn && (
+                  <td
+                    className="px-2.5 py-1.5"
+                    onClick={() => handleAction(referUser._id, true)}
+                  >
+                    {rejectBtn}
                   </td>
                 )}
               </tr>

@@ -8,8 +8,9 @@ import { IFiledDate, IMonth, ISearchBar } from "@/interface";
 import { Button, Container } from "@/universal";
 import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
 
-export const SearchBar: FC<ISearchBar> = ({ setData }) => {
+export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
   const [filedData, setFiledData] = useState<IFiledDate>({
+    date: "",
     year: "",
     month: "",
     id: "",
@@ -18,21 +19,28 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
 
   const handleSubmit = async () => {
     if (filedData.id) {
-      await getDataFn(`/all-ref?id=${filedData.id}`, setData);
-    } else if (filedData.year && filedData.month) {
+      await getDataFn(
+        `/all-ref?id=${filedData.id}&isActive=${onlyActive ? true : false}`,
+        setData
+      );
+    } else if ((filedData.year && filedData.month) || filedData.date) {
       const month = getMonthNumber(filedData.month as IMonth);
-      const date = createDate(Number(filedData.year), month);
+      const date = filedData.date
+        ? createDate(0, 0, filedData.date as Date)
+        : createDate(Number(filedData.year), month);
 
       if (date) {
-        await getDataFn(`/all-ref?date=${date}`, setData);
+        const url = `/all-ref?date=${date}&singleDate=${
+          filedData.date ? true : false
+        }&isActive=${onlyActive ? true : false}`;
+        await getDataFn(url, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
       }
     } else {
       toast.error("Please Provide filter Data 🚨");
     }
-
-    setFiledData({ year: "", month: "", id: "" });
+    setFiledData({ date: "", year: "", month: "", id: "" });
   };
 
   return (
@@ -68,6 +76,13 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
             </option>
           ))}
         </select>
+        <input
+          type="date"
+          onChange={(e) =>
+            setFiledData({ ...filedData, date: e.target.valueAsDate })
+          }
+          className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto"
+        />
         <input
           type="text"
           value={String(filedData.id)}

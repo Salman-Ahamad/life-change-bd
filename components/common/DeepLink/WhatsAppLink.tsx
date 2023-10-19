@@ -32,7 +32,7 @@ export const SendWishMessage: FC<ISendWish> = ({
   userId,
 }) => {
   const handleSendWish = () => {
-    updateData(`/send-wish/${userId}`, {
+    updateData(`/send-wish?id=${userId}`, {
       ...data,
     }).then(() => openWhatsappChat(phoneNo, message, groupLink));
   };

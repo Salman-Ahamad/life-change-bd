@@ -1,34 +1,17 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { Button, Title } from "@/universal";
+import { BackButton, Button, Title } from "@/universal";
 import { Types } from "mongoose";
 import React, { useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const adminNav: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
+    label: <BackButton className="text-2xl" />,
     link: "/admin",
-  },
-  {
-    label: "User Management",
-    link: "/admin/user-management",
-  },
-  {
-    label: "Reports",
-    link: "/admin/reports",
-  },
-  {
-    label: "Action",
-    link: "/admin/action",
-  },
-  {
-    label: "Student",
-    link: "/admin/settings",
   },
 ];
 
@@ -36,23 +19,28 @@ const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData);
 
-  const user = useCurrentUser(true);
-
-  const handleAction = (id: string) => {
+  const handleAction = (id: string, isReject?: boolean) => {
     if (Types.ObjectId.isValid(id)) {
-      updateData("/withdrawal", { id, status: "complete" }).then(() =>
-        window.location.reload()
-      );
+      if (!isReject) {
+        updateData("/withdrawal", { id, status: "complete" }).then(() =>
+          window.location.reload()
+        );
+      } else {
+        updateData("/withdrawal", { id, status: "reject" }).then(() =>
+          window.location.reload()
+        );
+      }
     } else {
       toast.error("Invalid Id");
     }
   };
+
   return (
     <main>
       <Header navData={adminNav} />
       <PageHeader
-        title="My Reference Joining Info"
-        notice="Last 3 Month Outbound"
+        title="Pending Withdrawal Requests"
+        notice="Please take action to accept or reject the requests!"
       />
       {data === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
@@ -67,6 +55,11 @@ const Action: React.FC = () => {
           actionBtn={
             <Button variant="secondary" className="text-xs">
               Accept
+            </Button>
+          }
+          rejectBtn={
+            <Button variant="secondary" className="text-xs bg-red-500">
+              Reject
             </Button>
           }
         />
