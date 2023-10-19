@@ -7,5 +7,4 @@ export const loginValidationSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .min(6, "Must be at least 6 characters"),
-  randomNum: Yup.string().required("Math is required"),
 });
