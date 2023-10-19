@@ -71,10 +71,22 @@ const AdminLogin: FC = () => {
                 <Input
                   name="role"
                   select={[
-                    "Controller",
-                    "Consultant",
+                    "Trainer",
                     "Group Leader",
+                    "Senior Group Leader",
                     "Teacher",
+                    "Checker",
+                    "Senior Accountant",
+                    "Accountant",
+                    "Senior Controller",
+                    "Controller",
+                    "Telecaller",
+                    "Consultant",
+                    "Lead Checker",
+                    "Audit",
+                    "Support",
+                    "Teacher",
+                    "LC BD Itd Solution",
                   ]}
                 />
               </div>
