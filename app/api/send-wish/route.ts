@@ -3,9 +3,26 @@ import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
 
-export const PATCH = async (req: NextRequest) => {
+export const GET = async () => {
   try {
-    const { id } = await req.json();
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    }
+
+    const result = await User.find({ "settings.sendWish": false });
+
+    return ApiResponse(200, "New User get successfully 👌", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
+
+export const PATCH = async ({ nextUrl }: NextRequest) => {
+  try {
+    const id = nextUrl.searchParams.get("id");
 
     // Get Current User
     const user = await getCurrentUser();

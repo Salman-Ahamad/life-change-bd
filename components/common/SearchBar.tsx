@@ -8,7 +8,7 @@ import { IFiledDate, IMonth, ISearchBar } from "@/interface";
 import { Button, Container } from "@/universal";
 import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
 
-export const SearchBar: FC<ISearchBar> = ({ setData }) => {
+export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
   const [filedData, setFiledData] = useState<IFiledDate>({
     date: "",
     year: "",
@@ -19,7 +19,10 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
 
   const handleSubmit = async () => {
     if (filedData.id) {
-      await getDataFn(`/all-ref?id=${filedData.id}`, setData);
+      await getDataFn(
+        `/all-ref?id=${filedData.id}&isActive=${onlyActive ? true : false}`,
+        setData
+      );
     } else if ((filedData.year && filedData.month) || filedData.date) {
       const month = getMonthNumber(filedData.month as IMonth);
       const date = filedData.date
@@ -29,7 +32,7 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
       if (date) {
         const url = `/all-ref?date=${date}&singleDate=${
           filedData.date ? true : false
-        }`;
+        }&isActive=${onlyActive ? true : false}`;
         await getDataFn(url, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");

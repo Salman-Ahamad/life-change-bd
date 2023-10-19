@@ -15,7 +15,7 @@ const navData: INavItem[] = [
 
 const SendWish = () => {
   const [sendWishData, setSendWish] = useState<IUser[] | null>(null);
-  useGetData("/all-ref", setSendWish);
+  useGetData("/send-wish", setSendWish);
 
   return (
     <>
