@@ -27,14 +27,16 @@ export const SearchBar: FC<ISearchBar> = ({ setData }) => {
         : createDate(Number(filedData.year), month);
 
       if (date) {
-        await getDataFn(`/all-ref?date=${date}`, setData);
+        const url = `/all-ref?date=${date}&singleDate=${
+          filedData.date ? true : false
+        }`;
+        await getDataFn(url, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
       }
     } else {
       toast.error("Please Provide filter Data 🚨");
     }
-
     setFiledData({ date: "", year: "", month: "", id: "" });
   };
 

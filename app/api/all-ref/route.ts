@@ -11,6 +11,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
+    const singleDate = nextUrl.searchParams.get("singleDate");
     const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
@@ -32,7 +33,15 @@ export const GET = async ({ nextUrl }: NextRequest) => {
 
     let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
+    let singleDateValue: boolean =
+      singleDate && JSON.parse(singleDate.toLowerCase());
+
     const formattingDate = new Date(Number(date));
+    // Set the start and end of the day
+    const startOfDay = new Date(Number(date));
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(Number(date));
+    endOfDay.setHours(23, 59, 59, 999);
 
     let option = {};
     const inactiveBonusOption = {
@@ -40,10 +49,19 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
-      const dateFilter = { createdAt: { $gte: formattingDate } };
+      const dateFilter = singleDateValue
+        ? {
+            createdAt: {
+              $gte: startOfDay,
+              $lt: endOfDay,
+            },
+          }
+        : { createdAt: { $gte: formattingDate } };
+
       const active = activeId ? { role: UserRole.active } : {};
       return (
         (id && { ...idFilter, ...active, ...option }) ||
+        // (singleDate && { ...singleDateFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
         (inactiveBonus && {
           ...inactiveBonusOption,
