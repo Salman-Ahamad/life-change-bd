@@ -17,24 +17,24 @@ export const BalanceManagement = () => {
     if (config)
       if (margeBalance !== 0) {
         if (balanceField === "pending") {
-          if (config.totalPendingFee <= margeBalance) {
-            updateData(
-              "/config",
-              { $inc: { mainBalance: margeBalance } },
-              true
-            );
-            updateData("/config", { $inc: { totalPendingFee: -margeBalance } });
+          if (config.totalPendingFee >= margeBalance) {
+            updateData("/config", {
+              $inc: {
+                mainBalance: margeBalance,
+                totalPendingFee: -margeBalance,
+              },
+            });
           } else {
             toast.error("Balance is low");
           }
         } else if (balanceField === "withdraw") {
-          if (config.totalWithdraw <= margeBalance) {
-            updateData(
-              "/config",
-              { $inc: { mainBalance: -margeBalance } },
-              true
-            );
-            updateData("/config", { $inc: { totalWithdraw: -margeBalance } });
+          if (config.totalWithdraw >= margeBalance) {
+            updateData("/config", {
+              $inc: {
+                mainBalance: -margeBalance,
+                totalWithdraw: -margeBalance,
+              },
+            });
           } else {
             toast.error("Balance is low");
           }
@@ -42,6 +42,9 @@ export const BalanceManagement = () => {
       } else {
         toast.error("Please Provide a pending balance");
       }
+
+    setBalanceField("");
+    setMargeBalance(0);
   };
 
   return (
@@ -82,6 +85,7 @@ export const BalanceManagement = () => {
           </select>
           <input
             type="number"
+            value={margeBalance}
             onChange={(e) => setMargeBalance(e.target.valueAsNumber)}
             className="outline-none text-black text-base md:text-lg max-w-[150px] border border-primary rounded-[5px] py-1 px-2"
           />
