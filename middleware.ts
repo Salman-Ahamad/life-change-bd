@@ -38,24 +38,6 @@ export default withAuth(
     ) {
       return NextResponse.redirect(new URL("/subadmin", request.url));
     }
-
-    // if (
-    //   request.nextUrl.pathname.startsWith("/active") &&
-    //   request.nextauth.token?.role === UserRole.inactive
-    // ) {
-    //   return NextResponse.redirect(new URL("/inactive", request.url));
-    //   // return NextResponse.redirect(`/inactive`);
-    // } else if (
-    //   request.nextUrl.pathname.startsWith("/inactive") &&
-    //   request.nextauth.token?.role === UserRole.active
-    // ) {
-    //   return NextResponse.redirect(`/active`);
-    // } else if (
-    //   request.nextUrl.pathname.startsWith("/admin") &&
-    //   request.nextauth.token?.role !== UserRole.admin
-    // ) {
-    //   return NextResponse.redirect(`/admin-login`);
-    // }
   },
   {
     callbacks: {
