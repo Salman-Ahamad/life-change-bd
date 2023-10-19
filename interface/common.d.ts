@@ -1,13 +1,6 @@
 import { StaticImageData } from "next/image";
 import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
-import {
-  ICardData,
-  IChildren,
-  IChildrenWithClassName,
-  IClassName,
-  IUser,
-  IWithdrawal,
-} from ".";
+import { ICardData, IChildren, IChildrenWithClassName, IClassName } from ".";
 
 export type IColor =
   | "black"
@@ -150,6 +143,7 @@ export interface IRefTable {
 }
 
 export interface IFiledDate {
+  date: Date | string | null;
   year: string;
   month: string;
   id: Types.ObjectId | string;

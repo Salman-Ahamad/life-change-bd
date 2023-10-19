@@ -1,5 +1,6 @@
 export * from "./Axios";
 export * from "./Response";
+export * from "./convertBoolean";
 export * from "./copyToClipboard";
 export * from "./createDate";
 export * from "./generateStudentId";

@@ -2,7 +2,7 @@ import { connectDb } from "@/config";
 import { ISlugParams } from "@/interface";
 import { UserRole, inactiveLimit } from "@/lib";
 import { AllRefer, User } from "@/models";
-import { ApiResponse } from "@/utils";
+import { ApiResponse, convertBoolean } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
 
@@ -30,9 +30,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
-
-    let inactiveBonusValue: boolean =
-      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
+    //
+    let inactiveBonusValue = inactiveBonus && convertBoolean(inactiveBonus);
 
     const inactiveBonusOption = {
       role: UserRole.active,
