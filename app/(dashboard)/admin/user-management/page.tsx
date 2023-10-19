@@ -13,12 +13,8 @@ const navData: INavItem[] = [
     link: "/admin",
   },
   {
-    label: "My Reference",
-    link: "/admin/user-management/ref-list/my-ref",
-  },
-  {
     label: "Send Wish",
-    link: "/admin/user-management/ref-list/send-wish",
+    link: "/admin/user-management/send-wish",
   },
 ];
 

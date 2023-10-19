@@ -3,32 +3,15 @@
 import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { Button, Title } from "@/universal";
+import { BackButton, Button, Title } from "@/universal";
 import { Types } from "mongoose";
 import React, { useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const adminNav: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
+    label: <BackButton className="text-2xl" />,
     link: "/admin",
-  },
-  {
-    label: "User Management",
-    link: "/admin/user-management",
-  },
-  {
-    label: "Reports",
-    link: "/admin/reports",
-  },
-  {
-    label: "Action",
-    link: "/admin/action",
-  },
-  {
-    label: "Student",
-    link: "/admin/settings",
   },
 ];
 
@@ -38,15 +21,24 @@ const Action: React.FC = () => {
 
   const user = useCurrentUser(true);
 
-  const handleAction = (id: string) => {
+  const handleAction = (id: string, isReject?: boolean) => {
     if (Types.ObjectId.isValid(id)) {
-      updateData("/withdrawal", { id, status: "complete" }).then(() =>
-        window.location.reload()
-      );
+      if (!isReject) {
+        console.log("Accepted");
+
+        updateData("/withdrawal", { id, status: "complete" }).then(() =>
+          window.location.reload()
+        );
+      } else {
+        updateData("/withdrawal", { id, status: "reject" }).then(() =>
+          window.location.reload()
+        );
+      }
     } else {
       toast.error("Invalid Id");
     }
   };
+
   return (
     <main>
       <Header navData={adminNav} />
@@ -67,6 +59,11 @@ const Action: React.FC = () => {
           actionBtn={
             <Button variant="secondary" className="text-xs">
               Accept
+            </Button>
+          }
+          rejectBtn={
+            <Button variant="secondary" className="text-xs bg-red-500">
+              Reject
             </Button>
           }
         />
