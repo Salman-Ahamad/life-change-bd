@@ -5,6 +5,5 @@ export * from "./createDate";
 export * from "./generateStudentId";
 export * from "./getLastThreeMonths";
 export * from "./getMonthNumber";
-export * from "./getRandomNumber";
 export * from "./loadingToast";
 export * from "./openWhatsappChat";

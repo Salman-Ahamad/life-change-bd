@@ -5,80 +5,46 @@ import { redirect } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
 import { Input } from "@/components";
-import { Form, Formik, FormikHelpers } from "formik";
+import { ISubAdminLoginFormValue } from "@/interface";
 import { loginValidationSchema } from "@/lib";
 import { Button, CTA, Title } from "@/universal";
-import { ISubAdminLoginFormValue } from "@/interface";
-import { getRandomNumber, loadingToast } from "@/utils";
+import { loadingToast } from "@/utils";
+import { Form, Formik, FormikHelpers } from "formik";
 import { toast } from "react-toastify";
 
 const AdminLogin: FC = () => {
   const [adminRole, setAdminRole] = useState<string>("");
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
   const { data: session } = useSession();
+
   const initialValues: ISubAdminLoginFormValue = {
     role: "",
     phone: "",
     password: "",
-    randomNum: "",
   };
 
-  useEffect(() => {
-    const randomNum = getRandomNumber(20, 50);
-    const randomNum2 = getRandomNumber(1, 15);
-    setNum1(randomNum);
-    setNum2(randomNum2);
-  }, []);
-
   const handleSubmit = (
-    { role, phone, password, randomNum }: ISubAdminLoginFormValue,
-    {
-      resetForm,
-      setFieldError,
-      setSubmitting,
-    }: FormikHelpers<ISubAdminLoginFormValue>
+    { role, phone, password }: ISubAdminLoginFormValue,
+    { resetForm }: FormikHelpers<ISubAdminLoginFormValue>
   ) => {
     const id = toast.loading("Loading... 🔃");
     setAdminRole(role.toLowerCase());
-
-    if (Number(randomNum) !== num1 + num2) {
-      setFieldError("randomNum", "Please give correct answer");
-      setSubmitting(false);
-    } else {
-      signIn("credentials", {
-        phone,
-        password,
-        redirect: false,
+    signIn("credentials", {
+      phone,
+      password,
+      redirect: false,
+    })
+      .then((res) => {
+        loadingToast(id, "Login Successfully ✅", "success");
       })
-        .then((res) => {
-          // if (!res?.error) {
-          //   if (session?.role === role.toLowerCase()) {
-          //     redirect("/active");
-          //   } else {
-          //     signOut();
-          //   }
-          loadingToast(id, "Login Successfully ✅", "success");
-          // } else {
-          //   const error = JSON.parse(res.error);
-          //   loadingToast(id, error.message, "warning");
-          // }
-        })
-        .catch((error) => loadingToast(id, error.message, "error"));
-      resetForm();
-    }
+      .catch((error) => loadingToast(id, error.message, "error"));
+    resetForm();
   };
 
   useEffect(() => {
     if (session?.user) {
       if (session.user.role !== adminRole) {
         console.log("Your role is no ", adminRole);
-
-        // signOut();
-        // redirect("/active");
       } else {
-        console.log("Your role is ", adminRole);
-
         redirect("/active");
       }
     }
@@ -121,11 +87,6 @@ const AdminLogin: FC = () => {
                 placeholder="Enter Your Password"
                 type="password"
               />
-
-              <CTA className="mt-2.5">
-                {num1 || 0} + {num2 || 0} = ?
-              </CTA>
-              <Input name="randomNum" placeholder="" type="text" />
 
               <Button
                 variant="primary"

@@ -13,7 +13,6 @@ export interface ISignUpFormValue {
 export interface ILoginFormValue {
   phone: string;
   password: string;
-  randomNum: string;
 }
 
 export interface ISubAdminLoginFormValue extends ILoginFormValue {
