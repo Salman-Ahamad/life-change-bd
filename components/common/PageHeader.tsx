@@ -6,7 +6,12 @@ import { IPageHeader } from "@/interface";
 import { CommonText, Title } from "@/universal";
 import { SearchBar } from ".";
 
-export const PageHeader: FC<IPageHeader> = ({ title, notice, setData }) => (
+export const PageHeader: FC<IPageHeader> = ({
+  title,
+  notice,
+  setData,
+  onlyActive,
+}) => (
   <>
     <Title variant="H3" className="capitalize mt-10">
       {title}
@@ -15,6 +20,6 @@ export const PageHeader: FC<IPageHeader> = ({ title, notice, setData }) => (
       {notice}
     </CommonText>
 
-    {setData && <SearchBar setData={setData} />}
+    {setData && <SearchBar setData={setData} onlyActive={onlyActive} />}
   </>
 );

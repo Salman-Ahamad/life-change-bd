@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable, Header, PageHeader } from "@/components";
-import { useCurrentUser, useGetData } from "@/hooks";
+import { useCurrentUser } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
 import { UserRole } from "@/lib";
 import { BackButton, Title } from "@/universal";
@@ -17,7 +17,6 @@ const navData: INavItem[] = [
 
 const Report = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  useGetData("/user/active", setData);
 
   const user = useCurrentUser(true);
 
@@ -31,7 +30,12 @@ const Report = () => {
   return (
     <>
       <Header navData={navData} />
-      <PageHeader title="Reports" notice="Last 3 Month Outbound" />
+      <PageHeader
+        title="Reports"
+        notice="Active User Report"
+        setData={setData}
+        onlyActive
+      />
       {data === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃

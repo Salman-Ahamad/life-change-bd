@@ -12,6 +12,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
     const singleDate = nextUrl.searchParams.get("singleDate");
+    const isActive = nextUrl.searchParams.get("isActive");
     const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
@@ -31,6 +32,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
+    let isActiveValue: boolean = isActive && JSON.parse(isActive.toLowerCase());
+    console.log("🚀 ~ file: route.ts:36 ~ GET ~ isActiveValue:", {
+      isActiveValue,
+    });
     let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     let singleDateValue: boolean =
@@ -61,7 +66,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       const active = activeId ? { role: UserRole.active } : {};
       return (
         (id && { ...idFilter, ...active, ...option }) ||
-        // (singleDate && { ...singleDateFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
         (inactiveBonus && {
           ...inactiveBonusOption,
@@ -74,7 +78,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     switch (user.role) {
       case UserRole.admin:
         const admin = { "settings.admin": user.id };
-        option = optionFn(admin, false);
+        option = optionFn(admin, isActiveValue ? true : false);
         break;
       case UserRole.controller:
         const controller = {

@@ -24,10 +24,12 @@ export interface ISearchData {
 
 export interface ISearchBar extends ISetSearchData {
   setData: Dispatch<SetStateAction<IUser[] | null>>;
+  onlyActive?: boolean;
 }
 
 export interface IPageHeader {
   title: string;
   notice: string;
   setData?: Dispatch<SetStateAction<IUser[] | null>>;
+  onlyActive?: boolean;
 }
