@@ -48,8 +48,6 @@ export const PATCH = async (req: NextRequest) => {
   try {
     const updatedData = await req.json();
 
-    console.log("Checking Marge from Server 11: ", updatedData);
-
     // Get Current User
     const user = await getCurrentUser();
 
@@ -59,10 +57,6 @@ export const PATCH = async (req: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    // TODO: Update config data in mongoDB
-    // TODO: mainBalance should be added/increased by margeBalance,
-    // TODO: totalPendingFee should be minus/decreased by margeBalance,
-
     const result = await AppConfig.updateOne(
       { for: UserRole.admin },
       updatedData,
@@ -70,8 +64,6 @@ export const PATCH = async (req: NextRequest) => {
         new: true,
       }
     );
-
-    console.log("Checking Marge from Server 22: ", { result });
 
     return ApiResponse(200, "Config update successfully 🛠️✅", result);
   } catch (error: any) {

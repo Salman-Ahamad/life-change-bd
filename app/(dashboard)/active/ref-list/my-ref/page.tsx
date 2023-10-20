@@ -10,7 +10,7 @@ import { BackButton, Button, Title } from "@/universal";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active",
+    link: "/active/ref-list",
   },
 ];
 
@@ -18,7 +18,7 @@ const MyReference = () => {
   const [refData, setRefData] = useState<IUser[] | null>(null);
   useGetData("/all-ref?inactiveBonus=false", setRefData);
 
-  const handleUpdate = async (id: string) => {
+  const handleCollectMoney = async (id: string) => {
     await updateData(`/all-ref/${id}`, {}).then(() => window.location.reload());
   };
 
@@ -39,7 +39,7 @@ const MyReference = () => {
           tableHeaders={["no", "id", "Name", "Joining Time"]}
           dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"
-          setActionId={handleUpdate}
+          setActionId={handleCollectMoney}
           actionBtn={
             <Button variant="secondary" className="text-xs">
               Collect Money

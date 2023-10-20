@@ -1,7 +1,7 @@
 import { connectDb } from "@/config";
 import { ISlugParams } from "@/interface";
 import { UserRole, inactiveLimit } from "@/lib";
-import { AllRefer, User } from "@/models";
+import { AllRefer, AppConfig, User } from "@/models";
 import { ApiResponse, convertBoolean } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -104,8 +104,36 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       .limit(inactiveLimit + 1);
 
     if (refList.length <= inactiveLimit) {
+      // TODO: We may invoke both line into one command. Please try following code.
+      // await User.updateOne(
+      //   { _id: logInUser.id },
+      //   {
+      //     $inc: { balance: 1 },
+      //     $set: { "settings.inactiveBonus": true }
+      //   }
+      // );
+
       await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
       await User.updateOne({ userId: id }, { "settings.inactiveBonus": true });
+      // This will reduce the main company balance by 1
+      await AppConfig.updateOne(
+        {},
+        { $inc: { mainBalance: -1 } },
+        { new: true }
+      );
+
+      // const result = await AppConfig.updateOne(
+      //   { for: UserRole.admin },
+      // {
+      //   $inc: {
+      //     mainBalance: -margeBalance,
+      //     totalWithdraw: -margeBalance,
+      //   },
+      // }
+      //   {
+      //     new: true,
+      //   }
+      // );
 
       return ApiResponse(200, "Collect Money successfully ✅", {});
     } else {
