@@ -23,9 +23,11 @@ export const BalanceManagement = () => {
                 mainBalance: margeBalance,
                 totalPendingFee: -margeBalance,
               },
-            });
+            }).then(() => window.location.reload());
           } else {
-            toast.error("Balance is low");
+            toast.error("Insufficient balance!");
+            setBalanceField("");
+            setMargeBalance(0);
           }
         } else if (balanceField === "withdraw") {
           if (config.totalWithdraw >= margeBalance) {
@@ -34,9 +36,11 @@ export const BalanceManagement = () => {
                 mainBalance: -margeBalance,
                 totalWithdraw: -margeBalance,
               },
-            });
+            }).then(() => window.location.reload());
           } else {
-            toast.error("Balance is low");
+            toast.error("Insufficient balance!");
+            setBalanceField("");
+            setMargeBalance(0);
           }
         }
       } else {
@@ -60,14 +64,14 @@ export const BalanceManagement = () => {
           variant="H5"
           className="capitalize flex gap-5 justify-start w-full"
         >
-          <span>Total Pending Fee: </span>
+          <span>Pending Fees: </span>
           <span>&#2547; {config?.totalPendingFee}</span>
         </Title>
         <Title
           variant="H5"
           className="capitalize flex gap-5 justify-start w-full"
         >
-          <span>Total Withdraw: </span>
+          <span>Withdraw Amount: </span>
           <span>&#2547; {config?.totalWithdraw}</span>
         </Title>
       </div>
