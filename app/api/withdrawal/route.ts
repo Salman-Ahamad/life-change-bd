@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { User, Withdrawal } from "@/models";
+import { AppConfig, User, Withdrawal } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -79,6 +79,24 @@ export const PATCH = async (req: NextRequest) => {
     const result = await Withdrawal.updateOne({ _id: id }, updatedData, {
       new: true,
     });
+
+    if (result.acknowledged && result.modifiedCount === 1) {
+      // Fetch the updated document by its _id
+      const updatedDocument = await Withdrawal.findOne({ _id: id });
+      if (
+        updatedDocument &&
+        updatedDocument.amount &&
+        updatedDocument.status === "complete"
+      ) {
+        // This will increase the totalWithdraw
+        const totalWithdrawalUpdate = await AppConfig.updateOne(
+          {},
+          { $inc: { totalWithdraw: updatedDocument.amount } }
+        );
+      } else {
+        console.log("Document not found after update.");
+      }
+    }
 
     return ApiResponse(200, "Withdrawal update successfully 🛠️✅", result);
   } catch (error: any) {
