@@ -40,6 +40,8 @@ const Dashboard = () => {
   const [config, setConfig] = useState<IAppConfig>();
   useGetData("/config", setConfig, true);
 
+  console.log(config?.sliderImage);
+
   return (
     <main>
       <Header navData={adminNav} />

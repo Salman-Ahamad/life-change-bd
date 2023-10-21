@@ -12,6 +12,7 @@ const SlideUploader: React.FC<{
   slideNo: number;
 }> = ({ slideName, slides, slideNo }) => {
   //   const [slides, setSlides] = useState<string[]>([]);
+  console.log({ slideName, slides, slideNo });
 
   const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
