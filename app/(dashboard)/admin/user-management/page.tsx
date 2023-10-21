@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Header, PageHeader } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { INavItem, IUser } from "@/interface";
-import { BackButton } from "@/universal";
+import { BackButton, Button } from "@/universal";
 
 const navData: INavItem[] = [
   {
@@ -20,6 +20,7 @@ const navData: INavItem[] = [
 
 const UserManagement: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
+  console.log("Data from User Mng: ", data);
 
   return (
     <>
@@ -28,6 +29,7 @@ const UserManagement: NextPage = () => {
         title="User Management"
         notice="Last 3 Month Outbound"
         setData={setData}
+        onlyActive
       />
       {data !== null && data.length !== 0 && (
         <RefTable

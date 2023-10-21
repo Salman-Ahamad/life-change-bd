@@ -107,6 +107,7 @@ export const config = {
     "/active/photo-zone",
     "/admin",
     "/admin/action",
+    "/admin/balance",
     "/admin/reports",
     "/admin/settings",
     "/admin/user-management",

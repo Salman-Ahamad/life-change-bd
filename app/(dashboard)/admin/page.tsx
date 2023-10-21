@@ -3,7 +3,6 @@
 import { Header, Slider } from "@/components";
 import { useState } from "react";
 
-import { BalanceManagement } from "@/components/Admin";
 import SlideUploader from "@/components/Admin/SlideUploader";
 import { useGetData } from "@/hooks";
 import { IAppConfig, INavItem } from "@/interface";
@@ -28,6 +27,10 @@ const adminNav: INavItem[] = [
     link: "/admin/action",
   },
   {
+    label: "Balance",
+    link: "/admin/balance",
+  },
+  {
     label: "Settings",
     link: "/admin/settings",
   },
@@ -40,7 +43,7 @@ const Dashboard = () => {
   return (
     <main>
       <Header navData={adminNav} />
-      <BalanceManagement />
+
       <Container className="flex flex-col justify-center items-center">
         <div className="flex gap-4">
           {config?.sliderImage && (
