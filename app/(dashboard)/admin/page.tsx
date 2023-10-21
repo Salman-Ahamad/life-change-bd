@@ -4,10 +4,11 @@ import { Header, Slider } from "@/components";
 import { useState } from "react";
 
 import SlideUploader from "@/components/Admin/SlideUploader";
-import { useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { IAppConfig, INavItem } from "@/interface";
 import { Container } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
+import { getFileUploader } from "@/utils/actions/getFileUploade";
 
 const adminNav: INavItem[] = [
   {
@@ -40,7 +41,27 @@ const Dashboard = () => {
   const [config, setConfig] = useState<IAppConfig>();
   useGetData("/config", setConfig, true);
 
-  console.log(config?.sliderImage);
+  const uploadImage = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    slideNoFn: number
+  ) => {
+    event.preventDefault();
+    console.log("1", { slideNoFn });
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile) {
+      console.log("2", { slideNoFn });
+      const uploadedFile = await getFileUploader(selectedFile);
+      if (uploadedFile) {
+        console.log("3", { slideNoFn });
+        updateData("/config/upload-slide", {
+          url: uploadedFile,
+          index: slideNoFn,
+        });
+        // .then(() => window.location.reload());
+      }
+    }
+  };
 
   return (
     <main>
@@ -53,6 +74,7 @@ const Dashboard = () => {
               slideName="slide1"
               slides={config?.sliderImage}
               slideNo={0}
+              uploadImFn={uploadImage}
             />
           )}
           {config?.sliderImage && (
@@ -60,6 +82,7 @@ const Dashboard = () => {
               slideName="slide2"
               slides={config?.sliderImage}
               slideNo={1}
+              uploadImFn={uploadImage}
             />
           )}
         </div>
@@ -69,6 +92,7 @@ const Dashboard = () => {
               slideName="slide3"
               slides={config?.sliderImage}
               slideNo={2}
+              uploadImFn={uploadImage}
             />
           )}
           {config?.sliderImage && (
@@ -76,6 +100,7 @@ const Dashboard = () => {
               slideName="slide4"
               slides={config?.sliderImage}
               slideNo={3}
+              uploadImFn={uploadImage}
             />
           )}
         </div>

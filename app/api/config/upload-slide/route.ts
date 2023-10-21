@@ -11,8 +11,6 @@ export const PATCH = async (req: NextRequest) => {
   try {
     const { url, slideNo } = await req.json();
 
-    console.log({ url, slideNo });
-
     // Get Current User
     const user = await getCurrentUser();
 

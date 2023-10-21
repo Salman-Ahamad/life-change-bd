@@ -10,25 +10,12 @@ const SlideUploader: React.FC<{
   slideName: string;
   slides: string[];
   slideNo: number;
-}> = ({ slideName, slides, slideNo }) => {
+  uploadImFn: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    slideNoFn: number
+  ) => Promise<void>;
+}> = ({ slideName, slides, slideNo, uploadImFn }) => {
   //   const [slides, setSlides] = useState<string[]>([]);
-  console.log({ slideName, slides, slideNo });
-
-  const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-
-    const selectedFile = event.target.files?.[0];
-
-    if (selectedFile) {
-      const uploadedFile = await getFileUploader(selectedFile);
-      if (uploadedFile) {
-        updateData("/config/upload-slide", {
-          url: uploadedFile,
-          index: slideNo,
-        }).then(() => window.location.reload());
-      }
-    }
-  };
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -58,7 +45,9 @@ const SlideUploader: React.FC<{
               name="filePicker"
               id="filePicker"
               accept="image/*"
-              onChange={uploadImage}
+              onChange={(e) => {
+                uploadImFn(e, slideNo);
+              }}
               hidden
             />
           </label>
