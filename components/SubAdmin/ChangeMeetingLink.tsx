@@ -28,10 +28,10 @@ export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
     <section className="flex items-end justify-center">
       <div className="flex flex-col gap-1">
         <p className="pb-12">
-          Current Link:{" "}
+          Current Meet Id:{" "}
           <span className="font-semibold">{course?.meetingId}</span>
         </p>
-        <label className="pl-1.5">Meet Link</label>
+        <label className="pl-1.5">Please enter meet ID</label>
         <div className="flex gap-2.5">
           <input
             type="text"
