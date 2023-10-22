@@ -18,9 +18,6 @@ const navData: INavItem[] = [
   },
 ];
 
-// TODO: May need to change, this will force to catch data for 10 second only
-// export const revalidate = 10;
-
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
