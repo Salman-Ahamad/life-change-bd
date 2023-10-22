@@ -21,7 +21,7 @@ export interface ISettingsSchema {
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
-  course: Types.ObjectId;
+  course: string;
 }
 
 export interface ISettings extends ISettingsSchema {

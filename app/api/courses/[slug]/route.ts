@@ -18,7 +18,7 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (user.role === UserRole.admin || user.role === UserRole.teacher) {
+    if (user.role === UserRole.admin) {
       const courses = await Course.findOne({ slug });
       return ApiResponse(200, "Courses Get successfully 👌", courses);
     } else {

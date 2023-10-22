@@ -1,19 +1,22 @@
 "use client";
 
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { ICourse } from "@/interface";
 import { Button, Title } from "@/universal";
 import { FC, useState } from "react";
 
-export const ChangeMeetingLink: FC<{ courseId: string }> = ({ courseId }) => {
+export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
+  courseSlug,
+}) => {
+  const [course, setCourse] = useState<ICourse>();
   const [meetLink, setMeetLink] = useState<string>("");
-  console.log({ courseId });
 
-  useGetData(`courses/${courseId}`, setMeetLink, true);
+  useGetData(`courses/${courseSlug}`, setCourse, true);
 
   const user = useCurrentUser(true);
 
   const handleChangeMeetingLink = async () => {
-    updateData(`courses/${courseId}`, { meetingId: meetLink }).then(() =>
+    updateData(`courses/${courseSlug}`, { meetingId: meetLink }).then(() =>
       window.location.reload()
     );
   };

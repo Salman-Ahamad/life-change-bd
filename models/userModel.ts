@@ -1,5 +1,6 @@
 import { IUserSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
+import { string } from "yup";
 
 const userSchema = new Schema<IUserSchema>(
   {
@@ -118,8 +119,7 @@ const userSchema = new Schema<IUserSchema>(
         default: false,
       },
       course: {
-        type: Schema.Types.ObjectId,
-        ref: "Course",
+        type: String,
       },
     },
   },

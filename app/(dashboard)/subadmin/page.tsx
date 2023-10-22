@@ -37,7 +37,7 @@ const SubAdmin = () => {
       </div>
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
         {user?.settings?.course && (
-          <ChangeMeetingLink courseId={user?.settings?.course} />
+          <ChangeMeetingLink courseSlug={user?.settings?.course} />
         )}
       </Container>
     </main>
