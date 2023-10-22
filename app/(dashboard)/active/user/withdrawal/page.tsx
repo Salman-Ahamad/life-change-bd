@@ -30,12 +30,16 @@ const Withdrawal = () => {
 
   const handleWithdraw = () => {
     if (user) {
-      if (number.length === 11 && user.balance >= amount) {
-        createData(`/withdrawal`, { amount, method, number }).then(() =>
-          window.location.reload()
-        );
+      if (user.balance >= amount) {
+        if (number.length === 11) {
+          createData(`/withdrawal`, { amount, method, number }).then(() =>
+            window.location.reload()
+          );
+        } else {
+          toast.error("Number must be 11 characters");
+        }
       } else {
-        toast.error("Number must be 11 characters");
+        toast.error("Please ceck available balance");
       }
     }
   };
