@@ -1,6 +1,6 @@
 "use client";
 
-import { WhatsAppLink } from "@/components";
+import { GoogleMeetLink, WhatsAppLink } from "@/components";
 import { IChildrenWithTitle } from "@/interface";
 import { googleMeet } from "@/lib/assets";
 import { Button, Title } from "@/universal";
@@ -44,7 +44,7 @@ export const DataRow: FC<IDataRow> = ({
       )}
       <p>{title}</p>
       {meetLink ? (
-        <MeetingLink meetId={meetLink} />
+        <GoogleMeetLink meetId={meetLink}>Join Class</GoogleMeetLink>
       ) : phoneNo ? (
         <WhatsAppLink btnText={btnText} phoneNo={phoneNo as string} />
       ) : (

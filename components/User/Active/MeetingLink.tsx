@@ -4,9 +4,12 @@ import { GoogleMeetLink } from "@/components";
 import { FC } from "react";
 import { ActivePageCard } from ".";
 
-export const MeetingLink: FC<{ meetId: string }> = ({ meetId }) => {
+export const MeetingLink: FC<{ meetId: string; title?: string }> = ({
+  meetId,
+  title,
+}) => {
   return (
-    <ActivePageCard title="Life Change BD Support Meeting">
+    <ActivePageCard title={title ? title : ""}>
       <div className="w-full flex justify-center">
         <GoogleMeetLink meetId={meetId}>Get Meeting Links</GoogleMeetLink>
       </div>
