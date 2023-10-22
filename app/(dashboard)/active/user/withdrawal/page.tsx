@@ -42,7 +42,9 @@ const Withdrawal = () => {
 
   const handleAddPending = () => {
     if (user && user.balance >= 200) {
-      updateData("/user/withdrawal-fee", {});
+      updateData("/user/withdrawal-fee", {}).then(() =>
+        window.location.reload()
+      );
     } else {
       toast.error("Below minimum balance 🤑200");
     }
