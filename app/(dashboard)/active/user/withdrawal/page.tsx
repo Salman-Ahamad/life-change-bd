@@ -30,7 +30,7 @@ const Withdrawal = () => {
 
   const handleWithdraw = () => {
     if (user) {
-      if (number.length === 11) {
+      if (number.length === 11 && user.balance >= amount) {
         createData(`/withdrawal`, { amount, method, number }).then(() =>
           window.location.reload()
         );
