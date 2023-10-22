@@ -19,7 +19,7 @@ export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
   // const user = useCurrentUser(true);
 
   const handleChangeMeetingLink = async () => {
-    updateData(`courses/${courseSlug}`, { meetingId: meetLink }).then(() =>
+    updateData(`courses/${course?.id}`, { meetingId: meetLink }).then(() =>
       window.location.reload()
     );
   };
