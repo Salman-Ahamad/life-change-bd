@@ -3,7 +3,7 @@
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { ICourse } from "@/interface";
 import { Button, Title } from "@/universal";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
   courseSlug,
@@ -12,8 +12,11 @@ export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
   const [meetLink, setMeetLink] = useState<string>("");
 
   useGetData(`courses/${courseSlug}`, setCourse, true);
+  // useEffect(() => {
+  //   course?.meetingId && setMeetLink(course?.meetingId);
+  // }, [course]);
 
-  const user = useCurrentUser(true);
+  // const user = useCurrentUser(true);
 
   const handleChangeMeetingLink = async () => {
     updateData(`courses/${courseSlug}`, { meetingId: meetLink }).then(() =>
@@ -24,9 +27,10 @@ export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
   return (
     <section className="flex items-end justify-center">
       <div className="flex flex-col gap-1">
-        <Title variant="H3" className="pb-12">
-          Current Link: {meetLink}
-        </Title>
+        <p className="pb-12">
+          Current Link:{" "}
+          <span className="font-semibold">{course?.meetingId}</span>
+        </p>
         <label className="pl-1.5">Meet Link</label>
         <div className="flex gap-2.5">
           <input
