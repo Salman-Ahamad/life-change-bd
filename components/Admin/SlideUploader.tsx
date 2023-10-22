@@ -8,14 +8,28 @@ import { getFileUploader } from "@/utils/actions/getFileUploade";
 
 const SlideUploader: React.FC<{
   slideName: string;
-  slides: string[];
-  slideNo: number;
-  uploadImFn: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    slideNoFn: number
-  ) => Promise<void>;
-}> = ({ slideName, slides, slideNo, uploadImFn }) => {
+  slideImage: string;
+  setSlideImage: (slideImage: string) => void;
+}> = ({ slideName, slideImage, setSlideImage }) => {
   //   const [slides, setSlides] = useState<string[]>([]);
+
+  const uploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile) {
+      const uploadedFile = await getFileUploader(selectedFile);
+      if (uploadedFile) {
+        setSlideImage(uploadedFile);
+
+        // updateData("/config/upload-slide", {
+        //   url: uploadedFile,
+        //   index: slideNoFn,
+        // });
+        // // .then(() => window.location.reload());
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -23,9 +37,9 @@ const SlideUploader: React.FC<{
         <div className="flex justify-between px-4 pt-6">
           <label htmlFor="filePicker">
             <div className="flex items-center gap-2 cursor-pointer">
-              {slides[slideNo] ? (
+              {slideImage ? (
                 <Image
-                  src={slides[slideNo]}
+                  src={slideImage}
                   width={50}
                   height={50}
                   className="w-20 h-20 rounded ml-2"
@@ -45,9 +59,7 @@ const SlideUploader: React.FC<{
               name="filePicker"
               id="filePicker"
               accept="image/*"
-              onChange={(e) => {
-                uploadImFn(e, slideNo);
-              }}
+              onChange={uploadImage}
               hidden
             />
           </label>

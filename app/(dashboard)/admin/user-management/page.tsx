@@ -20,7 +20,6 @@ const navData: INavItem[] = [
 
 const UserManagement: NextPage = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  console.log("Data from User Mng: ", data);
 
   return (
     <>
