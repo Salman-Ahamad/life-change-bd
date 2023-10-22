@@ -9,7 +9,7 @@ connectDb();
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { url, index } = await req.json();
+    const { url, slideNo } = await req.json();
 
     // Get Current User
     const user = await getCurrentUser();
@@ -24,7 +24,7 @@ export const PATCH = async (req: NextRequest) => {
       { for: UserRole.admin },
       {
         $set: {
-          [`sliderImage.${index}`]: url,
+          [`sliderImage.${slideNo}`]: url,
         },
       },
       {

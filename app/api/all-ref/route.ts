@@ -33,9 +33,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     let isActiveValue: boolean = isActive && JSON.parse(isActive.toLowerCase());
-    console.log("🚀 ~ file: route.ts:36 ~ GET ~ isActiveValue:", {
-      isActiveValue,
-    });
     let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     let singleDateValue: boolean =
