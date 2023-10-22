@@ -36,7 +36,6 @@ const Dashboard = () => {
 
   const user = useCurrentUser();
   useGetData("/config", setConfig);
-  // useGetData("/config", setConfig);
 
   return (
     <main>
