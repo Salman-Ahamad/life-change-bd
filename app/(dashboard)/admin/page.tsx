@@ -40,27 +40,18 @@ const adminNav: INavItem[] = [
 const Dashboard = () => {
   const [config, setConfig] = useState<IAppConfig>();
   useGetData("/config", setConfig, true);
+  const [slideImages, setSlideImages] = useState(
+    config?.sliderImage || ["", "", "", ""]
+  );
 
-  const uploadImage = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-    slideNoFn: number
-  ) => {
-    event.preventDefault();
-    console.log("1", { slideNoFn });
-    const selectedFile = event.target.files?.[0];
+  const handleSlideImageUpdate = (item: number, imageUrl: string) => {
+    console.log({ item, imageUrl });
 
-    if (selectedFile) {
-      console.log("2", { slideNoFn });
-      const uploadedFile = await getFileUploader(selectedFile);
-      if (uploadedFile) {
-        console.log("3", { slideNoFn });
-        updateData("/config/upload-slide", {
-          url: uploadedFile,
-          index: slideNoFn,
-        });
-        // .then(() => window.location.reload());
-      }
-    }
+    setSlideImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[item] = imageUrl;
+      return updatedImages;
+    });
   };
 
   return (
@@ -72,17 +63,19 @@ const Dashboard = () => {
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide1"
-              slides={config?.sliderImage}
-              slideNo={0}
-              uploadImFn={uploadImage}
+              slideImage={slideImages[0]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(0, image)
+              }
             />
           )}
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide2"
-              slides={config?.sliderImage}
-              slideNo={1}
-              uploadImFn={uploadImage}
+              slideImage={slideImages[1]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(1, image)
+              }
             />
           )}
         </div>
@@ -90,17 +83,19 @@ const Dashboard = () => {
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide3"
-              slides={config?.sliderImage}
-              slideNo={2}
-              uploadImFn={uploadImage}
+              slideImage={slideImages[2]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(2, image)
+              }
             />
           )}
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide4"
-              slides={config?.sliderImage}
-              slideNo={3}
-              uploadImFn={uploadImage}
+              slideImage={slideImages[3]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(3, image)
+              }
             />
           )}
         </div>
