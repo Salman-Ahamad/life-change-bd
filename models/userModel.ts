@@ -117,6 +117,10 @@ const userSchema = new Schema<IUserSchema>(
         type: Boolean,
         default: false,
       },
+      course: {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
     },
   },
   {

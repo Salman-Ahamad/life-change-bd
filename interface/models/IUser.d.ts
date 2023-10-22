@@ -21,6 +21,7 @@ export interface ISettingsSchema {
   controller: Types.ObjectId;
   teacher: Types.ObjectId;
   gl: Types.ObjectId;
+  course: Types.ObjectId;
 }
 
 export interface ISettings extends ISettingsSchema {
@@ -29,6 +30,7 @@ export interface ISettings extends ISettingsSchema {
   controller: IUSer;
   teacher: IUSer;
   gl: IUSer;
+  course: string;
 }
 
 export interface IUserSchema {

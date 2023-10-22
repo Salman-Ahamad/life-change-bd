@@ -121,6 +121,9 @@ export const config = {
     "/photo-zone/profile",
     "/photo-zone/user-profile/[slug]",
     "/subadmin",
+    "/subadmin/change-password",
+    "/subadmin/profile",
+    "/subadmin/profile/edit",
     "/forgot-password",
   ],
 };
