@@ -26,7 +26,7 @@ const Passbook = () => {
   >(null);
   const [dataType, setDataType] = useState<string>("credit");
 
-  useGetData("/all-ref/?inactiveBonus=true", setPassbookData, true);
+  useGetData("/all-ref", setPassbookData, true);
   useGetData("/passbook/debit", setPassbookDebitData, true);
 
   return (
@@ -41,6 +41,7 @@ const Passbook = () => {
           Debit History
         </Button>
       </div>
+
       {passbookData === null ? (
         <Title variant="H4" className="text-center capitalize my-10">
           Loading... Please wait 🔃
@@ -51,6 +52,8 @@ const Passbook = () => {
           tableHeaders={["Date", "id", "Name", "Joining Time"]}
           dataProperties={["createdAt", "firstName", "createdAt", "phone"]}
           message="Message"
+          extraHed={["Amount"]}
+          extraProperties={[<>amount</>]}
         />
       ) : dataType === "debit" && passbookDebitData ? (
         <DataTable

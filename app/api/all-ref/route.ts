@@ -55,6 +55,9 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const inactiveBonusOption = {
       "settings.inactiveBonus": inactiveBonusValue,
     };
+    const activeBonusOption = {
+      "settings.activeBonus": isActiveValue,
+    };
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = singleDateValue
@@ -65,11 +68,16 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return (
         (id && { ...idFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
+        (inactiveBonus &&
+          isActive && {
+            ...inactiveBonusOption,
+            ...activeBonusOption,
+            ...option,
+          }) ||
         (inactiveBonus && {
           ...inactiveBonusOption,
           ...option,
-        }) ||
-        {}
+        }) || { reference: user.userId }
       );
     };
 

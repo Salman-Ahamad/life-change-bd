@@ -140,6 +140,8 @@ export interface IRefTable {
   setActionId?: (id: string, isReject?: boolean) => void;
   UpdateSendWish?: boolean;
   slugUrl?: string;
+  extraHed?: string[];
+  extraProperties?: JSX.Element[];
 }
 
 export interface IFiledDate {
