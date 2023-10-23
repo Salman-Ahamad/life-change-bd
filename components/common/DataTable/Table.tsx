@@ -129,12 +129,13 @@ Lifechange Bd e-learning platform
                     {rejectBtn}
                   </td>
                 )}
-                {extraProperties?.map((item, i) => (
-                  <td key={i} className="px-2.5">
-                    {(referUser.role === UserRole.active && 120) ||
-                      (referUser.role === UserRole.inactive && 1)}
-                  </td>
-                ))}
+                {extraProperties &&
+                  extraProperties?.map((item, i) => (
+                    <td key={i} className="px-2.5">
+                      {(referUser.role === UserRole.active && 120) ||
+                        (referUser.role === UserRole.inactive && 1)}
+                    </td>
+                  ))}
               </tr>
             ))}
           </tbody>
