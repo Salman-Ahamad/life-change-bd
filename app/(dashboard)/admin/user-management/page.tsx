@@ -26,9 +26,8 @@ const UserManagement: NextPage = () => {
       <Header navData={navData} />
       <PageHeader
         title="User Management"
-        notice="Last 3 Month Outbound"
+        notice="All user management List"
         setData={setData}
-        // onlyActive
       />
       {data !== null && data.length !== 0 && (
         <RefTable
