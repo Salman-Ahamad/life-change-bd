@@ -9,7 +9,7 @@ import { useState } from "react";
 const SingleCourses = ({ params }: ISlugParams) => {
   const { slug } = params;
   const [course, setCourse] = useState<ICourse | undefined>();
-  useGetData(`/courses/${slug}`, setCourse);
+  useGetData(`/courses/${slug}`, setCourse, true);
 
   const { title, description, image, learn, footerDes } = course || {};
 

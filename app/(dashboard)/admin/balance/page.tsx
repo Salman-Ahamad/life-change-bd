@@ -1,11 +1,9 @@
 "use client";
 
 import { Header } from "@/components";
-import { useState } from "react";
 
 import { BalanceManagement } from "@/components/Admin";
-import { useGetData } from "@/hooks";
-import { IAppConfig, INavItem } from "@/interface";
+import { INavItem } from "@/interface";
 import { BackButton, Container } from "@/universal";
 
 const adminNav: INavItem[] = [
@@ -15,10 +13,7 @@ const adminNav: INavItem[] = [
   },
 ];
 
-const Blance = () => {
-  const [config, setConfig] = useState<IAppConfig>();
-  useGetData("/config", setConfig, true);
-
+const Balance = () => {
   return (
     <main>
       <Header navData={adminNav} />
@@ -30,4 +25,4 @@ const Blance = () => {
   );
 };
 
-export default Blance;
+export default Balance;

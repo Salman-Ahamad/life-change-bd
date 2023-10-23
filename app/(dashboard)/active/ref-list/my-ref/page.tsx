@@ -16,7 +16,7 @@ const navData: INavItem[] = [
 
 const MyReference = () => {
   const [refData, setRefData] = useState<IUser[] | null>(null);
-  useGetData("/all-ref?inactiveBonus=false", setRefData);
+  useGetData("/all-ref?inactiveBonus=false", setRefData, true);
 
   const handleCollectMoney = async (id: string) => {
     await updateData(`/all-ref/${id}`, {}).then(() => window.location.reload());

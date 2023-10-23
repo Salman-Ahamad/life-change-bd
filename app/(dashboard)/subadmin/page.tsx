@@ -1,14 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Header } from "@/components";
 
-import { Header, Slider } from "@/components";
-
-import { useCurrentUser, useGetData } from "@/hooks";
-import { Container, Title } from "@/universal";
-import { IAppConfig, INavItem } from "@/interface";
-import { AiOutlineHome } from "react-icons/ai";
 import { ChangeMeetingLink } from "@/components/SubAdmin/ChangeMeetingLink";
+import { useCurrentUser } from "@/hooks";
+import { INavItem } from "@/interface";
+import { Container, Title } from "@/universal";
+import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {

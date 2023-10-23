@@ -17,7 +17,7 @@ const adminNav: INavItem[] = [
 
 const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
-  useGetData("/withdrawal", setData);
+  useGetData("/withdrawal", setData, true);
 
   const handleAction = (id: string, isReject?: boolean) => {
     if (Types.ObjectId.isValid(id)) {

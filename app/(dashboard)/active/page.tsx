@@ -45,7 +45,7 @@ const navData: INavItem[] = [
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser(true);
-  useGetData("/config", setConfig);
+  useGetData("/config", setConfig, true);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {

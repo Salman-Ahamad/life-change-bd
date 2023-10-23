@@ -28,7 +28,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [disabled, setDisabled] = useState(true);
 
   const user = useCurrentUser(true);
-  useGetData(`/user/${slug}`, setUserData);
+  useGetData(`/user/${slug}`, setUserData, true);
 
   const admin = [
     UserRole.controller,

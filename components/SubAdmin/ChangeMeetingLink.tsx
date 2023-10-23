@@ -16,8 +16,6 @@ export const ChangeMeetingLink: FC<{ courseSlug: string }> = ({
   //   course?.meetingId && setMeetLink(course?.meetingId);
   // }, [course]);
 
-  // const user = useCurrentUser(true);
-
   const handleChangeMeetingLink = async () => {
     updateData(`courses/${course?.id}`, { meetingId: meetLink }).then(() =>
       window.location.reload()
