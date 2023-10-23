@@ -33,7 +33,7 @@ export const BalanceManagement = () => {
           if (config.totalWithdraw >= margeBalance) {
             updateData("/config", {
               $inc: {
-                mainBalance: -margeBalance,
+                mainBalance: margeBalance,
                 totalWithdraw: -margeBalance,
               },
             }).then(() => window.location.reload());
