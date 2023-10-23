@@ -30,19 +30,25 @@ const Withdrawal = () => {
 
   const handleWithdraw = () => {
     if (user) {
-      if (number.length === 11) {
-        createData(`/withdrawal`, { amount, method, number }).then(() =>
-          window.location.reload()
-        );
+      if (user.balance >= amount) {
+        if (number.length === 11) {
+          createData(`/withdrawal`, { amount, method, number }).then(() =>
+            window.location.reload()
+          );
+        } else {
+          toast.error("Number must be 11 characters");
+        }
       } else {
-        toast.error("Number must be 11 characters");
+        toast.error("Please ceck available balance");
       }
     }
   };
 
   const handleAddPending = () => {
     if (user && user.balance >= 200) {
-      updateData("/user/withdrawal-fee", {});
+      updateData("/user/withdrawal-fee", {}).then(() =>
+        window.location.reload()
+      );
     } else {
       toast.error("Below minimum balance 🤑200");
     }
@@ -99,7 +105,7 @@ const Withdrawal = () => {
           </Button>
         </div>
       </Container>
-      {!user?.settings.withdrawalFee && (
+      {user && !user?.settings.withdrawalFee && (
         <Container className="flex flex-col justify-center items-center gap-2.5 mt-5">
           <CommonText className="text-center text-green-600">
             Before withdraw, please <br />

@@ -11,7 +11,7 @@ const ProfileFeed: React.FC = () => {
   const [myPosts, setMyPosts] = useState<IPostWithAuthor[]>([]);
 
   const user = useCurrentUser(true);
-  useGetData("/photo-zone/post", setPosts);
+  useGetData("/photo-zone/post", setPosts, true);
 
   useEffect(() => {
     if (posts && posts.length > 0 && user) {

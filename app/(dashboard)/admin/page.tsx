@@ -3,12 +3,12 @@
 import { Header, Slider } from "@/components";
 import { useState } from "react";
 
-import { BalanceManagement } from "@/components/Admin";
 import SlideUploader from "@/components/Admin/SlideUploader";
-import { useGetData } from "@/hooks";
+import { updateData, useGetData } from "@/hooks";
 import { IAppConfig, INavItem } from "@/interface";
 import { Container } from "@/universal";
 import { AiOutlineHome } from "react-icons/ai";
+import { getFileUploader } from "@/utils/actions/getFileUploade";
 
 const adminNav: INavItem[] = [
   {
@@ -28,6 +28,10 @@ const adminNav: INavItem[] = [
     link: "/admin/action",
   },
   {
+    label: "Balance",
+    link: "/admin/balance",
+  },
+  {
     label: "Settings",
     link: "/admin/settings",
   },
@@ -36,25 +40,42 @@ const adminNav: INavItem[] = [
 const Dashboard = () => {
   const [config, setConfig] = useState<IAppConfig>();
   useGetData("/config", setConfig, true);
+  const [slideImages, setSlideImages] = useState(
+    config?.sliderImage || ["", "", "", ""]
+  );
+
+  const handleSlideImageUpdate = (item: number, imageUrl: string) => {
+    console.log({ item, imageUrl });
+
+    setSlideImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[item] = imageUrl;
+      return updatedImages;
+    });
+  };
 
   return (
     <main>
       <Header navData={adminNav} />
-      <BalanceManagement />
+
       <Container className="flex flex-col justify-center items-center">
         <div className="flex gap-4">
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide1"
-              slides={config?.sliderImage}
-              slideNo={0}
+              slideImage={slideImages[0]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(0, image)
+              }
             />
           )}
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide2"
-              slides={config?.sliderImage}
-              slideNo={1}
+              slideImage={slideImages[1]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(1, image)
+              }
             />
           )}
         </div>
@@ -62,15 +83,19 @@ const Dashboard = () => {
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide3"
-              slides={config?.sliderImage}
-              slideNo={2}
+              slideImage={slideImages[2]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(2, image)
+              }
             />
           )}
           {config?.sliderImage && (
             <SlideUploader
               slideName="slide4"
-              slides={config?.sliderImage}
-              slideNo={3}
+              slideImage={slideImages[3]}
+              setSlideImage={(image: string) =>
+                handleSlideImageUpdate(3, image)
+              }
             />
           )}
         </div>

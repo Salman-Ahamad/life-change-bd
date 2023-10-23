@@ -18,9 +18,6 @@ const navData: INavItem[] = [
   },
 ];
 
-// TODO: May need to change, this will force to catch data for 10 second only
-// export const revalidate = 10;
-
 const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
@@ -31,7 +28,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [disabled, setDisabled] = useState(true);
 
   const user = useCurrentUser(true);
-  useGetData(`/user/${slug}`, setUserData);
+  useGetData(`/user/${slug}`, setUserData, true);
 
   const admin = [
     UserRole.controller,

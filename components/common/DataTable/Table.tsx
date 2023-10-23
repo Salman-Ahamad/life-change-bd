@@ -1,6 +1,7 @@
 "use client";
 
 import { IRefTable, IUser } from "@/interface";
+import { UserRole } from "@/lib";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 
@@ -13,6 +14,8 @@ export const DataTable: FC<IRefTable> = ({
   rejectBtn,
   setActionId,
   UpdateSendWish,
+  extraHed,
+  extraProperties,
 }) => {
   const handleAction = (id: string, isReject?: boolean) => {
     setActionId && setActionId(id, isReject);
@@ -33,6 +36,8 @@ export const DataTable: FC<IRefTable> = ({
                   ))}
               {message && <THeader label={message} />}
               {actionBtn && <THeader label="Action" />}
+              {extraHed &&
+                extraHed.map((item) => <THeader key={item} label={item} />)}
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
@@ -124,6 +129,13 @@ Lifechange Bd e-learning platform
                     {rejectBtn}
                   </td>
                 )}
+                {extraProperties &&
+                  extraProperties?.map((item, i) => (
+                    <td key={i} className="px-2.5">
+                      {(referUser.role === UserRole.active && 120) ||
+                        (referUser.role === UserRole.inactive && 1)}
+                    </td>
+                  ))}
               </tr>
             ))}
           </tbody>

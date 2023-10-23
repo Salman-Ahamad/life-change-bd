@@ -18,7 +18,7 @@ const navData: INavItem[] = [
 const Courses: NextPage = () => {
   const [courses, setCourses] = useState<ICourse[] | null>();
 
-  useGetData("/courses", setCourses);
+  useGetData("/courses", setCourses, true);
 
   return (
     <>

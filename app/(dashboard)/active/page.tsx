@@ -45,7 +45,7 @@ const navData: INavItem[] = [
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser(true);
-  useGetData("/config", setConfig);
+  useGetData("/config", setConfig, true);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
@@ -83,7 +83,10 @@ const Active = () => {
         {config && (
           <div className="space-y-5">
             <HelpLink meetId={config.support.help} />
-            <MeetingLink meetId={config.support.meeting} />
+            <MeetingLink
+              meetId={config.support.meeting}
+              title="Life Change BD Support Meeting"
+            />
           </div>
         )}
         {config && <SupportTeam support={config.support.whatsApp} />}

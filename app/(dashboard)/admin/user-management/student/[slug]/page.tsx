@@ -22,7 +22,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const id = params.slug;
 
   const [userData, setUserData] = useState<IUser>();
-  useGetData(`/user/${id}`, setUserData);
+  useGetData(`/user/${id}`, setUserData, true);
 
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [depositAmount, setDepositAmount] = useState<number>(0);

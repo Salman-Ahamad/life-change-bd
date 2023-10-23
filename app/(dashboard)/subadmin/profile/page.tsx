@@ -11,23 +11,15 @@ import { BackButton, CommonText } from "@/universal";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active",
+    link: "/subadmin",
   },
   {
     label: "Edit Profile",
-    link: "/active/user/profile/edit",
+    link: "/subadmin/profile/edit",
   },
   {
     label: "Change Password",
-    link: "/active/change-password",
-  },
-  {
-    label: "Passbook",
-    link: "/active/passbook",
-  },
-  {
-    label: "Withdrawal",
-    link: "/active/user/withdrawal",
+    link: "/subadmin/change-password",
   },
 ];
 
@@ -70,6 +62,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full`}>
+                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
                 {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>

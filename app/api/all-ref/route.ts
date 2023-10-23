@@ -33,45 +33,51 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     let isActiveValue: boolean = isActive && JSON.parse(isActive.toLowerCase());
-    console.log("🚀 ~ file: route.ts:36 ~ GET ~ isActiveValue:", {
-      isActiveValue,
-    });
     let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     let singleDateValue: boolean =
       singleDate && JSON.parse(singleDate.toLowerCase());
 
-    const formattingDate = new Date(Number(date));
-    // Set the start and end of the day
+    // single date filtering
     const startOfDay = new Date(Number(date));
     startOfDay.setHours(0, 0, 0, 0);
     const endOfDay = new Date(Number(date));
     endOfDay.setHours(23, 59, 59, 999);
 
+    // year and month filtering
+    const formattingDate = new Date(Number(date));
+    const month = formattingDate.getMonth();
+    const year = formattingDate.getFullYear();
+    const startOfMonth = new Date(year, month, 1);
+    const endOfMonth = new Date(year, month + 1, 1);
+
     let option = {};
     const inactiveBonusOption = {
       "settings.inactiveBonus": inactiveBonusValue,
     };
+    const activeBonusOption = {
+      "settings.activeBonus": isActiveValue,
+    };
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = singleDateValue
-        ? {
-            createdAt: {
-              $gte: startOfDay,
-              $lt: endOfDay,
-            },
-          }
-        : { createdAt: { $gte: formattingDate } };
+        ? { createdAt: { $gte: startOfDay, $lt: endOfDay } }
+        : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
 
       const active = activeId ? { role: UserRole.active } : {};
       return (
         (id && { ...idFilter, ...active, ...option }) ||
         (date && { ...dateFilter, ...active, ...option }) ||
+        (inactiveBonus &&
+          isActive && {
+            ...inactiveBonusOption,
+            ...activeBonusOption,
+            ...option,
+          }) ||
         (inactiveBonus && {
           ...inactiveBonusOption,
           ...option,
-        }) ||
-        {}
+        }) || { reference: user.userId }
       );
     };
 
@@ -120,7 +126,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "Referance List get successfully 👌", refList);
+    return ApiResponse(200, "Reference List get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
