@@ -1,4 +1,3 @@
-import { User, Withdrawal } from "@/models";
 import { Earning } from "@/models/earnings";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -13,7 +12,9 @@ export const GET = async () => {
       return ApiResponse(404, "User not found❗");
     }
 
-    const result = await Earning.find({ userId: user.id });
+    const result = await Earning.find({ userId: user.userId }).sort({
+      createdAt: -1,
+    });
 
     return ApiResponse(200, "Earning data get successfully 👌", result);
   } catch (error: any) {

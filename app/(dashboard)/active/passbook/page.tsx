@@ -27,7 +27,6 @@ const Passbook = () => {
   const [dataType, setDataType] = useState<string>("credit");
 
   useGetData("/all-ref/?inactiveBonus=true", setPassbookData, true);
-  // useGetData("/passbook/credit", setPassbookData);
   useGetData("/passbook/debit", setPassbookDebitData, true);
 
   return (
@@ -53,13 +52,7 @@ const Passbook = () => {
           dataProperties={["createdAt", "firstName", "createdAt", "phone"]}
           message="Message"
         />
-      ) : // <DataTable
-      //   tableData={passbookData}
-      //   tableHeaders={["No", "Date", "Amount", "Description"]}
-      //   dataProperties={["createdAt", "amount", "comments"]}
-      // />
-      // TODO: Update this later
-      dataType === "debit" && passbookDebitData ? (
+      ) : dataType === "debit" && passbookDebitData ? (
         <DataTable
           tableData={passbookDebitData}
           tableHeaders={["no", "Date", "amount", "method", "Number", "status"]}

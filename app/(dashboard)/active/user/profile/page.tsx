@@ -70,7 +70,6 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full`}>
-                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
                 {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>

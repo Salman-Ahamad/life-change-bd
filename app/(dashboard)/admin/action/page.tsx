@@ -22,12 +22,13 @@ const Action: React.FC = () => {
   const handleAction = (id: string, isReject?: boolean) => {
     if (Types.ObjectId.isValid(id)) {
       if (!isReject) {
-        updateData("/withdrawal", { id, status: "complete" }).then(() =>
-          window.location.reload()
-        );
+        updateData("/withdrawal?status=complete", {
+          id,
+          status: "complete",
+        }).then(() => window.location.reload());
       } else {
-        updateData("/withdrawal", { id, status: "reject" }).then(() =>
-          window.location.reload()
+        updateData("/withdrawal?status=reject", { id, status: "reject" }).then(
+          () => window.location.reload()
         );
       }
     } else {
@@ -49,8 +50,8 @@ const Action: React.FC = () => {
       ) : data !== undefined ? (
         <DataTable
           tableData={data}
-          tableHeaders={["no", "id", "amount", "method", "status"]}
-          dataProperties={["userId", "amount", "method", "status"]}
+          tableHeaders={["no", "id", "Number", "amount", "method", "status"]}
+          dataProperties={["userId", "number", "amount", "method", "status"]}
           setActionId={handleAction}
           actionBtn={
             <Button variant="secondary" className="text-xs">

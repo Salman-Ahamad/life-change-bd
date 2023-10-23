@@ -25,7 +25,7 @@ export const POST = async (req: NextRequest) => {
     );
 
     const option = {
-      userId: user.id,
+      userId: user.userId,
       amount: amountToNumber,
       ...withdrawalData,
     };
@@ -62,6 +62,7 @@ export const GET = async () => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
+    const status = req.nextUrl.searchParams.get("status");
     const { id, ...updatedData } = await req.json();
 
     // Get Current User
@@ -76,29 +77,63 @@ export const PATCH = async (req: NextRequest) => {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const result = await Withdrawal.updateOne({ _id: id }, updatedData, {
-      new: true,
-    });
+    if (status === "complete") {
+      const result = await Withdrawal.updateOne({ _id: id }, updatedData, {
+        new: true,
+      });
 
-    if (result.acknowledged && result.modifiedCount === 1) {
-      // Fetch the updated document by its _id
-      const updatedDocument = await Withdrawal.findOne({ _id: id });
-      if (
-        updatedDocument &&
-        updatedDocument.amount &&
-        updatedDocument.status === "complete"
-      ) {
-        // This will increase the totalWithdraw
-        const totalWithdrawalUpdate = await AppConfig.updateOne(
-          {},
-          { $inc: { totalWithdraw: updatedDocument.amount } }
-        );
-      } else {
-        console.log("Document not found after update.");
+      if (result.acknowledged && result.modifiedCount === 1) {
+        // Fetch the updated document by its _id
+        const updatedDocument = await Withdrawal.findOne({ _id: id });
+        if (
+          updatedDocument &&
+          updatedDocument.amount &&
+          updatedDocument.status === "complete"
+        ) {
+          // This will increase the totalWithdraw
+          await AppConfig.updateOne(
+            {},
+            { $inc: { totalWithdraw: updatedDocument.amount } }
+          );
+        } else {
+          console.log("Document not found after update.");
+        }
+      }
+
+      return ApiResponse(200, "Withdrawal complete successfully 🛠️✅", result);
+    } else if (status === "reject") {
+      const result = await Withdrawal.updateOne({ _id: id }, updatedData, {
+        new: true,
+      });
+
+      if (result.acknowledged && result.modifiedCount === 1) {
+        // Fetch the updated document by its _id
+        const updatedDocument = await Withdrawal.findOne({ _id: id });
+
+        if (
+          updatedDocument &&
+          updatedDocument.amount &&
+          updatedDocument.status === "reject"
+        ) {
+          // This will increase the totalWithdraw
+          await User.findOneAndUpdate(
+            {
+              userId: updatedDocument.userId,
+            },
+            { $inc: { balance: updatedDocument.amount } },
+            { new: true }
+          );
+
+          return ApiResponse(
+            200,
+            "Withdrawal Reject successfully 🛠️✅",
+            result
+          );
+        } else {
+          console.log("Document not found after update.");
+        }
       }
     }
-
-    return ApiResponse(200, "Withdrawal update successfully 🛠️✅", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
