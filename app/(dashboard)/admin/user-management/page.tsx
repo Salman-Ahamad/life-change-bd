@@ -1,11 +1,11 @@
 "use client";
 
-import { NextPage } from "next";
-import { useState } from "react";
 import { Header, PageHeader } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { INavItem, IUser } from "@/interface";
-import { BackButton, Button } from "@/universal";
+import { BackButton } from "@/universal";
+import { NextPage } from "next";
+import { useState } from "react";
 
 const navData: INavItem[] = [
   {
@@ -28,7 +28,7 @@ const UserManagement: NextPage = () => {
         title="User Management"
         notice="Last 3 Month Outbound"
         setData={setData}
-        onlyActive
+        // onlyActive
       />
       {data !== null && data.length !== 0 && (
         <RefTable
