@@ -173,6 +173,15 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               setUpdatedData((prev) => ({ ...prev, whatsapp: value }))
             }
           />
+          <InputField
+            onlyText={user?.role !== UserRole.admin}
+            label="Balance:"
+            name="Balance"
+            defaultValue={(userData && String(userData.balance)) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, balance: Number(value) }))
+            }
+          />
 
           <InputField
             onlyText={
