@@ -114,7 +114,8 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       // );
 
       await User.updateOne({ _id: logInUser.id }, { $inc: { balance: 1 } });
-      await User.updateOne({ userId: id }, { "settings.inactiveBonus": true });
+      await User.updateOne({ _id: id }, { "settings.inactiveBonus": true });
+
       // This will reduce the main company balance by 1
       await AppConfig.updateOne(
         {},
