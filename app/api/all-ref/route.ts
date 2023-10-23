@@ -38,12 +38,18 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     let singleDateValue: boolean =
       singleDate && JSON.parse(singleDate.toLowerCase());
 
-    const formattingDate = new Date(Number(date));
-    // Set the start and end of the day
+    // single date filtering
     const startOfDay = new Date(Number(date));
     startOfDay.setHours(0, 0, 0, 0);
     const endOfDay = new Date(Number(date));
     endOfDay.setHours(23, 59, 59, 999);
+
+    // year and month filtering
+    const formattingDate = new Date(Number(date));
+    const month = formattingDate.getMonth();
+    const year = formattingDate.getFullYear();
+    const startOfMonth = new Date(year, month, 1);
+    const endOfMonth = new Date(year, month + 1, 1);
 
     let option = {};
     const inactiveBonusOption = {
@@ -52,13 +58,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = singleDateValue
-        ? {
-            createdAt: {
-              $gte: startOfDay,
-              $lt: endOfDay,
-            },
-          }
-        : { createdAt: { $gte: formattingDate } };
+        ? { createdAt: { $gte: startOfDay, $lt: endOfDay } }
+        : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
 
       const active = activeId ? { role: UserRole.active } : {};
       return (
