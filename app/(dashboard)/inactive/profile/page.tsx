@@ -43,7 +43,8 @@ const Profile = () => {
         role: UserRole.active,
         balance: user.balance - config.baseFee,
       };
-      updateData("/all-ref", updatedData).then(() => signOut());
+      // updateData("/all-ref", updatedData).then(() => signOut());
+      updateData("/user/active", {}).then(() => signOut());
     }
   };
 
