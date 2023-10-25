@@ -1,0 +1,1364 @@
+[{
+  "_id": {
+    "$oid": "652acaa336bbdce045e5f857"
+  },
+  "userId": "230013",
+  "firstName": "Tushar",
+  "lastName": "Imran",
+  "email": "dfhdh@asdfas.com",
+  "password": "$2a$10$16K6lC4pHmGo6ZzgjKflLeG2OjXUWrCjxnJgP4dt2VXE2LtL7Kj36",
+  "phone": "01234567801",
+  "whatsapp": "01234567801",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 49010020,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T17:06:43.734Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T08:08:17.254Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac5fa36bbdce045e5f82d"
+  },
+  "userId": "230007",
+  "firstName": "Ahnaf",
+  "lastName": "Masrup",
+  "email": "sample@gmail.com",
+  "password": "$2a$10$SIwynx/X4STm8TeMKSXsBuss.pMVHFzJCijC/isHzLzqmatfEMiXq",
+  "phone": "01234567892",
+  "whatsapp": "01234567892",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "teacher",
+  "reference": "-",
+  "balance": 100,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": true,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "course": "sahih-holy-quran"
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:46:50.366Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-22T02:17:02.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac63736bbdce045e5f834"
+  },
+  "userId": "230008",
+  "firstName": "Masrifa",
+  "lastName": "Sultana",
+  "email": "sample66@gmail.com",
+  "password": "$2a$10$D02V15O2zFUH.N.YiKMReeF695tuPTIoGhEAszkioL3jFiaCpXi7W",
+  "phone": "01234567894",
+  "whatsapp": "01234567894",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:47:51.368Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T16:47:51.368Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac3fb36bbdce045e5f81f"
+  },
+  "userId": "230005",
+  "firstName": "Md",
+  "lastName": "Hossain",
+  "email": "test123@gmail.com",
+  "password": "$2a$10$7GvzIswY661JA.ZyZpsgUe2vtA9B1iDofjg6BeDa1LyiFd5.GhJXi",
+  "phone": "01234567890",
+  "whatsapp": "01234567890",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "consultant": {
+      "$oid": "652abc5d209ab943ff72046f"
+    },
+    "controller": {
+      "$oid": "652ab926209ab943ff72044c"
+    }
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:38:19.227Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T15:57:57.976Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b24e26697f75f8c84d0bd"
+  },
+  "userId": "230015",
+  "firstName": "Rimon ",
+  "lastName": "Hasan",
+  "email": "rimonhasan50858@gmail.com",
+  "password": "$2a$10$eGDbkM7mBZTwAO4b/y7qxOIvxG9TLfostVE1QSx0153NlfpzPficC",
+  "phone": "01700961855",
+  "whatsapp": "01700961855",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "gl",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T23:31:46.086Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T11:00:29.386Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652fb7a299a1e90686961d5b"
+  },
+  "userId": "230029",
+  "firstName": "salman",
+  "lastName": "test",
+  "email": "salman@test.com",
+  "password": "$2a$10$Vdw5RIfUmMOGBSQkzzqdv.C2GWcKdi6.yg93barHHEtqe22NNOHIy",
+  "phone": "01912345678",
+  "whatsapp": "01912345678",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T10:46:58.046Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T10:46:58.046Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652aca1136bbdce045e5f850"
+  },
+  "userId": "230012",
+  "firstName": "Josna",
+  "lastName": "Akhter",
+  "email": "fdsgsdfg@gmail.com",
+  "password": "$2a$10$P.iL/g/XpK4CTg9NVTCrz.O9vqmQrIHNRxMU35HB21cvTMXCbEx2e",
+  "phone": "01234567899",
+  "whatsapp": "01234567899",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T17:04:17.468Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T17:04:17.468Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652fbbcb6e12d1f0da737ba1"
+  },
+  "userId": "230030",
+  "firstName": "Rimon",
+  "lastName": "Hasan",
+  "email": "rhmaltrapro@gmail.com",
+  "password": "$2a$10$d8z.Zs8KA8.JMGXTFazQ1eLxfEh94ZO4AqEfgZJnbuQfwsq6o.cQK",
+  "phone": "01700961856",
+  "whatsapp": "01700961856",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "active",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T11:04:43.104Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T15:58:48.991Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ab926209ab943ff72044c"
+  },
+  "userId": "230003",
+  "firstName": "controller",
+  "lastName": "Profile",
+  "email": "controller@gmail.com",
+  "password": "$2a$10$wDI4OSKXZsj8uYwbH2nCeuSsxt8XyXPp7wnBioaO5sfCw5HUlr7U.",
+  "phone": "01312345678",
+  "whatsapp": "01312345678",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "controller",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T15:52:06.699Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T16:41:31.251Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6527ecf7577ff95a96133786"
+  },
+  "userId": "230001",
+  "firstName": "LIFE CHANGE ",
+  "lastName": "BD",
+  "email": "webserviceit9@gmail.com",
+  "password": "$2a$10$koniqIfDnyryxAcweOCZjubmsMib3u1NZ.SjjZF4mmmFtviiI65xe",
+  "phone": "01856639710",
+  "whatsapp": "01856639710",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "admin",
+  "reference": "-",
+  "balance": 400,
+  "image": "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697534008/upload/oongegjg6irjnqu0iphn.jpg",
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-12T12:56:23.881Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T10:25:42.812Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652aa94a209ab943ff720421"
+  },
+  "userId": "230002",
+  "firstName": "Salman",
+  "lastName": "Ahamad",
+  "email": "salman@gmail.com",
+  "password": "$2a$10$iEYxPleE6KtoG7Bryvrmv.p/5n7Rhr8nnPx0h8P4NOCAV.TJgfkHq",
+  "phone": "01712345678",
+  "whatsapp": "01712345678",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "active",
+  "reference": "-",
+  "balance": 19800,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": true,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": true
+  },
+  "createdAt": {
+    "$date": "2023-10-14T14:44:26.306Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-23T14:22:52.328Z"
+  },
+  "__v": 0,
+  "image": "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697294763/upload/egnc7asm0v22bdbwtagw.png"
+},
+{
+  "_id": {
+    "$oid": "652e3ab1c8689c13b3af4a60"
+  },
+  "userId": "230027",
+  "firstName": "Dj",
+  "lastName": "Rahat",
+  "email": "djrahat@gmail.com",
+  "password": "$2a$10$C6DqovanedldmMzU2W8kFenRc6OLmoLRHgfi3mH5N0jiuEMLTvhUK",
+  "phone": "01874331932",
+  "whatsapp": "01874331932",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "6527ecf7577ff95a96133786",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-17T07:41:37.651Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T07:41:37.651Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b1bc8f25dafc376eec3a1"
+  },
+  "userId": "230014",
+  "firstName": "HB",
+  "lastName": "MEDUL",
+  "email": "habibul5031@gmail.com",
+  "password": "$2a$10$spMMOEauG.WWk9gtVxomdePsb8l0vtysFJg6VnkL/aKAo2rDA0S8S",
+  "phone": "01738154732",
+  "whatsapp": "01738154732",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "consultant",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T22:52:56.094Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-15T09:29:10.731Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652abc5d209ab943ff72046f"
+  },
+  "userId": "230004",
+  "firstName": "consultant",
+  "lastName": "Profile",
+  "email": "consultant@p.com",
+  "password": "$2a$10$zSckuFJ0mH4EBeyofWarWu69md7UqXQH.G6aTYa0UERCSCoAiqKQS",
+  "phone": "01412345678",
+  "whatsapp": "01412345678",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "consultant",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false,
+    "controller": {
+      "$oid": "652ab926209ab943ff72044c"
+    }
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:05:49.989Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T04:31:10.941Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac74336bbdce045e5f842"
+  },
+  "userId": "230010",
+  "firstName": "Khalid",
+  "lastName": "Farhan",
+  "email": "contact@casualgirls.store",
+  "password": "$2a$10$gG1KQ0KDrt2rWEo.MPOcpeqIAqvJjgyJ8f2qPvg7XXwHGrNAJwi.S",
+  "phone": "01234567897",
+  "whatsapp": "01234567897",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:52:19.884Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T16:52:19.884Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac71636bbdce045e5f83b"
+  },
+  "userId": "230009",
+  "firstName": "Nazma",
+  "lastName": "Akhter",
+  "email": "dfdgrs@asda.com",
+  "password": "$2a$10$CKoUp.zQm1klzJWLPIT04uEvBEhdqWpvLX9lG3xtxM9h2qRidYrAu",
+  "phone": "01234567895",
+  "whatsapp": "01234567895",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 944,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:51:34.337Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T07:54:46.306Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652bdf0681a9fb0366256e2f"
+  },
+  "userId": "230018",
+  "firstName": "Ibrahim",
+  "lastName": "Khandakar",
+  "email": "asdfa@asd.com",
+  "password": "$2a$10$YNUS7l8/tyKaUzNRnyAu9.pPS3AIjaW5fYW7bzSYQxz383EsVPZ8W",
+  "phone": "01768181719",
+  "whatsapp": "01768181719",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-15T12:45:58.694Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T11:36:34.349Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ac77b36bbdce045e5f849"
+  },
+  "userId": "230011",
+  "firstName": "Robiul",
+  "lastName": "Hasan",
+  "email": "coasdastact@casualgirls.store",
+  "password": "$2a$10$lZeGUt3QXCXKlnPYxKTBGOUMZcbfHWuXXnGZuxOB66HfCWPZO2Zki",
+  "phone": "01234567898",
+  "whatsapp": "01234567898",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:53:15.720Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T16:53:15.720Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652b34337cb1e76126b5dfee"
+  },
+  "userId": "230016",
+  "firstName": "Rimon",
+  "lastName": "Hasan",
+  "email": "remonhasan765@gmail.com",
+  "password": "$2a$10$5rwWsHpYQDr0FjbesxwkuOc47JhfYWqEjPfHfc3dan2X72m5oeHHe",
+  "phone": "01967669343",
+  "whatsapp": "01967669343",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "teacher",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false,
+    "sendWish": true
+  },
+  "createdAt": {
+    "$date": "2023-10-15T00:37:07.137Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-20T18:41:52.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ba01385b48c147868722d"
+  },
+  "userId": "230017",
+  "firstName": "Md Amir",
+  "lastName": "Hossain",
+  "email": "amirhossain.limon@gmail.com",
+  "password": "$2a$10$Gr/MwhYfQPVlrRNuxnb8kuYBd8o7TIi.GXFqwvEM02Xmpt.JxM2PK",
+  "phone": "01819062270",
+  "whatsapp": "01819062270",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "admin",
+  "reference": "-",
+  "balance": 56800,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-15T08:17:23.049Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T12:16:34.104Z"
+  },
+  "__v": 0,
+  "image": "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697621798/upload/nygdhqj2mygms7pfz6fq.jpg"
+},
+{
+  "_id": {
+    "$oid": "652e364568ccbda16f5e2de4"
+  },
+  "userId": "230026",
+  "firstName": "Saiful",
+  "lastName": "islam",
+  "email": "saiful2483041@gmail.com",
+  "password": "$2a$10$CDoYx75Y5lbizV7zAZzDpu3sa62Wh2Fsu0mrUZPvoAu1pJON/ZgpW",
+  "phone": "01580482000",
+  "whatsapp": "01580482000",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 5,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-17T07:22:45.348Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T07:23:34.956Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652fb45015204e6aae24e73c"
+  },
+  "userId": "230028",
+  "firstName": "Test referal",
+  "lastName": "Done",
+  "email": "fsdf@asf.dsf",
+  "password": "$2a$10$nCqrZW8TFc9hFRqH6DyqheiCmlEfx3ntgLpTsxNHkXOLSmltJ/qoS",
+  "phone": "12121223233",
+  "whatsapp": "12121223233",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "230017",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T10:32:48.126Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T11:14:08.123Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652c7a044499b87519be8f50"
+  },
+  "userId": "230020",
+  "firstName": "King ",
+  "lastName": "King",
+  "email": "gjgss@gmail.com",
+  "password": "$2a$10$liPKz9.A3XJ4lg9Ok4X0uONNpr/Kf/t9ei/qgpWZd117a.K3z36sK",
+  "phone": "01723006548",
+  "whatsapp": "01723006548",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-15T23:47:16.962Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-15T23:47:16.962Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652beb7d851cefc4c5eb95b3"
+  },
+  "userId": "230019",
+  "firstName": "Md  ",
+  "lastName": "Nuralam",
+  "email": "mdnuralambd658@gmail.com",
+  "password": "$2a$10$n8G5wkIrwBMLyKFwjOvyNe19tge1XNVf/nal6OOJBuTtbEyJxzTXS",
+  "phone": "01701526339",
+  "whatsapp": "01701526339",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "active",
+  "reference": "230002",
+  "balance": 1553,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "withdrawalFee": true,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": true,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-15T13:39:09.494Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-22T03:26:12.517Z"
+  },
+  "__v": 0,
+  "image": "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697529084/upload/r319degc90dfmueafazx.jpg"
+},
+{
+  "_id": {
+    "$oid": "652ac44936bbdce045e5f826"
+  },
+  "userId": "230006",
+  "firstName": "Md. Ashraf",
+  "lastName": "Hossain",
+  "email": "test3@gmail.com",
+  "password": "$2a$10$Wh/e9RANAfTljRZKDdSmtuzlDdJyI/2qGvABDE6/T41hThTj7IkzS",
+  "phone": "01234567891",
+  "whatsapp": "01234567891",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "gl",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "consultant": {
+      "$oid": "652abc5d209ab943ff72046f"
+    },
+    "controller": {
+      "$oid": "652ab926209ab943ff72044c"
+    }
+  },
+  "createdAt": {
+    "$date": "2023-10-14T16:39:37.345Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-14T17:24:47.844Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ca63041db8a9c9d5b31d0"
+  },
+  "userId": "230021",
+  "firstName": "salman",
+  "lastName": "ahamad",
+  "email": "salman@user.com",
+  "password": "$2a$10$UfpsUEjK/4ka5Z/e9MBSXeG9cMob/3BlundY3OBeId4kVy3gl05Va",
+  "phone": "01712345671",
+  "whatsapp": "01712345671",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": true,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-16T02:55:44.450Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T05:57:53.820Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652fc4d9e981d3e550a48191"
+  },
+  "userId": "230032",
+  "firstName": "Md. Amir",
+  "lastName": "Hossain",
+  "email": "coewtact@casdfghgirls.store",
+  "password": "$2a$10$L3x/b0aqN4VQzPdDl6X3Feq8Zc3FP3rQmoESeRUZkDJhmFEMH30mK",
+  "phone": "12312312387",
+  "whatsapp": "12312312387",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "652ba01385b48c147868722d",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T11:43:21.613Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T11:43:21.613Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652cae946b19998f2c02dd40"
+  },
+  "userId": "230022",
+  "firstName": "test",
+  "lastName": "a",
+  "email": "test@gmail.com",
+  "password": "$2a$10$LRl6HzplDHEc5fI/iVd1seAbE1xpFTFEYHI/iOqU8Str9LK7zlRA2",
+  "phone": "01712345144",
+  "whatsapp": "01712345144",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false,
+    "sendWish": true
+  },
+  "createdAt": {
+    "$date": "2023-10-16T03:31:32.555Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-19T07:51:36.768Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652d8b306965cedc287ee66d"
+  },
+  "userId": "230023",
+  "firstName": "BORHAN ",
+  "lastName": "UDDIN ",
+  "email": "borhanuddinbd2001@gmail.com",
+  "password": "$2a$10$CKTIkg4wyZVlonmsDWLWxey3Xvd/6BgdF1oPYavqUs3SjXAG//Mfq",
+  "phone": "01753770832",
+  "whatsapp": "01753770832",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "6527ecf7577ff95a96133786",
+  "balance": 5,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": false,
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-16T19:12:48.328Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T14:52:52.961Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652fc8a16fa122df4808d449"
+  },
+  "userId": "230033",
+  "firstName": "salman",
+  "lastName": "2",
+  "email": "salman@2.com",
+  "password": "$2a$10$q1.aSW9T3Uf2/FV7PUfzQ.RfSSa5YaPBLTir7HKu01bgCzMH96a1W",
+  "phone": "01714725836",
+  "whatsapp": "01714725836",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "230002",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": true,
+    "activeBonus": false,
+    "sendWish": true
+  },
+  "createdAt": {
+    "$date": "2023-10-18T11:59:29.323Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-23T04:13:07.698Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652e04b67c04272ff7afbd29"
+  },
+  "userId": "230024",
+  "firstName": "Inactive ",
+  "lastName": "Test",
+  "email": "dfsd@dsd.com",
+  "password": "$2a$10$a0MZyZ/vyUCEDUcZMNECg.11x2OXheI6uwvKzgelWlVM9wTuNgY/W",
+  "phone": "56565656565",
+  "whatsapp": "56565656565",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-17T03:51:18.271Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T02:19:31.387Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652e1caaf72df2032e9fd787"
+  },
+  "userId": "230025",
+  "firstName": "Mst Rumiara",
+  "lastName": "Khatun",
+  "email": "mstsumikhatun664@gmail.com",
+  "password": "$2a$10$icgbWurNZQvLRpFw7krHyut8CU2EesmUGjI.4gFh3F2.C23Lmg74i",
+  "phone": "01302158569",
+  "whatsapp": "01756921327",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "6527ecf7577ff95a96133786",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "withdrawalFee": false,
+    "activeNotice": true,
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-17T05:33:31.003Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-17T05:33:31.003Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "652ff5e206475c3affb98cc7"
+  },
+  "userId": "230034",
+  "firstName": "HR Riaj",
+  "lastName": "Uddin",
+  "email": "riajuddin7898@gmail.com",
+  "password": "$2a$10$s6iNjKXRwA6H.wno9ftcB.g3XDsqIXDrIh87wdxWeWHShUUt0ycFq",
+  "phone": "01683927898",
+  "whatsapp": "01683927898",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "-",
+  "balance": 5,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": true,
+  "settings": {
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "activeNotice": true,
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "withdrawalFee": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T15:12:34.106Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-21T12:32:01.142Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653007bd84b8c245a4366c32"
+  },
+  "userId": "230035",
+  "firstName": "Md Nuralam",
+  "lastName": " Hossen ",
+  "email": "mdnuralamhossen658@gmail.com",
+  "password": "$2a$10$CmgWm/H63WEJ5rleb7XhReCqJ3pC93vJIhV7/Zvqy/EQtIAFcUotu",
+  "phone": "01615221658",
+  "whatsapp": "01615221658",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "inactive",
+  "reference": "230019",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "activeNotice": true,
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "withdrawalFee": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T16:28:45.555Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T16:28:45.555Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653009700d413b9ac00c2ae0"
+  },
+  "userId": "230036",
+  "firstName": "Nadia",
+  "lastName": "Islam Nodi",
+  "email": "nadiyaislamnodi561@gmail.com",
+  "password": "$2a$10$jX0MADRFUzNx2huCYUAIEu9CIPDHu/DbV.ert7l3yYtQeg.CDlTWO",
+  "phone": "01603216858",
+  "whatsapp": "01603216858",
+  "country": "Bangladesh",
+  "language": "Bengali",
+  "role": "active",
+  "reference": "230019",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "activeNotice": false,
+    "inactiveBonus": true,
+    "activeBonus": true,
+    "withdrawalFee": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-18T16:36:00.842Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-18T17:06:03.404Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6531ec4f9fe4fbac1354e787"
+  },
+  "userId": "230037",
+  "firstName": "test",
+  "lastName": "fdsdsgdfgf",
+  "email": "dfsdssd@dsd.vv",
+  "password": "$2a$10$PTIhejQ7yM4sb0QuwEYk1uebuvOhmVENiXdpFot1Cdnp.n4NMTERK",
+  "phone": "98726734532",
+  "whatsapp": "98726734532",
+  "country": "Bangladesh",
+  "language": "English",
+  "role": "inactive",
+  "reference": "230007",
+  "balance": 0,
+  "courses": [],
+  "posts": [],
+  "likes": [],
+  "isVerified": false,
+  "settings": {
+    "admin": {
+      "$oid": "6527ecf7577ff95a96133786"
+    },
+    "activeNotice": true,
+    "inactiveBonus": false,
+    "activeBonus": false,
+    "withdrawalFee": false,
+    "sendWish": false
+  },
+  "createdAt": {
+    "$date": "2023-10-20T02:56:15.475Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-20T02:56:15.475Z"
+  },
+  "__v": 0
+}]

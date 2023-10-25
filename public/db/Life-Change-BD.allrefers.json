@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "6526bcf0ab6e2e33c2918bd2"
+  },
+  "referredId": {
+    "$oid": "6526949ced9258893e03cd3a"
+  },
+  "referUser": {
+    "$oid": "6526bcf0ab6e2e33c2918bd0"
+  },
+  "createdAt": {
+    "$date": "2023-10-11T15:19:12.729Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-11T15:19:12.729Z"
+  },
+  "__v": 0
+}]

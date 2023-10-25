@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "65260e33dfd72b36c571d857"
+  },
+  "for": "admin",
+  "mainBalance": 495820,
+  "totalPendingFee": 300,
+  "totalWithdraw": 1900,
+  "baseFee": 500,
+  "withdrawalFee": 200,
+  "meetings": [],
+  "createdAt": {
+    "$date": "2023-10-11T02:53:39.768Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-24T01:27:37.193Z"
+  },
+  "__v": 0,
+  "sliderImage": [
+    "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697949973/upload/z43bd7bb5mx9pgdv7qix.webp",
+    "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697949973/upload/z43bd7bb5mx9pgdv7qix.webp",
+    "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697949973/upload/z43bd7bb5mx9pgdv7qix.webp",
+    "http://res.cloudinary.com/djlpbc9dz/image/upload/v1697949973/upload/z43bd7bb5mx9pgdv7qix.webp"
+  ],
+  "support": {
+    "meeting": "112233",
+    "whatsApp": "KGcXCx74zwhFJPHERpaSlL",
+    "help": "meet.google.com/vqr-ksiw-qcn"
+  }
+}]
