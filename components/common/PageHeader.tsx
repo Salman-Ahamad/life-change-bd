@@ -10,7 +10,7 @@ export const PageHeader: FC<IPageHeader> = ({
   title,
   notice,
   setData,
-  onlyActive,
+  ...props
 }) => (
   <>
     <Title variant="H3" className="capitalize mt-10">
@@ -20,6 +20,6 @@ export const PageHeader: FC<IPageHeader> = ({
       {notice}
     </CommonText>
 
-    {setData && <SearchBar setData={setData} onlyActive={onlyActive} />}
+    {setData && <SearchBar setData={setData} {...props} />}
   </>
 );

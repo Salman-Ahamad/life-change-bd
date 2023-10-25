@@ -13,6 +13,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const date = nextUrl.searchParams.get("date");
     const singleDate = nextUrl.searchParams.get("singleDate");
     const isActive = nextUrl.searchParams.get("isActive");
+    const isStudent = nextUrl.searchParams.get("isStudent");
     const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
 
     // Get Current User
@@ -33,6 +34,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     let isActiveValue: boolean = isActive && JSON.parse(isActive.toLowerCase());
+    let isStudentValue: boolean =
+      isStudent && JSON.parse(isStudent.toLowerCase());
     let inactiveBonusValue: boolean =
       inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
     let singleDateValue: boolean =
@@ -65,17 +68,22 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
 
       const active = activeId ? { role: UserRole.active } : {};
+      const student = isStudentValue
+        ? { $or: [{ role: UserRole.inactive }, { role: UserRole.active }] }
+        : {};
       return (
-        (id && { ...idFilter, ...active, ...option }) ||
-        (date && { ...dateFilter, ...active, ...option }) ||
+        (id && { ...idFilter, ...active, ...student, ...option }) ||
+        (date && { ...dateFilter, ...active, ...student, ...option }) ||
         (inactiveBonus &&
           isActive && {
             ...inactiveBonusOption,
             ...activeBonusOption,
+            ...student,
             ...option,
           }) ||
         (inactiveBonus && {
           ...inactiveBonusOption,
+          ...student,
           ...option,
         }) || { reference: user.userId }
       );

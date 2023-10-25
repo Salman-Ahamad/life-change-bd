@@ -182,6 +182,15 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               setUpdatedData((prev) => ({ ...prev, balance: Number(value) }))
             }
           />
+          <InputField
+            onlyText={user?.role !== UserRole.admin}
+            label="Reference:"
+            name="Reference"
+            defaultValue={(userData && String(userData.reference)) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, reference: Number(value) }))
+            }
+          />
 
           <InputField
             onlyText={
