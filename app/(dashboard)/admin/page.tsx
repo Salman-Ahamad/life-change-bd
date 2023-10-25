@@ -3,12 +3,14 @@
 import { Header, Slider } from "@/components";
 import { useState } from "react";
 
-import SlideUploader from "@/components/Admin/SlideUploader";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
-import { IAppConfig, INavItem } from "@/interface";
+import { SlideUploader } from "@/components/Admin";
+import { deleteData, useGetData } from "@/hooks";
+import { INavItem, ISlider } from "@/interface";
 import { Container } from "@/universal";
+import Image from "next/image";
 import { AiOutlineHome } from "react-icons/ai";
-import { getFileUploader } from "@/utils/actions/getFileUploade";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const adminNav: INavItem[] = [
   {
@@ -38,73 +40,56 @@ const adminNav: INavItem[] = [
 ];
 
 const Dashboard = () => {
-  const user = useCurrentUser();
-  console.log(user);
+  const [sliders, setSliders] = useState<ISlider[]>();
 
-  const [config, setConfig] = useState<IAppConfig>();
-  useGetData("/config", setConfig, true);
-  const [slideImages, setSlideImages] = useState(
-    config?.sliderImage || ["", "", "", ""]
-  );
+  useGetData("/config/slider", setSliders, true);
 
-  const handleSlideImageUpdate = (item: number, imageUrl: string) => {
-    console.log({ item, imageUrl });
+  const handleDelete = (id: string) => {
+    const result: boolean = window.confirm(
+      "Do you want to confirm this action?"
+    );
 
-    setSlideImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages[item] = imageUrl;
-      return updatedImages;
-    });
+    if (result) {
+      deleteData(`/config/slider?id=${id}`, {}).then(() =>
+        window.location.reload()
+      );
+    } else {
+      toast.info("User clicked Cancel");
+    }
   };
 
   return (
     <main>
       <Header navData={adminNav} />
 
-      <Container className="flex flex-col justify-center items-center">
-        <div className="flex gap-4">
-          {config?.sliderImage && (
-            <SlideUploader
-              slideName="slide1"
-              slideImage={slideImages[0]}
-              setSlideImage={(image: string) =>
-                handleSlideImageUpdate(0, image)
-              }
-            />
-          )}
-          {config?.sliderImage && (
-            <SlideUploader
-              slideName="slide2"
-              slideImage={slideImages[1]}
-              setSlideImage={(image: string) =>
-                handleSlideImageUpdate(1, image)
-              }
-            />
-          )}
-        </div>
-        <div className="flex gap-4">
-          {config?.sliderImage && (
-            <SlideUploader
-              slideName="slide3"
-              slideImage={slideImages[2]}
-              setSlideImage={(image: string) =>
-                handleSlideImageUpdate(2, image)
-              }
-            />
-          )}
-          {config?.sliderImage && (
-            <SlideUploader
-              slideName="slide4"
-              slideImage={slideImages[3]}
-              setSlideImage={(image: string) =>
-                handleSlideImageUpdate(3, image)
-              }
-            />
-          )}
+      <Container className="flex flex-col justify-center items-center gap-10 my-10">
+        <div className="max-w-lg w-full mx-auto flex gap-6 justify-center">
+          {sliders && sliders?.length !== 0 && <Slider slides={sliders} />}
         </div>
 
-        <div className="max-w-lg w-full mx-auto py-6 flex gap-6 justify-center">
-          {config?.sliderImage && <Slider slides={config?.sliderImage} />}
+        <div className="flex flex-col justify-center items-start gap-3 w-fit">
+          <SlideUploader />
+          {sliders?.map(({ imgUrl, id }, i) => (
+            <div
+              key={i}
+              className="w-full flex justify-between items-center gap-2.5"
+            >
+              <Image
+                src={imgUrl}
+                width={50}
+                height={50}
+                className="w-[50px] h-[50px] rounded"
+                alt=""
+              />
+              <div className="text-red-400 font-bold">Delete Slide {i + 1}</div>
+              <div
+                onClick={() => handleDelete(id)}
+                className="rounded border border-red-600 text-red-600 text-2xl flex justify-center items-center p-1 cursor-pointer"
+              >
+                <RiDeleteBin2Line />
+              </div>
+            </div>
+          ))}
         </div>
       </Container>
     </main>
