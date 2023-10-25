@@ -37,11 +37,13 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
         whatsApp: String,
         meeting: String,
         help: String,
+        welcomeClass: String,
       },
       default: {
         whatsApp: "",
         meeting: "",
         help: "",
+        welcomeClass: "",
       },
     },
   },

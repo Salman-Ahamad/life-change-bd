@@ -86,7 +86,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     if (user && depositAmount > 0) {
       updateData(`/user/deposit/`, {
         id: id,
-        diopsideAmount: Number(depositAmount),
+        depositAmount: Number(depositAmount),
       });
     }
   };
@@ -180,6 +180,15 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             defaultValue={(userData && String(userData.balance)) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({ ...prev, balance: Number(value) }))
+            }
+          />
+          <InputField
+            onlyText={user?.role !== UserRole.admin}
+            label="Reference:"
+            name="Reference"
+            defaultValue={(userData && String(userData.reference)) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({ ...prev, reference: Number(value) }))
             }
           />
 

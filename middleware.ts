@@ -36,51 +36,22 @@ export default withAuth(
     ) {
       return NextResponse.redirect(new URL("/admin", request.url));
     } else if (
+      userRole === UserRole.teacher &&
+      !pathname.startsWith("/teacher") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
+    ) {
+      return NextResponse.redirect(new URL("/teacher", request.url));
+    } else if (
       (userRole === UserRole.controller ||
         userRole === UserRole.consultant ||
-        userRole === UserRole.gl ||
-        userRole === UserRole.teacher) &&
+        userRole === UserRole.gl) &&
       !pathname.startsWith("/subadmin") &&
       !pathname.startsWith("/photo-zone") &&
       !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/subadmin", request.url));
     }
-
-    // const userRole = request.nextauth.token?.role;
-
-    // if (
-    //   userRole === UserRole.active &&
-    //   !request.nextUrl.pathname.startsWith("/active") &&
-    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
-    //   !request.nextUrl.pathname.startsWith("/forgot-password")
-    // ) {
-    //   return NextResponse.redirect(new URL("/active", request.url));
-    // } else if (
-    //   userRole === UserRole.inactive &&
-    //   !request.nextUrl.pathname.startsWith("/inactive") &&
-    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
-    //   !request.nextUrl.pathname.startsWith("/forgot-password")
-    // ) {
-    //   return NextResponse.redirect(new URL("/inactive", request.url));
-    // } else if (
-    //   userRole === UserRole.admin &&
-    //   !request.nextUrl.pathname.startsWith("/admin") &&
-    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
-    //   !request.nextUrl.pathname.startsWith("/forgot-password")
-    // ) {
-    //   return NextResponse.redirect(new URL("/admin", request.url));
-    // } else if (
-    //   (userRole === UserRole.controller ||
-    //     userRole === UserRole.consultant ||
-    //     userRole === UserRole.gl ||
-    //     userRole === UserRole.teacher) &&
-    //   !request.nextUrl.pathname.startsWith("/subadmin") &&
-    //   !request.nextUrl.pathname.startsWith("/photo-zone") &&
-    //   !request.nextUrl.pathname.startsWith("/forgot-password")
-    // ) {
-    //   return NextResponse.redirect(new URL("/subadmin", request.url));
-    // }
   },
   {
     callbacks: {
@@ -120,6 +91,10 @@ export const config = {
     "/photo-zone",
     "/photo-zone/profile",
     "/photo-zone/user-profile/[slug]",
+    "/teacher",
+    "/teacher/change-password",
+    "/teacher/profile",
+    "/teacher/profile/edit",
     "/subadmin",
     "/subadmin/change-password",
     "/subadmin/profile",

@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
@@ -34,21 +34,24 @@ const AdminLogin: FC = () => {
       redirect: false,
     })
       .then((res) => {
+        console.log("User Role", res);
+
         loadingToast(id, "Login Successfully ✅", "success");
       })
       .catch((error) => loadingToast(id, error.message, "error"));
     resetForm();
   };
 
-  useEffect(() => {
-    if (session?.user) {
-      if (session.user.role !== adminRole) {
-        console.log("Your role is no ", adminRole);
-      } else {
-        redirect("/active");
-      }
-    }
-  }, [session, adminRole]);
+  // useEffect(() => {
+  //   if (session?.user) {
+  //     if (session.user.role !== adminRole) {
+  //       console.log("Your role is not ", adminRole);
+  //       signOut();
+  //     } else {
+  //       redirect("/subadmin");
+  //     }
+  //   }
+  // }, [session, adminRole]);
 
   return (
     <main className="h-screen flex justify-between items-center">

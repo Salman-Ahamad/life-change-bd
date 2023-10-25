@@ -11,8 +11,8 @@ import {
   SupportTeam,
 } from "@/components/User/Active";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
+import { IAppConfig, INavItem, ISlider } from "@/interface";
 import { Container, Title } from "@/universal";
-import { IAppConfig, INavItem } from "@/interface";
 import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
@@ -44,8 +44,11 @@ const navData: INavItem[] = [
 
 const Active = () => {
   const [config, setConfig] = useState<IAppConfig>();
+  const [sliders, setSliders] = useState<ISlider[]>();
+
   const user = useCurrentUser(true);
   useGetData("/config", setConfig, true);
+  useGetData("/config/slider", setSliders, true);
 
   useEffect(() => {
     if (user?.settings.activeNotice) {
@@ -77,7 +80,7 @@ const Active = () => {
 
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
         <Title variant="H3">Welcome to Life Change Bd</Title>
-        {config?.sliderImage && <Slider slides={config?.sliderImage} />}
+        {sliders && sliders.length !== 0 && <Slider slides={sliders} />}
       </div>
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
         {config && (

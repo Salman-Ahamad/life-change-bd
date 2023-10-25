@@ -12,6 +12,7 @@ export interface IAppConfigSchema {
     whatsApp: string;
     meeting: string;
     help: string;
+    welcomeClass: string;
   };
 }
 
