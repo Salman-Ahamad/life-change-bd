@@ -9,7 +9,6 @@ connectDb();
 export const PATCH = async (req: NextRequest) => {
   try {
     const { userId, refId } = await req.json();
-    console.log("🚀 ~ file: route.ts:13 ~ PATCH ~ userId:", { userId, refId });
 
     // Get Current User
     const user = await getCurrentUser();
