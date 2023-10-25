@@ -15,7 +15,18 @@ export const GET = async (req: Request, { params }: ISlugParams) => {
     // Get Current User
     const user = await getCurrentUser();
     if (!user) {
-      return ApiResponse(404, "User not found❗");
+      // This will return course details after removing certificate and enrolled user
+
+      // AMIR: Change this
+      const courses = await Course.findOne({ slug }).select({
+        enrolled: 0,
+        certificates: 0,
+        meetingId: 0,
+        status: 0,
+      });
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
+
+      // return ApiResponse(404, "User not found❗");
     }
 
     if (user.role === UserRole.admin || user.role === UserRole.teacher) {

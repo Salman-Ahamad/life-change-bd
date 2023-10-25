@@ -1,5 +1,5 @@
 import { connectDb } from "@/config";
-import { User } from "@/models";
+import { AppConfig, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -19,14 +19,27 @@ export const PATCH = async (req: NextRequest) => {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
+    const appConfig = await AppConfig.findOne({}).select({ baseFee: 1 });
+    const baseFee = await appConfig.baseFee;
+
+    // Referer get 120
     await User.updateOne(
       { userId: refId },
       { $inc: { balance: 120 } },
       { new: true }
     );
+
+    // Referer base fee status change
     await User.updateOne(
       { _id: userId },
-      { "settings.activeBonus": true },
+      { "settings.activeBonus": true, $inc: { balance: baseFee } },
+      { new: true }
+    );
+    // This will reduce the main company balance by 120
+    const balanceIncrease = baseFee - 120;
+    await AppConfig.updateOne(
+      {},
+      { $inc: { mainBalance: balanceIncrease } },
       { new: true }
     );
 

@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { User } from "@/models";
+import { AppConfig, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -9,7 +9,7 @@ connectDb();
 
 export const PATCH = async (req: NextRequest) => {
   try {
-    const { id, diopsideAmount } = await req.json();
+    const { id, depositAmount } = await req.json();
 
     // Get Current User
     const user = await getCurrentUser();
@@ -27,11 +27,18 @@ export const PATCH = async (req: NextRequest) => {
     if (!student) {
       return ApiResponse(404, "Student id not found");
     }
-    const incrementAmount = Number(diopsideAmount);
+    const incrementAmount = Number(depositAmount);
 
     const result = await User.updateOne(
       { _id: id },
       { $inc: { balance: incrementAmount } }
+    );
+
+    // This will reduce the main company balance by incrementAmount
+    await AppConfig.updateOne(
+      {},
+      { $inc: { mainBalance: -incrementAmount } },
+      { new: true }
     );
 
     return ApiResponse(200, "User update successfully 🛠️✅", result);

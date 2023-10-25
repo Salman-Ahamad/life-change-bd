@@ -1,0 +1,317 @@
+[
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b43c"
+    },
+    "title": "Sahih Holy Quran",
+    "image": "https://i.ibb.co/hMM3d2Q/Whats-App-Image-2023-10-15-at-19-26-54.jpg",
+    "video": "https://i.ibb.co/hMM3d2Q/Whats-App-Image-2023-10-15-at-19-26-54.jpg",
+    "slug": "sahih-holy-quran",
+    "learn": [
+      "Making Videos across picture",
+      "Sound and effects in the video",
+      "Speaking in front of the camara",
+      "Screen recorder video Making",
+      "Advertisement video Making"
+    ],
+    "description": "The Holy Quran is the central religious text of Islam, believed by Muslims to be the literal word of God as revealed to the Prophet Muhammad. It consists of 114 chapters, known as surahs, which vary in length, and cover a wide range of topics, including theology, morality, guidance for personal conduct, and legal principles. The Quran is written in Arabic and is highly regarded for its literary and linguistic excellence. It addresses matters of faith, worship, social justice, and provides stories of past prophets and communities as lessons for believers. It is divided into verses called ayahs, and it serves as the foundational source of guidance for Muslims in matters of faith and practice.",
+    "footerDes": "Do not possess the capability to learn or understand religious textsv like the Holy Quran or any other text. My responses are generatedv based on patterns and information from the data I was trained on, upv until my last update in September 2021. I can provide information andv answer questions based on that data, but I do not have the ability tov learn or comprehend religious scriptures or any other form ofv knowledge. If you have specific questions about the Quran, I can tryv to provide information based on what I have been trained on, but I amv not a substitute for in-depth study or consultation with religiousv scholars or experts.",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": [],
+    "meetingId": "",
+    "updatedAt": {
+      "$date": "2023-10-22T04:49:09.474Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b43d"
+    },
+    "title": "Photo Editing",
+    "image": "https://i.ibb.co/N7S4nPC/course2.jpg",
+    "video": "https://i.ibb.co/N7S4nPC/course2.jpg",
+    "slug": "photo-editing",
+    "learn": [
+      "Photo designing",
+      "Poster designing",
+      "YouTube Thumbnail",
+      "Poster Making",
+      "3D picture Making",
+      "Advertisement Making"
+    ],
+    "description": "We will teach our Photo editing course, through a company prescribed, flexible and user compatible Mobile application through our multiple online classes and trainer guidance.",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b43e"
+    },
+    "title": "Video Editing",
+    "image": "https://i.ibb.co/gSZRSrG/course3.jpg",
+    "video": "https://i.ibb.co/gSZRSrG/course3.jpg",
+    "slug": "video-editing",
+    "learn": [
+      "Making Videos across picture",
+      "Sound and effects in the video",
+      "Speaking in front of the camera",
+      "Screen recorder video Making",
+      "Advertisement video Making"
+    ],
+    "description": "We will teach our Video editing course, through a company prescribed, flexible and user compatible Mobile application through our multiple online classes and trainer guidance.",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b43f"
+    },
+    "title": "Lead Generation",
+    "image": "https://i.ibb.co/kVnTvL9/course4.jpg",
+    "video": "https://i.ibb.co/kVnTvL9/course4.jpg",
+    "slug": "lead-generation",
+    "learn": [
+      "Understand Your Audience",
+      "Create Engaging Content",
+      "Consistency is Key*",
+      "Leverage Visuals",
+      "Use Hashtags",
+      "Call-to-Action (CTA)",
+      "Lead Magnets",
+      "Engage and Respond",
+      "Paid Advertising",
+      "Analytics and Optimization",
+      "A/B Testing",
+      "Partnerships and Collaborations",
+      "Email Marketing Integration"
+    ],
+    "description": "Generating leads through social media content is an essential strategy for businesses and organizations looking to expand their customer base. Here are some tips to effectively generate leads through social media content:",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b440"
+    },
+    "title": "Digital Marketing",
+    "image": "https://i.ibb.co/C6gRHF3/course5.jpg",
+    "video": "https://i.ibb.co/C6gRHF3/course5.jpg",
+    "slug": "digital-marketing",
+    "learn": [
+      "Lead generation",
+      "Sales processes",
+      "Google adsense",
+      "Manager Accounts Management",
+      "Sales Management"
+    ],
+    "description": "In this arc of learning and earning. First, we will revise and go through each and every major and minute aspects of Digital Marketing that has been taught diligently by our mentors and trainers previously. Then, we are going to learn about the Sales process, ( i.e. how to execute, implement and ultimately satisfy our respective objectives). we will also learn about how to effectively channel our assests through different social platforms and reach our target through 'Funnel sales process', along with this we will also be given a chance to know how to use and manage different Manager accounts, Google adSense services, how to represent and spread our company's ideas and convert that into sales, which will in turn increase our productivity and services.",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b441"
+    },
+    "title": "Graphic Design",
+    "image": "https://i.ibb.co/P4mYfpw/course6.jpg",
+    "video": "https://i.ibb.co/P4mYfpw/course6.jpg",
+    "slug": "graphic-design",
+    "learn": [
+      "Define Your Purpose",
+      "Know Your Audience",
+      "Visual Hierarchy",
+      "Typography",
+      "Color Scheme",
+      "Whitespace",
+      "Imagery and Graphics",
+      "Balance and Symmetry",
+      "Consistency",
+      "Simplicity",
+      "Mobile Responsiveness",
+      "Test Your Designs",
+      "File Formats",
+      "Legal Considerations",
+      "Design Tools",
+      "Feedback",
+      "Stay Updated"
+    ],
+    "description": "Creating effective graphic design content involves combining creativity, design principles, and communication goals. Here are some key considerations for producing compelling graphic design content",
+    "footerDes": "Remember that effective graphic design communicates a message clearly and engages the audience. Whether you're creating a logo, social media posts, posters, or any other design material, thoughtful consideration of these principles can help you achieve your design goals.",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b442"
+    },
+    "title": "People Management",
+    "image": "https://i.ibb.co/3C3bBVb/course7.jpg",
+    "video": "https://i.ibb.co/3C3bBVb/course7.jpg",
+    "slug": "people-management",
+    "learn": [
+      "Communication Skills",
+      "Setting Expectations",
+      "Recognition and Feedback",
+      "Empowerment",
+      "Conflict Resolution",
+      "Training and Development",
+      "Performance Management",
+      "Work-Life Balance",
+      "Inclusively and Diversity",
+      "Team Building",
+      "Delegation",
+      "Adaptability",
+      "Conflict Resolution",
+      "Motivation",
+      "Ethical Leadership",
+      "Feedback Culture",
+      "Employee Well-Being",
+      "Goal Alignment",
+      "Conflict Resolution",
+      "Lead by Example"
+    ],
+    "description": "Effective people management is crucial for building a motivated and productive team. Here are some key aspects and tips related to people management.",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b443"
+    },
+    "title": "Facebook Marketing",
+    "image": "https://i.ibb.co/1RzNV8s/course8.jpg",
+    "video": "https://i.ibb.co/1RzNV8s/course8.jpg",
+    "slug": "facebook-marketing",
+    "learn": [
+      "Create a Business Page",
+      "Content Calendar",
+      "Engaging Posts",
+      "Video Content",
+      "Live Videos",
+      "User-Generated Content",
+      "Storytelling",
+      "Visual Content",
+      "Hashtags",
+      "Interactive Content",
+      "Educational Content",
+      "Timely Posts",
+      "Promotions and Offers",
+      "Call-to-Action (CTA)",
+      "Facebook Ads",
+      "Analytics",
+      "Audience Engagement",
+      "Mobile Optimization",
+      "Collaborations",
+      "Experiment and Adas"
+    ],
+    "description": "Facebook marketing is a powerful way to reach and engage with your target audience. Here are some key strategies and content ideas for effective Facebook marketing.",
+    "footerDes": "",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b444"
+    },
+    "title": "Mail Marketing",
+    "image": "https://i.ibb.co/FWmdwYG/course9.jpg",
+    "video": "https://i.ibb.co/FWmdwYG/course9.jpg",
+    "slug": "mail-marketing",
+    "learn": [
+      "Segment Your Audience",
+      "Clear and Compelling Subject Line",
+      "Personalization",
+      "Engaging Content",
+      "Eye-Catching Design",
+      "Call to Action (CTA)",
+      "Content Hierarchy",
+      "Use of Images",
+      "Brief and Scannable",
+      "Social Sharing",
+      "Unsubscribe Option",
+      "Test and Preview",
+      "A/B Testing",
+      "Timing and Frequency",
+      "Transactional Emails",
+      "Feedback and Surveys",
+      "Compliance",
+      "Analytics",
+      "Welcome Series",
+      "Follow-Up Sequences"
+    ],
+    "description": "Email marketing can be a powerful tool for reaching your audience and driving engagement. Here are some key elements to consider when creating email marketing content.",
+    "footerDes": "Provide value, be respectful of their preferences, and continuously improve your email campaigns based on data and feedback.",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  },
+  {
+    "_id": {
+      "$oid": "6527fd3fc52df568af38b445"
+    },
+    "title": "YouTube Content Creating",
+    "image": "https://i.ibb.co/jD2JTbm/course10.jpg",
+    "video": "https://i.ibb.co/jD2JTbm/course10.jpg",
+    "slug": "youtube-content-creating",
+    "learn": [
+      "Choose Your Niche",
+      "Know Your Audience",
+      "Plan Your Content",
+      "Quality Production",
+      "Engaging Thumbnails",
+      "Compelling Titles",
+      "Hook Your Audience",
+      "Content Structure",
+      "Educational Content",
+      "Entertainment",
+      "Collaborations",
+      "Live Streams",
+      "Audience Engagement",
+      "YouTube SEO",
+      "Branding",
+      "Call to Action (CTA)",
+      "Analytics",
+      "Adapt and Experiment",
+      "Trends and Seasonal Content",
+      "Patience and Consistency"
+    ],
+    "description": "Creating engaging content for YouTube requires careful planning and attention to your audience's interests. Here are some tips and content ideas for successful YouTube content creation",
+    "footerDes": "Remember that the key to YouTube success is creating content that resonates with your target audience and provides value, entertainment, or information. Building a dedicated audience often requires patience and persistence, so stay committed to your content goals.",
+    "price": "99",
+    "duration": "30D",
+    "status": "enroll",
+    "enrolled": [],
+    "certificates": []
+  }
+]

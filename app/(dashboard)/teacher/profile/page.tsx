@@ -2,25 +2,29 @@
 
 import Image from "next/image";
 
-import { Header } from "@/components";
-import { updateData, useCurrentUser, useGetData } from "@/hooks";
-import { IAppConfig, INavItem, IUser } from "@/interface";
+import { Header, ShareReferLink } from "@/components";
+import { useCurrentUser } from "@/hooks";
+import { INavItem, IUser } from "@/interface";
 import { UserRole, avatarProfile } from "@/lib";
-import { BackButton, Button, CommonText } from "@/universal";
-import { signOut } from "next-auth/react";
-import { useState } from "react";
+import { BackButton, CommonText } from "@/universal";
 
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/active",
+    link: "/teacher",
+  },
+  {
+    label: "Edit Profile",
+    link: "/teacher/profile/edit",
+  },
+  {
+    label: "Change Password",
+    link: "/teacher/change-password",
   },
 ];
 
 const Profile = () => {
-  const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser(true);
-  useGetData("/config", setConfig, true);
 
   const profileTitle = [
     "email",
@@ -37,26 +41,15 @@ const Profile = () => {
     ? profileTitle
     : profileTitle.filter((i) => i !== "reference");
 
-  const handleActivation = () => {
-    if (user && config) {
-      const updatedData = {
-        role: UserRole.active,
-        balance: user.balance - config.baseFee,
-      };
-      // updateData("/all-ref", updatedData).then(() => signOut());
-      updateData("/user/active", {}).then(() => signOut());
-    }
-  };
-
   return (
     <main>
       <Header navData={navData} />
 
       {user ? (
-        <section className="flex flex-col justify-center items-center">
+        <section>
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
-              src={avatarProfile}
+              src={user.image || avatarProfile}
               width={80}
               height={80}
               className="rounded-full shadow-lg w-[80px] h-[80px]"
@@ -68,8 +61,9 @@ const Profile = () => {
               >
                 {user.firstName} {user?.lastName}
               </p>
-              <CommonText className={`text-start w-full capitalize`}>
-                {user.userId}
+              <CommonText className={`text-start w-full`}>
+                {/* Change: Ami change kore dichi. active chara onnora kono ID e dekhbe na */}
+                {user.role === UserRole.active ? user.userId : user.id}
               </CommonText>
             </div>
           </div>
@@ -86,6 +80,9 @@ const Profile = () => {
                   {item}
                 </CommonText>
               ))}
+              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
+                Referral Link:{" "}
+              </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">
               {tableTitle.map((item, i) => (
@@ -95,29 +92,19 @@ const Profile = () => {
                     i % 2 === 0 && "bg-gray-200"
                   }`}
                 >
-                  {user[item as keyof IUser]}
+                  {item === "reference"
+                    ? user.reference || "-"
+                    : user[item as keyof IUser]}
                 </CommonText>
               ))}
+              <ShareReferLink
+                phoneNo={user.phone}
+                btnText="Share"
+                message=""
+                userId={user.userId}
+              />
             </div>
           </div>
-          {user && config && user.role === UserRole.inactive && (
-            <div className="my-5">
-              {user.balance <= config.baseFee ? (
-                <CommonText>
-                  {/* Please Deposit &#2547; {config.baseFee - user.balance} to
-                  Activate❗ */}
-                </CommonText>
-              ) : (
-                <Button
-                  variant="secondary"
-                  className="mx-auto"
-                  onClick={handleActivation}
-                >
-                  Request to Activate
-                </Button>
-              )}
-            </div>
-          )}
         </section>
       ) : (
         <section className="max-w-sm w-full mx-auto">

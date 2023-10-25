@@ -22,7 +22,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const { slug } = params;
 
   const [userData, setUserData] = useState<IUser>();
-  const [diopsideAmount, setDepositAmount] = useState<number>(0);
+  const [depositAmount, setDepositAmount] = useState<number>(0);
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [updatedData, setUpdatedData] = useState<object>({});
   const [disabled, setDisabled] = useState(true);
@@ -57,10 +57,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const updateProfile = () => updateData(`/user/${slug}`, updatedData);
 
   const depositMoney = () => {
-    if (user && diopsideAmount > 0) {
+    if (user && depositAmount > 0) {
       updateData(`/user/deposit/`, {
         id: slug,
-        diopsideAmount: Number(diopsideAmount),
+        depositAmount: Number(depositAmount),
       });
     }
   };

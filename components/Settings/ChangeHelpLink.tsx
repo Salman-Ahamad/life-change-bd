@@ -20,9 +20,10 @@ export const ChangeHelpLink: FC = () => {
           <Button
             variant="secondary"
             className="py-[7px] lg:py-2.5 px-3"
-            onClick={() =>
-              updateData("/config", { "support.help": helpLink }, true)
-            }
+            onClick={() => {
+              updateData("/config", { "support.help": helpLink });
+              setHelpLink("");
+            }}
           >
             Save
           </Button>

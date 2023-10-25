@@ -86,7 +86,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     if (user && depositAmount > 0) {
       updateData(`/user/deposit/`, {
         id: id,
-        diopsideAmount: Number(depositAmount),
+        depositAmount: Number(depositAmount),
       });
     }
   };
