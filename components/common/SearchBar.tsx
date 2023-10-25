@@ -3,12 +3,14 @@
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
-import { getDataFn } from "@/hooks";
+import { getDataFn, useCurrentUser } from "@/hooks";
 import { IFiledDate, IMonth, ISearchBar } from "@/interface";
+import { UserRole } from "@/lib";
 import { Button, Container } from "@/universal";
 import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
 
 export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
+  const [userType, setUserType] = useState<"all" | "student">("all");
   const [filedData, setFiledData] = useState<IFiledDate>({
     date: "",
     year: "",
@@ -16,11 +18,13 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
     id: "",
   });
   const filterDate = getLastThreeMonths();
-
+  const user = useCurrentUser(true);
   const handleSubmit = async () => {
     if (filedData.id) {
       await getDataFn(
-        `/all-ref?id=${filedData.id}&isActive=${onlyActive ? true : false}`,
+        `/all-ref?id=${filedData.id}&isActive=${
+          onlyActive ? true : false
+        }&isStudent=${userType === "student" ? true : false}`,
         setData
       );
     } else if ((filedData.year && filedData.month) || filedData.date) {
@@ -32,7 +36,9 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
       if (date) {
         const url = `/all-ref?date=${date}&singleDate=${
           filedData.date ? true : false
-        }&isActive=${onlyActive ? true : false}`;
+        }&isActive=${onlyActive ? true : false}&isStudent=${
+          userType === "student" ? true : false
+        }`;
         await getDataFn(url, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
@@ -45,6 +51,28 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
 
   return (
     <Container className="my-5">
+      {user?.role === UserRole.admin && (
+        <div className="flex justify-center items-center mb-2">
+          <Button
+            variant="accent"
+            className={`rounded-r-none border border-accent border-r-none ${
+              userType !== "all" && "bg-white text-black hover:text-white"
+            }`}
+            onClick={() => setUserType("all")}
+          >
+            All User
+          </Button>
+          <Button
+            variant="accent"
+            onClick={() => setUserType("student")}
+            className={`rounded-l-none border border-accent border-l-none ${
+              userType !== "student" && "bg-white text-black hover:text-white"
+            }`}
+          >
+            Student
+          </Button>
+        </div>
+      )}
       <p className="text-center text-gray-500 mb-1">
         Search by Year and Month Or User Id!
       </p>

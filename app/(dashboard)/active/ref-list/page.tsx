@@ -13,7 +13,7 @@ const navData: INavItem[] = [
     link: "/active",
   },
   {
-    label: "My Reference",
+    label: "Collect Money",
     link: "/active/ref-list/my-ref",
   },
 ];
@@ -32,8 +32,8 @@ const RefList: NextPage = () => {
       {data !== null && data.length !== 0 && (
         <DataTable
           tableData={data}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          tableHeaders={["No", "id", "Name", "Role", "Joining Time"]}
+          dataProperties={["userId", "firstName", "role", "createdAt", "phone"]}
           message="Message"
         />
       )}
