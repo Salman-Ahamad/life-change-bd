@@ -1,3 +1,3 @@
 <h1 align="center">Life Change BD</h1>
 
-### Live site [Link 🔗](https://life-change-bd.vercel.app/)
+### Live site [vercel 🔗](https://life-change-bd.vercel.app) - [live 🔗](https://www.lifechangebd.com)
