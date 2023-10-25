@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { User } from "@/models";
+import { AppConfig, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -32,6 +32,13 @@ export const PATCH = async (req: NextRequest) => {
     const result = await User.updateOne(
       { _id: id },
       { $inc: { balance: incrementAmount } }
+    );
+
+    // This will reduce the main company balance by 1
+    await AppConfig.updateOne(
+      {},
+      { $inc: { mainBalance: -incrementAmount } },
+      { new: true }
     );
 
     return ApiResponse(200, "User update successfully 🛠️✅", result);

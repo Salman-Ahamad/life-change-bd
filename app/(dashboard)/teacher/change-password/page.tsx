@@ -12,11 +12,11 @@ import { toast } from "react-toastify";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/subadmin/profile",
+    link: "/teacher/profile",
   },
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/subadmin",
+    link: "/teacher",
   },
 ];
 

@@ -11,11 +11,11 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/subadmin",
+    link: "/teacher",
   },
   {
     label: "Profile",
-    link: "/subadmin/profile",
+    link: "/teacher/profile",
   },
   {
     label: "Photo Zone",
@@ -34,8 +34,10 @@ const SubAdmin = () => {
         <Title variant="H3">Welcome to Life Change Bd</Title>
       </div>
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        {user?.settings?.course && (
+        {user?.settings?.course ? (
           <ChangeMeetingLink courseSlug={user?.settings?.course} />
+        ) : (
+          <p>No course is assigned!</p>
         )}
       </Container>
     </main>
