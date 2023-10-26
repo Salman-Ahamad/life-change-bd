@@ -71,6 +71,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       const student = isStudentValue
         ? { $or: [{ role: UserRole.inactive }, { role: UserRole.active }] }
         : {};
+
       return (
         (id && { ...idFilter, ...active, ...student, ...option }) ||
         (date && { ...dateFilter, ...active, ...student, ...option }) ||

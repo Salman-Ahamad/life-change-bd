@@ -1,8 +1,7 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { FC, useState } from "react";
 
 import { Input } from "@/components";
 import { ISubAdminLoginFormValue } from "@/interface";
@@ -34,8 +33,6 @@ const AdminLogin: FC = () => {
       redirect: false,
     })
       .then((res) => {
-        console.log("User Role", res);
-
         loadingToast(id, "Login Successfully ✅", "success");
       })
       .catch((error) => loadingToast(id, error.message, "error"));
@@ -45,7 +42,6 @@ const AdminLogin: FC = () => {
   // useEffect(() => {
   //   if (session?.user) {
   //     if (session.user.role !== adminRole) {
-  //       console.log("Your role is not ", adminRole);
   //       signOut();
   //     } else {
   //       redirect("/subadmin");

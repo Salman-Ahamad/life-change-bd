@@ -27,7 +27,6 @@ export const PATCH = async (req: NextRequest) => {
 
     return ApiResponse(200, "Config update successfully 🛠️✅", result);
   } catch (error: any) {
-    console.log("Error in Server: ", error);
     return ApiResponse(400, error.message);
   }
 };
