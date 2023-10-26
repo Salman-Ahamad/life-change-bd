@@ -61,16 +61,10 @@ export const UserDataTable: React.FC<IDataTableWithImage> = ({
                     {item.balance}
                   </td>
                   <td className="text-right px-6 whitespace-nowrap">
-                    <button
-                      onClick={() => console.log("Edit Button Clicked")}
-                      className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
-                    >
+                    <button className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
                       Edit
                     </button>
-                    <button
-                      onClick={() => console.log("Delete Button Clicked")}
-                      className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                    >
+                    <button className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
                       Delete
                     </button>
                   </td>

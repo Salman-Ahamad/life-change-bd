@@ -42,8 +42,6 @@ const Post = ({ data, userId }: { userId: string; data: IPostWithAuthor }) => {
       } else {
         // User not liked, add ObjectId to likes
         const likesArr = data.likes.push(userObjectId);
-        // console.log(likesArr);
-        // console.log(data.likes);
 
         // updateData("/photo-zone/post", {
         //   likes: likesArr,

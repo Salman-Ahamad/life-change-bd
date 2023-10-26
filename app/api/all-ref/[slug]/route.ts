@@ -12,13 +12,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
-    const monthFilter = nextUrl.searchParams.get("monthFilter");
     const singleDate = nextUrl.searchParams.get("singleDate");
     const isActive = nextUrl.searchParams.get("isActive");
     const isStudent = nextUrl.searchParams.get("isStudent");
     const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
-
-    console.log("All-ref_Date: ", { date });
 
     // Get Current User
     const user = await getCurrentUser();
@@ -75,10 +72,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       const student = isStudentValue
         ? { $or: [{ role: UserRole.inactive }, { role: UserRole.active }] }
         : {};
-      console.log(
-        "All-ref_OptionDate: ",
-        date && { ...dateFilter, ...active, ...student, ...option }
-      );
+
       return (
         (id && { ...idFilter, ...active, ...student, ...option }) ||
         (date && { ...dateFilter, ...active, ...student, ...option }) ||
@@ -96,8 +90,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         }) || { reference: user.userId }
       );
     };
-
-    console.log("All-ref_OptionFN: ", { optionFn });
 
     switch (user.role) {
       case UserRole.admin:
@@ -138,13 +130,11 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       default:
         break;
     }
-    console.log("All-ref_Option: ", { option });
+
     const refList = await User.find(option)
       .sort({ createdAt: -1 })
       .select({ password: 0 })
       .exec();
-
-    console.log("All-ref_Result: ", { refList });
 
     return ApiResponse(200, "Reference List get successfully 👌", refList);
   } catch (error: any) {
