@@ -110,21 +110,21 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
           onChange={(e) =>
             setFiledData({ ...filedData, month: e.target.value })
           }
-          className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto"
+          className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto cursor-pointer"
         />
         <input
           type="date"
           onChange={(e) =>
             setFiledData({ ...filedData, date: e.target.valueAsDate })
           }
-          className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto"
+          className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto cursor-pointer"
         />
         <input
           type="text"
           value={String(filedData.id)}
           placeholder="User Id"
           onChange={(e) => setFiledData({ ...filedData, id: e.target.value })}
-          className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto"
+          className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto cursor-pointer"
         />
         <Button
           variant="secondary"
