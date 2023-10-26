@@ -146,8 +146,7 @@ export interface IRefTable {
 
 export interface IFiledDate {
   date: Date | string | null;
-  year: string;
-  month: string;
+  month: Date | string | null;
   id: Types.ObjectId | string;
 }
 
