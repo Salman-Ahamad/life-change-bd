@@ -32,7 +32,11 @@ export const getDataFn = async (
 ) => {
   const id = !toastOf && toast.loading("Loading...🔃");
 
-  Axios.get(apiUrl)
+  Axios.get(apiUrl, {
+    headers: {
+      "Cache-Control": "no-store", // Adding this header to disable caching
+    },
+  })
     .then(({ data }) => {
       setData(data.data);
       if (data.data) id && loadingToast(id, data.message, "success");
