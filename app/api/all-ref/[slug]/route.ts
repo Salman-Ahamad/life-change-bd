@@ -2,7 +2,7 @@ import { connectDb } from "@/config";
 import { ISlugParams } from "@/interface";
 import { UserRole, inactiveLimit } from "@/lib";
 import { AllRefer, AppConfig, User } from "@/models";
-import { ApiResponse, convertBoolean } from "@/utils";
+import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
 
@@ -12,7 +12,13 @@ export const GET = async ({ nextUrl }: NextRequest) => {
   try {
     const id = nextUrl.searchParams.get("id");
     const date = nextUrl.searchParams.get("date");
+    const monthFilter = nextUrl.searchParams.get("monthFilter");
+    const singleDate = nextUrl.searchParams.get("singleDate");
+    const isActive = nextUrl.searchParams.get("isActive");
+    const isStudent = nextUrl.searchParams.get("isStudent");
     const inactiveBonus = nextUrl.searchParams.get("inactiveBonus");
+
+    console.log("All-ref_Date: ", { date });
 
     // Get Current User
     const user = await getCurrentUser();
@@ -30,58 +36,117 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
-    //
-    let inactiveBonusValue = inactiveBonus && convertBoolean(inactiveBonus);
 
+    let isActiveValue: boolean = isActive && JSON.parse(isActive.toLowerCase());
+    let isStudentValue: boolean =
+      isStudent && JSON.parse(isStudent.toLowerCase());
+    let inactiveBonusValue: boolean =
+      inactiveBonus && JSON.parse(inactiveBonus.toLowerCase());
+    let singleDateValue: boolean =
+      singleDate && JSON.parse(singleDate.toLowerCase());
+
+    // single date filtering
+    const startOfDay = new Date(Number(date));
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(Number(date));
+    endOfDay.setHours(23, 59, 59, 999);
+
+    // year and month filtering
+    const formattingDate = new Date(Number(date));
+    const month = formattingDate.getMonth();
+    const year = formattingDate.getFullYear();
+    const startOfMonth = new Date(year, month, 1);
+    const endOfMonth = new Date(year, month + 1, 1);
+
+    let option = {};
     const inactiveBonusOption = {
-      role: UserRole.active,
       "settings.inactiveBonus": inactiveBonusValue,
     };
-    const formattingDate = new Date(Number(date));
-    const dateFilter = {
-      reference: user.id,
-      createdAt: { $gte: formattingDate },
-      role: UserRole.active,
+    const activeBonusOption = {
+      "settings.activeBonus": isActiveValue,
     };
-    const filterById = {
-      userId: id,
-      reference: user.id,
-      role: UserRole.active,
-    };
-    const controller = {
-      "settings.controller": user.id,
-      role: UserRole.active,
-    };
-    const consultant = {
-      "settings.consultant": user.id,
-      role: UserRole.active,
-    };
-    const teacher = {
-      "settings.teacher": user.id,
-      role: UserRole.active,
-    };
-    const gl = {
-      "settings.gl": user.id,
-      role: UserRole.active,
+    const optionFn = (option: object, activeId?: boolean) => {
+      const idFilter = { userId: id };
+      const dateFilter = singleDateValue
+        ? { createdAt: { $gte: startOfDay, $lt: endOfDay } }
+        : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
+
+      const active = activeId ? { role: UserRole.active } : {};
+      const student = isStudentValue
+        ? { $or: [{ role: UserRole.inactive }, { role: UserRole.active }] }
+        : {};
+      console.log(
+        "All-ref_OptionDate: ",
+        date && { ...dateFilter, ...active, ...student, ...option }
+      );
+      return (
+        (id && { ...idFilter, ...active, ...student, ...option }) ||
+        (date && { ...dateFilter, ...active, ...student, ...option }) ||
+        (inactiveBonus &&
+          isActive && {
+            ...inactiveBonusOption,
+            ...activeBonusOption,
+            ...student,
+            ...option,
+          }) ||
+        (inactiveBonus && {
+          ...inactiveBonusOption,
+          ...student,
+          ...option,
+        }) || { reference: user.userId }
+      );
     };
 
-    const option =
-      (user.role === UserRole.admin && {}) ||
-      (user.role === UserRole.controller && controller) ||
-      (user.role === UserRole.consultant && consultant) ||
-      (user.role === UserRole.teacher && teacher) ||
-      (user.role === UserRole.gl && gl) ||
-      (inactiveBonus && inactiveBonusOption) ||
-      (date && dateFilter) ||
-      (id && filterById) ||
-      {};
+    console.log("All-ref_OptionFN: ", { optionFn });
 
+    switch (user.role) {
+      case UserRole.admin:
+        const admin = { "settings.admin": user.id };
+        option = optionFn(admin, isActiveValue ? true : false);
+        break;
+      case UserRole.controller:
+        const controller = {
+          "settings.controller": user.id,
+        };
+        option = optionFn(controller);
+        break;
+      case UserRole.consultant:
+        const consultant = {
+          "settings.consultant": user.id,
+        };
+        option = optionFn(consultant);
+        break;
+      case UserRole.teacher:
+        const teacher = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(teacher);
+        break;
+      case UserRole.gl:
+        const gl = {
+          "settings.teacher": user.id,
+        };
+        option = optionFn(gl);
+        break;
+      case UserRole.active:
+        const active = {
+          reference: user.userId,
+        };
+        option = optionFn(active);
+        break;
+
+      default:
+        break;
+    }
+    console.log("All-ref_Option: ", { option });
     const refList = await User.find(option)
       .sort({ createdAt: -1 })
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "Regerance list get successfully 👌", refList);
+    console.log("All-ref_Result: ", { refList });
+
+    return ApiResponse(200, "Reference List get successfully 👌", refList);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
