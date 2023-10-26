@@ -13,8 +13,6 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
   const [userType, setUserType] = useState<"all" | "student">("all");
   const [filedData, setFiledData] = useState<IFiledDate>({
     date: "",
-    monthDate: "",
-    year: "",
     month: "",
     id: "",
   });
@@ -29,15 +27,11 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
         }&isStudent=${userType === "student" ? true : false}`,
         setData
       );
-    } else if (
-      (filedData.year && filedData.month) ||
-      filedData.monthDate ||
-      filedData.date
-    ) {
+    } else if (filedData.month || filedData.date) {
       const month = getMonthNumber(filedData.month as IMonth);
       const date = filedData.date
         ? createDate(0, 0, filedData.date as Date)
-        : new Date(filedData.monthDate as Date).getTime();
+        : new Date(filedData.month as Date).getTime();
       // : createDate(Number(filedData.year), month);
 
       if (date) {
@@ -53,12 +47,7 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
     } else {
       toast.error("Please Provide filter Data 🚨");
     }
-    setFiledData({ date: "", year: "", month: "", id: "", monthDate: "" });
-  };
-
-  const handleDate = (dateProps: string) => {
-    const date = new Date(dateProps);
-    console.log("🚀 ~ file: SearchBar.tsx:54 ~ handleDate ~ date:", { date });
+    setFiledData({ date: "", month: "", id: "" });
   };
 
   return (
@@ -89,7 +78,7 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
         Search by Year and Month Or User Id!
       </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
-        <select
+        {/* <select
           value={filedData.year}
           onChange={(e) => setFiledData({ ...filedData, year: e.target.value })}
           className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
@@ -100,9 +89,9 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
               {year}
             </option>
           ))}
-        </select>
+        </select> */}
 
-        <select
+        {/* <select
           value={filedData.month}
           onChange={(e) =>
             setFiledData({ ...filedData, month: e.target.value })
@@ -115,11 +104,11 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
               {month}
             </option>
           ))}
-        </select>
+        </select> */}
         <input
           type="month"
           onChange={(e) =>
-            setFiledData({ ...filedData, monthDate: e.target.value })
+            setFiledData({ ...filedData, month: e.target.value })
           }
           className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto"
         />
