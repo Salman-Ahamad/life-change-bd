@@ -1,9 +1,9 @@
 "use client";
 
 import { Header } from "@/components";
+import { updateData } from "@/hooks";
 import { IChangePassword, INavItem } from "@/interface";
 import { BackButton, Button, Container } from "@/universal";
-import { Axios, loadingToast } from "@/utils";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
@@ -21,7 +21,7 @@ const navData: INavItem[] = [
 ];
 
 const ChangePassword: NextPage = () => {
-  const [updatedData, setUpdatedData] = useState<IChangePassword>();
+  const [updatedData, setUpdatedData] = useState<IChangePassword>({});
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -29,20 +29,19 @@ const ChangePassword: NextPage = () => {
   }, [updatedData]);
 
   const handleChangePassword = () => {
-    const id = toast.loading("Changing password...");
-
     if (updatedData?.newPassword !== updatedData?.reTypePassword) {
-      loadingToast(id, "Password didn't match!", "error");
+      toast.error("Password didn't match!");
     } else {
-      Axios.patch("/auth/change-password", updatedData)
-        .then(({ data }) => {
-          if (data.data) {
-            loadingToast(id, data.message, "success");
-          }
-        })
-        .catch(({ response }) => {
-          loadingToast(id, response.data.message, "error");
-        });
+      updateData("/auth/change-password", updatedData);
+      // Axios.patch("/auth/change-password", updatedData)
+      //   .then(({ data }) => {
+      //     if (data.data) {
+      //       loadingToast(id, data.message, "success");
+      //     }
+      //   })
+      //   .catch(({ response }) => {
+      //     loadingToast(id, response.data.message, "error");
+      //   });
     }
   };
 

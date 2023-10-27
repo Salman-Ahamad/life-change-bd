@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 
 import { Input } from "@/components";
 import { ISubAdminLoginFormValue } from "@/interface";
@@ -13,13 +13,12 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const AdminLogin: FC = () => {
-  const [adminRole, setAdminRole] = useState<string>("");
-
   const { data: session } = useSession();
 
   useEffect(() => {
     if (session?.user) {
       if (session.user.role === UserRole.teacher) redirect("/teacher");
+      if (session.user.role === UserRole.checker) redirect("/checker");
 
       if (
         session.user.role !== UserRole.inactive ||
