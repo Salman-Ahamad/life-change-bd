@@ -42,6 +42,13 @@ export default withAuth(
       !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/teacher", request.url));
+    } else if (
+      userRole === UserRole.checker &&
+      !pathname.startsWith("/checker") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
+    ) {
+      return NextResponse.redirect(new URL("/checker", request.url));
     }
   },
   {
@@ -86,6 +93,10 @@ export const config = {
     "/teacher/change-password",
     "/teacher/profile",
     "/teacher/profile/edit",
+    "/checker",
+    "/checker/change-password",
+    "/checker/profile",
+    "/checker/profile/edit",
     "/forgot-password",
   ],
 };
