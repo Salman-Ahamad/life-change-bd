@@ -49,12 +49,23 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   }, [userData, selectFieldValue]);
 
   const admin = [
-    UserRole.controller,
-    UserRole.consultant,
-    UserRole.teacher,
-    UserRole.gl,
     UserRole.active,
     UserRole.inactive,
+    UserRole.srController,
+    UserRole.controller,
+    UserRole.consultant,
+    UserRole.trainer,
+    UserRole.teacher,
+    UserRole.support,
+    UserRole.srAccountant,
+    UserRole.accountant,
+    UserRole.audit,
+    UserRole.leadChecker,
+    UserRole.checker,
+    UserRole.srgl,
+    UserRole.gl,
+    UserRole.telecaller,
+    UserRole.lcBdItdSolution,
   ];
   const controller = [
     UserRole.consultant,
