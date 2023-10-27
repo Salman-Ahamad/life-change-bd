@@ -80,7 +80,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
       }).then(() => setIsActive(false));
     }
   };
-  const updateProfile = () => updateData(`/user/${id}`, updatedData, true);
+  const updateProfile = () => updateData(`/user/${id}`, updatedData);
 
   const depositMoney = () => {
     if (user && depositAmount > 0) {
