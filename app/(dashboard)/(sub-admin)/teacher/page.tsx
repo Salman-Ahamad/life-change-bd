@@ -25,10 +25,13 @@ const navData: INavItem[] = [
 
 const SubAdmin = () => {
   const [welcomeMeetLink, setWelcomeMeetLink] = useState<string>("");
-  const user = useCurrentUser(true);
-  useGetData("config/welcome-class", setWelcomeMeetLink, true);
+  const [configMeetLink, setConfigMeetLink] = useState<any>();
 
-  const handleChangeMeetingLink = async () => {
+  const user = useCurrentUser(true);
+
+  useGetData("config/welcome-class", setConfigMeetLink, true);
+
+  const handleChangeMeetingLink = () => {
     updateData("config/welcome-class", { meetLink: welcomeMeetLink }).then(() =>
       window.location.reload()
     );
@@ -41,12 +44,17 @@ const SubAdmin = () => {
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
         <Title variant="H3">Welcome to Life Change Bd</Title>
       </div>
+
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
         <div className="flex items-end justify-center">
           <div className="flex flex-col gap-1">
             <p className="pb-12">
-              Current Welcome Class Link:{" "}
-              <span className="font-semibold">{welcomeMeetLink}</span>
+              Current Welcome Class Link:&nbsp;
+              <span className="font-semibold">
+                {configMeetLink?.support.welcomeClass
+                  ? configMeetLink?.support.welcomeClass
+                  : welcomeMeetLink}
+              </span>
             </p>
             <label className="pl-1.5">Please enter meet ID</label>
             <div className="flex gap-2.5">
