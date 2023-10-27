@@ -42,7 +42,9 @@ const SubAdmin = () => {
       <Header navData={navData} />
 
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
-        <Title variant="H3">Welcome to Life Change Bd</Title>
+        <Title variant="H3" className="capitalize">
+          Welcome to Life Change Bd
+        </Title>
       </div>
 
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">

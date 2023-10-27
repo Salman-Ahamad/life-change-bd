@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { IId } from ".";
+import { ICourse, IId, IUser } from ".";
 
 export type IAssignmentStatus = "pending" | "accept" | "reject";
 
@@ -11,6 +11,6 @@ export interface IAssignmentSchema {
 }
 
 export interface IAssignment extends IAssignmentSchema, IId {
-  courseId: string;
-  userId: string;
+  courseId: ICourse;
+  userId: IUser;
 }

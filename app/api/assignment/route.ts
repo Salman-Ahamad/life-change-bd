@@ -1,4 +1,5 @@
 import { connectDb } from "@/config";
+import { UserRole } from "@/lib";
 import { Assignment } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -33,6 +34,37 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
+export const GET = async () => {
+  try {
+    // Get Current User
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return ApiResponse(404, "User not found❗");
+    } else if (user.role !== UserRole.checker) {
+      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
+    }
+
+    const result = await Assignment.find({ status: "pending" })
+      .populate({
+        path: "userId",
+        select: "userId",
+      })
+      .populate({
+        path: "courseId",
+        select: "title",
+      })
+      .sort({
+        createdAt: -1,
+      })
+      .exec();
+
+    return ApiResponse(200, "Assignment Get successfully 👌", result);
+  } catch (error: any) {
+    return ApiResponse(400, error.message);
+  }
+};
+
 export const PATCH = async (req: NextRequest) => {
   try {
     const { id, ...updatedData } = await req.json();
@@ -45,7 +77,7 @@ export const PATCH = async (req: NextRequest) => {
     } else if (!user.role) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
-    updatedData.status = "pending";
+
     const result = await Assignment.updateOne({ _id: id }, updatedData, {
       new: true,
     });
