@@ -1,12 +1,12 @@
 "use client";
 
-import { NextPage } from "next";
-import { useState } from "react";
 import { Header } from "@/components";
 import { updateData } from "@/hooks";
 import { INavItem, ISlugParams } from "@/interface";
 import { BackButton, Button, Container, Title } from "@/universal";
+import { NextPage } from "next";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const navData: INavItem[] = [
   {
@@ -28,7 +28,7 @@ const AssignmentId: NextPage<IAssignmentId> = ({ params }) => {
   const router = useRouter();
 
   const handlePostUrl = () =>
-    updateData("/assignment", {
+    updateData("/assignment/resubmit", {
       id,
       postLink: url,
     }).then(() => router.back());

@@ -1,10 +1,10 @@
 "use client";
 
+import { LoginForm } from "@/components";
+import { UserRole } from "@/lib";
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { FC, useEffect } from "react";
-import { LoginForm } from "@/components";
-import { UserRole } from "@/lib";
 
 const AdminLogin: FC = () => {
   const { data: session } = useSession();

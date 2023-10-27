@@ -1,5 +1,4 @@
 import { connectDb } from "@/config";
-import { UserRole } from "@/lib";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
@@ -19,18 +18,6 @@ export const GET = async () => {
 
     if (!currentUser) {
       return ApiResponse(404, "User not found❗");
-    }
-
-    if (
-      currentUser.role !== UserRole.active &&
-      currentUser.role !== UserRole.inactive &&
-      currentUser.role !== UserRole.controller &&
-      currentUser.role !== UserRole.consultant &&
-      currentUser.role !== UserRole.teacher &&
-      currentUser.role !== UserRole.gl &&
-      currentUser.role !== UserRole.admin
-    ) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
     const user = await User.findOne({ _id: currentUser.id })

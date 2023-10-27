@@ -5,21 +5,21 @@ import { useEffect, useState } from "react";
 
 import { Header } from "@/components";
 import { updateData, useCurrentUser } from "@/hooks";
+import { INavItem } from "@/interface";
 import { avatarProfile, uploadImg } from "@/lib";
 import { BackButton, Button, Container } from "@/universal";
-import Image from "next/image";
 import { getFileUploader } from "@/utils/actions/getFileUploade";
-import { INavItem } from "@/interface";
+import Image from "next/image";
 import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/subadmin/profile",
+    link: "/checker/profile",
   },
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/subadmin",
+    link: "/checker",
   },
 ];
 

@@ -1,19 +1,33 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
-import { FC, useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { FC, useEffect } from "react";
 
 import { Input } from "@/components";
 import { ISubAdminLoginFormValue } from "@/interface";
-import { loginValidationSchema } from "@/lib";
+import { UserRole, loginValidationSchema } from "@/lib";
 import { Button, CTA, Title } from "@/universal";
 import { loadingToast } from "@/utils";
 import { Form, Formik, FormikHelpers } from "formik";
+import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const AdminLogin: FC = () => {
-  const [adminRole, setAdminRole] = useState<string>("");
   const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      if (session.user.role === UserRole.teacher) redirect("/teacher");
+      if (session.user.role === UserRole.checker) redirect("/checker");
+
+      if (
+        session.user.role !== UserRole.inactive ||
+        session.user.role !== UserRole.active ||
+        session.user.role !== UserRole.admin
+      )
+        signOut();
+    }
+  }, [session]);
 
   const initialValues: ISubAdminLoginFormValue = {
     role: "",
@@ -26,7 +40,7 @@ const AdminLogin: FC = () => {
     { resetForm }: FormikHelpers<ISubAdminLoginFormValue>
   ) => {
     const id = toast.loading("Loading... 🔃");
-    setAdminRole(role.toLowerCase());
+
     signIn("credentials", {
       phone,
       password,
@@ -38,16 +52,6 @@ const AdminLogin: FC = () => {
       .catch((error) => loadingToast(id, error.message, "error"));
     resetForm();
   };
-
-  // useEffect(() => {
-  //   if (session?.user) {
-  //     if (session.user.role !== adminRole) {
-  //       signOut();
-  //     } else {
-  //       redirect("/subadmin");
-  //     }
-  //   }
-  // }, [session, adminRole]);
 
   return (
     <main className="h-screen flex justify-between items-center">
@@ -84,7 +88,6 @@ const AdminLogin: FC = () => {
                     "Lead Checker",
                     "Audit",
                     "Support",
-                    "Teacher",
                     "LC BD Itd Solution",
                   ]}
                 />

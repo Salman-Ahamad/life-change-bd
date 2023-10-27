@@ -43,14 +43,12 @@ export default withAuth(
     ) {
       return NextResponse.redirect(new URL("/teacher", request.url));
     } else if (
-      (userRole === UserRole.controller ||
-        userRole === UserRole.consultant ||
-        userRole === UserRole.gl) &&
-      !pathname.startsWith("/subadmin") &&
+      userRole === UserRole.checker &&
+      !pathname.startsWith("/checker") &&
       !pathname.startsWith("/photo-zone") &&
       !pathname.startsWith("/forgot-password")
     ) {
-      return NextResponse.redirect(new URL("/subadmin", request.url));
+      return NextResponse.redirect(new URL("/checker", request.url));
     }
   },
   {
@@ -95,10 +93,10 @@ export const config = {
     "/teacher/change-password",
     "/teacher/profile",
     "/teacher/profile/edit",
-    "/subadmin",
-    "/subadmin/change-password",
-    "/subadmin/profile",
-    "/subadmin/profile/edit",
+    "/checker",
+    "/checker/change-password",
+    "/checker/profile",
+    "/checker/profile/edit",
     "/forgot-password",
   ],
 };

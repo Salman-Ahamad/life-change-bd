@@ -11,15 +11,15 @@ import { BackButton, CommonText } from "@/universal";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/subadmin",
+    link: "/checker",
   },
   {
     label: "Edit Profile",
-    link: "/subadmin/profile/edit",
+    link: "/checker/profile/edit",
   },
   {
     label: "Change Password",
-    link: "/subadmin/change-password",
+    link: "/checker/change-password",
   },
 ];
 
