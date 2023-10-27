@@ -8,7 +8,7 @@ import { FC, useEffect } from "react";
 
 import { LoginForm } from "@/components";
 import { UserRole, loginBanner } from "@/lib";
-import { Button, CommonText } from "@/universal";
+import { CommonText } from "@/universal";
 
 const Login: FC = () => {
   const { data: session } = useSession();
@@ -17,11 +17,11 @@ const Login: FC = () => {
     if (session?.user) {
       if (session.user.role === UserRole.inactive) redirect("/inactive");
       if (session.user.role === UserRole.active) redirect("/active");
-      if (session.user.role === UserRole.admin) signOut(); //TODO: Add toast
-      if (session.user.role === UserRole.consultant) signOut();
-      if (session.user.role === UserRole.controller) signOut();
-      if (session.user.role === UserRole.gl) signOut();
-      if (session.user.role === UserRole.teacher) signOut();
+      if (
+        session.user.role !== UserRole.inactive ||
+        session.user.role !== UserRole.active
+      )
+        signOut();
     }
   }, [session]);
 
