@@ -19,6 +19,7 @@ const AdminLogin: FC = () => {
     if (session?.user) {
       if (session.user.role === UserRole.teacher) redirect("/teacher");
       if (session.user.role === UserRole.checker) redirect("/checker");
+      if (session.user.role === UserRole.checker) redirect("/controller");
 
       if (
         session.user.role !== UserRole.inactive ||
