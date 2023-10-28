@@ -52,7 +52,7 @@ const Action: React.FC = () => {
           tableData={data}
           tableHeaders={["no", "id", "Number", "amount", "method", "status"]}
           dataProperties={["userId", "number", "amount", "method", "status"]}
-          setActionId={handleAction}
+          actionFn={handleAction}
           actionBtn={
             <Button variant="secondary" className="text-xs">
               Accept

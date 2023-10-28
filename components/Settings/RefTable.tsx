@@ -3,7 +3,6 @@
 import { IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
-import Link from "next/link";
 
 export const RefTable: FC<IRefTable> = ({
   tableHeaders,
@@ -11,7 +10,7 @@ export const RefTable: FC<IRefTable> = ({
   tableData,
   message,
   actionBtn,
-  setActionId,
+  actionFn: setActionId,
   slugUrl,
 }) => {
   const handleAction = (referUserId: string) => {

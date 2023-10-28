@@ -1,6 +1,5 @@
 import { IUserSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
-import { string } from "yup";
 
 const userSchema = new Schema<IUserSchema>(
   {
@@ -83,20 +82,16 @@ const userSchema = new Schema<IUserSchema>(
         default: "6527ecf7577ff95a96133786",
       },
       controller: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
+        type: String,
       },
       consultant: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
+        type: String,
       },
       teacher: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
+        type: String,
       },
       gl: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
+        type: String,
       },
       activeNotice: {
         type: Boolean,

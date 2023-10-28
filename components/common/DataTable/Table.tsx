@@ -12,13 +12,13 @@ export const DataTable: FC<IRefTable> = ({
   message,
   actionBtn,
   rejectBtn,
-  setActionId,
+  actionFn,
   UpdateSendWish,
   extraHed,
   extraProperties,
 }) => {
   const handleAction = (id: string, isReject?: boolean) => {
-    setActionId && setActionId(id, isReject);
+    actionFn && actionFn(id, isReject);
   };
 
   return (
@@ -47,10 +47,13 @@ export const DataTable: FC<IRefTable> = ({
                 {dataProperties.map((item, i) => {
                   switch (item) {
                     case "firstName":
+                      const name = `${referUser[item]} ${referUser["lastName"]}`;
                       return (
                         <Tbody
                           key={i}
-                          label={`${referUser[item]} ${referUser["lastName"]}`}
+                          label={
+                            name.length >= 15 ? name.slice(0, 15) + "..." : name
+                          }
                         />
                       );
                     case "createdAt":
