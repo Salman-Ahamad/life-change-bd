@@ -137,7 +137,7 @@ export interface IRefTable {
   message?: string;
   actionBtn?: JSX.Element;
   rejectBtn?: JSX.Element;
-  setActionId?: (id: string, isReject?: boolean) => void;
+  actionFn?: (id: string, isReject?: boolean) => void;
   UpdateSendWish?: boolean;
   slugUrl?: string;
   extraHed?: string[];

@@ -39,7 +39,7 @@ const MyReference = () => {
           tableHeaders={["no", "id", "Name", "Joining Time"]}
           dataProperties={["userId", "firstName", "createdAt", "phone"]}
           message="Message"
-          setActionId={handleCollectMoney}
+          actionFn={handleCollectMoney}
           actionBtn={
             <Button variant="secondary" className="text-xs">
               Collect Money
