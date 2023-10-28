@@ -19,7 +19,7 @@ export const GET = async () => {
       "-password"
     );
 
-    return ApiResponse(200, "User get successfully 👌", user);
+    return ApiResponse(200, "Inactive User get successfully 👌", user);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

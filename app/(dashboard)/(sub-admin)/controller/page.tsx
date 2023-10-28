@@ -34,11 +34,11 @@ const SubAdmin = () => {
   const [consultant, setConsultant] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>();
 
-  const filterableUsers = inactiveUsers.filter(
+  const filterableUsers = inactiveUsers?.filter(
     ({ settings }) => !settings.consultant
   );
 
-  useGetData("/user/inactive", setInactiveUsers, true);
+  useGetData("/user/inactive", setInactiveUsers);
 
   const handleGetConsultant = () => {
     getDataFn(`/user/consultant/${consultantId}`, setConsultant);
