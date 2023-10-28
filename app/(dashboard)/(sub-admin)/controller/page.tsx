@@ -24,9 +24,8 @@ const navData: INavItem[] = [
 
 const SubAdmin = () => {
   const [inactiveUsers, setInactiveUsers] = useState<IUser[]>([]);
-  console.log(
-    "🚀 ~ file: page.tsx:31 ~ SubAdmin ~ inactiveUsers:",
-    inactiveUsers
+  const filterableUsers = inactiveUsers.filter(
+    ({ settings }) => !settings.consultant
   );
 
   useGetData("/user/inactive", setInactiveUsers, true);
@@ -47,9 +46,9 @@ const SubAdmin = () => {
         <Title variant="H4" className="capitalize -mb-5">
           Inactive User List
         </Title>
-        {inactiveUsers.length !== 0 && (
+        {filterableUsers.length !== 0 && (
           <DataTable
-            tableData={inactiveUsers}
+            tableData={filterableUsers}
             tableHeaders={["No", "id", "Name", "Joining Time"]}
             dataProperties={["userId", "firstName", "createdAt"]}
             actionFn={handleUpdate}

@@ -224,7 +224,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             onlyText={user?.role !== UserRole.admin}
             label="Controller:"
             name="controller"
-            defaultValue={(userData && userData.settings?.controller?.id) || ""}
+            defaultValue={(userData && userData.settings?.controller) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -239,7 +239,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Consultant:"
             name="consultant"
-            defaultValue={(userData && userData.settings?.consultant?.id) || ""}
+            defaultValue={(userData && userData.settings?.consultant) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -255,7 +255,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Teacher:"
             name="teacher"
-            defaultValue={(userData && userData.settings?.teacher?.id) || ""}
+            defaultValue={(userData && userData.settings?.teacher) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -271,7 +271,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Group Leader:"
             name="gl"
-            defaultValue={(userData && userData.settings?.gl?.id) || ""}
+            defaultValue={(userData && userData.settings?.gl) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
