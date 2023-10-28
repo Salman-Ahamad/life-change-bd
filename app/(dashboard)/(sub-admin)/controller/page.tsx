@@ -19,6 +19,10 @@ const navData: INavItem[] = [
     link: "/controller/profile",
   },
   {
+    label: "Request",
+    link: "/controller/request",
+  },
+  {
     label: "Photo Zone",
     link: "/photo-zone",
   },
