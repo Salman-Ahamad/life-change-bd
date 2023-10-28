@@ -97,25 +97,25 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.controller:
         const controller = {
-          "settings.controller": user.id,
+          "settings.controller": user.userId,
         };
         option = optionFn(controller);
         break;
       case UserRole.consultant:
         const consultant = {
-          "settings.consultant": user.id,
+          "settings.consultant": user.userId,
         };
         option = optionFn(consultant);
         break;
       case UserRole.teacher:
         const teacher = {
-          "settings.teacher": user.id,
+          "settings.teacher": user.userId,
         };
         option = optionFn(teacher);
         break;
       case UserRole.gl:
         const gl = {
-          "settings.teacher": user.id,
+          "settings.gl": user.userId,
         };
         option = optionFn(gl);
         break;

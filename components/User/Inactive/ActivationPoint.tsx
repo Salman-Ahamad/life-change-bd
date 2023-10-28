@@ -14,28 +14,8 @@ export const ActivationPoint = () => {
   const user = useCurrentUser(true);
   useGetData("/config", setConfig, true);
 
-  const profileTitle = [
-    "email",
-    "country",
-    "language",
-    "phone",
-    "whatsapp",
-    "role",
-    "reference",
-    "balance",
-  ];
-
-  const tableTitle = user?.reference
-    ? profileTitle
-    : profileTitle.filter((i) => i !== "reference");
-
   const handleActivation = () => {
     if (user && config) {
-      const updatedData = {
-        role: UserRole.active,
-        balance: user.balance - config.baseFee,
-      };
-      // updateData("/all-ref", updatedData).then(() => signOut());
       updateData("/user/active", {}).then(() => signOut());
     }
   };

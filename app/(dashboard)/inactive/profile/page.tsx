@@ -39,11 +39,6 @@ const Profile = () => {
 
   const handleActivation = () => {
     if (user && config) {
-      const updatedData = {
-        role: UserRole.active,
-        balance: user.balance - config.baseFee,
-      };
-      // updateData("/all-ref", updatedData).then(() => signOut());
       updateData("/user/active", {}).then(() => signOut());
     }
   };
