@@ -95,7 +95,7 @@ export const PATCH = async (req: NextRequest, { params }: ISlugParams) => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (user.role !== UserRole.admin) {
+    if (user.role === UserRole.active || user.role === UserRole.inactive) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
