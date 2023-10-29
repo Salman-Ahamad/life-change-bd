@@ -22,7 +22,6 @@ const Settings: NextPage = () => {
   const [config, setConfig] = useState<IAppConfig>();
   const user = useCurrentUser(true);
   useGetData("/config", setConfig, true);
-  console.log(config);
 
   // https://chat.whatsapp.com/HO9jwt1dkPiEqOffAJLgmF
 

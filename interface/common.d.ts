@@ -1,6 +1,12 @@
 import { StaticImageData } from "next/image";
 import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
-import { ICardData, IChildren, IChildrenWithClassName, IClassName } from ".";
+import {
+  ICardData,
+  IChildren,
+  IChildrenWithClassName,
+  IClassName,
+  IUser,
+} from ".";
 
 export type IColor =
   | "black"
@@ -130,6 +136,12 @@ export interface ITbody extends ITHeader {
   href?: string;
 }
 
+export interface IActionFn {
+  id: string;
+  isReject?: boolean;
+  user?: IUser;
+}
+
 export interface IRefTable {
   tableHeaders: string[];
   dataProperties: string[];
@@ -137,11 +149,12 @@ export interface IRefTable {
   message?: string;
   actionBtn?: JSX.Element;
   rejectBtn?: JSX.Element;
-  actionFn?: (id: string, isReject?: boolean) => void;
+  actionFn?: (props: IActionFn) => void;
   UpdateSendWish?: boolean;
   slugUrl?: string;
   extraHed?: string[];
   extraProperties?: JSX.Element[];
+  addFullUser?: Dispatch<SetStateAction<any[]>>;
 }
 
 export interface IFiledDate {

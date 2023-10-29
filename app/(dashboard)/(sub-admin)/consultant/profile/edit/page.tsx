@@ -15,11 +15,11 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/checker/profile",
+    link: "/consultant/profile",
   },
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/checker",
+    link: "/consultant",
   },
 ];
 

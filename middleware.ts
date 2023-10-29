@@ -56,6 +56,13 @@ export default withAuth(
       !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/controller", request.url));
+    } else if (
+      userRole === UserRole.consultant &&
+      !pathname.startsWith("/consultant") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
+    ) {
+      return NextResponse.redirect(new URL("/consultant", request.url));
     }
   },
   {
