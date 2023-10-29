@@ -1,5 +1,5 @@
 export const openWhatsappChat = (
-  phoneNo: string,
+  phoneNo?: string,
   message?: string,
   groupLink?: string
 ) => {

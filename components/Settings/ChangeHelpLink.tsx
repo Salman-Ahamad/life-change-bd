@@ -4,13 +4,15 @@ import { updateData } from "@/hooks";
 import { Button } from "@/universal";
 import { FC, useState } from "react";
 
-export const ChangeHelpLink: FC = () => {
+export const ChangeHelpLink: FC<{ help: string }> = ({ help }) => {
   const [helpLink, setHelpLink] = useState<string>("");
 
   return (
-    <section className="flex items-end justify-center">
+    <div className="flex items-end justify-center w-full">
       <div className="flex flex-col gap-1">
-        <label className="pl-1.5">Help Link</label>
+        <label className="pl-1.5">
+          Help Link: <span className="font-bold">{help ? help : ""}</span>
+        </label>
         <div className="flex gap-2.5">
           <input
             type="text"
@@ -23,12 +25,13 @@ export const ChangeHelpLink: FC = () => {
             onClick={() => {
               updateData("/config", { "support.help": helpLink });
               setHelpLink("");
+              window.location.reload();
             }}
           >
             Save
           </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
