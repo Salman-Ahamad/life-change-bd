@@ -31,7 +31,7 @@ const SendWish = () => {
           tableHeaders={["no", "id", "Name"]}
           dataProperties={["userId", "firstName", "phone"]}
           message="SendWish"
-          UpdateSendWish
+          updateSendWish
         />
       )}
     </>

@@ -21,6 +21,8 @@ export const DataTable: FC<IRefTable> = ({
   const handleAction = ({ id, isReject, user }: IActionFn) => {
     if (user) {
       actionFn && actionFn({ id, user });
+      addFullUser &&
+        addFullUser((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
     } else {
       actionFn && actionFn({ id, isReject });
     }
