@@ -1,6 +1,6 @@
 "use client";
 
-import { IRefTable, IUser } from "@/interface";
+import { IActionFn, IRefTable, IUser } from "@/interface";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
 
@@ -10,11 +10,11 @@ export const RefTable: FC<IRefTable> = ({
   tableData,
   message,
   actionBtn,
-  actionFn: setActionId,
+  actionFn,
   slugUrl,
 }) => {
-  const handleAction = (referUserId: string) => {
-    setActionId && setActionId(referUserId);
+  const handleAction = ({ id }: IActionFn) => {
+    actionFn && actionFn({ id });
   };
 
   return (

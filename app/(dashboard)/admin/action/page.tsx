@@ -2,7 +2,7 @@
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useGetData } from "@/hooks";
-import { INavItem, IUser } from "@/interface";
+import { IActionFn, INavItem, IUser } from "@/interface";
 import { BackButton, Button, Title } from "@/universal";
 import { Types } from "mongoose";
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ const Action: React.FC = () => {
   const [data, setData] = useState<IUser[] | null>(null);
   useGetData("/withdrawal", setData, true);
 
-  const handleAction = (id: string, isReject?: boolean) => {
+  const handleAction = ({ id, isReject }: IActionFn) => {
     if (Types.ObjectId.isValid(id)) {
       if (!isReject) {
         updateData("/withdrawal?status=complete", {

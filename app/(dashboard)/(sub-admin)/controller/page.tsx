@@ -2,7 +2,7 @@
 
 import { DataTable, Header, THeader, Tbody } from "@/components";
 import { getDataFn, updateData, useGetData } from "@/hooks";
-import { INavItem, IUser } from "@/interface";
+import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Title } from "@/universal";
 import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
@@ -46,11 +46,13 @@ const SubAdmin = () => {
     setConsultantId("");
   };
 
-  const handleUpdate = (id: string) => {
+  const handleAddStudent = ({ id, user }: IActionFn) => {
     if (consultant) {
       updateData(`/user/${id}`, {
         "settings.consultant": consultant.userId,
-      }).then(() => window.location.reload());
+      }).then(() =>
+        getDataFn(`/user/consultant?id=${consultantId}`, setStudents, true)
+      );
     } else {
       toast.error("Consultant not found");
     }
@@ -59,7 +61,9 @@ const SubAdmin = () => {
     if (consultant) {
       updateData(`/user/${id}`, {
         "settings.consultant": "",
-      }).then(() => window.location.reload());
+      }).then(() =>
+        getDataFn(`/user/consultant?id=${consultantId}`, setStudents, true)
+      );
     } else {
       toast.error("Consultant not found");
     }
@@ -148,7 +152,7 @@ const SubAdmin = () => {
             tableData={filterableUsers}
             tableHeaders={["No", "id", "Name", "Joining Time"]}
             dataProperties={["userId", "firstName", "createdAt"]}
-            actionFn={handleUpdate}
+            actionFn={handleAddStudent}
             actionBtn={
               <Button variant="secondary" className="text-xs">
                 Add
