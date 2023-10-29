@@ -36,9 +36,6 @@ export const PATCH = async (req: NextRequest) => {
     const user = await getCurrentUser();
 
     if (!user) {
-      console.log("🚀 ~ file: route.ts:39 ~ PATCH ~ user:", {
-        user: user!.role,
-      });
       return ApiResponse(404, "User not found❗");
     } else if (user.role !== UserRole.admin && user.role !== UserRole.teacher) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");

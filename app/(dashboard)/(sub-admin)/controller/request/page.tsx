@@ -12,7 +12,6 @@ const Request = () => {
   useGetData("/request", setRequestUser);
 
   const handleAdd = (request: IRequest) => {
-    console.log("🚀 ~ file: page.tsx:15 ~ handleAdd ~ request:", { request });
     updateData(`/request`, {
       userId: request.userId,
       reqId: request.id,
