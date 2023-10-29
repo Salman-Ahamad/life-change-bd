@@ -107,7 +107,7 @@ const SubAdmin = () => {
             type="text"
             value={consultantId}
             onChange={(e) => setConsultantId(e.target.value)}
-            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md w-[47%] sm:w-auto"
+            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
           />
           <Button
             variant="secondary"

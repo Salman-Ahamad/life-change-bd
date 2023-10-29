@@ -1,17 +1,20 @@
 import { IRequestSchema } from "@/interface";
 import { Schema, model, models } from "mongoose";
 
-const sliderSchema = new Schema<IRequestSchema>(
+const requestSchema = new Schema<IRequestSchema>(
   {
     to: {
       type: String,
       required: true,
     },
-    formId: {
+    consultantId: {
       type: String,
+      required: true,
     },
     userId: {
       type: String,
+      required: true,
+      unique: true,
     },
   },
   {
@@ -22,5 +25,5 @@ const sliderSchema = new Schema<IRequestSchema>(
   }
 );
 
-export const Slider =
-  models?.slider || model<IRequestSchema>("slider", sliderSchema);
+export const Request =
+  models?.request || model<IRequestSchema>("request", requestSchema);
