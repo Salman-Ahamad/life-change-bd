@@ -4,13 +4,20 @@ import { updateData } from "@/hooks";
 import { Button } from "@/universal";
 import { FC, useState } from "react";
 
-export const ChangeBaseFee: FC = () => {
+export const ChangeBaseFee: FC<{
+  currentBaseFee: number;
+}> = ({ currentBaseFee }) => {
   const [baseFee, setBaseFee] = useState(0);
 
   return (
-    <section className="flex items-end justify-center">
+    <div className="flex items-end justify-center w-full">
       <div className="flex flex-col gap-1">
-        <label className="pl-1.5">Base Fee </label>
+        <label className="pl-1.5">
+          Base Fee:{" "}
+          <span className="font-bold">
+            {currentBaseFee ? currentBaseFee : 0}
+          </span>
+        </label>
         <div className="flex gap-2.5">
           <input
             type="number"
@@ -26,6 +33,6 @@ export const ChangeBaseFee: FC = () => {
           </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

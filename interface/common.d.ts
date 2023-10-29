@@ -157,7 +157,7 @@ export interface ImageUploaderProps extends IClassName {
 }
 
 export interface IWaDeepLink {
-  phoneNo: string;
+  phoneNo?: string;
   btnText: string;
   message?: string;
   groupLink?: string;
