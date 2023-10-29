@@ -25,6 +25,7 @@ export interface IDataRow {
   icon?: boolean;
   phoneNo?: string;
   meetLink?: string;
+  groupLink?: string;
 }
 export const DataRow: FC<IDataRow> = ({
   title,
@@ -32,6 +33,7 @@ export const DataRow: FC<IDataRow> = ({
   icon,
   phoneNo,
   meetLink,
+  groupLink,
 }) => {
   return (
     <div className="flex justify-between items-center gap-2.5 py-2 hover:bg-gray-100">
@@ -47,6 +49,8 @@ export const DataRow: FC<IDataRow> = ({
         <GoogleMeetLink meetId={meetLink}>Join Class</GoogleMeetLink>
       ) : phoneNo ? (
         <WhatsAppLink btnText={btnText} phoneNo={phoneNo as string} />
+      ) : groupLink ? (
+        <WhatsAppLink btnText={btnText} groupLink={groupLink as string} />
       ) : (
         <Button variant="secondary">Start soon</Button>
       )}

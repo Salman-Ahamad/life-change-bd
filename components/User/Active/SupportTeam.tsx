@@ -31,7 +31,7 @@ export const SupportTeam: FC<{ support: string }> = ({ support }) => {
 
         <DataRow
           title="Support WhatsApp Group"
-          phoneNo={support}
+          groupLink={support}
           btnText="Join"
         />
       </ActivePageCard>
