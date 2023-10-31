@@ -17,10 +17,11 @@ export interface ISettingsSchema {
   withdrawalFee: boolean;
   sendWish: boolean;
   admin: Types.ObjectId;
-  consultant: Types.ObjectId;
-  controller: Types.ObjectId;
-  teacher: Types.ObjectId;
-  gl: Types.ObjectId;
+  consultant: string;
+  controller: string;
+  teacher: string;
+  gl: string;
+  trainer: string;
   course: string;
 }
 
