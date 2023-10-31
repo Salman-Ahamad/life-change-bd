@@ -2,7 +2,7 @@
 
 import { Header } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
-import { createData, useCurrentUser, useGetData } from "@/hooks";
+import { createData, updateData, useCurrentUser, useGetData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Label, Title } from "@/universal";
 import { Dispatch, FC, SetStateAction, useState } from "react";
@@ -35,6 +35,7 @@ const SubAdmin: FC = () => {
   const [students, setStudents] = useState<IUser[]>([]);
   const [userId, setUserId] = useState("");
   const [open, setOpen] = useState(false);
+  const [selectUser, setSelectUser] = useState<IUser>();
   const user = useCurrentUser(true);
 
   useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
@@ -49,13 +50,13 @@ const SubAdmin: FC = () => {
   };
 
   const handleAddTrainer = ({ id, user }: IActionFn) => {
-    console.log("🚀 ~ file: page.tsx:51 ~ handleAddTrainer ~ id:", user);
+    setSelectUser(user);
     setOpen(true);
   };
 
   return (
     <main>
-      <PopUp open={open} setOpen={setOpen} />
+      {selectUser && <PopUp open={open} setOpen={setOpen} user={selectUser} />}
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
         Welcome to Life Change Bd
@@ -104,12 +105,17 @@ const SubAdmin: FC = () => {
 export default SubAdmin;
 
 export const PopUp: FC<{
+  user: IUser;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-}> = ({ open: visible, setOpen }) => {
+}> = ({ open: visible, setOpen, user }) => {
   const [userId, setUserId] = useState("");
 
-  const handleAddTrainer = () => {};
+  const handleAddTrainer = () => {
+    updateData(`/user/${user.id}`, {
+      "settings.trainer": userId,
+    });
+  };
 
   return (
     <section
@@ -129,7 +135,7 @@ export const PopUp: FC<{
             <Label className="font-semibold">Add Trainer</Label>
             <input
               type="text"
-              value={userId}
+              value={user.settings.trainer || userId}
               placeholder="Trainer ID"
               onChange={(e) => setUserId(e.target.value)}
               className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
