@@ -1,5 +1,4 @@
 import { connectDb } from "@/config";
-import { UserRole } from "@/lib";
 import { User } from "@/models";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { compare } from "bcryptjs";
@@ -84,7 +83,6 @@ export const options: NextAuthOptions = {
           if (currentUser.email === profile?.email) {
             const updatedData = {
               isVerified: true,
-              balance: currentUser.balance + 5,
             };
             await User.updateOne({ _id: currentUser.id }, updatedData, {
               new: true,
