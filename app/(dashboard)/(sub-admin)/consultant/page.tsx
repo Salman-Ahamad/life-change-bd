@@ -47,7 +47,9 @@ const SubAdmin = () => {
       </Title>
       <Container>
         <div className="flex flex-col justify-center items-start gap-1 mb-5 w-fit mx-auto">
-          <Label className="text-sm ml-2">Request New Inactive User</Label>
+          <Label className="text-sm lg:text-sm ml-2">
+            Request New Inactive User
+          </Label>
           <div className="flex justify-center items-center gap-1">
             <input
               type="text"

@@ -28,11 +28,11 @@ const SubAdmin = () => {
   const [userId, setUserId] = useState("");
   const user = useCurrentUser(true);
 
-  useGetData(`/user/consultant?id=${user?.userId}`, setStudents, true);
+  useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
 
   const handleRequest = () => {
     createData("/request", {
-      to: "230174", // Controller Id
+      to: "230001", // Admin Id
       userId: userId,
       seniorId: user?.userId,
     });
@@ -47,7 +47,9 @@ const SubAdmin = () => {
       </Title>
       <Container>
         <div className="flex flex-col justify-center items-start gap-1 mb-5 w-fit mx-auto">
-          <Label className="text-sm ml-2">Request New Inactive User</Label>
+          <Label className="text-sm lg:text-sm ml-2">
+            Request New Active User
+          </Label>
           <div className="flex justify-center items-center gap-1">
             <input
               type="text"
@@ -67,7 +69,7 @@ const SubAdmin = () => {
         </div>
 
         <Title variant="H4" className="capitalize -mb-5">
-          Inactive User List
+          Student List (Active User)
         </Title>
         {students && students?.length !== 0 && (
           <RefTable
