@@ -97,6 +97,8 @@ export const config = {
     "/admin/user-management/ref-list",
     "/admin/user-management/ref-list/my-ref",
     "/admin/user-management/send-wish",
+    "/admin/user-management/gl",
+    "/admin/user-management/gl/request",
     "/admin/user-management/student",
     "/inactive",
     "/inactive/profile",

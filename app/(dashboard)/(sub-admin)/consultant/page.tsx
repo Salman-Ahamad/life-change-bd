@@ -34,7 +34,7 @@ const SubAdmin = () => {
     createData("/request", {
       to: "230174", // Controller Id
       userId: userId,
-      consultantId: user?.userId,
+      seniorId: user?.userId,
     });
     setUserId("");
   };

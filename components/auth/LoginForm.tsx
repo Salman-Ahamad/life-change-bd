@@ -59,7 +59,7 @@ export const LoginForm: FC<{ title?: string }> = ({ title }) => {
             {title ? title : "Welcome back"}
           </Title>
 
-          <CTA className="mt-2.5">Phone Number with Country code</CTA>
+          <CTA className="mt-2.5">Phone Number</CTA>
           <Input name="phone" placeholder="Enter Your Phone" type="text" />
           <CTA className="mt-2.5">Password</CTA>
           <Input
