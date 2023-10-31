@@ -15,9 +15,10 @@ export const GET = async () => {
       return ApiResponse(404, "User not found❗");
     }
 
-    const result = await User.find({ role: UserRole.inactive }).select(
-      "-password"
-    );
+    const result = await User.find({
+      role: UserRole.trainer,
+      "settings.trainer": user.userId,
+    }).select("-password");
 
     return ApiResponse(200, "Inactive User get successfully 👌", result);
   } catch (error: any) {

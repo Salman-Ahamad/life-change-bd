@@ -154,7 +154,7 @@ export interface IRefTable {
   slugUrl?: string;
   extraHed?: string[];
   extraProperties?: JSX.Element[];
-  addFullUser?: Dispatch<SetStateAction<any[]>>;
+  addFullUser?: boolean;
 }
 
 export interface IFiledDate {

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const deleteData = async (
   apiUrl: string,
-  updatedData: object,
+  updatedData?: object,
   toastOf: boolean = false
 ) => {
   const id = !toastOf && toast.loading("Deleting...🔃");

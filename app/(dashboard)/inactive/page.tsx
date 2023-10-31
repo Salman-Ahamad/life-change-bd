@@ -34,7 +34,7 @@ const Inactive = () => {
     <>
       <Header navData={navData} />
       {user && !user.isVerified && (
-        <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
+        <Tost label="Verify Email Address" btnText="verify" />
       )}
       <ImageUploadSection />
       <Support />

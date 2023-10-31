@@ -1,88 +1,81 @@
 "use client";
 
-import { DataTable, Header, THeader, Tbody } from "@/components";
-import { getDataFn, updateData, useGetData } from "@/hooks";
-import { IActionFn, INavItem, IUser } from "@/interface";
-import { Button, Container, Title } from "@/universal";
 import { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 
+import { DataTable, Header, THeader, Tbody } from "@/components";
+import { getDataFn, updateData, useGetData } from "@/hooks";
+import { IActionFn, INavItem, IUser } from "@/interface";
+import { Button, Container, Title } from "@/universal";
+
 const navData: INavItem[] = [
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/controller",
-  },
-  {
-    label: "Profile",
-    link: "/controller/profile",
+    link: "/admin",
   },
   {
     label: "Request",
-    link: "/controller/request",
-  },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
+    link: "/admin/user-management/gl/request",
   },
 ];
 
 const SubAdmin = () => {
-  const [inactiveUsers, setInactiveUsers] = useState<IUser[]>([]);
-  const [consultantId, setConsultantId] = useState("");
-  const [consultant, setConsultant] = useState<IUser>();
+  const [activeUsers, setActiveUsers] = useState<IUser[]>([]);
+  const [glId, setGlId] = useState("");
+  const [gl, setGl] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>([]);
   const [users, setUsers] = useState<IUser[]>(
-    inactiveUsers?.filter(({ settings }) => !settings.consultant)
+    activeUsers?.filter(({ settings }) => !settings.gl)
   );
   const [updateBtn, setUpdateBtn] = useState(true);
 
-  useGetData("/user/inactive", setInactiveUsers);
+  useGetData("/user/active", setActiveUsers);
 
   useEffect(() => {
-    if (inactiveUsers) {
-      setUsers(inactiveUsers?.filter(({ settings }) => !settings.consultant));
+    if (activeUsers) {
+      setUsers(activeUsers?.filter(({ settings }) => !settings.gl));
     }
-  }, [inactiveUsers]);
+  }, [activeUsers]);
 
-  const handleGetConsultant = () => {
-    getDataFn(`/user/consultant/${consultantId}`, setConsultant);
-    getDataFn(`/user/consultant?id=${consultantId}`, setStudents, true);
-    setConsultantId("");
+  const handleGetGl = () => {
+    getDataFn(`/user/gl/${glId}`, setGl);
+    getDataFn(`/user/gl?id=${glId}`, setStudents, true);
+    setGlId("");
   };
 
   const handleAddStudent = ({ user }: IActionFn) => {
-    if (consultant) {
+    if (gl?.userId) {
       setUpdateBtn(false);
       if (user) {
-        setUsers((prv) => [...prv, user]);
+        setUsers((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
         setStudents((prv) => [...prv, user]);
       }
     } else {
-      toast.error("Consultant not found");
+      toast.error("Group Leader not found");
     }
   };
 
   const handleRemove = (user: IUser) => {
     setUpdateBtn(false);
-    if (consultant) {
+    if (gl) {
       updateData(`/user/${user.id}`, {
-        "settings.consultant": "",
+        "settings.gl": "",
       }).then(() => {
         setUsers((prv) => [...prv, user]);
         setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
       });
     } else {
-      toast.error("Consultant not found");
+      toast.error("Group Leader not found");
     }
   };
 
   const handleUpdateDb = () => {
-    if (consultant) {
+    if (gl) {
       students.map((student: IUser) =>
         updateData(`/user/${student.id}`, {
-          "settings.consultant": consultant.userId,
+          "settings.gl": gl.userId,
         }).then(() => setUpdateBtn(true))
       );
     }
@@ -96,35 +89,35 @@ const SubAdmin = () => {
       </Title>
       <Container>
         <Title variant="H4" className="capitalize mb-1">
-          Consultant
+          Group Leader
         </Title>
 
         <div className="flex justify-center items-center gap-1 mb-5">
           <input
             type="text"
-            value={consultantId}
-            onChange={(e) => setConsultantId(e.target.value)}
+            value={glId}
+            onChange={(e) => setGlId(e.target.value)}
             className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
           />
           <Button
             variant="secondary"
-            disabled={consultantId.length === 0}
-            onClick={handleGetConsultant}
+            disabled={glId.length === 0}
+            onClick={handleGetGl}
             className="disabled:opacity-40"
           >
             Search
           </Button>
         </div>
 
-        {consultant && (
+        {gl && (
           <>
             <div className="flex justify-center items-center gap-2.5 mb-5">
               <Title
                 variant="H5"
                 className="capitalize flex items-center justify-center"
               >
-                Name: {consultant?.firstName}&nbsp;
-                {consultant?.lastName} - Id: {consultant?.userId}
+                Name: {gl?.firstName}&nbsp;
+                {gl?.lastName} - Id: {gl?.userId}
               </Title>
               <Button
                 variant="secondary"
@@ -132,7 +125,7 @@ const SubAdmin = () => {
                 onClick={handleUpdateDb}
                 className="disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Update Consultant List
+                Update gl List
               </Button>
             </div>
 
@@ -179,7 +172,7 @@ const SubAdmin = () => {
       </Container>
       <Container>
         <Title variant="H4" className="capitalize -mb-10">
-          Inactive User List
+          Active User List
         </Title>
 
         {users.length !== 0 && (

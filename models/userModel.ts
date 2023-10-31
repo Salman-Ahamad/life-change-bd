@@ -90,6 +90,9 @@ const userSchema = new Schema<IUserSchema>(
       teacher: {
         type: String,
       },
+      trainer: {
+        type: String,
+      },
       gl: {
         type: String,
       },

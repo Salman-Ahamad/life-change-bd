@@ -34,7 +34,10 @@ export const GET = async () => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.controller) {
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 

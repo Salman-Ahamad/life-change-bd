@@ -1,6 +1,8 @@
 "use client";
 
+import { useCurrentUser } from "@/hooks";
 import { IActionFn, IRefTable, IUser } from "@/interface";
+import { UserRole } from "@/lib";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
 
@@ -13,8 +15,9 @@ export const RefTable: FC<IRefTable> = ({
   actionFn,
   slugUrl,
 }) => {
-  const handleAction = ({ id }: IActionFn) => {
-    actionFn && actionFn({ id });
+  const user = useCurrentUser(true);
+  const handleAction = (props: IActionFn) => {
+    actionFn && actionFn(props);
   };
 
   return (
@@ -66,23 +69,34 @@ export const RefTable: FC<IRefTable> = ({
                         />
                       );
                     default:
-                      return (
-                        <Tbody
-                          key={i}
-                          label={referUser[item as keyof IUser] as string}
-                          href={
-                            slugUrl
-                              ? `${slugUrl}${referUser.id}`
-                              : `/user/${referUser.id}`
-                          }
-                        />
-                      );
+                      if (user?.role === UserRole.admin) {
+                        return (
+                          <Tbody
+                            key={i}
+                            label={referUser[item as keyof IUser] as string}
+                            href={
+                              slugUrl
+                                ? `${slugUrl}${referUser.id}`
+                                : `/user/${referUser.id}`
+                            }
+                          />
+                        );
+                      } else {
+                        return (
+                          <Tbody
+                            key={i}
+                            label={referUser[item as keyof IUser] as string}
+                          />
+                        );
+                      }
                   }
                 })}
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.id)}
+                    onClick={() =>
+                      handleAction({ id: referUser.id, user: referUser })
+                    }
                   >
                     {actionBtn}
                   </td>

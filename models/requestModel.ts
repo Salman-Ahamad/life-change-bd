@@ -7,7 +7,7 @@ const requestSchema = new Schema<IRequestSchema>(
       type: String,
       required: true,
     },
-    consultantId: {
+    seniorId: {
       type: String,
       required: true,
     },

@@ -75,7 +75,7 @@ const Active = () => {
     <main>
       <Header navData={navData} />
       {user && !user.isVerified && (
-        <Tost label="Verify Email Address and Get 5 Taka" btnText="verify" />
+        <Tost label="Verify Email Address" btnText="verify" />
       )}
 
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">

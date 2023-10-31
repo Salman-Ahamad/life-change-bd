@@ -33,3 +33,9 @@ export interface IPageHeader {
   setData?: Dispatch<SetStateAction<IUser[] | null>>;
   onlyActive?: boolean;
 }
+
+export interface IPopUp {
+  user: IUser;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
