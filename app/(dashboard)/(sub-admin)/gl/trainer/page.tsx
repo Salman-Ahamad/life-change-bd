@@ -4,13 +4,12 @@ import { Header } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { createData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { Button, Container, Label, Title } from "@/universal";
+import { BackButton, Button, Container, Label, Title } from "@/universal";
 import { useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
+    label: <BackButton className="text-2xl" />,
     link: "/gl",
   },
   {
@@ -20,14 +19,6 @@ const navData: INavItem[] = [
   {
     label: "Trainer",
     link: "/gl/trainer",
-  },
-  {
-    label: "Profile",
-    link: "/gl/profile",
-  },
-  {
-    label: "Photo Zone",
-    link: "/photo-zone",
   },
 ];
 
