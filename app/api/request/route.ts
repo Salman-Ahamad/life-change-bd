@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
 
     const result = await Request.create(courseData);
 
-    return ApiResponse(200, "Course created successfully 👌", result);
+    return ApiResponse(200, "Request Send successfully 👌", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
