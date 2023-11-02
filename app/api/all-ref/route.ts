@@ -97,13 +97,19 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.controller:
         const controller = {
-          "settings.controller": user.userId,
+          $or: [
+            { role: UserRole.inactive },
+            { "settings.controller": user.userId },
+          ],
         };
         option = optionFn(controller);
         break;
       case UserRole.consultant:
         const consultant = {
-          "settings.consultant": user.userId,
+          $or: [
+            { role: UserRole.inactive },
+            { "settings.consultant": user.userId },
+          ],
         };
         option = optionFn(consultant);
         break;
@@ -113,9 +119,15 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         };
         option = optionFn(teacher);
         break;
+      case UserRole.sgl:
+        const sgl = {
+          $or: [{ role: UserRole.active }, { "settings.sgl": user.userId }],
+        };
+        option = optionFn(sgl);
+        break;
       case UserRole.gl:
         const gl = {
-          "settings.gl": user.userId,
+          $or: [{ role: UserRole.active }, { "settings.gl": user.userId }],
         };
         option = optionFn(gl);
         break;

@@ -33,7 +33,7 @@ export const UserRole = {
   consultant: "consultant",
   srController: "sr-controller",
   controller: "controller",
-  srgl: "srgl", // Senior Group Leader
+  sgl: "sgl", // Senior Group Leader
   gl: "gl",
   teacher: "teacher",
   trainer: "trainer",

@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable, Header, THeader, Tbody } from "@/components";
+import { DataTable, Header, SearchBar, THeader, Tbody } from "@/components";
 import { getDataFn, updateData, useGetData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Title } from "@/universal";
@@ -33,9 +33,7 @@ const SubAdmin = () => {
   const [consultantId, setConsultantId] = useState("");
   const [consultant, setConsultant] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>([]);
-  const [users, setUsers] = useState<IUser[]>(
-    inactiveUsers?.filter(({ settings }) => !settings.consultant)
-  );
+  const [users, setUsers] = useState<IUser[] | null>(null);
   const [updateBtn, setUpdateBtn] = useState(true);
 
   useGetData("/user/inactive", setInactiveUsers);
@@ -56,7 +54,7 @@ const SubAdmin = () => {
     if (consultant) {
       setUpdateBtn(false);
       if (user) {
-        setUsers((prv) => [...prv, user]);
+        setUsers((prv) => prv && [...prv, user]);
         setStudents((prv) => [...prv, user]);
       }
     } else {
@@ -70,7 +68,7 @@ const SubAdmin = () => {
       updateData(`/user/${user.id}`, {
         "settings.consultant": "",
       }).then(() => {
-        setUsers((prv) => [...prv, user]);
+        setUsers((prv) => prv && [...prv, user]);
         setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
       });
     } else {
@@ -97,11 +95,12 @@ const SubAdmin = () => {
     <main>
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
-        Welcome to Life Change Bd
+        Welcome to Life Change Bd{" "}
+        <span className="text-info">(Controller)</span>
       </Title>
       <Container>
-        <Title variant="H4" className="capitalize mb-1">
-          Consultant
+        <Title variant="H5" className="capitalize">
+          Find Consultant Id
         </Title>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-1 mb-5">
@@ -115,7 +114,7 @@ const SubAdmin = () => {
             variant="secondary"
             disabled={consultantId.length === 0}
             onClick={handleGetConsultant}
-            className="disabled:opacity-40 w-full md:w-auto"
+            className="disabled:opacity-40 w-full md:w-auto disabled:cursor-not-allowed"
           >
             Search
           </Button>
@@ -193,11 +192,11 @@ const SubAdmin = () => {
         )}
       </Container>
       <Container>
+        <SearchBar setData={setUsers} />
         <Title variant="H4" className="capitalize -mb-10">
           Inactive User List
         </Title>
-
-        {users.length !== 0 && (
+        {users && users.length !== 0 && (
           <DataTable
             tableData={users}
             tableHeaders={["No", "id", "Name", "Joining Time"]}
