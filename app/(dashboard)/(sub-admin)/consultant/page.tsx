@@ -28,7 +28,7 @@ const SubAdmin = () => {
   const [userId, setUserId] = useState("");
   const user = useCurrentUser(true);
 
-  useGetData(`/user/consultant?id=${user?.userId}`, setStudents, true);
+  useGetData(`/user/consultant?id=${user?.userId}`, setStudents);
 
   const handleRequest = () => {
     createData("/request", {
@@ -77,7 +77,7 @@ const SubAdmin = () => {
             tableHeaders={["No", "id", "Name", "Joining Time"]}
             dataProperties={["userId", "firstName", "createdAt", "phone"]}
             message="Message"
-            slugUrl="/admin/user-management/student/"
+            messageDone
           />
         )}
       </Container>

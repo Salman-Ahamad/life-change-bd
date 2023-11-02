@@ -45,7 +45,18 @@ const RootLayout: FC<IChildren> = ({ children }) => (
     <body className={inter.className}>
       <AuthProvider>
         {children}
-        <ToastContainer />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="light"
+        />
       </AuthProvider>
     </body>
   </html>
