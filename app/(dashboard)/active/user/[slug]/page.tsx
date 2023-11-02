@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { FileUploader, Header } from "@/components";
 import { InputField } from "@/components/Settings";
-import { getDataFn, updateData, useCurrentUser, useGetData } from "@/hooks";
+import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile } from "@/lib";
 import { BackButton, Button, Container, Title } from "@/universal";
@@ -166,7 +166,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             onlyText={user?.role !== UserRole.admin}
             label="Controller:"
             name="controller"
-            defaultValue={(userData && userData.settings?.controller?.id) || ""}
+            defaultValue={(userData && userData.settings?.controller) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -181,7 +181,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Consultant:"
             name="consultant"
-            defaultValue={(userData && userData.settings?.consultant?.id) || ""}
+            defaultValue={(userData && userData.settings?.consultant) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -197,7 +197,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Teacher:"
             name="teacher"
-            defaultValue={(userData && userData.settings?.teacher?.id) || ""}
+            defaultValue={(userData && userData.settings?.teacher) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,
@@ -213,7 +213,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
             label="Group Leader:"
             name="gl"
-            defaultValue={(userData && userData.settings?.gl?.id) || ""}
+            defaultValue={(userData && userData.settings?.gl) || ""}
             onChange={(value) =>
               setUpdatedData((prev) => ({
                 ...prev,

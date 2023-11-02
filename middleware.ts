@@ -56,6 +56,13 @@ export default withAuth(
       !pathname.startsWith("/forgot-password")
     ) {
       return NextResponse.redirect(new URL("/controller", request.url));
+    } else if (
+      userRole === UserRole.consultant &&
+      !pathname.startsWith("/consultant") &&
+      !pathname.startsWith("/photo-zone") &&
+      !pathname.startsWith("/forgot-password")
+    ) {
+      return NextResponse.redirect(new URL("/consultant", request.url));
     }
   },
   {
@@ -90,6 +97,8 @@ export const config = {
     "/admin/user-management/ref-list",
     "/admin/user-management/ref-list/my-ref",
     "/admin/user-management/send-wish",
+    "/admin/user-management/gl",
+    "/admin/user-management/gl/request",
     "/admin/user-management/student",
     "/inactive",
     "/inactive/profile",
@@ -104,11 +113,18 @@ export const config = {
     "/checker/change-password",
     "/checker/profile",
     "/checker/profile/edit",
-    "/forgot-password",
     "/controller",
     "/controller/change-password",
     "/controller/profile",
     "/controller/profile/edit",
+    "/consultant",
+    "/consultant/change-password",
+    "/consultant/profile",
+    "/consultant/profile/edit",
+    "/gl",
+    "/gl/change-password",
+    "/gl/profile",
+    "/gl/profile/edit",
     "/forgot-password",
   ],
 };

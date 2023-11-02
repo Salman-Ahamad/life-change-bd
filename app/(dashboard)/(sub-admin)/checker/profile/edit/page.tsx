@@ -114,25 +114,6 @@ const Edit: NextPage = () => {
             </label>
           </div>
 
-          {/*
-          <div className="text-lg py-1">
-            <span className="font-semibold pl-2">Last Name:&nbsp;</span>
-            <input
-              type="text"
-              name="lastName"
-              defaultValue={user && user.lastName}
-              onChange={(e) =>
-                setUpdatedData((prv) => {
-                  return {
-                    ...prv,
-                    lastName: e.target.value,
-                  };
-                })
-              }
-              className="outline-none pl-1.5 bg-gray-100 rounded-sm"
-            />
-          </div> */}
-
           <Button
             variant="secondary"
             className="capitalize mt-5 disabled:bg-opacity-50 disabled:cursor-not-allowed"

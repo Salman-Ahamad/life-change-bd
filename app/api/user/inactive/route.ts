@@ -9,17 +9,17 @@ connectDb();
 export const GET = async () => {
   try {
     // Get Current User
-    const currentUser = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    if (!currentUser) {
+    if (!user) {
       return ApiResponse(404, "User not found❗");
     }
 
-    const user = await User.find({ role: UserRole.inactive }).select(
+    const result = await User.find({ role: UserRole.inactive }).select(
       "-password"
     );
 
-    return ApiResponse(200, "Inactive User get successfully 👌", user);
+    return ApiResponse(200, "Inactive User get successfully 👌", result);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

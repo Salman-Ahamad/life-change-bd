@@ -33,15 +33,6 @@ const ChangePassword: NextPage = () => {
       toast.error("Password didn't match!");
     } else {
       updateData("/auth/change-password", updatedData);
-      // Axios.patch("/auth/change-password", updatedData)
-      //   .then(({ data }) => {
-      //     if (data.data) {
-      //       loadingToast(id, data.message, "success");
-      //     }
-      //   })
-      //   .catch(({ response }) => {
-      //     loadingToast(id, response.data.message, "error");
-      //   });
     }
   };
 

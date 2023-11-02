@@ -1,6 +1,6 @@
 "use client";
 
-import { IRefTable, IUser } from "@/interface";
+import { IActionFn, IRefTable, IUser } from "@/interface";
 import { UserRole } from "@/lib";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
@@ -16,9 +16,14 @@ export const DataTable: FC<IRefTable> = ({
   UpdateSendWish,
   extraHed,
   extraProperties,
+  addFullUser,
 }) => {
-  const handleAction = (id: string, isReject?: boolean) => {
-    actionFn && actionFn(id, isReject);
+  const handleAction = ({ id, isReject, user }: IActionFn) => {
+    if (user) {
+      actionFn && actionFn({ id, user });
+    } else {
+      actionFn && actionFn({ id, isReject });
+    }
   };
 
   return (
@@ -119,7 +124,12 @@ Lifechange Bd e-learning platform
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser._id)}
+                    onClick={() => {
+                      if (addFullUser) {
+                        handleAction({ id: referUser._id, user: referUser });
+                      }
+                      handleAction({ id: referUser._id });
+                    }}
                   >
                     {actionBtn}
                   </td>
@@ -127,7 +137,9 @@ Lifechange Bd e-learning platform
                 {rejectBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser._id, true)}
+                    onClick={() =>
+                      handleAction({ id: referUser._id, isReject: true })
+                    }
                   >
                     {rejectBtn}
                   </td>

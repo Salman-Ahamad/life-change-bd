@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { DataTable, Header, PageHeader } from "@/components";
 import { updateData, useGetData } from "@/hooks";
-import { INavItem, IUser } from "@/interface";
+import { IActionFn, INavItem, IUser } from "@/interface";
 import { BackButton, Button, Title } from "@/universal";
 
 const navData: INavItem[] = [
@@ -18,7 +18,7 @@ const MyReference = () => {
   const [refData, setRefData] = useState<IUser[] | null>(null);
   useGetData("/all-ref?inactiveBonus=false", setRefData, true);
 
-  const handleCollectMoney = async (id: string) => {
+  const handleCollectMoney = async ({ id }: IActionFn) => {
     await updateData(`/all-ref/${id}`, {}).then(() => window.location.reload());
   };
 

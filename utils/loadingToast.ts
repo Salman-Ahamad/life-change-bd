@@ -11,6 +11,11 @@ export const loadingToast = (
   toast.update(id, {
     render: message,
     type: type,
+    position: "bottom-center",
     autoClose: autoClose || 5000,
     isLoading: isLoading || false,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    draggable: true,
+    pauseOnHover: false,
   });

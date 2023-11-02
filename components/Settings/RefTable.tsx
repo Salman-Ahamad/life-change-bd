@@ -1,20 +1,31 @@
 "use client";
 
-import { IRefTable, IUser } from "@/interface";
+import { updateData, useCurrentUser } from "@/hooks";
+import { IActionFn, IRefTable, IUser } from "@/interface";
+import { UserRole } from "@/lib";
+import { Button } from "@/universal";
 import { FC } from "react";
 import { THeader, Tbody, WhatsAppLink } from "..";
 
 export const RefTable: FC<IRefTable> = ({
+  slugUrl,
+  message,
+  actionFn,
+  tableData,
+  actionBtn,
+  messageDone,
   tableHeaders,
   dataProperties,
-  tableData,
-  message,
-  actionBtn,
-  actionFn: setActionId,
-  slugUrl,
 }) => {
-  const handleAction = (referUserId: string) => {
-    setActionId && setActionId(referUserId);
+  const user = useCurrentUser(true);
+  const handleAction = (props: IActionFn) => {
+    actionFn && actionFn(props);
+  };
+
+  const handleMessageDone = (id: string) => {
+    updateData(`/user/${id}`, {
+      "settings.sendMessage": new Date(),
+    }).then(() => window.location.reload());
   };
 
   return (
@@ -32,6 +43,7 @@ export const RefTable: FC<IRefTable> = ({
                   ))}
               {message && <THeader label={message} />}
               {actionBtn && <THeader label="Action" />}
+              {messageDone && <THeader label="Message Done" />}
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
@@ -66,25 +78,50 @@ export const RefTable: FC<IRefTable> = ({
                         />
                       );
                     default:
-                      return (
-                        <Tbody
-                          key={i}
-                          label={referUser[item as keyof IUser] as string}
-                          href={
-                            slugUrl
-                              ? `${slugUrl}${referUser.id}`
-                              : `/user/${referUser.id}`
-                          }
-                        />
-                      );
+                      if (user?.role === UserRole.admin) {
+                        return (
+                          <Tbody
+                            key={i}
+                            label={referUser[item as keyof IUser] as string}
+                            href={
+                              slugUrl
+                                ? `${slugUrl}${referUser.id}`
+                                : `/user/${referUser.id}`
+                            }
+                          />
+                        );
+                      } else {
+                        return (
+                          <Tbody
+                            key={i}
+                            label={referUser[item as keyof IUser] as string}
+                          />
+                        );
+                      }
                   }
                 })}
                 {actionBtn && (
                   <td
                     className="px-2.5 py-1.5"
-                    onClick={() => handleAction(referUser.id)}
+                    onClick={() =>
+                      handleAction({ id: referUser.id, user: referUser })
+                    }
                   >
                     {actionBtn}
+                  </td>
+                )}
+                {messageDone && (
+                  <td
+                    className="px-2.5 py-1.5"
+                    onClick={() => handleMessageDone(referUser.id)}
+                  >
+                    <Button
+                      variant="secondary"
+                      disabled={referUser.settings.sendMessage ? true : false}
+                      className="disabled:cursor-not-allowed disabled:opacity-75"
+                    >
+                      Done
+                    </Button>
                   </td>
                 )}
               </tr>

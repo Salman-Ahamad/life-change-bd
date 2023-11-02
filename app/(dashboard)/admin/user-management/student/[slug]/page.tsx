@@ -62,7 +62,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     UserRole.audit,
     UserRole.leadChecker,
     UserRole.checker,
-    UserRole.srgl,
+    UserRole.sgl,
     UserRole.gl,
     UserRole.telecaller,
     UserRole.lcBdItdSolution,
