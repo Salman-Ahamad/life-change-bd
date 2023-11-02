@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from "@/components";
+import { Header, SearchBar } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { createData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
@@ -24,11 +24,11 @@ const navData: INavItem[] = [
 ];
 
 const SubAdmin = () => {
-  const [students, setStudents] = useState<IUser[]>([]);
+  const [students, setStudents] = useState<IUser[] | null>(null);
   const [userId, setUserId] = useState("");
   const user = useCurrentUser(true);
 
-  useGetData(`/user/consultant?id=${user?.userId}`, setStudents, true);
+  useGetData(`/user/consultant?id=${user?.userId}`, setStudents);
 
   const handleRequest = () => {
     createData("/request", {
@@ -50,23 +50,25 @@ const SubAdmin = () => {
           <Label className="text-sm lg:text-sm ml-2">
             Request New Inactive User
           </Label>
-          <div className="flex justify-center items-center gap-1">
+          <div className="flex justify-center items-center gap-1 flex-col sm:flex-row">
             <input
               type="text"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
-              className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
+              className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md w-full sm:w-auto"
             />
             <Button
               variant="secondary"
               disabled={userId.length === 0}
               onClick={handleRequest}
-              className="disabled:opacity-40"
+              className="disabled:opacity-40 w-full sm:w-auto"
             >
               Request
             </Button>
           </div>
         </div>
+
+        <SearchBar setData={setStudents} />
 
         <Title variant="H4" className="capitalize -mb-5">
           Inactive User List
@@ -77,7 +79,7 @@ const SubAdmin = () => {
             tableHeaders={["No", "id", "Name", "Joining Time"]}
             dataProperties={["userId", "firstName", "createdAt", "phone"]}
             message="Message"
-            slugUrl="/admin/user-management/student/"
+            messageDone
           />
         )}
       </Container>

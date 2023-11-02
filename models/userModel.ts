@@ -93,6 +93,9 @@ const userSchema = new Schema<IUserSchema>(
       trainer: {
         type: String,
       },
+      sgl: {
+        type: String,
+      },
       gl: {
         type: String,
       },
@@ -115,6 +118,9 @@ const userSchema = new Schema<IUserSchema>(
       sendWish: {
         type: Boolean,
         default: false,
+      },
+      sendMessage: {
+        type: Date,
       },
       course: {
         type: String,

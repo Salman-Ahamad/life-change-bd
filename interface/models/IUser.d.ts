@@ -5,7 +5,10 @@ export type IUserRole =
   | "admin"
   | "controller"
   | "consultant"
+  | "checker"
   | "teacher"
+  | "trainer"
+  | "sgl"
   | "gl"
   | "active"
   | "inactive";
@@ -16,10 +19,12 @@ export interface ISettingsSchema {
   activeBonus: boolean;
   withdrawalFee: boolean;
   sendWish: boolean;
+  sendMessage: Date;
   admin: Types.ObjectId;
   consultant: string;
   controller: string;
   teacher: string;
+  sgl: string;
   gl: string;
   trainer: string;
   course: string;
@@ -27,11 +32,6 @@ export interface ISettingsSchema {
 
 export interface ISettings extends ISettingsSchema {
   admin: IUSer;
-  consultant: IUSer;
-  controller: IUSer;
-  teacher: IUSer;
-  gl: IUSer;
-  course: string;
 }
 
 export interface IUserSchema {

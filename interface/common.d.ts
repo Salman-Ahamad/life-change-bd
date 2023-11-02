@@ -155,6 +155,7 @@ export interface IRefTable {
   extraHed?: string[];
   extraProperties?: JSX.Element[];
   addFullUser?: boolean;
+  messageDone?: boolean;
 }
 
 export interface IFiledDate {

@@ -5,14 +5,14 @@ export const findLastStudentId = async (): Promise<string | undefined> => {
     createdAt: -1,
   });
 
-  return lastStudent?.userId ? lastStudent.userId.substring(3) : undefined;
+  return lastStudent?.userId ? lastStudent.userId.substring(2) : undefined;
 };
 
 export const generateStudentId = async (): Promise<string> => {
   const currentId =
-    (await findLastStudentId()) || (0).toString().padStart(4, "0"); //0000
+    (await findLastStudentId()) || (0).toString().padStart(6, "0"); //000000
   //increment by 1
-  let incrementedId = (parseInt(currentId) + 1).toString().padStart(4, "0");
+  let incrementedId = (parseInt(currentId) + 1).toString().padStart(6, "0");
   const year = new Date().getFullYear().toString().slice(2);
 
   incrementedId = `${year}${incrementedId}`;

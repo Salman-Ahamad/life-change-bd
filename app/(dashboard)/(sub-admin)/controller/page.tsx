@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable, Header, THeader, Tbody } from "@/components";
+import { DataTable, Header, SearchBar, THeader, Tbody } from "@/components";
 import { getDataFn, updateData, useGetData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Title } from "@/universal";
@@ -33,9 +33,7 @@ const SubAdmin = () => {
   const [consultantId, setConsultantId] = useState("");
   const [consultant, setConsultant] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>([]);
-  const [users, setUsers] = useState<IUser[]>(
-    inactiveUsers?.filter(({ settings }) => !settings.consultant)
-  );
+  const [users, setUsers] = useState<IUser[] | null>(null);
   const [updateBtn, setUpdateBtn] = useState(true);
 
   useGetData("/user/inactive", setInactiveUsers);
@@ -56,7 +54,7 @@ const SubAdmin = () => {
     if (consultant) {
       setUpdateBtn(false);
       if (user) {
-        setUsers((prv) => [...prv, user]);
+        setUsers((prv) => prv && [...prv, user]);
         setStudents((prv) => [...prv, user]);
       }
     } else {
@@ -70,7 +68,7 @@ const SubAdmin = () => {
       updateData(`/user/${user.id}`, {
         "settings.consultant": "",
       }).then(() => {
-        setUsers((prv) => [...prv, user]);
+        setUsers((prv) => prv && [...prv, user]);
         setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
       });
     } else {
@@ -87,30 +85,36 @@ const SubAdmin = () => {
       );
     }
   };
+  const date = (props: Date): string => {
+    const date = new Date(props).toLocaleDateString();
+    const time = new Date(props).toLocaleTimeString();
+    return `${time} - ${date}`;
+  };
 
   return (
     <main>
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
-        Welcome to Life Change Bd
+        Welcome to Life Change Bd{" "}
+        <span className="text-info">(Controller)</span>
       </Title>
       <Container>
-        <Title variant="H4" className="capitalize mb-1">
-          Consultant
+        <Title variant="H5" className="capitalize">
+          Find Consultant Id
         </Title>
 
-        <div className="flex justify-center items-center gap-1 mb-5">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-1 mb-5">
           <input
             type="text"
             value={consultantId}
             onChange={(e) => setConsultantId(e.target.value)}
-            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
+            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md w-full md:w-auto"
           />
           <Button
             variant="secondary"
             disabled={consultantId.length === 0}
             onClick={handleGetConsultant}
-            className="disabled:opacity-40"
+            className="disabled:opacity-40 w-full md:w-auto disabled:cursor-not-allowed"
           >
             Search
           </Button>
@@ -118,7 +122,7 @@ const SubAdmin = () => {
 
         {consultant && (
           <>
-            <div className="flex justify-center items-center gap-2.5 mb-5">
+            <div className="flex justify-center items-center gap-2.5 mb-5 flex-wrap">
               <Title
                 variant="H5"
                 className="capitalize flex items-center justify-center"
@@ -137,52 +141,62 @@ const SubAdmin = () => {
             </div>
 
             {students?.length !== 0 && (
-              <table className="w-full max-w-xl mx-auto rounded-t-md overflow-hidden mb-5">
-                <thead className="bg-info text-gray-50 font-medium">
-                  <tr>
-                    <THeader label="No" />
-                    <THeader label="User Id" />
-                    <THeader label="Name" />
-                    <THeader label="Action" />
-                  </tr>
-                </thead>
-                <tbody className="text-gray-600 divide-y text-center border-b-2 border-info">
-                  {students?.map((student, i) => (
-                    <tr key={i}>
-                      <Tbody label={String(i + 1)} />
-                      <Tbody label={student.userId} />
-                      <Tbody
-                        label={student.firstName + " " + student.lastName}
-                      />
-
-                      <Tbody
-                        label={
-                          <div className="flex gap-1.5">
-                            <Button
-                              onClick={() => handleRemove(student)}
-                              variant="secondary"
-                              className="bg-red-500 hover:bg-red-600 transition-all delay-200 px-1 py-1 flex gap-0.5 justify-center items-center rounded-md text-xs mx-auto"
-                            >
-                              Remove&nbsp;
-                              <RiDeleteBin2Line />
-                            </Button>
-                          </div>
-                        }
-                      />
+              <div className="rounded-lg overflow-x-auto">
+                <table className="w-full max-w-xl mx-auto rounded-t-md overflow-hidden mb-5 overflow-x-auto">
+                  <thead className="bg-info text-gray-50 font-medium">
+                    <tr>
+                      <THeader label="No" />
+                      <THeader label="User Id" />
+                      <THeader label="Message Time" />
+                      <THeader label="Name" />
+                      <THeader label="Action" />
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="text-gray-600 divide-y text-center border-b-2 border-info">
+                    {students?.map((student, i) => (
+                      <tr key={i}>
+                        <Tbody label={String(i + 1)} />
+                        <Tbody label={student.userId} />
+                        <Tbody
+                          label={
+                            student.settings.sendMessage
+                              ? date(student.settings.sendMessage)
+                              : "Still not messaging"
+                          }
+                        />
+                        <Tbody
+                          label={student.firstName + " " + student.lastName}
+                        />
+
+                        <Tbody
+                          label={
+                            <div className="flex gap-1.5">
+                              <Button
+                                onClick={() => handleRemove(student)}
+                                variant="secondary"
+                                className="bg-red-500 hover:bg-red-600 transition-all delay-200 px-1 py-1 flex gap-0.5 justify-center items-center rounded-md text-xs mx-auto"
+                              >
+                                Remove&nbsp;
+                                <RiDeleteBin2Line />
+                              </Button>
+                            </div>
+                          }
+                        />
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </>
         )}
       </Container>
       <Container>
+        <SearchBar setData={setUsers} />
         <Title variant="H4" className="capitalize -mb-10">
           Inactive User List
         </Title>
-
-        {users.length !== 0 && (
+        {users && users.length !== 0 && (
           <DataTable
             tableData={users}
             tableHeaders={["No", "id", "Name", "Joining Time"]}

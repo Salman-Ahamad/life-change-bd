@@ -3,16 +3,15 @@
 import { SignUpForm } from "@/components";
 import { CommonText, Title } from "@/universal";
 import Link from "next/link";
-import React from "react";
+import { FC } from "react";
 
 interface SignUpProps {
   searchParams: {
     referral?: string;
-    // Add other properties if needed
   };
 }
 
-const SignUp: React.FC<SignUpProps> = ({ searchParams }) => {
+const SignUp: FC<SignUpProps> = ({ searchParams }) => {
   const { referral } = searchParams;
 
   return (
