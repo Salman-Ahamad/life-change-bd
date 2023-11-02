@@ -1,4 +1,4 @@
-import { Date, Types } from "mongoose";
+import { Types } from "mongoose";
 import { ICourse } from ".";
 
 export type IUserRole =
