@@ -7,10 +7,10 @@ export const signUpValidationSchema = Yup.object().shape({
   country: Yup.string().required("Country is required"),
   whatsapp: Yup.string()
     .required("Whatsapp number is required")
-    .matches(/^\d{12}$/, "Whatsapp number must be 12 digits"),
+    .matches(/^\d{11,12}$/, "Phone number must be 11 or 12 digits"),
   phone: Yup.string()
     .required("Phone number is required")
-    .matches(/^\d{12}$/, "Phone number must be 12 digits"),
+    .matches(/^\d{11,12}$/, "Phone number must be 11 or 12 digits"),
   email: Yup.string().email().required("Email is required"),
   password: Yup.string()
     .required("Password is required")
