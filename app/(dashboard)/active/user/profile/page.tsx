@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Header, ShareReferLink } from "@/components";
 import { useCurrentUser } from "@/hooks";
 import { INavItem, IUser } from "@/interface";
-import { UserRole, avatarProfile } from "@/lib";
+import { avatarProfile } from "@/lib";
 import { BackButton, CommonText } from "@/universal";
 
 const navData: INavItem[] = [
@@ -70,7 +70,7 @@ const Profile = () => {
                 {user.firstName} {user?.lastName}
               </p>
               <CommonText className={`text-start w-full`}>
-                {user.role === UserRole.active ? user.userId : user.id}
+                {user.userId}
               </CommonText>
             </div>
           </div>
