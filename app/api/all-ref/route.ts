@@ -121,13 +121,21 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.sgl:
         const sgl = {
-          $or: [{ role: UserRole.active }, { "settings.sgl": user.userId }],
+          $or: [
+            { role: UserRole.active },
+            { role: UserRole.inactive },
+            { "settings.sgl": user.userId },
+          ],
         };
         option = optionFn(sgl);
         break;
       case UserRole.gl:
         const gl = {
-          $or: [{ role: UserRole.active }, { "settings.gl": user.userId }],
+          $or: [
+            { role: UserRole.active },
+            { role: UserRole.inactive },
+            { "settings.gl": user.userId },
+          ],
         };
         option = optionFn(gl);
         break;
