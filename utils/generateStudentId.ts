@@ -4,8 +4,7 @@ export const findLastStudentId = async (): Promise<string | undefined> => {
   const lastStudent = await User.findOne({}, { userId: 1, _id: 0 }).sort({
     createdAt: -1,
   });
-
-  return lastStudent?.userId ? lastStudent.userId.substring(5) : undefined;
+  return lastStudent?.userId ? lastStudent.userId.substring(2) : undefined;
 };
 
 export const generateStudentId = async (): Promise<string> => {
