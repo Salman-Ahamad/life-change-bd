@@ -8,7 +8,7 @@ import { InputField } from "@/components/Settings";
 import { updateData, useCurrentUser, useGetData } from "@/hooks";
 import { INavItem, ISlugParams, IUser, IUserRole } from "@/interface";
 import { UserRole, avatarProfile } from "@/lib";
-import { BackButton, Button, Container, Title } from "@/universal";
+import { BackButton, Button, CommonText, Container, Title } from "@/universal";
 import Image from "next/image";
 
 const navData: INavItem[] = [
@@ -19,11 +19,7 @@ const navData: INavItem[] = [
 ];
 
 const Edit: NextPage<ISlugParams> = ({ params }) => {
-  const id = params.slug;
-
   const [userData, setUserData] = useState<IUser>();
-  useGetData(`/user/${id}`, setUserData, true);
-
   const [userImage, setUserImage] = useState<string>(userData?.image as string);
   const [depositAmount, setDepositAmount] = useState<number>(0);
   const [updatedData, setUpdatedData] = useState<object>({});
@@ -31,7 +27,10 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   const [selectFieldValue, setSelectFieldValue] = useState("");
   const [isActive, setIsActive] = useState(false);
 
+  const id = params.slug;
   const user = useCurrentUser(true);
+
+  useGetData(`/user/${id}`, setUserData, true);
 
   useEffect(() => {
     if (userData && userData.reference !== "-") {
@@ -49,7 +48,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
   }, [userData, selectFieldValue]);
 
   const admin = [
-    UserRole.active,
+    // UserRole.active,
     UserRole.inactive,
     UserRole.srController,
     UserRole.controller,
@@ -67,20 +66,17 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     UserRole.telecaller,
     UserRole.lcBdItdSolution,
   ];
-  const controller = [
-    UserRole.consultant,
-    UserRole.teacher,
-    UserRole.gl,
-    UserRole.active,
-    UserRole.inactive,
-  ];
-  const consultant = [UserRole.teacher, UserRole.gl];
+  // const controller = [
+  //   UserRole.consultant,
+  //   UserRole.teacher,
+  //   UserRole.gl,
+  //   UserRole.active,
+  //   UserRole.inactive,
+  // ];
+  // const consultant = [UserRole.teacher, UserRole.gl];
 
-  const selectOption =
-    (user?.role === UserRole.admin && admin) ||
-    (user?.role === UserRole.controller && controller) ||
-    (user?.role === UserRole.consultant && consultant) ||
-    [];
+  const selectOption = (user?.role === UserRole.admin && admin) || [];
+
   useEffect(() => userData && setDisabled(false), [userData]);
 
   const addActiveBonus = () => {
@@ -91,6 +87,20 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
       }).then(() => setIsActive(false));
     }
   };
+  const handleActive = () => {
+    updateData(`/user/${id}`, {
+      role: UserRole.active,
+      "settings.activates": new Date(),
+    }).then(() => {
+      if (userData?.reference && userData?.reference !== "-") {
+        updateData(`/user/active-bonus`, {
+          refId: userData.reference,
+          userId: userData.id,
+        });
+      }
+    });
+  };
+
   const updateProfile = () => updateData(`/user/${id}`, updatedData);
 
   const depositMoney = () => {
@@ -264,11 +274,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
           <InputField
-            onlyText={
-              user?.role !== UserRole.admin &&
-              user?.role !== UserRole.controller &&
-              user?.role !== UserRole.consultant
-            }
+            onlyText={user?.role !== UserRole.admin}
             label="Group Leader:"
             name="gl"
             defaultValue={(userData && userData.settings?.gl) || ""}
@@ -280,6 +286,16 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             }
           />
 
+          {((userData && userData.role === UserRole.inactive) ||
+            selectFieldValue === UserRole.inactive) && (
+            <div className="mt-5 flex flex-col items-center justify-center gap-2.5">
+              <CommonText>Active User And Send Activation Bonus</CommonText>
+              <Button variant="secondary" onClick={handleActive}>
+                Active
+              </Button>
+            </div>
+          )}
+
           <Button
             variant="secondary"
             className="capitalize mt-5 disabled:bg-opacity-50 disabled:cursor-not-allowed"
@@ -289,7 +305,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             update profile
           </Button>
 
-          <Title variant="H4" className="capitalize">
+          <Title variant="H4" className="capitalize mt-10">
             Deposit Money
           </Title>
           <InputField
