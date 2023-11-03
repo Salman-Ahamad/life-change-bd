@@ -14,16 +14,20 @@ const navData: INavItem[] = [
     link: "/gl",
   },
   {
+    label: "Profile",
+    link: "/gl/profile",
+  },
+  {
+    label: "Active",
+    link: "/gl/active",
+  },
+  {
     label: "Inactive",
     link: "/gl/inactive",
   },
   {
     label: "Trainer",
     link: "/gl/trainer",
-  },
-  {
-    label: "Profile",
-    link: "/gl/profile",
   },
   {
     label: "Photo Zone",

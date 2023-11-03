@@ -137,7 +137,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
             { "settings.gl": user.userId },
           ],
         };
-        option = optionFn(gl);
+        option = optionFn(gl, isActiveValue ? true : false);
         break;
       case UserRole.active:
         const active = {
