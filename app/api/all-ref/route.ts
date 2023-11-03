@@ -132,9 +132,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       case UserRole.gl:
         const gl = {
           $or: [
-            { role: UserRole.active },
+            { role: UserRole.active, "settings.gl": user.userId },
             { role: UserRole.inactive },
-            { "settings.gl": user.userId },
           ],
         };
         option = optionFn(gl, isActiveValue ? true : false);
