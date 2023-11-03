@@ -18,10 +18,6 @@ const navData: INavItem[] = [
     link: "/gl/profile",
   },
   {
-    label: "Active",
-    link: "/gl/active",
-  },
-  {
     label: "Inactive",
     link: "/gl/inactive",
   },
