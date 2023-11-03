@@ -1,8 +1,8 @@
 "use client";
 
-import { Header, PopUp } from "@/components";
+import { Header, PopUp, SearchBar } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
-import { createData, useCurrentUser, useGetData } from "@/hooks";
+import { createData, useCurrentUser } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Label, Title } from "@/universal";
 import { FC, useState } from "react";
@@ -36,13 +36,13 @@ const navData: INavItem[] = [
 ];
 
 const SubAdmin: FC = () => {
-  const [students, setStudents] = useState<IUser[]>([]);
+  const [students, setStudents] = useState<IUser[] | null>(null);
   const [userId, setUserId] = useState("");
   const [open, setOpen] = useState(false);
   const [selectUser, setSelectUser] = useState<IUser>();
   const user = useCurrentUser(true);
 
-  useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
+  // useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
 
   const handleRequest = () => {
     createData("/request", {
@@ -87,6 +87,8 @@ const SubAdmin: FC = () => {
             </Button>
           </div>
         </div>
+
+        <SearchBar setData={setStudents} onlyActive />
 
         <Title variant="H4" className="capitalize -mb-5">
           Student List (Active User)
