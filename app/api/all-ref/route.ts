@@ -28,6 +28,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       user.role !== UserRole.consultant &&
       user.role !== UserRole.teacher &&
       user.role !== UserRole.gl &&
+      user.role !== UserRole.trainer &&
       user.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
@@ -137,6 +138,15 @@ export const GET = async ({ nextUrl }: NextRequest) => {
           ],
         };
         option = optionFn(gl, isActiveValue ? true : false);
+        break;
+      case UserRole.trainer:
+        const trainer = {
+          $or: [
+            { role: UserRole.active, "settings.trainer": user.userId },
+            { role: UserRole.inactive },
+          ],
+        };
+        option = optionFn(trainer, isActiveValue ? true : false);
         break;
       case UserRole.active:
         const active = {
