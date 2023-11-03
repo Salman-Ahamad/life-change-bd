@@ -89,21 +89,21 @@ const SubAdmin = () => {
       </Title>
       <Container>
         <Title variant="H4" className="capitalize mb-1">
-          Group Leader
+          Find Group Leader Id
         </Title>
 
-        <div className="flex justify-center items-center gap-1 mb-5">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-1 mb-5">
           <input
             type="text"
             value={glId}
             onChange={(e) => setGlId(e.target.value)}
-            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"
+            className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md w-full md:w-auto"
           />
           <Button
             variant="secondary"
             disabled={glId.length === 0}
             onClick={handleGetGl}
-            className="disabled:opacity-40"
+            className="disabled:opacity-40 w-full md:w-auto disabled:cursor-not-allowed"
           >
             Search
           </Button>
@@ -111,7 +111,7 @@ const SubAdmin = () => {
 
         {gl && (
           <>
-            <div className="flex justify-center items-center gap-2.5 mb-5">
+            <div className="flex justify-center items-center gap-2.5 mb-5 flex-wrap">
               <Title
                 variant="H5"
                 className="capitalize flex items-center justify-center"
@@ -130,42 +130,44 @@ const SubAdmin = () => {
             </div>
 
             {students?.length !== 0 && (
-              <table className="w-full max-w-xl mx-auto rounded-t-md overflow-hidden mb-5">
-                <thead className="bg-info text-gray-50 font-medium">
-                  <tr>
-                    <THeader label="No" />
-                    <THeader label="User Id" />
-                    <THeader label="Name" />
-                    <THeader label="Action" />
-                  </tr>
-                </thead>
-                <tbody className="text-gray-600 divide-y text-center border-b-2 border-info">
-                  {students?.map((student, i) => (
-                    <tr key={i}>
-                      <Tbody label={String(i + 1)} />
-                      <Tbody label={student.userId} />
-                      <Tbody
-                        label={student.firstName + " " + student.lastName}
-                      />
-
-                      <Tbody
-                        label={
-                          <div className="flex gap-1.5">
-                            <Button
-                              onClick={() => handleRemove(student)}
-                              variant="secondary"
-                              className="bg-red-500 hover:bg-red-600 transition-all delay-200 px-1 py-1 flex gap-0.5 justify-center items-center rounded-md text-xs mx-auto"
-                            >
-                              Remove&nbsp;
-                              <RiDeleteBin2Line />
-                            </Button>
-                          </div>
-                        }
-                      />
+              <div className="rounded-lg overflow-x-auto">
+                <table className="w-full max-w-xl mx-auto rounded-t-md overflow-hidden mb-5 overflow-x-auto">
+                  <thead className="bg-info text-gray-50 font-medium">
+                    <tr>
+                      <THeader label="No" />
+                      <THeader label="User Id" />
+                      <THeader label="Name" />
+                      <THeader label="Action" />
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="text-gray-600 divide-y text-center border-b-2 border-info">
+                    {students?.map((student, i) => (
+                      <tr key={i}>
+                        <Tbody label={String(i + 1)} />
+                        <Tbody label={student.userId} />
+                        <Tbody
+                          label={student.firstName + " " + student.lastName}
+                        />
+
+                        <Tbody
+                          label={
+                            <div className="flex gap-1.5">
+                              <Button
+                                onClick={() => handleRemove(student)}
+                                variant="secondary"
+                                className="bg-red-500 hover:bg-red-600 transition-all delay-200 px-1 py-1 flex gap-0.5 justify-center items-center rounded-md text-xs mx-auto"
+                              >
+                                Remove&nbsp;
+                                <RiDeleteBin2Line />
+                              </Button>
+                            </div>
+                          }
+                        />
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </>
         )}

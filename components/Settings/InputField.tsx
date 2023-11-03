@@ -1,7 +1,6 @@
 "use client";
 
 import { ProfileInputProps } from "@/interface";
-import { Button } from "@/universal";
 import { ChangeEvent, FC } from "react";
 
 export const InputField: FC<ProfileInputProps> = ({
@@ -22,9 +21,9 @@ export const InputField: FC<ProfileInputProps> = ({
     ) : selectOption ? (
       <>
         <select
-          className={`outline-none pl-1.5 bg-gray-100 rounded-sm cursor-pointer ${
-            isActive === true ? "col-span-3" : "col-span-5"
-          }`}
+          className={`outline-none pl-1.5 bg-gray-100 rounded-sm cursor-pointer col-span-5
+            `}
+          // ${isActive === true ? "col-span-3" : "col-span-5"}
           onChange={(e: ChangeEvent<HTMLSelectElement>) => {
             onChange(e.target.value);
             setFieldValue && setFieldValue(e.target.value);
@@ -43,7 +42,7 @@ export const InputField: FC<ProfileInputProps> = ({
               )
           )}
         </select>
-        {isActive === true && (
+        {/* {isActive === true && (
           <Button
             variant="accent"
             onClick={addActiveBonus}
@@ -51,7 +50,7 @@ export const InputField: FC<ProfileInputProps> = ({
           >
             Sand Bonus
           </Button>
-        )}
+        )} */}
       </>
     ) : (
       <input

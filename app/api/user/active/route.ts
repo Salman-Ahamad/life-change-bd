@@ -2,9 +2,8 @@ import { UserRole } from "@/lib";
 import { AppConfig, User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
-import { NextRequest } from "next/server";
 
-export const GET = async ({ nextUrl }: NextRequest) => {
+export const GET = async () => {
   try {
     // Get Current User
     const user = await getCurrentUser();
@@ -22,7 +21,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
 };
 
 // Use this method to activate inactive user
-export const PATCH = async (req: NextRequest) => {
+export const PATCH = async () => {
   try {
     // Get Current User
     const user = await getCurrentUser();
@@ -47,6 +46,7 @@ export const PATCH = async (req: NextRequest) => {
     await User.updateOne(
       { _id: user.id },
       {
+        "settings.activates": new Date(),
         "settings.activeBonus": true,
         role: UserRole.active,
         $inc: { balance: -baseFee },

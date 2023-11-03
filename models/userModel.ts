@@ -99,6 +99,9 @@ const userSchema = new Schema<IUserSchema>(
       gl: {
         type: String,
       },
+      activates: {
+        type: Date,
+      },
       activeNotice: {
         type: Boolean,
         default: true,
