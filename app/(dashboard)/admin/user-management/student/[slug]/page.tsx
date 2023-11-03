@@ -91,14 +91,12 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
     updateData(`/user/${id}`, {
       role: UserRole.active,
       "settings.activates": new Date(),
-    }).then(() => {
-      if (userData?.reference && userData?.reference !== "-") {
-        updateData(`/user/active-bonus`, {
-          refId: userData.reference,
-          userId: userData.id,
-        });
-      }
     });
+    if (userData && userData.reference !== "-") {
+      if (!userData.settings.activeBonus) {
+        addActiveBonus();
+      }
+    }
   };
 
   const updateProfile = () => updateData(`/user/${id}`, updatedData);
@@ -209,7 +207,7 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
             name="Reference"
             defaultValue={(userData && String(userData.reference)) || ""}
             onChange={(value) =>
-              setUpdatedData((prev) => ({ ...prev, reference: Number(value) }))
+              setUpdatedData((prev) => ({ ...prev, reference: value }))
             }
           />
 
