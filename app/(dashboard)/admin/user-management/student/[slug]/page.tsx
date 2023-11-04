@@ -227,8 +227,36 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               setUpdatedData((prev) => ({ ...prev, role: value }))
             }
           />
-
+          {/* <InputField
+            onlyText={
+              user?.role !== UserRole.admin &&
+              user?.role !== UserRole.controller &&
+              user?.role !== UserRole.consultant
+            }
+            label="Teacher:"
+            name="teacher"
+            defaultValue={(userData && userData.settings?.teacher) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                "settings.teacher": value,
+              }))
+            }
+          /> */}
           <InputField
+            onlyText={user?.role !== UserRole.admin}
+            label="Group Leader:"
+            name="gl"
+            defaultValue={(userData && userData.settings?.gl) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                "settings.gl": value,
+              }))
+            }
+          />
+
+          {/* <InputField
             onlyText={user?.role !== UserRole.admin}
             label="Controller:"
             name="controller"
@@ -237,6 +265,19 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               setUpdatedData((prev) => ({
                 ...prev,
                 "settings.controller": value,
+              }))
+            }
+          /> */}
+
+          <InputField
+            onlyText={user?.role !== UserRole.admin}
+            label="Trainer:"
+            name="trainer"
+            defaultValue={(userData && userData.settings?.trainer) || ""}
+            onChange={(value) =>
+              setUpdatedData((prev) => ({
+                ...prev,
+                "settings.trainer": value,
               }))
             }
           />
@@ -252,34 +293,6 @@ const Edit: NextPage<ISlugParams> = ({ params }) => {
               setUpdatedData((prev) => ({
                 ...prev,
                 "settings.consultant": value,
-              }))
-            }
-          />
-          <InputField
-            onlyText={
-              user?.role !== UserRole.admin &&
-              user?.role !== UserRole.controller &&
-              user?.role !== UserRole.consultant
-            }
-            label="Teacher:"
-            name="teacher"
-            defaultValue={(userData && userData.settings?.teacher) || ""}
-            onChange={(value) =>
-              setUpdatedData((prev) => ({
-                ...prev,
-                "settings.teacher": value,
-              }))
-            }
-          />
-          <InputField
-            onlyText={user?.role !== UserRole.admin}
-            label="Group Leader:"
-            name="gl"
-            defaultValue={(userData && userData.settings?.gl) || ""}
-            onChange={(value) =>
-              setUpdatedData((prev) => ({
-                ...prev,
-                "settings.gl": value,
               }))
             }
           />
