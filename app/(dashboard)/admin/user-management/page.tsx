@@ -36,8 +36,22 @@ const UserManagement: NextPage = () => {
       {data !== null && data.length !== 0 && (
         <RefTable
           tableData={data}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          tableHeaders={[
+            "No",
+            "id",
+            "Name",
+            "role",
+            "Joining Time",
+            "Active Time",
+          ]}
+          dataProperties={[
+            "userId",
+            "firstName",
+            "role",
+            "createdAt",
+            "activates",
+            "phone",
+          ]}
           message="Message"
           slugUrl="/admin/user-management/student/"
         />

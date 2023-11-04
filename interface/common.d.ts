@@ -128,7 +128,7 @@ export interface IAPIResponse<T> {
   data: T;
 }
 
-export interface ITHeader {
+export interface ITHeader extends IClassName {
   label: string | JSX.Element;
 }
 
