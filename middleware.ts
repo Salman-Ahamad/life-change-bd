@@ -131,6 +131,11 @@ export const config = {
     "/trainer/change-password",
     "/trainer/profile",
     "/trainer/profile/edit",
+    "/sgl",
+    "/sgl/inactive",
+    "/sgl/change-password",
+    "/sgl/profile",
+    "/sgl/profile/edit",
     "/forgot-password",
   ],
 };
