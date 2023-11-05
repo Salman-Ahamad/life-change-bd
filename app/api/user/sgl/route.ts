@@ -18,7 +18,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     const result = await User.find({
-      role: UserRole.active,
+      role: UserRole.gl,
       "settings.sgl": id,
     });
 
