@@ -66,8 +66,36 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = singleDateValue
-        ? { createdAt: { $gte: startOfDay, $lt: endOfDay } }
-        : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
+        ? {
+            $or: [
+              {
+                "settings.activates": {
+                  $exists: true,
+                  $gte: startOfDay,
+                  $lte: endOfDay,
+                },
+              },
+              {
+                "settings.activates": { $exists: false },
+                createdAt: { $gte: startOfDay, $lte: endOfDay },
+              },
+            ],
+          }
+        : {
+            $or: [
+              {
+                "settings.activates": {
+                  $exists: true,
+                  $gte: startOfMonth,
+                  $lte: endOfMonth,
+                },
+              },
+              {
+                "settings.activates": { $exists: false },
+                createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+              },
+            ],
+          };
 
       const active = activeId ? { role: UserRole.active } : {};
       const student = isStudentValue
@@ -157,7 +185,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     const refList = await User.find(option)
-      .sort({ createdAt: -1 })
+      .sort({
+        "settings.activates": -1,
+        createdAt: -1,
+      })
       .select({ password: 0 })
       .exec();
 
