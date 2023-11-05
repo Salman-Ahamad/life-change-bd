@@ -13,6 +13,10 @@ const navData: INavItem[] = [
     link: "/admin",
   },
   {
+    label: "Senior Group Leader",
+    link: "/admin/user-management/sgl",
+  },
+  {
     label: "Group Leader",
     link: "/admin/user-management/gl",
   },

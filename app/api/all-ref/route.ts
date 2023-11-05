@@ -27,6 +27,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       user.role !== UserRole.controller &&
       user.role !== UserRole.consultant &&
       user.role !== UserRole.teacher &&
+      user.role !== UserRole.sgl &&
       user.role !== UserRole.gl &&
       user.role !== UserRole.trainer &&
       user.role !== UserRole.admin
@@ -122,11 +123,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.sgl:
         const sgl = {
-          $or: [
-            { role: UserRole.active },
-            { role: UserRole.inactive },
-            { "settings.sgl": user.userId },
-          ],
+          $or: [{ role: UserRole.sgl }, { "settings.sgl": user.userId }],
         };
         option = optionFn(sgl);
         break;
