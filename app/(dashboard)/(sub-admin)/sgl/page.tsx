@@ -18,14 +18,6 @@ const navData: INavItem[] = [
     link: "/sgl/profile",
   },
   {
-    label: "Inactive",
-    link: "/sgl/inactive",
-  },
-  {
-    label: "Trainer",
-    link: "/sgl/trainer",
-  },
-  {
     label: "Photo Zone",
     link: "/photo-zone",
   },
