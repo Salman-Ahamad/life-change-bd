@@ -4,19 +4,23 @@ import { FC, useState } from "react";
 import { toast } from "react-toastify";
 
 import { getDataFn, useCurrentUser } from "@/hooks";
-import { IFiledDate, IMonth, ISearchBar } from "@/interface";
+import { IFiledDate, ISearchBar } from "@/interface";
 import { UserRole } from "@/lib";
 import { Button, Container } from "@/universal";
-import { createDate, getLastThreeMonths, getMonthNumber } from "@/utils";
+import { createDate } from "@/utils";
 
-export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
+export const SearchBar: FC<ISearchBar> = ({
+  setData,
+  onlyActive,
+  onlyInactive,
+}) => {
   const [userType, setUserType] = useState<"all" | "student">("all");
   const [filedData, setFiledData] = useState<IFiledDate>({
     date: "",
     month: "",
     id: "",
   });
-  const filterDate = getLastThreeMonths();
+
   const user = useCurrentUser(true);
 
   const handleSubmit = async () => {
@@ -24,21 +28,21 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
       await getDataFn(
         `/all-ref?id=${filedData.id}&isActive=${
           onlyActive ? true : false
-        }&isStudent=${userType === "student" ? true : false}`,
+        }&isStudent=${
+          (userType === "student" && true) || (onlyInactive && true) || false
+        }`,
         setData
       );
     } else if (filedData.month || filedData.date) {
-      const month = getMonthNumber(filedData.month as IMonth);
       const date = filedData.date
         ? createDate(0, 0, filedData.date as Date)
         : new Date(filedData.month as Date).getTime();
-      // : createDate(Number(filedData.year), month);
 
       if (date) {
         const url = `/all-ref?date=${date}&singleDate=${
           filedData.date ? true : false
         }&isActive=${onlyActive ? true : false}&isStudent=${
-          userType === "student" ? true : false
+          (userType === "student" && true) || (onlyInactive && true) || false
         }`;
         await getDataFn(url, setData);
       } else {
@@ -78,33 +82,6 @@ export const SearchBar: FC<ISearchBar> = ({ setData, onlyActive }) => {
         Search by Year and Month Or User Id!
       </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
-        {/* <select
-          value={filedData.year}
-          onChange={(e) => setFiledData({ ...filedData, year: e.target.value })}
-          className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
-        >
-          <option value="">Choose Year</option>
-          {filterDate.years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select> */}
-
-        {/* <select
-          value={filedData.month}
-          onChange={(e) =>
-            setFiledData({ ...filedData, month: e.target.value })
-          }
-          className="focus:outline-none border border-primary p-2 rounded-md w-[47%] sm:w-auto"
-        >
-          <option value="">Select Month</option>
-          {filterDate.mounts.reverse().map((month, index) => (
-            <option key={index} value={month}>
-              {month}
-            </option>
-          ))}
-        </select> */}
         <input
           type="month"
           onChange={(e) =>

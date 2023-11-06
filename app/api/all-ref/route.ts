@@ -27,7 +27,9 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       user.role !== UserRole.controller &&
       user.role !== UserRole.consultant &&
       user.role !== UserRole.teacher &&
+      user.role !== UserRole.sgl &&
       user.role !== UserRole.gl &&
+      user.role !== UserRole.trainer &&
       user.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
@@ -64,8 +66,36 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     const optionFn = (option: object, activeId?: boolean) => {
       const idFilter = { userId: id };
       const dateFilter = singleDateValue
-        ? { createdAt: { $gte: startOfDay, $lt: endOfDay } }
-        : { createdAt: { $gte: startOfMonth, $lt: endOfMonth } };
+        ? {
+            $or: [
+              {
+                "settings.activates": {
+                  $exists: true,
+                  $gte: startOfDay,
+                  $lte: endOfDay,
+                },
+              },
+              {
+                "settings.activates": { $exists: false },
+                createdAt: { $gte: startOfDay, $lte: endOfDay },
+              },
+            ],
+          }
+        : {
+            $or: [
+              {
+                "settings.activates": {
+                  $exists: true,
+                  $gte: startOfMonth,
+                  $lte: endOfMonth,
+                },
+              },
+              {
+                "settings.activates": { $exists: false },
+                createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+              },
+            ],
+          };
 
       const active = activeId ? { role: UserRole.active } : {};
       const student = isStudentValue
@@ -121,15 +151,30 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.sgl:
         const sgl = {
-          $or: [{ role: UserRole.active }, { "settings.sgl": user.userId }],
+          $or: [
+            { role: UserRole.gl, "settings.sgl": user.userId },
+            // { role: UserRole.inactive },
+          ],
         };
         option = optionFn(sgl);
         break;
       case UserRole.gl:
         const gl = {
-          $or: [{ role: UserRole.active }, { "settings.gl": user.userId }],
+          $or: [
+            { role: UserRole.active, "settings.gl": user.userId },
+            { role: UserRole.inactive },
+          ],
         };
-        option = optionFn(gl);
+        option = optionFn(gl, isActiveValue ? true : false);
+        break;
+      case UserRole.trainer:
+        const trainer = {
+          $or: [
+            { role: UserRole.active, "settings.trainer": user.userId },
+            { role: UserRole.inactive },
+          ],
+        };
+        option = optionFn(trainer, isActiveValue ? true : false);
         break;
       case UserRole.active:
         const active = {
@@ -143,7 +188,10 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
 
     const refList = await User.find(option)
-      .sort({ createdAt: -1 })
+      .sort({
+        "settings.activates": -1,
+        createdAt: -1,
+      })
       .select({ password: 0 })
       .exec();
 

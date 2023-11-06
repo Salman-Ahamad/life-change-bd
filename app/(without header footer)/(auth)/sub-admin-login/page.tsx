@@ -21,7 +21,9 @@ const AdminLogin: FC = () => {
       if (session.user.role === UserRole.checker) redirect("/checker");
       if (session.user.role === UserRole.controller) redirect("/controller");
       if (session.user.role === UserRole.consultant) redirect("/consultant");
+      if (session.user.role === UserRole.sgl) redirect("/sgl");
       if (session.user.role === UserRole.gl) redirect("/gl");
+      if (session.user.role === UserRole.trainer) redirect("/trainer");
 
       if (
         session.user.role !== UserRole.inactive ||

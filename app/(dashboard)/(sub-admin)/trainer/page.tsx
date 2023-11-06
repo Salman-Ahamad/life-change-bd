@@ -1,9 +1,9 @@
 "use client";
 
-import { Header, PopUp, SearchBar } from "@/components";
+import { Header, SearchBar } from "@/components";
 import { RefTable } from "@/components/Settings/RefTable";
 import { createData, useCurrentUser } from "@/hooks";
-import { IActionFn, INavItem, IUser } from "@/interface";
+import { INavItem, IUser } from "@/interface";
 import { Button, Container, Label, Title } from "@/universal";
 import { FC, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
@@ -11,19 +11,15 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/gl",
+    link: "/trainer",
   },
   {
     label: "Profile",
-    link: "/gl/profile",
+    link: "/trainer/profile",
   },
   {
     label: "Inactive",
-    link: "/gl/inactive",
-  },
-  {
-    label: "Trainer",
-    link: "/gl/trainer",
+    link: "/trainer/inactive",
   },
   {
     label: "Photo Zone",
@@ -34,8 +30,7 @@ const navData: INavItem[] = [
 const SubAdmin: FC = () => {
   const [students, setStudents] = useState<IUser[] | null>(null);
   const [userId, setUserId] = useState("");
-  const [open, setOpen] = useState(false);
-  const [selectUser, setSelectUser] = useState<IUser>();
+
   const user = useCurrentUser(true);
 
   // useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
@@ -49,14 +44,8 @@ const SubAdmin: FC = () => {
     setUserId("");
   };
 
-  const handleAddTrainer = ({ id, user }: IActionFn) => {
-    setSelectUser(user);
-    setOpen(true);
-  };
-
   return (
     <main>
-      {selectUser && <PopUp open={open} setOpen={setOpen} user={selectUser} />}
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
         Welcome to Life Change Bd
@@ -101,8 +90,6 @@ const SubAdmin: FC = () => {
               "phone",
             ]}
             message="Message"
-            actionFn={handleAddTrainer}
-            actionBtn={<Button variant="accent">Add Trainer</Button>}
           />
         )}
       </Container>

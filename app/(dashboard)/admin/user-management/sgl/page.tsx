@@ -17,36 +17,36 @@ const navData: INavItem[] = [
   },
   {
     label: "Request",
-    link: "/admin/user-management/gl/request",
+    link: "/admin/user-management/sgl/request",
   },
 ];
 
 const SubAdmin = () => {
   const [activeUsers, setActiveUsers] = useState<IUser[]>([]);
-  const [glId, setGlId] = useState("");
-  const [gl, setGl] = useState<IUser>();
+  const [sglId, setSglId] = useState("");
+  const [sgl, setSgl] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>([]);
   const [users, setUsers] = useState<IUser[]>(
-    activeUsers?.filter(({ settings }) => !settings.gl)
+    activeUsers?.filter(({ settings }) => !settings.sgl)
   );
   const [updateBtn, setUpdateBtn] = useState(true);
 
-  useGetData("/user/active", setActiveUsers);
+  useGetData("/user/gl/all", setActiveUsers);
 
   useEffect(() => {
     if (activeUsers) {
-      setUsers(activeUsers?.filter(({ settings }) => !settings.gl));
+      setUsers(activeUsers?.filter(({ settings }) => !settings.sgl));
     }
   }, [activeUsers]);
 
-  const handleGetGl = () => {
-    getDataFn(`/user/gl/${glId}`, setGl);
-    getDataFn(`/user/gl?id=${glId}`, setStudents, true);
-    setGlId("");
+  const handleGetSgl = () => {
+    getDataFn(`/user/sgl/${sglId}`, setSgl);
+    getDataFn(`/user/sgl?id=${sglId}`, setStudents, true);
+    setSglId("");
   };
 
   const handleAddStudent = ({ user }: IActionFn) => {
-    if (gl?.userId) {
+    if (sgl?.userId) {
       setUpdateBtn(false);
       if (user) {
         setUsers((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
@@ -59,9 +59,9 @@ const SubAdmin = () => {
 
   const handleRemove = (user: IUser) => {
     setUpdateBtn(false);
-    if (gl) {
+    if (sgl) {
       updateData(`/user/${user.id}`, {
-        "settings.gl": "",
+        "settings.sgl": "",
       }).then(() => {
         setUsers((prv) => [...prv, user]);
         setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
@@ -72,10 +72,10 @@ const SubAdmin = () => {
   };
 
   const handleUpdateDb = () => {
-    if (gl) {
+    if (sgl) {
       students.map((student: IUser) =>
         updateData(`/user/${student.id}`, {
-          "settings.gl": gl.userId,
+          "settings.sgl": sgl.userId,
         }).then(() => setUpdateBtn(true))
       );
     }
@@ -89,35 +89,35 @@ const SubAdmin = () => {
       </Title>
       <Container>
         <Title variant="H4" className="capitalize mb-1">
-          Find Group Leader Id
+          Find Senior Group Leader Id
         </Title>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-1 mb-5">
           <input
             type="text"
-            value={glId}
-            onChange={(e) => setGlId(e.target.value)}
+            value={sglId}
+            onChange={(e) => setSglId(e.target.value)}
             className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md w-full md:w-auto"
           />
           <Button
             variant="secondary"
-            disabled={glId.length === 0}
-            onClick={handleGetGl}
+            disabled={sglId.length === 0}
+            onClick={handleGetSgl}
             className="disabled:opacity-40 w-full md:w-auto disabled:cursor-not-allowed"
           >
             Search
           </Button>
         </div>
 
-        {gl && (
+        {sgl && (
           <>
             <div className="flex justify-center items-center gap-2.5 mb-5 flex-wrap">
               <Title
                 variant="H5"
                 className="capitalize flex items-center justify-center"
               >
-                Name: {gl?.firstName}&nbsp;
-                {gl?.lastName} - Id: {gl?.userId}
+                Name: {sgl?.firstName}&nbsp;
+                {sgl?.lastName} - Id: {sgl?.userId}
               </Title>
               <Button
                 variant="secondary"
@@ -125,7 +125,7 @@ const SubAdmin = () => {
                 onClick={handleUpdateDb}
                 className="disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Update gl List
+                Update sgl List
               </Button>
             </div>
 
@@ -174,7 +174,7 @@ const SubAdmin = () => {
       </Container>
       <Container>
         <Title variant="H4" className="capitalize -mb-10">
-          Active User List
+          Group Leader List
         </Title>
 
         {users.length !== 0 && (

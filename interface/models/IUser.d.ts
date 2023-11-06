@@ -14,6 +14,7 @@ export type IUserRole =
   | "inactive";
 
 export interface ISettingsSchema {
+  activates: Date;
   activeNotice: boolean;
   inactiveBonus: boolean;
   activeBonus: boolean;
