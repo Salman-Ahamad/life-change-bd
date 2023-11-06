@@ -49,8 +49,14 @@ const Passbook = () => {
       ) : dataType === "credit" && passbookData?.length !== 0 ? (
         <DataTable
           tableData={passbookData}
-          tableHeaders={["No", "id", "Name", "Joining Time"]}
-          dataProperties={["userId", "firstName", "createdAt", "phone"]}
+          tableHeaders={["No", "id", "Name", "Joining Time", "Active Time"]}
+          dataProperties={[
+            "userId",
+            "firstName",
+            "createdAt",
+            "settings.activates",
+            "phone",
+          ]}
           message="Message"
           extraHed={["Amount"]}
           extraProperties={[<>amount</>]}
