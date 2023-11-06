@@ -92,8 +92,14 @@ const SubAdmin: FC = () => {
         {students && students?.length !== 0 && (
           <RefTable
             tableData={students}
-            tableHeaders={["No", "id", "Name", "Joining Time"]}
-            dataProperties={["userId", "firstName", "createdAt", "phone"]}
+            tableHeaders={["No", "id", "Name", "Joining Time", "Active Time"]}
+            dataProperties={[
+              "userId",
+              "firstName",
+              "createdAt",
+              "activates",
+              "phone",
+            ]}
             message="Message"
             actionFn={handleAddTrainer}
             actionBtn={<Button variant="accent">Add Trainer</Button>}

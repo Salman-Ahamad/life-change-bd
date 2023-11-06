@@ -11,15 +11,11 @@ import { AiOutlineHome } from "react-icons/ai";
 const navData: INavItem[] = [
   {
     label: <AiOutlineHome className="text-2xl" />,
-    link: "/trainer",
+    link: "/sgl",
   },
   {
     label: "Profile",
-    link: "/trainer/profile",
-  },
-  {
-    label: "Inactive",
-    link: "/trainer/inactive",
+    link: "/sgl/profile",
   },
   {
     label: "Photo Zone",
@@ -30,10 +26,10 @@ const navData: INavItem[] = [
 const SubAdmin: FC = () => {
   const [students, setStudents] = useState<IUser[] | null>(null);
   const [userId, setUserId] = useState("");
+  // const [open, setOpen] = useState(false);
+  // const [selectUser, setSelectUser] = useState<IUser>();
 
   const user = useCurrentUser(true);
-
-  // useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
 
   const handleRequest = () => {
     createData("/request", {
@@ -44,8 +40,14 @@ const SubAdmin: FC = () => {
     setUserId("");
   };
 
+  // const handleAddTrainer = ({ user }: IActionFn) => {
+  //   setSelectUser(user);
+  //   setOpen(true);
+  // };
+
   return (
     <main>
+      {/* {selectUser && <PopUp open={open} setOpen={setOpen} user={selectUser} />} */}
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
         Welcome to Life Change Bd
@@ -53,7 +55,7 @@ const SubAdmin: FC = () => {
       <Container>
         <div className="flex flex-col justify-center items-start gap-1 mb-5 w-fit mx-auto">
           <Label className="text-sm lg:text-sm ml-2">
-            Request New Active User
+            Request New Group Leader
           </Label>
           <div className="flex justify-center items-center gap-1">
             <input
@@ -76,20 +78,16 @@ const SubAdmin: FC = () => {
         <SearchBar setData={setStudents} onlyActive />
 
         <Title variant="H4" className="capitalize -mb-5">
-          Student List (Active User)
+          Group Leader List
         </Title>
         {students && students?.length !== 0 && (
           <RefTable
             tableData={students}
-            tableHeaders={["No", "id", "Name", "Joining Time", "Active Time"]}
-            dataProperties={[
-              "userId",
-              "firstName",
-              "createdAt",
-              "activates",
-              "phone",
-            ]}
+            tableHeaders={["No", "id", "Name", "Joining Time"]}
+            dataProperties={["userId", "firstName", "createdAt", "phone"]}
             message="Message"
+            // actionFn={handleAddTrainer}
+            // actionBtn={<Button variant="accent">Add Trainer</Button>}
           />
         )}
       </Container>

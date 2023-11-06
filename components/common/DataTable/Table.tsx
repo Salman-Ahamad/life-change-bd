@@ -1,7 +1,6 @@
 "use client";
 
 import { IActionFn, IRefTable, IUser } from "@/interface";
-import { UserRole } from "@/lib";
 import { FC } from "react";
 import { SendWishMessage, THeader, Tbody, WhatsAppLink } from "..";
 
@@ -66,6 +65,23 @@ export const DataTable: FC<IRefTable> = ({
                         referUser[item]
                       ).toLocaleDateString();
                       return <Tbody key={i} label={date} />;
+                    case "activates":
+                      const activates = referUser.settings.activates
+                        ? new Date(
+                            referUser.settings.activates
+                          ).toLocaleDateString()
+                        : "-";
+                      return (
+                        <Tbody
+                          key={i}
+                          label={activates}
+                          className={
+                            !referUser.settings.activates
+                              ? "text-center pr-10"
+                              : "-"
+                          }
+                        />
+                      );
 
                     case "phone":
                       return (
@@ -115,7 +131,9 @@ Lifechange Bd e-learning platform
                       return (
                         <Tbody
                           key={i}
-                          label={referUser[item as keyof IUser] as string}
+                          label={
+                            (referUser[item as keyof IUser] as string) || "-"
+                          }
                         />
                       );
                   }
@@ -147,8 +165,8 @@ Lifechange Bd e-learning platform
                 {extraProperties &&
                   extraProperties?.map((item, i) => (
                     <td key={i} className="px-2.5">
-                      {(referUser.role === UserRole.active && 120) ||
-                        (referUser.role === UserRole.inactive && 1)}
+                      {referUser.settings.activeBonus ? 120 : "-"} ↔️&nbsp;
+                      {referUser.settings.inactiveBonus ? 1 : "-"}
                     </td>
                   ))}
               </tr>

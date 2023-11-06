@@ -64,6 +64,23 @@ export const RefTable: FC<IRefTable> = ({
                         referUser[item]
                       ).toLocaleDateString();
                       return <Tbody key={i} label={date} />;
+                    case "activates":
+                      const activates = referUser.settings.activates
+                        ? new Date(
+                            referUser.settings.activates
+                          ).toLocaleDateString()
+                        : "-";
+                      return (
+                        <Tbody
+                          key={i}
+                          label={activates}
+                          className={
+                            !referUser.settings.activates
+                              ? "text-center pr-10"
+                              : ""
+                          }
+                        />
+                      );
 
                     case "phone":
                       return (
@@ -82,7 +99,7 @@ export const RefTable: FC<IRefTable> = ({
                         return (
                           <Tbody
                             key={i}
-                            label={referUser[item as keyof IUser] as string}
+                            label={referUser[item as keyof IUser] || "-"}
                             href={
                               slugUrl
                                 ? `${slugUrl}${referUser.id}`
@@ -94,7 +111,9 @@ export const RefTable: FC<IRefTable> = ({
                         return (
                           <Tbody
                             key={i}
-                            label={referUser[item as keyof IUser] as string}
+                            label={
+                              (referUser[item as keyof IUser] as string) || "-"
+                            }
                           />
                         );
                       }
