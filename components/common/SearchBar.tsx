@@ -39,11 +39,14 @@ export const SearchBar: FC<ISearchBar> = ({
         ? createDate(0, 0, filedData.date as Date)
         : new Date(filedData.month as Date).getTime();
 
+      const countUrl =
+        (user?.role === UserRole.admin && "count/all") ||
+        (user?.role === UserRole.sgl && "count/sgl") ||
+        "count";
+
       if (date) {
         const url = count
-          ? `/all-ref/${
-              user?.role === UserRole.sgl ? "count/sgl" : "count"
-            }?date=${date}&singleDate=${
+          ? `/all-ref/${countUrl}?date=${date}&singleDate=${
               filedData.date ? true : false
             }&isActive=${onlyActive ? true : false}&isStudent=${
               (userType === "student" && true) ||
@@ -70,7 +73,7 @@ export const SearchBar: FC<ISearchBar> = ({
 
   return (
     <Container className="my-5">
-      {user?.role === UserRole.admin && (
+      {user?.role === UserRole.admin && !count && (
         <div className="flex justify-center items-center mb-2">
           <Button
             variant="accent"
@@ -93,7 +96,7 @@ export const SearchBar: FC<ISearchBar> = ({
         </div>
       )}
       <p className="text-center text-gray-500 mb-1">
-        Search by Year and Month Or User Id!
+        Search by Date {count ? "Or" : ","} Month {!count && "Or User Id"}!
       </p>
       <section className="flex justify-center items-center gap-3 lg:gap-5 flex-wrap">
         <input

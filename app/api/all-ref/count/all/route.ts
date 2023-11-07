@@ -116,8 +116,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
 
     switch (user.role) {
       case UserRole.admin:
-        const admin = { "settings.admin": user.id };
-        option = optionFn(admin, isActiveValue ? true : false);
+        const admin = { "settings.admin": user.id, role: UserRole.active };
+        option = optionFn(admin);
         break;
       case UserRole.consultant:
         const consultant = {
@@ -158,25 +158,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
     }
 
-    const refList = await User.find(option)
-      .sort({
-        "settings.activates": -1,
-        createdAt: -1,
-      })
-      .select({ password: 0 })
-      .exec();
-
-    let countPromises = refList.map(async (user) => {
-      const result = await User.countDocuments({
-        reference: user.userId,
-        role: UserRole.active,
-      });
-      return result;
-    });
-
-    let counts = await Promise.all(countPromises);
-
-    let refCount: number = counts.reduce((total, count) => total + count, 0);
+    const refCount: number = await User.countDocuments(option);
 
     return ApiResponse(200, "Reference Count get successfully 👌", refCount);
   } catch (error: any) {
