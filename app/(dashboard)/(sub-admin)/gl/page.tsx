@@ -26,6 +26,10 @@ const navData: INavItem[] = [
     link: "/gl/trainer",
   },
   {
+    label: "Count",
+    link: "/gl/count",
+  },
+  {
     label: "Photo Zone",
     link: "/photo-zone",
   },

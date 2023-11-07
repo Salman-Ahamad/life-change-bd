@@ -172,6 +172,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     });
 
     let counts = await Promise.all(countPromises);
+    console.log("🚀 ~ file: route.ts:175 ~ GET ~ counts:", counts);
 
     let refCount: number = counts.reduce((total, count) => total + count, 0);
 
