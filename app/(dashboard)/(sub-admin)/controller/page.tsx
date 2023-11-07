@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable, Header, SearchBar, THeader, Tbody } from "@/components";
-import { getDataFn, updateData, useGetData } from "@/hooks";
+import { getDataFn, updateData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Title } from "@/universal";
 import { useEffect, useState } from "react";
@@ -29,20 +29,18 @@ const navData: INavItem[] = [
 ];
 
 const SubAdmin = () => {
-  const [inactiveUsers, setInactiveUsers] = useState<IUser[]>([]);
+  const [Inactive, setInactive] = useState<IUser[] | null>(null);
+  const [users, setUsers] = useState<IUser[] | null>(null);
   const [consultantId, setConsultantId] = useState("");
   const [consultant, setConsultant] = useState<IUser>();
   const [students, setStudents] = useState<IUser[]>([]);
-  const [users, setUsers] = useState<IUser[] | null>(null);
   const [updateBtn, setUpdateBtn] = useState(true);
 
-  useGetData("/user/inactive", setInactiveUsers);
-
   useEffect(() => {
-    if (inactiveUsers) {
-      setUsers(inactiveUsers?.filter(({ settings }) => !settings.consultant));
+    if (Inactive) {
+      setUsers(Inactive?.filter(({ settings }) => !settings.consultant));
     }
-  }, [inactiveUsers]);
+  }, [Inactive]);
 
   const handleGetConsultant = () => {
     getDataFn(`/user/consultant/${consultantId}`, setConsultant);
@@ -54,8 +52,14 @@ const SubAdmin = () => {
     if (consultant) {
       setUpdateBtn(false);
       if (user) {
-        setUsers((prv) => prv && [...prv, user]);
-        setStudents((prv) => [...prv, user]);
+        if (!students?.includes(user)) {
+          setUsers(
+            (prv) => prv && prv.filter((prvUser) => prvUser.id !== user.id)
+          );
+          setStudents((prv) => [...prv, user]);
+        } else {
+          toast.error("User already add");
+        }
       }
     } else {
       toast.error("Consultant not found");
@@ -68,8 +72,12 @@ const SubAdmin = () => {
       updateData(`/user/${user.id}`, {
         "settings.consultant": "",
       }).then(() => {
-        setUsers((prv) => prv && [...prv, user]);
-        setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
+        if (!users?.includes(user)) {
+          setUsers((prv) => prv && [...prv, user]);
+          setStudents((prv) => prv.filter((prvUser) => prvUser.id !== user.id));
+        } else {
+          toast.error("User already add");
+        }
       });
     } else {
       toast.error("Consultant not found");
@@ -92,7 +100,7 @@ const SubAdmin = () => {
   };
 
   return (
-    <main>
+    <main className="pb-40">
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
         Welcome to Life Change Bd{" "}
@@ -192,7 +200,7 @@ const SubAdmin = () => {
         )}
       </Container>
       <Container>
-        <SearchBar setData={setUsers} />
+        <SearchBar setData={setInactive} />
         <Title variant="H4" className="capitalize -mb-10">
           Inactive User List
         </Title>

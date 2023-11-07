@@ -124,10 +124,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.controller:
         const controller = {
-          $or: [
-            // { role: UserRole.inactive },
-            { "settings.controller": user.userId },
-          ],
+          role: UserRole.inactive,
         };
         option = optionFn(controller);
         break;
