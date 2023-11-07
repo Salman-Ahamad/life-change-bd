@@ -26,6 +26,7 @@ export interface ISearchBar extends ISetSearchData {
   setData: Dispatch<SetStateAction<IUser[] | null>>;
   onlyActive?: boolean;
   onlyInactive?: boolean;
+  count?: boolean;
 }
 
 export interface IPageHeader {

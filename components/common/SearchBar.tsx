@@ -10,6 +10,7 @@ import { Button, Container } from "@/universal";
 import { createDate } from "@/utils";
 
 export const SearchBar: FC<ISearchBar> = ({
+  count,
   setData,
   onlyActive,
   onlyInactive,
@@ -26,7 +27,7 @@ export const SearchBar: FC<ISearchBar> = ({
   const handleSubmit = async () => {
     if (filedData.id) {
       await getDataFn(
-        `/all-ref?id=${filedData.id}&isActive=${
+        `/all-ref/${filedData.id}?isActive=${
           onlyActive ? true : false
         }&isStudent=${
           (userType === "student" && true) || (onlyInactive && true) || false
@@ -39,11 +40,22 @@ export const SearchBar: FC<ISearchBar> = ({
         : new Date(filedData.month as Date).getTime();
 
       if (date) {
-        const url = `/all-ref?date=${date}&singleDate=${
-          filedData.date ? true : false
-        }&isActive=${onlyActive ? true : false}&isStudent=${
-          (userType === "student" && true) || (onlyInactive && true) || false
-        }`;
+        const url = count
+          ? `/all-ref/count?date=${date}&singleDate=${
+              filedData.date ? true : false
+            }&isActive=${onlyActive ? true : false}&isStudent=${
+              (userType === "student" && true) ||
+              (onlyInactive && true) ||
+              false
+            }`
+          : `/all-ref?date=${date}&singleDate=${
+              filedData.date ? true : false
+            }&isActive=${onlyActive ? true : false}&isStudent=${
+              (userType === "student" && true) ||
+              (onlyInactive && true) ||
+              false
+            }`;
+
         await getDataFn(url, setData);
       } else {
         toast.error("Invalid date. Please provide valid year and month.");
@@ -96,13 +108,15 @@ export const SearchBar: FC<ISearchBar> = ({
           }
           className="focus:outline-none border border-primary p-2 rounded-md w-full sm:w-auto cursor-pointer"
         />
-        <input
-          type="text"
-          value={String(filedData.id)}
-          placeholder="User Id"
-          onChange={(e) => setFiledData({ ...filedData, id: e.target.value })}
-          className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto cursor-pointer"
-        />
+        {!count && (
+          <input
+            type="text"
+            value={String(filedData.id)}
+            placeholder="User Id"
+            onChange={(e) => setFiledData({ ...filedData, id: e.target.value })}
+            className="p-2 outline-none border border-primary rounded-md text-base w-full sm:w-auto cursor-pointer"
+          />
+        )}
         <Button
           variant="secondary"
           className="py-2.5 px-5 w-full md:w-auto"

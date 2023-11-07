@@ -1,6 +1,6 @@
 import { connectDb } from "@/config";
 import { UserRole } from "@/lib";
-import { AllRefer, User } from "@/models";
+import { User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { NextRequest } from "next/server";
@@ -23,14 +23,11 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       return ApiResponse(404, "User not found❗");
     }
     if (
-      user.role !== UserRole.active &&
-      user.role !== UserRole.controller &&
-      user.role !== UserRole.consultant &&
-      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin &&
       user.role !== UserRole.sgl &&
       user.role !== UserRole.gl &&
       user.role !== UserRole.trainer &&
-      user.role !== UserRole.admin
+      user.role !== UserRole.consultant
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
@@ -122,15 +119,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         const admin = { "settings.admin": user.id };
         option = optionFn(admin, isActiveValue ? true : false);
         break;
-      case UserRole.controller:
-        const controller = {
-          $or: [
-            // { role: UserRole.inactive },
-            { "settings.controller": user.userId },
-          ],
-        };
-        option = optionFn(controller);
-        break;
       case UserRole.consultant:
         const consultant = {
           $or: [
@@ -139,12 +127,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
           ],
         };
         option = optionFn(consultant);
-        break;
-      case UserRole.teacher:
-        const teacher = {
-          "settings.teacher": user.userId,
-        };
-        option = optionFn(teacher);
         break;
       case UserRole.sgl:
         const sgl = {
@@ -171,12 +153,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         };
         option = optionFn(trainer, isActiveValue ? true : false);
         break;
-      case UserRole.active:
-        const active = {
-          reference: user.userId,
-        };
-        option = optionFn(active);
-        break;
 
       default:
         break;
@@ -190,47 +166,16 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    return ApiResponse(200, "Reference List get successfully 👌", refList);
-  } catch (error: any) {
-    return ApiResponse(400, error.message);
-  }
-};
-
-export const POST = async (req: NextRequest) => {
-  try {
-    const referData = await req.json();
-    // Get Current User
-    const user = await getCurrentUser();
-    if (!user) {
-      return ApiResponse(404, "User not found❗");
-    }
-
-    const result = await AllRefer.create(referData);
-
-    return ApiResponse(200, "Refer add successfully 👌", result);
-  } catch (error: any) {
-    return ApiResponse(400, error.message);
-  }
-};
-
-export const PATCH = async (req: NextRequest) => {
-  try {
-    const updatedData = await req.json();
-
-    // Get Current User
-    const user = await getCurrentUser();
-
-    if (!user) {
-      return ApiResponse(404, "User not found❗");
-    } else if (!user.role) {
-      return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
-    }
-
-    const result = await User.updateOne({ _id: user.id }, updatedData, {
-      new: true,
+    let countPromises = refList.map(async (user) => {
+      const result = await User.countDocuments({ reference: user.userId });
+      return result;
     });
 
-    return ApiResponse(200, "User update successfully 🛠️✅", result);
+    let counts = await Promise.all(countPromises);
+
+    let refCount: number = counts.reduce((total, count) => total + count, 0);
+
+    return ApiResponse(200, "Reference Count get successfully 👌", refCount);
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }
