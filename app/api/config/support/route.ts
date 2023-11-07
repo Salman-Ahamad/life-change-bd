@@ -9,37 +9,38 @@ connectDb();
 export const GET = async () => {
   try {
     // Get Current User
-    const currentUser = await getCurrentUser();
+    const user = await getCurrentUser();
 
-    if (!currentUser) {
+    if (!user) {
       return ApiResponse(404, "User not found❗");
     }
 
     if (
-      currentUser.role !== UserRole.active &&
-      currentUser.role !== UserRole.inactive &&
-      currentUser.role !== UserRole.controller &&
-      currentUser.role !== UserRole.consultant &&
-      currentUser.role !== UserRole.teacher &&
-      currentUser.role !== UserRole.gl &&
-      currentUser.role !== UserRole.admin
+      user.role !== UserRole.active &&
+      user.role !== UserRole.inactive &&
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.gl &&
+      user.role !== UserRole.admin
     ) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
-    const user = await User.findOne({ _id: currentUser.id })
-      .populate("courses")
-      .select({ settings: 1 });
+    // const user = await User.findOne({ _id: currentUser.id })
+    //   .populate("courses")
+    //   .select({ settings: 1 });
 
-    const consultant = User.findOne({ _id: user.settings.consultant })
+    const trainer = await User.findOne({ userId: user.settings.trainer })
       .select({ phone: 1 })
       .exec();
-    const gl = User.findOne({ _id: user.settings.gl })
+
+    const gl = await User.findOne({ userId: user.settings.gl })
       .select({ phone: 1 })
       .exec();
 
     return ApiResponse(200, "Sub-admin get successfully 👌", {
-      consultant,
+      trainer,
       gl,
     });
   } catch (error: any) {

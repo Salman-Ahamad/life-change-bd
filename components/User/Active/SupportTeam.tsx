@@ -1,39 +1,32 @@
 "use client";
 
 import { useGetData } from "@/hooks";
+import { IGlTrainer, ILabel } from "@/interface";
 import { FC, useState } from "react";
 import { ActivePageCard, DataRow } from ".";
-export interface IGlConsultant {
-  gl: {
-    phone: string;
-  };
-  consultant: {
-    phone: string;
-  };
-}
-export const SupportTeam: FC<{ support: string }> = ({ support }) => {
-  const [data, setData] = useState<IGlConsultant>();
+
+export const SupportTeam: FC<ILabel> = ({ label }) => {
+  const [data, setData] = useState<IGlTrainer>();
   useGetData("/config/support", setData, true);
 
-  if (data)
-    return (
-      <ActivePageCard title="Life change Support Team">
-        <DataRow
-          title="My Group Leader"
-          phoneNo={data.gl.phone}
-          btnText="WhatsApp"
-        />
-        <DataRow
-          title="My Trainer"
-          phoneNo={data.consultant.phone}
-          btnText="WhatsApp"
-        />
+  return (
+    <ActivePageCard title="Life change Support Team">
+      <DataRow
+        title="My Group Leader"
+        phoneNo={data?.gl.phone}
+        btnText="WhatsApp"
+      />
+      <DataRow
+        title="My Trainer"
+        phoneNo={data?.trainer.phone}
+        btnText="WhatsApp"
+      />
 
-        <DataRow
-          title="Support WhatsApp Group"
-          groupLink={support}
-          btnText="Join"
-        />
-      </ActivePageCard>
-    );
+      <DataRow
+        title="Support WhatsApp Group"
+        groupLink={label}
+        btnText="Join"
+      />
+    </ActivePageCard>
+  );
 };

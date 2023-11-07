@@ -41,3 +41,12 @@ export interface IPopUp {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface IGlTrainer {
+  gl: {
+    phone: string;
+  };
+  trainer: {
+    phone: string;
+  };
+}

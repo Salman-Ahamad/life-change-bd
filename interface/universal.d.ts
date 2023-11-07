@@ -36,7 +36,7 @@ export interface IH extends IChildrenWithClassName, ITitleVariant {}
 
 export interface ICommonText extends IChildrenWithClassName {}
 
-export interface ILabel extends IText, IChildrenWithClassName {
+export interface ILabelText extends IText, IChildrenWithClassName {
   color?: IColor;
   uppercase?: boolean;
 }

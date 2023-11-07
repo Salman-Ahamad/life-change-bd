@@ -36,18 +36,15 @@ const navData: INavItem[] = [
     label: "Photo Zone",
     link: "/photo-zone",
   },
-  // {
-  //   label: "Video Zone",
-  //   link: "/active/video-zone",
-  // },
 ];
 
 const Active = () => {
-  const [config, setConfig] = useState<IAppConfig>();
-  const [sliders, setSliders] = useState<ISlider[]>();
+  const [config, setConfig] = useState<IAppConfig | null>(null);
+  const [sliders, setSliders] = useState<ISlider[]>([]);
 
   const user = useCurrentUser(true);
-  useGetData("/config", setConfig, true);
+
+  useGetData("/config", setConfig);
   useGetData("/config/slider", setSliders, true);
 
   useEffect(() => {
@@ -80,23 +77,20 @@ const Active = () => {
 
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
         <Title variant="H3">Welcome to Life Change Bd</Title>
-        {sliders && sliders.length !== 0 && <Slider slides={sliders} />}
+        {sliders && sliders?.length !== 0 && <Slider slides={sliders} />}
       </div>
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        {config && (
-          <div className="space-y-5">
-            <HelpLink meetId={config.support.help} />
-            <MeetingLink
-              meetId={config.support.meeting}
-              title="Life Change BD Support Meeting"
-            />
-          </div>
-        )}
-        {config && <SupportTeam support={config.support.whatsApp} />}
+        <div className="space-y-5">
+          <HelpLink meetId={config?.support.help || ""} />
+          <MeetingLink
+            meetId={config?.support.meeting || ""}
+            title="Life Change BD Support Meeting"
+          />
+        </div>
+        <SupportTeam label={config?.support.whatsApp || ""} />
       </Container>
 
       <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        {/* TODO: Add course ive link list */}
         <LiveLearningClass />
       </Container>
     </main>
