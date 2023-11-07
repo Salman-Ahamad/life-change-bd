@@ -13,6 +13,10 @@ const AssignmentSchema = new Schema<IAssignmentSchema>(
       ref: "users",
       required: [true, "Please provide a valid userId"],
     },
+    assignment: {
+      type: Number,
+      required: [true, "Please provide a valid Assignment No"],
+    },
     postLink: {
       type: String,
       required: [true, "Please provide a valid postLink"],

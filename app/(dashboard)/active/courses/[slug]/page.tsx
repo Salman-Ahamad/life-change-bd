@@ -19,41 +19,54 @@ const navData: INavItem[] = [
 ];
 
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
-  const [data, setData] = useState<ICourse | undefined>();
-  const [assignment, setAssignment] = useState<IAssignment[] | undefined>();
+  const [course, setCourse] = useState<ICourse | undefined>();
+  const [assignments, setAssignments] = useState<IAssignment[]>([]);
+  const [Action, setAction] = useState(false);
   const [url, setUrl] = useState("");
 
   const { slug } = params;
 
-  useGetData(`/courses/${slug}`, setData, true);
+  useGetData(`/courses/${slug}`, setCourse, true);
 
   useEffect(() => {
-    if (data?.id) getDataFn(`/assignment/${data?.id}`, setAssignment, true);
-  }, [data?.id]);
+    if (course?.id)
+      getDataFn(`/assignment/${course?.id}`, setAssignments, true);
+  }, [course?.id]);
 
-  const handlePostUrl = () =>
-    createData("/assignment", {
-      courseId: data?.id,
-      postLink: url,
-    }).then(() => {
-      window.location.reload();
-      setUrl("");
-    });
+  useEffect(() => {
+    if (assignments) {
+      assignments?.map((as) => as.status === "reject" && setAction(true));
+    }
+  }, [assignments]);
+
+  const handlePostUrl = () => {
+    if (assignments && course) {
+      assignments?.length < course?.assignments &&
+        createData("/assignment", {
+          courseId: course?.id,
+          assignment: assignments?.length + 1,
+          postLink: url,
+        }).then(() => {
+          window.location.reload();
+          setUrl("");
+        });
+    }
+  };
 
   return (
     <main>
       <Header navData={navData} />
       <Container>
-        {data ? (
+        {course ? (
           <div className="flex justify-center items-center flex-col gap-8 my-8">
             <Title variant="H2" className="capitalize">
-              {data?.title}
+              {course?.title}
             </Title>
-            <GoogleMeetLink meetId={data?.meetingId || ""}>
+            <GoogleMeetLink meetId={course?.meetingId || ""}>
               Watch Video
             </GoogleMeetLink>
 
-            {assignment && assignment.length !== 0 && (
+            {assignments && assignments.length !== 0 && (
               <div>
                 <Title variant="H4" className="capitalize">
                   List of Previous URL&rsquo;s
@@ -64,16 +77,11 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                       <THeader label="No" />
                       <THeader label="Url" />
                       <THeader label="Status" />
-                      {assignment.map(
-                        (as, i) =>
-                          as.status === "reject" && (
-                            <THeader key={i} label="Action" />
-                          )
-                      )}
+                      {Action && <THeader label="Action" />}
                     </tr>
                   </thead>
                   <tbody className="text-gray-600 divide-y">
-                    {assignment.map((assignment, i) => (
+                    {assignments.map((assignment, i) => (
                       <tr key={assignment.id}>
                         <Tbody label={String(i + 1)} />
                         <Tbody
@@ -108,7 +116,7 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
               </div>
             )}
 
-            {assignment && assignment?.length < 10 && (
+            {assignments && assignments?.length < course?.assignments && (
               <div>
                 <Title variant="H4" className="capitalize mb-5">
                   Submit new URL

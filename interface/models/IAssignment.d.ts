@@ -6,6 +6,7 @@ export type IAssignmentStatus = "pending" | "accept" | "reject";
 export interface IAssignmentSchema {
   courseId: Types.ObjectId;
   userId: Types.ObjectId;
+  assignment: number;
   postLink: string;
   status: IAssignmentStatus;
 }
