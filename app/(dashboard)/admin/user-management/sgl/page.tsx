@@ -11,7 +11,7 @@ import { BackButton, Button, Container, Title } from "@/universal";
 
 const navData: INavItem[] = [
   {
-    label: <BackButton />,
+    label: <BackButton className="text-2xl" />,
     link: "/admin",
   },
   {
