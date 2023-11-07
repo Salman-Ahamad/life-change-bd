@@ -166,18 +166,28 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    let countPromises = refList.map(async (user) => {
-      const result = await User.countDocuments({
-        reference: user.userId,
-        role: UserRole.active,
-      });
-      return result;
-    });
+    let refCount = 0;
+    await Promise.all(
+      refList.map(async (gl) => {
+        const userList = await User.find({
+          "settings.gl": gl.userId,
+          role: UserRole.active,
+        }).exec();
 
-    let counts = await Promise.all(countPromises);
-    console.log("🚀 ~ file: route.ts:175 ~ GET ~ counts:", counts);
+        const countPromises = userList.map(async (user) => {
+          const result = await User.countDocuments({
+            reference: user.userId,
+            role: UserRole.active,
+          });
+          return result;
+        });
 
-    let refCount: number = counts.reduce((total, count) => total + count, 0);
+        const userCounts = await Promise.all(countPromises);
+        refCount += userCounts.reduce((acc, count) => acc + count, 0);
+      })
+    );
+
+    console.log("🚀 ~ file: route.ts:169 ~ GET ~ refCount:", { refCount });
 
     return ApiResponse(200, "Reference Count get successfully 👌", refCount);
   } catch (error: any) {

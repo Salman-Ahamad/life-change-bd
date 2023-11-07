@@ -14,6 +14,10 @@ const navData: INavItem[] = [
     link: "/sgl",
   },
   {
+    label: "Count",
+    link: "/sgl/count",
+  },
+  {
     label: "Profile",
     link: "/sgl/profile",
   },

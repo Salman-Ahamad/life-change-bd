@@ -41,7 +41,9 @@ export const SearchBar: FC<ISearchBar> = ({
 
       if (date) {
         const url = count
-          ? `/all-ref/count?date=${date}&singleDate=${
+          ? `/all-ref/${
+              user?.role === UserRole.sgl ? "count/sgl" : "count"
+            }?date=${date}&singleDate=${
               filedData.date ? true : false
             }&isActive=${onlyActive ? true : false}&isStudent=${
               (userType === "student" && true) ||
