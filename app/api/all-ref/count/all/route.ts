@@ -22,13 +22,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     if (!user) {
       return ApiResponse(404, "User not found❗");
     }
-    if (
-      user.role !== UserRole.admin &&
-      user.role !== UserRole.sgl &&
-      user.role !== UserRole.gl &&
-      user.role !== UserRole.trainer &&
-      user.role !== UserRole.consultant
-    ) {
+    if (user.role !== UserRole.admin) {
       return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
     }
 
@@ -114,53 +108,66 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       );
     };
 
-    switch (user.role) {
-      case UserRole.admin:
-        const admin = { "settings.admin": user.id, role: UserRole.active };
-        option = optionFn(admin);
-        break;
-      case UserRole.consultant:
-        const consultant = {
-          $or: [
-            // { role: UserRole.inactive },
-            { "settings.consultant": user.userId, role: UserRole.inactive },
-          ],
-        };
-        option = optionFn(consultant);
-        break;
-      case UserRole.sgl:
-        const sgl = {
-          $or: [
-            { role: UserRole.gl, "settings.sgl": user.userId },
-            // { role: UserRole.inactive },
-          ],
-        };
-        option = optionFn(sgl);
-        break;
-      case UserRole.gl:
-        const gl = {
-          $or: [
-            { role: UserRole.active, "settings.gl": user.userId },
-            // { role: UserRole.inactive },
-          ],
-        };
-        option = optionFn(gl, isActiveValue ? true : false);
-        break;
-      case UserRole.trainer:
-        const trainer = {
-          role: UserRole.active,
-          "settings.trainer": user.userId,
-        };
-        option = optionFn(trainer, isActiveValue ? true : false);
-        break;
+    // switch (user.role) {
+    //   case UserRole.admin:
+    //     const admin = { "settings.admin": user.id };
+    //     option = optionFn(admin);
+    //     break;
+    //   case UserRole.consultant:
+    //     const consultant = {
+    //       $or: [
+    //         // { role: UserRole.inactive },
+    //         { "settings.consultant": user.userId, role: UserRole.inactive },
+    //       ],
+    //     };
+    //     option = optionFn(consultant);
+    //     break;
+    //   case UserRole.sgl:
+    //     const sgl = {
+    //       $or: [
+    //         { role: UserRole.gl, "settings.sgl": user.userId },
+    //         // { role: UserRole.inactive },
+    //       ],
+    //     };
+    //     option = optionFn(sgl);
+    //     break;
+    //   case UserRole.gl:
+    //     const gl = {
+    //       $or: [
+    //         { role: UserRole.active, "settings.gl": user.userId },
+    //         // { role: UserRole.inactive },
+    //       ],
+    //     };
+    //     option = optionFn(gl, isActiveValue ? true : false);
+    //     break;
+    //   case UserRole.trainer:
+    //     const trainer = {
+    //       role: UserRole.active,
+    //       "settings.trainer": user.userId,
+    //     };
+    //     option = optionFn(trainer, isActiveValue ? true : false);
+    //     break;
+    //   default:
+    //     break;
+    // }
 
-      default:
-        break;
-    }
+    const activeUser = (isActive: boolean) => {
+      const active = {
+        "settings.admin": user.id,
+        role: isActive ? UserRole.active : UserRole.inactive,
+      };
+      option = optionFn(active);
+    };
 
-    const refCount: number = await User.countDocuments(option);
+    activeUser(true);
+    const activeRefCount: number = await User.countDocuments(option);
+    activeUser(false);
+    const inactiveRefCount: number = await User.countDocuments(option);
 
-    return ApiResponse(200, "Reference Count get successfully 👌", refCount);
+    return ApiResponse(200, "Reference Count get successfully 👌", {
+      active: activeRefCount,
+      inactive: inactiveRefCount,
+    });
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

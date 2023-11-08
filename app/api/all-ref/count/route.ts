@@ -164,19 +164,44 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    let countPromises = refList.map(async (user) => {
+    console.log("🚀 ~ file: route.ts:166 ~ GET ~ refList:", refList);
+
+    const activeCountPromises = refList.map(async (user) => {
       const result = await User.countDocuments({
         reference: user.userId,
         role: UserRole.active,
       });
       return result;
     });
+    const inactiveCountPromises = refList.map(async (user) => {
+      const result = await User.countDocuments({
+        reference: user.userId,
+        role: UserRole.inactive,
+      });
+      return result;
+    });
 
-    let counts = await Promise.all(countPromises);
+    const activeCounts = await Promise.all(activeCountPromises);
+    const inactiveCounts = await Promise.all(inactiveCountPromises);
 
-    let refCount: number = counts.reduce((total, count) => total + count, 0);
+    const activeRefCount: number = activeCounts.reduce(
+      (total, count) => total + count,
+      0
+    );
+    const inactiveRefCount: number = inactiveCounts.reduce(
+      (total, count) => total + count,
+      0
+    );
 
-    return ApiResponse(200, "Reference Count get successfully 👌", refCount);
+    console.log("🚀 ~ file: route.ts:193 ~ GET ~ inactiveRefCount:", {
+      active: activeRefCount,
+      inactive: inactiveRefCount,
+    });
+
+    return ApiResponse(200, "Reference Count get successfully 👌", {
+      active: activeRefCount,
+      inactive: inactiveRefCount,
+    });
   } catch (error: any) {
     return ApiResponse(400, error.message);
   }

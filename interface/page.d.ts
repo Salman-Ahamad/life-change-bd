@@ -23,7 +23,7 @@ export interface ISearchData {
 }
 
 export interface ISearchBar extends ISetSearchData {
-  setData: Dispatch<SetStateAction<IUser[] | null>>;
+  setData: Dispatch<SetStateAction<IUser[] | any | null>>;
   onlyActive?: boolean;
   onlyInactive?: boolean;
   count?: boolean;
