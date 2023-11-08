@@ -164,16 +164,18 @@ const Courses: NextPage = () => {
                       </h3>
 
                       <div className="w-full flex justify-end items-end">
-                        <LinkButton
-                          variant="secondary"
-                          href={`/active/courses/${slug}`}
-                          disabled={
-                            handleStatus(slug, assignments) === "enroll"
-                          }
-                          className="m-4 border-t disabled:opacity-80 disabled:cursor-not-allowed"
-                        >
-                          {handleStatus(slug, assignments) || "Loading..."}
-                        </LinkButton>
+                        {slug !== "sahih-holy-quran" && (
+                          <LinkButton
+                            variant="secondary"
+                            href={`/active/courses/${slug}`}
+                            disabled={
+                              handleStatus(slug, assignments) === "enroll"
+                            }
+                            className="m-4 border-t disabled:opacity-80 disabled:cursor-not-allowed"
+                          >
+                            {handleStatus(slug, assignments) || "Loading..."}
+                          </LinkButton>
+                        )}
                       </div>
                     </div>
                   </li>

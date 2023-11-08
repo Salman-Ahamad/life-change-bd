@@ -10,8 +10,9 @@ export interface IClassName {
 
 export interface IChildrenWithClassName extends IChildren, IClassName {}
 
-export interface IChildrenWithTitle extends IChildren {
+export interface IChildrenWithTitle extends IChildrenWithClassName {
   title: string;
+  icon?: boolean;
 }
 
 export interface ISlugParams {

@@ -14,12 +14,12 @@ export const SupportTeam: FC<ILabel> = ({ label }) => {
       <DataRow
         title="My Group Leader"
         phoneNo={data?.gl.phone}
-        btnText="WhatsApp"
+        btnText="Message"
       />
       <DataRow
         title="My Trainer"
         phoneNo={data?.trainer.phone}
-        btnText="WhatsApp"
+        btnText="Message"
       />
 
       <DataRow
