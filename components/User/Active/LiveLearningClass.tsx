@@ -37,8 +37,6 @@ export const LiveLearningClass = () => {
       ) : (
         <p></p>
       )}
-
-      <DataRow title="Lead Generation Class" btnText="ViewClass" icon />
     </ActivePageCard>
   );
 };

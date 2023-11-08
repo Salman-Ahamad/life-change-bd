@@ -142,6 +142,7 @@ export const config = {
     "/controller/profile",
     "/controller/profile/edit",
     "/consultant",
+    "/consultant/count",
     "/consultant/change-password",
     "/consultant/profile",
     "/consultant/profile/edit",

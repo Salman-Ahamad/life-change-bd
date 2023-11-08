@@ -41,7 +41,7 @@ export const SearchBar: FC<ISearchBar> = ({
 
       const countUrl =
         (user?.role === UserRole.admin && "count/all") ||
-        (user?.role === UserRole.sgl && "count/sgl") ||
+        // (user?.role === UserRole.sgl && "count/sgl") ||
         "count";
 
       if (date) {

@@ -167,6 +167,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .exec();
 
     let refCount = 0;
+
     await Promise.all(
       refList.map(async (gl) => {
         const userList = await User.find({
@@ -184,6 +185,7 @@ export const GET = async ({ nextUrl }: NextRequest) => {
 
         const userCounts = await Promise.all(countPromises);
         refCount += userCounts.reduce((acc, count) => acc + count, 0);
+        return true;
       })
     );
 

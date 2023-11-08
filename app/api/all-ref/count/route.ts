@@ -121,10 +121,8 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.consultant:
         const consultant = {
-          $or: [
-            // { role: UserRole.inactive },
-            { "settings.consultant": user.userId, role: UserRole.inactive },
-          ],
+          "settings.consultant": user.userId,
+          role: UserRole.active,
         };
         option = optionFn(consultant);
         break;

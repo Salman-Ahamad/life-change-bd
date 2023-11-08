@@ -8,7 +8,7 @@ import { FC, useState } from "react";
 const navData: INavItem[] = [
   {
     label: <BackButton className="text-2xl" />,
-    link: "/trainer",
+    link: "/admin",
   },
 ];
 
