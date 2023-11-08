@@ -54,7 +54,7 @@ const Profile = () => {
       <Header navData={navData} />
 
       {user ? (
-        <section>
+        <section className="pb-20">
           <div className="w-fit mx-auto flex justify-center items-center my-10 gap-5">
             <Image
               src={user.image || avatarProfile}
@@ -88,7 +88,13 @@ const Profile = () => {
                 </CommonText>
               ))}
               <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
-                Referral Link:
+                Group Leader Id
+              </CommonText>
+              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize ">
+                Trainer Id
+              </CommonText>
+              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
+                Referral Link
               </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">
@@ -104,6 +110,14 @@ const Profile = () => {
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}
+              <CommonText
+                className={`text-start w-full px-2 py-1.5 bg-gray-200`}
+              >
+                {user.settings.gl || "-"}
+              </CommonText>
+              <CommonText className={`text-start w-full px-2 py-1.5`}>
+                {user.settings.trainer || "-"}
+              </CommonText>
               <ShareReferLink
                 phoneNo={user.phone}
                 btnText="Share"
