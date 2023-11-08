@@ -90,7 +90,7 @@ export const GET = async (
         const sgl = {
           $or: [
             { role: UserRole.gl, "settings.sgl": user.userId },
-            // { role: UserRole.inactive },
+            { role: UserRole.inactive },
           ],
         };
         option = optionFn(sgl);

@@ -82,6 +82,13 @@ export const DataTable: FC<IRefTable> = ({
                           }
                         />
                       );
+                    case "consultant":
+                      return (
+                        <Tbody
+                          key={i}
+                          label={referUser.settings.consultant || "-"}
+                        />
+                      );
 
                     case "phone":
                       return (

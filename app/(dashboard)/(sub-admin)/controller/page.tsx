@@ -4,7 +4,7 @@ import { DataTable, Header, SearchBar, THeader, Tbody } from "@/components";
 import { getDataFn, updateData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Title } from "@/universal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
@@ -36,11 +36,11 @@ const SubAdmin = () => {
   const [students, setStudents] = useState<IUser[]>([]);
   const [updateBtn, setUpdateBtn] = useState(true);
 
-  useEffect(() => {
-    if (Inactive) {
-      setUsers(Inactive?.filter(({ settings }) => !settings.consultant));
-    }
-  }, [Inactive]);
+  // useEffect(() => {
+  //   if (Inactive) {
+  //     setUsers(Inactive?.filter(({ settings }) => !settings.consultant));
+  //   }
+  // }, [Inactive]);
 
   const handleGetConsultant = () => {
     getDataFn(`/user/consultant/${consultantId}`, setConsultant);
@@ -200,15 +200,15 @@ const SubAdmin = () => {
         )}
       </Container>
       <Container>
-        <SearchBar setData={setInactive} />
+        <SearchBar setData={setUsers} />
         <Title variant="H4" className="capitalize -mb-10">
           Inactive User List
         </Title>
         {users && users.length !== 0 && (
           <DataTable
             tableData={users}
-            tableHeaders={["No", "id", "Name", "Joining Time"]}
-            dataProperties={["userId", "firstName", "createdAt"]}
+            tableHeaders={["No", "id", "Name", "Joining Time", "consultant"]}
+            dataProperties={["userId", "firstName", "createdAt", "consultant"]}
             actionFn={handleAddStudent}
             addFullUser
             actionBtn={
