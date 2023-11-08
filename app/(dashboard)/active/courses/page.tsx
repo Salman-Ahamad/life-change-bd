@@ -2,7 +2,7 @@
 
 import { Header } from "@/components";
 import { useGetData } from "@/hooks";
-import { ICourse, INavItem } from "@/interface";
+import { ICourse, INavItem, IUserCourse } from "@/interface";
 import { BackButton, LinkButton } from "@/universal";
 import { NextPage } from "next";
 import Image from "next/image";
@@ -14,18 +14,7 @@ const navData: INavItem[] = [
     link: "/active",
   },
 ];
-export interface IUserCourse {
-  sahihHolyQuran: number;
-  photoEditing: number;
-  videoEditing: number;
-  leadGeneration: number;
-  digitalMarketing: number;
-  graphicDesign: number;
-  peopleManagement: number;
-  facebookMarketing: number;
-  mailMarketing: number;
-  youTubeContentCreating: number;
-}
+
 const Courses: NextPage = () => {
   const [courses, setCourses] = useState<ICourse[] | null>(null);
   const [courseStatus, setCourseStatus] = useState<IUserCourse | null>(null);

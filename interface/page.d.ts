@@ -42,6 +42,18 @@ export interface IPopUp {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+export interface IUserCourse {
+  sahihHolyQuran: number;
+  photoEditing: number;
+  videoEditing: number;
+  leadGeneration: number;
+  digitalMarketing: number;
+  graphicDesign: number;
+  peopleManagement: number;
+  facebookMarketing: number;
+  mailMarketing: number;
+  youTubeContentCreating: number;
+}
 export interface IGlTrainer {
   gl: {
     phone: string;
