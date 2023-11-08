@@ -84,6 +84,7 @@ const SubAdmin = () => {
             dataProperties={["userId", "firstName", "createdAt", "phone"]}
             message="Message"
             messageDone
+            UpdateSendWish
           />
         )}
       </Container>

@@ -121,7 +121,7 @@ Hi...${referUser.firstName} ${referUser.lastName}
 
 আমি আপনার কনসালটেন্ট
 From
-Lifechange Bd e-learning platform
+Lifechange Bd e-learning platform
                               
                               `}
                               />

@@ -16,6 +16,7 @@ export const RefTable: FC<IRefTable> = ({
   messageDone,
   tableHeaders,
   dataProperties,
+  UpdateSendWish,
 }) => {
   const user = useCurrentUser(true);
   const handleAction = (props: IActionFn) => {
@@ -83,13 +84,39 @@ export const RefTable: FC<IRefTable> = ({
                       );
 
                     case "phone":
-                      return (
+                      return UpdateSendWish ? (
                         <Tbody
                           key={i}
                           label={
                             <WhatsAppLink
                               btnText={message || "Message"}
                               phoneNo={referUser[item]}
+                              message={`
+
+Hi...${referUser.firstName} ${referUser.lastName}
+
+আপনার স্টুডেন্ট আইডি:${referUser.id}
+
+আমি কনসালটেন্ট মিটিং এর জন্য আপনার আবেদনপত্র পেয়েছি।
+
+আমি আপনাকে ফ্রিতে বিস্তারিত জানিয়ে দিবো।এবং আরো কাজের বিষয়ে জানার জন্য আপনাকে একটা কনসালটেন্ট মিটিং এ জইন করতে হবে।
+
+
+আমি আপনার কনসালটেন্ট
+From
+Life Change BD E-Learning Platform
+                              `}
+                            />
+                          }
+                        />
+                      ) : (
+                        <Tbody
+                          key={i}
+                          label={
+                            <WhatsAppLink
+                              btnText={message || "Message"}
+                              phoneNo={referUser[item]}
+                              message=""
                             />
                           }
                         />
