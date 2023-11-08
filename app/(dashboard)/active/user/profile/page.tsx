@@ -88,7 +88,7 @@ const Profile = () => {
                 </CommonText>
               ))}
               <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
-                Referral Link:{" "}
+                Referral Link:
               </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">

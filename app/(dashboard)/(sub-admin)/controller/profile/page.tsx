@@ -79,9 +79,6 @@ const Profile = () => {
                   {item}
                 </CommonText>
               ))}
-              <CommonText className="text-start font-semibold w-full px-1.5 py-1.5 capitalize bg-gray-200">
-                Referral Link:{" "}
-              </CommonText>
             </div>
             <div className="flex justify-start items-start flex-col w-full">
               {tableTitle.map((item, i) => (
@@ -96,12 +93,6 @@ const Profile = () => {
                     : user[item as keyof IUser]}
                 </CommonText>
               ))}
-              <ShareReferLink
-                phoneNo={user.phone}
-                btnText="Share"
-                message=""
-                userId={user.userId}
-              />
             </div>
           </div>
         </section>
