@@ -24,7 +24,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     }
     if (
       user.role !== UserRole.admin &&
-      user.role !== UserRole.sgl &&
       user.role !== UserRole.gl &&
       user.role !== UserRole.trainer &&
       user.role !== UserRole.consultant
@@ -115,25 +114,12 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     };
 
     switch (user.role) {
-      case UserRole.admin:
-        const admin = { "settings.admin": user.id };
-        option = optionFn(admin, isActiveValue ? true : false);
-        break;
       case UserRole.consultant:
         const consultant = {
           "settings.consultant": user.userId,
           role: UserRole.active,
         };
         option = optionFn(consultant);
-        break;
-      case UserRole.sgl:
-        const sgl = {
-          $or: [
-            { role: UserRole.gl, "settings.sgl": user.userId },
-            // { role: UserRole.inactive },
-          ],
-        };
-        option = optionFn(sgl);
         break;
       case UserRole.gl:
         const gl = {
@@ -156,7 +142,22 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
     }
 
-    const refList = await User.find(option)
+    const userFindOption =
+      (user.role === UserRole.gl && {
+        role: UserRole.active,
+        "settings.gl": user.userId,
+      }) ||
+      (user.role === UserRole.trainer && {
+        role: UserRole.active,
+        "settings.trainer": user.userId,
+      }) ||
+      (user.role === UserRole.consultant && {
+        "settings.consultant": user.userId,
+        role: UserRole.active,
+      }) ||
+      {};
+
+    const refList = await User.find(userFindOption)
       .sort({
         "settings.activates": -1,
         createdAt: -1,
@@ -165,17 +166,21 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .exec();
 
     const activeCountPromises = refList.map(async (user) => {
-      const result = await User.countDocuments({
+      const active = {
         reference: user.userId,
         role: UserRole.active,
-      });
+      };
+      option = optionFn(active);
+      const result = await User.countDocuments(option);
       return result;
     });
     const inactiveCountPromises = refList.map(async (user) => {
-      const result = await User.countDocuments({
+      const inactive = {
         reference: user.userId,
         role: UserRole.inactive,
-      });
+      };
+      option = optionFn(inactive);
+      const result = await User.countDocuments(option);
       return result;
     });
 
