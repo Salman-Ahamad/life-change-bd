@@ -52,8 +52,8 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
     if (assignments && course) {
       const result = is24HoursEarlier(lastAssignment as Date);
 
-      if (result) {
-        if (assignments?.length < course?.assignments) {
+      if (assignments?.length < course?.assignments) {
+        if (result) {
           createData("/assignment", {
             courseId: course?.id,
             assignment: assignments?.length + 1,
@@ -63,9 +63,12 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
             setUrl("");
           });
         } else {
-          toast.info("Already all assignments Submitted!");
+          toast.error(
+            "The input date is not 24 hours earlier than the current time."
+          );
         }
       } else {
+        toast.info("Already all assignments Submitted!");
       }
     }
   };
