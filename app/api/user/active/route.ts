@@ -53,11 +53,10 @@ export const PATCH = async () => {
       },
       { new: true }
     );
-    // This will reduce the main company balance by 120
-    const balanceIncrease = baseFee - 120;
+    // This will reduce the main company balance by 120\
     await AppConfig.updateOne(
       {},
-      { $inc: { mainBalance: balanceIncrease } },
+      { $inc: { mainBalance: -120 } },
       { new: true }
     );
 
