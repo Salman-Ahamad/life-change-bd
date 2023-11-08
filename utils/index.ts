@@ -6,5 +6,6 @@ export * from "./createDate";
 export * from "./generateStudentId";
 export * from "./getLastThreeMonths";
 export * from "./getMonthNumber";
+export * from "./isDate24HoursEarlier";
 export * from "./loadingToast";
 export * from "./openWhatsappChat";

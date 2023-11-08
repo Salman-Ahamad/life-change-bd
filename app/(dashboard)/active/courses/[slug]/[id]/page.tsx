@@ -2,7 +2,7 @@
 
 import { Header } from "@/components";
 import { updateData } from "@/hooks";
-import { INavItem, ISlugParams } from "@/interface";
+import { INavItem, ISlugId } from "@/interface";
 import { BackButton, Button, Container, Title } from "@/universal";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
@@ -15,14 +15,7 @@ const navData: INavItem[] = [
   },
 ];
 
-export interface IAssignmentId extends ISlugParams {
-  params: {
-    slug: string;
-    id: string;
-  };
-}
-
-const AssignmentId: NextPage<IAssignmentId> = ({ params }) => {
+const AssignmentId: NextPage<ISlugId> = ({ params }) => {
   const [url, setUrl] = useState("");
   const id = params.id;
   const router = useRouter();

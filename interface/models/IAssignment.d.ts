@@ -14,4 +14,5 @@ export interface IAssignmentSchema {
 export interface IAssignment extends IAssignmentSchema, IId {
   courseId: ICourse;
   userId: IUser;
+  createdAt: string;
 }

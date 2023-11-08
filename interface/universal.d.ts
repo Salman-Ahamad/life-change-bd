@@ -24,6 +24,14 @@ export interface IIdParams {
     id: string;
   };
 }
+
+export interface ISlugId extends ISlugParams {
+  params: {
+    slug: string;
+    id: string;
+  };
+}
+
 export interface ITitleVariant {
   variant: "H1" | "H2" | "H3" | "H4" | "H5";
 }

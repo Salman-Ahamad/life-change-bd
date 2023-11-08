@@ -9,7 +9,9 @@ import { GoogleMeetLink, Header, THeader, Tbody } from "@/components";
 import { createData, getDataFn, useGetData } from "@/hooks";
 import { IAssignment, ICourse, INavItem, ISlugParams } from "@/interface";
 import { BackButton, Button, Container, LinkButton, Title } from "@/universal";
+import { is24HoursEarlier } from "@/utils";
 import { BiEditAlt } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -21,16 +23,23 @@ const navData: INavItem[] = [
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
   const [course, setCourse] = useState<ICourse | undefined>();
   const [assignments, setAssignments] = useState<IAssignment[]>([]);
+  const [lastAssignment, setLastAssignment] = useState<string | Date>("");
   const [Action, setAction] = useState(false);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState<string>("");
 
   const { slug } = params;
 
   useGetData(`/courses/${slug}`, setCourse, true);
 
   useEffect(() => {
-    if (course?.id)
+    if (course?.id !== undefined) {
       getDataFn(`/assignment/${course?.id}`, setAssignments, true);
+      getDataFn(
+        `/assignment/last-one?id=${course?.id}`,
+        setLastAssignment,
+        true
+      );
+    }
   }, [course?.id]);
 
   useEffect(() => {
@@ -41,15 +50,23 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
 
   const handlePostUrl = () => {
     if (assignments && course) {
-      assignments?.length < course?.assignments &&
-        createData("/assignment", {
-          courseId: course?.id,
-          assignment: assignments?.length + 1,
-          postLink: url,
-        }).then(() => {
-          window.location.reload();
-          setUrl("");
-        });
+      const result = is24HoursEarlier(lastAssignment as Date);
+
+      if (result) {
+        if (assignments?.length < course?.assignments) {
+          createData("/assignment", {
+            courseId: course?.id,
+            assignment: assignments?.length + 1,
+            postLink: url,
+          }).then(() => {
+            window.location.reload();
+            setUrl("");
+          });
+        } else {
+          toast.info("Already all assignments Submitted!");
+        }
+      } else {
+      }
     }
   };
 
