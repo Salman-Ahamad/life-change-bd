@@ -108,49 +108,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       );
     };
 
-    // switch (user.role) {
-    //   case UserRole.admin:
-    //     const admin = { "settings.admin": user.id };
-    //     option = optionFn(admin);
-    //     break;
-    //   case UserRole.consultant:
-    //     const consultant = {
-    //       $or: [
-    //         // { role: UserRole.inactive },
-    //         { "settings.consultant": user.userId, role: UserRole.inactive },
-    //       ],
-    //     };
-    //     option = optionFn(consultant);
-    //     break;
-    //   case UserRole.sgl:
-    //     const sgl = {
-    //       $or: [
-    //         { role: UserRole.gl, "settings.sgl": user.userId },
-    //         // { role: UserRole.inactive },
-    //       ],
-    //     };
-    //     option = optionFn(sgl);
-    //     break;
-    //   case UserRole.gl:
-    //     const gl = {
-    //       $or: [
-    //         { role: UserRole.active, "settings.gl": user.userId },
-    //         // { role: UserRole.inactive },
-    //       ],
-    //     };
-    //     option = optionFn(gl, isActiveValue ? true : false);
-    //     break;
-    //   case UserRole.trainer:
-    //     const trainer = {
-    //       role: UserRole.active,
-    //       "settings.trainer": user.userId,
-    //     };
-    //     option = optionFn(trainer, isActiveValue ? true : false);
-    //     break;
-    //   default:
-    //     break;
-    // }
-
     const activeUser = (isActive: boolean) => {
       const active = {
         "settings.admin": user.id,
