@@ -56,7 +56,8 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
         if (result) {
           createData("/assignment", {
             courseId: course?.id,
-            assignment: assignments?.length + 1,
+            assignment:
+              (assignments?.length !== 0 && assignments?.length + 1) || 1,
             postLink: url,
           }).then(() => {
             window.location.reload();

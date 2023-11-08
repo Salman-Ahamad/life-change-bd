@@ -34,10 +34,7 @@ const Courses: NextPage = () => {
             return "enroll";
           }
         case "photo-editing":
-          if (
-            courseStatus?.photoEditing < no &&
-            courseStatus.sahihHolyQuran === courses[0].assignments
-          ) {
+          if (courseStatus?.photoEditing < no) {
             return "running";
           } else if (courseStatus?.photoEditing === no) {
             return "complete";
