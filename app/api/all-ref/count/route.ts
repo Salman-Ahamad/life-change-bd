@@ -164,8 +164,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       .select({ password: 0 })
       .exec();
 
-    console.log("🚀 ~ file: route.ts:166 ~ GET ~ refList:", refList);
-
     const activeCountPromises = refList.map(async (user) => {
       const result = await User.countDocuments({
         reference: user.userId,

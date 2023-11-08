@@ -95,7 +95,7 @@ export const RefTable: FC<IRefTable> = ({
 
 Hi...${referUser.firstName} ${referUser.lastName}
 
-আপনার স্টুডেন্ট আইডি:${referUser.id}
+আপনার স্টুডেন্ট আইডি:${referUser.userId}
 
 আমি কনসালটেন্ট মিটিং এর জন্য আপনার আবেদনপত্র পেয়েছি।
 
