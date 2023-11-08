@@ -143,20 +143,22 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                   Submit new URL
                 </Title>
 
-                <input
-                  type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
-                />
+                <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+                  <input
+                    type="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
+                  />
 
-                <Button
-                  className="ml-2.5 py-[7px] lg:py-2.5 px-3"
-                  variant="secondary"
-                  onClick={handlePostUrl}
-                >
-                  Post Url
-                </Button>
+                  <Button
+                    className="ml-2.5 py-[7px] lg:py-2.5 px-3"
+                    variant="secondary"
+                    onClick={handlePostUrl}
+                  >
+                    Post Url
+                  </Button>
+                </div>
               </div>
             )}
           </div>

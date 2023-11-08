@@ -92,6 +92,7 @@ const Active = () => {
       </Container>
       <Container className="my-8">
         <ActivePageCard
+          time
           title="Welcome Class"
           className="flex flex-col justify-center items-center w-full max-w-xs mx-auto bg-slate-50"
         >

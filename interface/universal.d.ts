@@ -13,6 +13,7 @@ export interface IChildrenWithClassName extends IChildren, IClassName {}
 export interface IChildrenWithTitle extends IChildrenWithClassName {
   title: string;
   icon?: boolean;
+  time?: boolean;
 }
 
 export interface ISlugParams {

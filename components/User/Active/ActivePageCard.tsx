@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 
 export const ActivePageCard: FC<IChildrenWithTitle> = ({
   icon,
+  time,
   title,
   children,
   className,
@@ -18,6 +19,12 @@ export const ActivePageCard: FC<IChildrenWithTitle> = ({
     <div
       className={twMerge("shadow-lg border p-4 h-fit space-y-2.5", className)}
     >
+      {time && (
+        <div className="text-center text-sm text-white font-semibold w-full bg-secondary p-2 rounded ">
+          Join Live Learning Training Classes BD Time : ( 8am to 10pm)
+        </div>
+      )}
+
       {icon && (
         <Image
           src={googleMeet}
