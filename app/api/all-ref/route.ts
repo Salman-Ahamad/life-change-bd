@@ -103,19 +103,16 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         : {};
 
       return (
-        (id && { ...idFilter, ...active, ...student, ...option }) ||
-        (date && { ...dateFilter, ...active, ...student, ...option }) ||
+        (id && { $and: [idFilter, active, student, option] }) ||
+        (date && {
+          $and: [dateFilter, active, student, option],
+        }) ||
         (inactiveBonus &&
           isActive && {
-            ...inactiveBonusOption,
-            ...activeBonusOption,
-            ...student,
-            ...option,
+            $and: [inactiveBonusOption, activeBonusOption, student, option],
           }) ||
         (inactiveBonus && {
-          ...inactiveBonusOption,
-          ...student,
-          ...option,
+          $and: [inactiveBonusOption, student, option],
         }) || { reference: user.userId }
       );
     };
@@ -127,18 +124,15 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         break;
       case UserRole.controller:
         const controller = {
-          $or: [
-            { role: UserRole.inactive },
-            { "settings.controller": user.userId },
-          ],
+          role: UserRole.inactive,
         };
         option = optionFn(controller);
         break;
       case UserRole.consultant:
         const consultant = {
           $or: [
-            { role: UserRole.inactive },
-            { "settings.consultant": user.userId },
+            // { role: UserRole.inactive },
+            { "settings.consultant": user.userId, role: UserRole.inactive },
           ],
         };
         option = optionFn(consultant);
@@ -162,17 +156,15 @@ export const GET = async ({ nextUrl }: NextRequest) => {
         const gl = {
           $or: [
             { role: UserRole.active, "settings.gl": user.userId },
-            { role: UserRole.inactive },
+            // { role: UserRole.inactive },
           ],
         };
         option = optionFn(gl, isActiveValue ? true : false);
         break;
       case UserRole.trainer:
         const trainer = {
-          $or: [
-            { role: UserRole.active, "settings.trainer": user.userId },
-            { role: UserRole.inactive },
-          ],
+          role: UserRole.active,
+          "settings.trainer": user.userId,
         };
         option = optionFn(trainer, isActiveValue ? true : false);
         break;

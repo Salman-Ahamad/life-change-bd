@@ -21,6 +21,10 @@ const navData: INavItem[] = [
     link: "/admin/user-management/gl",
   },
   {
+    label: "Count",
+    link: "/admin/user-management/count",
+  },
+  {
     label: "Send Wish",
     link: "/admin/user-management/send-wish",
   },

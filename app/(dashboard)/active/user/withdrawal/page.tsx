@@ -93,6 +93,8 @@ const Withdrawal = () => {
               <option value="bKash">bKash</option>
               <option value="Nagad">Nagad</option>
               <option value="Rocket">Rocket</option>
+              <option value="Google Pay">Google Pay</option>
+              <option value="Paytm">Paytm</option>
             </select>
           </div>
           <Button

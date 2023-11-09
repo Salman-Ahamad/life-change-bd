@@ -5,7 +5,7 @@ import { RefTable } from "@/components/Settings/RefTable";
 import { createData, useCurrentUser } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
 import { Button, Container, Label, Title } from "@/universal";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 
 const navData: INavItem[] = [
@@ -26,6 +26,10 @@ const navData: INavItem[] = [
     link: "/gl/trainer",
   },
   {
+    label: "Count",
+    link: "/gl/count",
+  },
+  {
     label: "Photo Zone",
     link: "/photo-zone",
   },
@@ -35,10 +39,21 @@ const SubAdmin: FC = () => {
   const [students, setStudents] = useState<IUser[] | null>(null);
   const [userId, setUserId] = useState("");
   const [open, setOpen] = useState(false);
-  const [selectUser, setSelectUser] = useState<IUser>();
+  const [selectUser, setSelectUser] = useState<IUser | null | undefined>(null);
   const user = useCurrentUser(true);
 
-  // useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
+  const scrollToTop = () => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth", // for smooth scrolling, use 'auto' for instant scrolling
+    });
+  };
+
+  useEffect(() => {
+    if (open) {
+      scrollToTop();
+    }
+  }, [open]);
 
   const handleRequest = () => {
     createData("/request", {
@@ -49,14 +64,21 @@ const SubAdmin: FC = () => {
     setUserId("");
   };
 
-  const handleAddTrainer = ({ id, user }: IActionFn) => {
+  const handleAddTrainer = ({ user }: IActionFn) => {
     setSelectUser(user);
     setOpen(true);
   };
 
   return (
     <main>
-      {selectUser && <PopUp open={open} setOpen={setOpen} user={selectUser} />}
+      {selectUser && (
+        <PopUp
+          open={open}
+          setOpen={setOpen}
+          user={selectUser}
+          setSelectUser={setSelectUser}
+        />
+      )}
       <Header navData={navData} />
       <Title variant="H3" className="capitalize py-6">
         Welcome to Life Change Bd

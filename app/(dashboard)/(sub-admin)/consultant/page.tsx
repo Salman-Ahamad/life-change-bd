@@ -14,6 +14,10 @@ const navData: INavItem[] = [
     link: "/consultant",
   },
   {
+    label: "Count",
+    link: "/consultant/count",
+  },
+  {
     label: "Profile",
     link: "/consultant/profile",
   },
@@ -80,6 +84,7 @@ const SubAdmin = () => {
             dataProperties={["userId", "firstName", "createdAt", "phone"]}
             message="Message"
             messageDone
+            UpdateSendWish
           />
         )}
       </Container>

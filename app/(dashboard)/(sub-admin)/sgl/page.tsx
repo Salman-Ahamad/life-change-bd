@@ -13,6 +13,10 @@ const navData: INavItem[] = [
     label: <AiOutlineHome className="text-2xl" />,
     link: "/sgl",
   },
+  // {
+  //   label: "Count",
+  //   link: "/sgl/count",
+  // },
   {
     label: "Profile",
     link: "/sgl/profile",

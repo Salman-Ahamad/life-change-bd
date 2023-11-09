@@ -7,7 +7,6 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid course title"],
     },
-
     image: {
       type: String,
       required: [true, "Please provide a valid image"],
@@ -27,6 +26,10 @@ const courseSchema = new Schema<ICourseSchema>(
     description: {
       type: String,
       required: [true, "Please provide a valid description"],
+    },
+    assignments: {
+      type: Number,
+      default: 10,
     },
     price: {
       type: String,

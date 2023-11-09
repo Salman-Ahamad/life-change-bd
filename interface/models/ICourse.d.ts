@@ -14,6 +14,7 @@ export interface ICourseSchema {
   status: ICourseStatus;
   enrolled: string[];
   certificates: string[];
+  assignments: number;
   // others
   price: string;
   duration: string;

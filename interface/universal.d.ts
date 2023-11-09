@@ -10,8 +10,10 @@ export interface IClassName {
 
 export interface IChildrenWithClassName extends IChildren, IClassName {}
 
-export interface IChildrenWithTitle extends IChildren {
+export interface IChildrenWithTitle extends IChildrenWithClassName {
   title: string;
+  icon?: boolean;
+  time?: boolean;
 }
 
 export interface ISlugParams {
@@ -24,6 +26,14 @@ export interface IIdParams {
     id: string;
   };
 }
+
+export interface ISlugId extends ISlugParams {
+  params: {
+    slug: string;
+    id: string;
+  };
+}
+
 export interface ITitleVariant {
   variant: "H1" | "H2" | "H3" | "H4" | "H5";
 }
@@ -36,7 +46,7 @@ export interface IH extends IChildrenWithClassName, ITitleVariant {}
 
 export interface ICommonText extends IChildrenWithClassName {}
 
-export interface ILabel extends IText, IChildrenWithClassName {
+export interface ILabelText extends IText, IChildrenWithClassName {
   color?: IColor;
   uppercase?: boolean;
 }

@@ -37,6 +37,10 @@ const adminNav: INavItem[] = [
     label: "Settings",
     link: "/admin/settings",
   },
+  {
+    label: "Change Password",
+    link: "/admin/change-password",
+  },
 ];
 
 const Dashboard = () => {

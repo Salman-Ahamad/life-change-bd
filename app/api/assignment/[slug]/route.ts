@@ -5,6 +5,7 @@ import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 
 connectDb();
+
 export const revalidate = 10;
 
 export const GET = async (req: Request, { params }: ISlugParams) => {

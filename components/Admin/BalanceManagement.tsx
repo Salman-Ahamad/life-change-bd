@@ -52,7 +52,7 @@ export const BalanceManagement = () => {
   };
 
   return (
-    <Container className="my-10 mb-20 flex flex-col items-start justify-center max-w-xs gap-5">
+    <Container className="my-10 mb-20 flex flex-col items-start justify-center max-w-sm gap-5">
       <div className="flex flex-col justify-center items-center gap-5">
         <Title
           variant="H5"

@@ -9,7 +9,9 @@ import { GoogleMeetLink, Header, THeader, Tbody } from "@/components";
 import { createData, getDataFn, useGetData } from "@/hooks";
 import { IAssignment, ICourse, INavItem, ISlugParams } from "@/interface";
 import { BackButton, Button, Container, LinkButton, Title } from "@/universal";
+import { is24HoursEarlier } from "@/utils";
 import { BiEditAlt } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const navData: INavItem[] = [
   {
@@ -19,41 +21,73 @@ const navData: INavItem[] = [
 ];
 
 const Assignment: NextPage<ISlugParams> = ({ params }) => {
-  const [data, setData] = useState<ICourse | undefined>();
-  const [assignment, setAssignment] = useState<IAssignment[] | undefined>();
-  const [url, setUrl] = useState("");
+  const [course, setCourse] = useState<ICourse | undefined>();
+  const [assignments, setAssignments] = useState<IAssignment[]>([]);
+  const [lastAssignment, setLastAssignment] = useState<string | Date>("");
+  const [Action, setAction] = useState(false);
+  const [url, setUrl] = useState<string>("");
 
   const { slug } = params;
 
-  useGetData(`/courses/${slug}`, setData, true);
+  useGetData(`/courses/${slug}`, setCourse, true);
 
   useEffect(() => {
-    if (data?.id) getDataFn(`/assignment/${data?.id}`, setAssignment, true);
-  }, [data?.id]);
+    if (course?.id !== undefined) {
+      getDataFn(`/assignment/${course?.id}`, setAssignments, true);
+      getDataFn(
+        `/assignment/last-one?id=${course?.id}`,
+        setLastAssignment,
+        true
+      );
+    }
+  }, [course?.id]);
 
-  const handlePostUrl = () =>
-    createData("/assignment", {
-      courseId: data?.id,
-      postLink: url,
-    }).then(() => {
-      window.location.reload();
-      setUrl("");
-    });
+  useEffect(() => {
+    if (assignments) {
+      assignments?.map((as) => as.status === "reject" && setAction(true));
+    }
+  }, [assignments]);
+
+  const handlePostUrl = () => {
+    if (assignments && course) {
+      const result = is24HoursEarlier(lastAssignment as Date);
+
+      if (assignments?.length < course?.assignments) {
+        if (result) {
+          createData("/assignment", {
+            courseId: course?.id,
+            assignment:
+              (assignments?.length !== 0 && assignments?.length + 1) || 1,
+            postLink: url,
+          }).then(() => {
+            window.location.reload();
+            setUrl("");
+          });
+        } else {
+          toast.error(
+            "The input date is not 24 hours earlier than the current time."
+          );
+        }
+      } else {
+        toast.info("Already all assignments Submitted!");
+      }
+    }
+  };
 
   return (
     <main>
       <Header navData={navData} />
       <Container>
-        {data ? (
+        {course ? (
           <div className="flex justify-center items-center flex-col gap-8 my-8">
             <Title variant="H2" className="capitalize">
-              {data?.title}
+              {course?.title}
             </Title>
-            <GoogleMeetLink meetId={data?.meetingId || ""}>
+            <GoogleMeetLink meetId={course?.meetingId || ""}>
               Watch Video
             </GoogleMeetLink>
 
-            {assignment && assignment.length !== 0 && (
+            {assignments && assignments.length !== 0 && (
               <div>
                 <Title variant="H4" className="capitalize">
                   List of Previous URL&rsquo;s
@@ -64,16 +98,11 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
                       <THeader label="No" />
                       <THeader label="Url" />
                       <THeader label="Status" />
-                      {assignment.map(
-                        (as, i) =>
-                          as.status === "reject" && (
-                            <THeader key={i} label="Action" />
-                          )
-                      )}
+                      {Action && <THeader label="Action" />}
                     </tr>
                   </thead>
                   <tbody className="text-gray-600 divide-y">
-                    {assignment.map((assignment, i) => (
+                    {assignments.map((assignment, i) => (
                       <tr key={assignment.id}>
                         <Tbody label={String(i + 1)} />
                         <Tbody
@@ -108,26 +137,28 @@ const Assignment: NextPage<ISlugParams> = ({ params }) => {
               </div>
             )}
 
-            {assignment && assignment?.length < 10 && (
+            {assignments && assignments?.length < course?.assignments && (
               <div>
                 <Title variant="H4" className="capitalize mb-5">
                   Submit new URL
                 </Title>
 
-                <input
-                  type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
-                />
+                <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+                  <input
+                    type="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className="outline-none text-black text-base md:text-lg max-w-xs border border-primary rounded-[5px] py-1 px-2"
+                  />
 
-                <Button
-                  className="ml-2.5 py-[7px] lg:py-2.5 px-3"
-                  variant="secondary"
-                  onClick={handlePostUrl}
-                >
-                  Post Url
-                </Button>
+                  <Button
+                    className="ml-2.5 py-[7px] lg:py-2.5 px-3"
+                    variant="secondary"
+                    onClick={handlePostUrl}
+                  >
+                    Post Url
+                  </Button>
+                </div>
               </div>
             )}
           </div>

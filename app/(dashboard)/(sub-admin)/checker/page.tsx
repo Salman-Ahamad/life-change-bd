@@ -54,6 +54,7 @@ const SubAdmin = () => {
                 <THeader label="No" />
                 <THeader label="User Id" />
                 <THeader label="Course" />
+                <THeader label="Assignment No" />
                 <THeader label="Url" />
                 <THeader label="Status" />
                 <THeader label="Action" />
@@ -61,11 +62,12 @@ const SubAdmin = () => {
             </thead>
             <tbody className="text-gray-600 divide-y text-center">
               {assignments.map(
-                ({ courseId, id, postLink, status, userId }, i) => (
+                ({ courseId, id, postLink, status, userId, assignment }, i) => (
                   <tr key={id}>
                     <Tbody label={String(i + 1)} />
                     <Tbody label={userId?.userId} />
                     <Tbody label={courseId?.title} />
+                    <Tbody label={String(assignment || "-")} />
                     <Tbody
                       label={
                         <Link
