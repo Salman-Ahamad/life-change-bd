@@ -196,11 +196,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       0
     );
 
-    console.log("🚀 ~ file: route.ts:193 ~ GET ~ inactiveRefCount:", {
-      active: activeRefCount,
-      inactive: inactiveRefCount,
-    });
-
     return ApiResponse(200, "Reference Count get successfully 👌", {
       active: activeRefCount,
       inactive: inactiveRefCount,

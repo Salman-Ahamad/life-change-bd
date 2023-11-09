@@ -189,8 +189,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
       })
     );
 
-    console.log("🚀 ~ file: route.ts:169 ~ GET ~ refCount:", { refCount });
-
     return ApiResponse(200, "Reference Count get successfully 👌", refCount);
   } catch (error: any) {
     return ApiResponse(400, error.message);

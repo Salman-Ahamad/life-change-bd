@@ -111,11 +111,6 @@ export const GET = async ({ nextUrl }: NextRequest) => {
     activeUser(false);
     const inactiveRefCount: number = await User.countDocuments(option);
 
-    console.log("🚀 ~ file: route.ts:113 ~ GET ~ inactiveRefCount:", {
-      active: activeRefCount,
-      inactive: inactiveRefCount,
-    });
-
     return ApiResponse(200, "Reference Count get successfully 👌", {
       active: activeRefCount,
       inactive: inactiveRefCount,
