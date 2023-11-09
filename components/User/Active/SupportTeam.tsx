@@ -13,12 +13,12 @@ export const SupportTeam: FC<ILabel> = ({ label }) => {
     <ActivePageCard title="Life change Support Team">
       <DataRow
         title="My Group Leader"
-        phoneNo={data?.gl.phone}
+        phoneNo={data?.gl?.phone}
         btnText="Message"
       />
       <DataRow
         title="My Trainer"
-        phoneNo={data?.trainer.phone}
+        phoneNo={data?.trainer?.phone}
         btnText="Message"
       />
 
