@@ -75,8 +75,8 @@ export const Footer: FC = () => (
               key={i}
               className="w-full flex flex-col md:flex-row justify-between items-center gap-10 pt-5 border-t border-gray-800 px-8 text-center text-white"
             >
-              <CommonText>{copyright}</CommonText>
-              <CommonText>
+              <CommonText className="text-white">{copyright}</CommonText>
+              <CommonText className="text-white">
                 Developed by{" "}
                 <Link href="https://webserviceit.com/" className="text-center">
                   Webservice

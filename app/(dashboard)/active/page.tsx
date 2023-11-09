@@ -70,7 +70,7 @@ const Active = () => {
   }, [user?.settings.activeNotice]);
 
   return (
-    <main>
+    <main className="pb-10">
       <Header navData={navData} />
       {user && !user.isVerified && (
         <Tost label="Verify Email Address" btnText="verify" />
