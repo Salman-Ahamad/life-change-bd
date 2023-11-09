@@ -40,6 +40,7 @@ export interface IPopUp {
   user: IUser;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectUser: Dispatch<SetStateAction<IUser | null | undefined>>;
 }
 
 export interface IUserCourse {

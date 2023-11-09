@@ -2,14 +2,22 @@
 import { updateData } from "@/hooks";
 import { IPopUp } from "@/interface";
 import { Button, Label } from "@/universal";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
-export const PopUp: FC<IPopUp> = ({ open, setOpen, user }) => {
-  const [userId, setUserId] = useState(user.settings.trainer);
+export const PopUp: FC<IPopUp> = ({ open, setOpen, setSelectUser, user }) => {
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    setUserId(user.settings.trainer);
+  }, [user]);
 
   const handleAddTrainer = () => {
     updateData(`/user/${user.id}`, {
       "settings.trainer": userId,
+    }).then(() => {
+      setOpen(false);
+      setSelectUser(null);
+      setUserId("");
     });
   };
 
@@ -21,7 +29,10 @@ export const PopUp: FC<IPopUp> = ({ open, setOpen, user }) => {
     >
       <div className="w-fit h-fit p-5 rounded-lg shadow-lg relative bg-white">
         <div
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setUserId("");
+            setOpen(false);
+          }}
           className="absolute top-2 right-2 cursor-pointer"
         >
           ❌
@@ -39,7 +50,7 @@ export const PopUp: FC<IPopUp> = ({ open, setOpen, user }) => {
           </div>
           <Button
             variant="secondary"
-            disabled={userId.length === 0}
+            disabled={userId?.length === 0}
             onClick={handleAddTrainer}
             className="disabled:opacity-40 w-full"
           >
