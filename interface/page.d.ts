@@ -23,9 +23,10 @@ export interface ISearchData {
 }
 
 export interface ISearchBar extends ISetSearchData {
-  setData: Dispatch<SetStateAction<IUser[] | null>>;
+  setData: Dispatch<SetStateAction<IUser[] | any | null>>;
   onlyActive?: boolean;
   onlyInactive?: boolean;
+  count?: boolean;
 }
 
 export interface IPageHeader {
@@ -39,4 +40,25 @@ export interface IPopUp {
   user: IUser;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IUserCourse {
+  sahihHolyQuran: number;
+  photoEditing: number;
+  videoEditing: number;
+  leadGeneration: number;
+  digitalMarketing: number;
+  graphicDesign: number;
+  peopleManagement: number;
+  facebookMarketing: number;
+  mailMarketing: number;
+  youTubeContentCreating: number;
+}
+export interface IGlTrainer {
+  gl: {
+    phone: string;
+  };
+  trainer: {
+    phone: string;
+  };
 }

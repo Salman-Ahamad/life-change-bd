@@ -26,6 +26,10 @@ const navData: INavItem[] = [
     link: "/gl/trainer",
   },
   {
+    label: "Count",
+    link: "/gl/count",
+  },
+  {
     label: "Photo Zone",
     link: "/photo-zone",
   },
@@ -38,8 +42,6 @@ const SubAdmin: FC = () => {
   const [selectUser, setSelectUser] = useState<IUser>();
   const user = useCurrentUser(true);
 
-  // useGetData(`/user/gl?id=${user?.userId}`, setStudents, true);
-
   const handleRequest = () => {
     createData("/request", {
       to: "230001", // Admin Id
@@ -49,7 +51,7 @@ const SubAdmin: FC = () => {
     setUserId("");
   };
 
-  const handleAddTrainer = ({ id, user }: IActionFn) => {
+  const handleAddTrainer = ({ user }: IActionFn) => {
     setSelectUser(user);
     setOpen(true);
   };

@@ -5,7 +5,7 @@ import { Button, Label } from "@/universal";
 import { FC, useState } from "react";
 
 export const PopUp: FC<IPopUp> = ({ open, setOpen, user }) => {
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(user.settings.trainer);
 
   const handleAddTrainer = () => {
     updateData(`/user/${user.id}`, {
@@ -31,7 +31,7 @@ export const PopUp: FC<IPopUp> = ({ open, setOpen, user }) => {
             <Label className="font-semibold">Add Trainer</Label>
             <input
               type="text"
-              value={user.settings.trainer || userId}
+              value={userId}
               placeholder="Trainer ID"
               onChange={(e) => setUserId(e.target.value)}
               className="focus:outline-none border border-primary px-1.5 py-0.5 rounded-md sm:w-auto"

@@ -82,6 +82,13 @@ export const DataTable: FC<IRefTable> = ({
                           }
                         />
                       );
+                    case "consultant":
+                      return (
+                        <Tbody
+                          key={i}
+                          label={referUser.settings.consultant || "-"}
+                        />
+                      );
 
                     case "phone":
                       return (
@@ -114,7 +121,7 @@ Hi...${referUser.firstName} ${referUser.lastName}
 
 আমি আপনার কনসালটেন্ট
 From
-Lifechange Bd e-learning platform
+Lifechange Bd e-learning platform
                               
                               `}
                               />

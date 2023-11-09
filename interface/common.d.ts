@@ -42,6 +42,9 @@ export interface IText extends IChildrenWithClassName {
 export interface IMainContainer extends IChildrenWithClassName {
   bgColor?: IColor;
 }
+export interface ILabel {
+  label: string;
+}
 
 export interface ILinkIcon {
   icon: StaticImageData;
@@ -49,9 +52,8 @@ export interface ILinkIcon {
   label?: string;
 }
 
-export interface ILinkLabel {
+export interface ILinkLabel extends ILabel {
   link: string;
-  label: string;
 }
 
 export interface INavItem {
@@ -106,12 +108,10 @@ export interface IPrivacyPolicy {
   title?: string;
   content: string[];
 }
-export interface IPrivacyPolicyWithClass extends IPrivacyPolicy {
-  className?: string;
-}
 
-export interface ITost {
-  label: string;
+export interface IPrivacyPolicyWithClass extends IPrivacyPolicy, IClassName {}
+
+export interface ITost extends ILabel {
   btnText: string;
 }
 
@@ -192,9 +192,8 @@ export interface IGoogleMeetDeepLink extends IChildren {
   endTime?: string;
 }
 
-export interface ProfileInputProps {
+export interface ProfileInputProps extends ILabel {
   name: string;
-  label: string;
   onlyText?: boolean;
   isActive?: boolean;
   defaultValue: string;

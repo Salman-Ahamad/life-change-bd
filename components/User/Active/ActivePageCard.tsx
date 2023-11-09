@@ -6,11 +6,32 @@ import { googleMeet } from "@/lib/assets";
 import { Button, Title } from "@/universal";
 import Image from "next/image";
 import { FC } from "react";
-import { MeetingLink } from ".";
+import { twMerge } from "tailwind-merge";
 
-export const ActivePageCard: FC<IChildrenWithTitle> = ({ title, children }) => {
+export const ActivePageCard: FC<IChildrenWithTitle> = ({
+  icon,
+  time,
+  title,
+  children,
+  className,
+}) => {
   return (
-    <div className="shadow-lg border p-4 h-fit space-y-2.5">
+    <div
+      className={twMerge("shadow-lg border p-4 h-fit space-y-2.5", className)}
+    >
+      {time && (
+        <div className="text-center text-sm text-white font-semibold w-full bg-secondary p-2 rounded ">
+          Join Live Learning Training Classes BD Time : ( 8am to 10pm)
+        </div>
+      )}
+
+      {icon && (
+        <Image
+          src={googleMeet}
+          alt="Google Meet Icon"
+          className="w-10 h-8 pr-2"
+        />
+      )}
       <Title variant="H5" className="pb-4 capitalize">
         {title}
       </Title>

@@ -43,8 +43,8 @@ export const Hero: FC = () => {
             <br className="sm:hidden md:flex lg:hidden" /> E-LEARNING PLATFORM
           </Title>
           <CommonText className="max-w-[640px] text-white text-base lg:text-xl">
-            It’s an Bangladeshi trusted online platform. It is a learning and
-            earning process by using your valuable free time at home through
+            It&apos;s a Bangladeshi trusted online platform. It is a learning
+            and earning process by using your valuable free time at home through
             your smart phone only It is a very easy process and you can learn
             this process on your own mother tongue and you can earn from our
             community with selling some Courses Services or product also. Here

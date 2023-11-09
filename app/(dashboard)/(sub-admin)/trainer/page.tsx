@@ -18,6 +18,10 @@ const navData: INavItem[] = [
     link: "/trainer/profile",
   },
   {
+    label: "Count",
+    link: "/trainer/count",
+  },
+  {
     label: "Inactive",
     link: "/trainer/inactive",
   },

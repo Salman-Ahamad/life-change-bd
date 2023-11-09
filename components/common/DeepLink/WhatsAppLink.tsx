@@ -58,7 +58,7 @@ export const ShareReferLink: FC<IWaShareLink> = ({
     <Button
       variant="secondary"
       onClick={handleSendWish}
-      className="flex gap-2 items-center"
+      className="flex gap-2 justify-center items-center md:py-2 w-full"
     >
       {btnText}
       <FaShareSquare className="" />

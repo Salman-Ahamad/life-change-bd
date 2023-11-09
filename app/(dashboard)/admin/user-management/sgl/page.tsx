@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 import { DataTable, Header, THeader, Tbody } from "@/components";
 import { getDataFn, updateData, useGetData } from "@/hooks";
 import { IActionFn, INavItem, IUser } from "@/interface";
-import { Button, Container, Title } from "@/universal";
+import { BackButton, Button, Container, Title } from "@/universal";
 
 const navData: INavItem[] = [
   {
-    label: <AiOutlineHome className="text-2xl" />,
+    label: <BackButton className="text-2xl" />,
     link: "/admin",
   },
   {

@@ -5,15 +5,9 @@ import { FC } from "react";
 
 import { bnsLogo } from "@/lib/assets";
 import { footerItems } from "@/lib/data";
-import {
-  Button,
-  CommonText,
-  LinkButton,
-  MainContainer,
-  Title,
-} from "@/universal";
-import { AppDownload } from ".";
+import { CommonText, LinkButton, MainContainer, Title } from "@/universal";
 import Link from "next/link";
+import { AppDownload } from ".";
 
 export const Footer: FC = () => (
   <footer>
@@ -77,12 +71,19 @@ export const Footer: FC = () => (
               </CommonText>
             </div>
           ) : (
-            <CommonText
+            <div
               key={i}
-              className="text-white text-center pt-5 border-t border-gray-800"
+              className="w-full flex flex-col md:flex-row justify-between items-center gap-10 pt-5 border-t border-gray-800 px-8 text-center text-white"
             >
-              {copyright}
-            </CommonText>
+              <CommonText>{copyright}</CommonText>
+              <CommonText>
+                Developed by{" "}
+                <Link href="https://webserviceit.com/" className="text-center">
+                  Webservice
+                </Link>{" "}
+                it
+              </CommonText>
+            </div>
           )
         )}
       </section>

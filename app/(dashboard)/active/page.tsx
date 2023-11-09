@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Header, Slider, Tost } from "@/components";
+import { GoogleMeetLink, Header, Slider, Tost } from "@/components";
 import {
+  ActivePageCard,
   HelpLink,
   LiveLearningClass,
   MeetingLink,
@@ -36,18 +37,15 @@ const navData: INavItem[] = [
     label: "Photo Zone",
     link: "/photo-zone",
   },
-  // {
-  //   label: "Video Zone",
-  //   link: "/active/video-zone",
-  // },
 ];
 
 const Active = () => {
-  const [config, setConfig] = useState<IAppConfig>();
-  const [sliders, setSliders] = useState<ISlider[]>();
+  const [config, setConfig] = useState<IAppConfig | null>(null);
+  const [sliders, setSliders] = useState<ISlider[]>([]);
 
   const user = useCurrentUser(true);
-  useGetData("/config", setConfig, true);
+
+  useGetData("/config", setConfig);
   useGetData("/config/slider", setSliders, true);
 
   useEffect(() => {
@@ -80,23 +78,30 @@ const Active = () => {
 
       <div className="max-w-lg w-full mx-auto py-6 flex flex-col justify-center">
         <Title variant="H3">Welcome to Life Change Bd</Title>
-        {sliders && sliders.length !== 0 && <Slider slides={sliders} />}
+        {sliders && sliders?.length !== 0 && <Slider slides={sliders} />}
       </div>
-      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        {config && (
-          <div className="space-y-5">
-            <HelpLink meetId={config.support.help} />
-            <MeetingLink
-              meetId={config.support.meeting}
-              title="Life Change BD Support Meeting"
-            />
-          </div>
-        )}
-        {config && <SupportTeam support={config.support.whatsApp} />}
+      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full pt-12 px-6 mx-auto">
+        <div className="space-y-5">
+          <HelpLink meetId={config?.support.help || ""} />
+          <MeetingLink
+            meetId={config?.support.meeting || ""}
+            title="Life Change BD Support Meeting"
+          />
+        </div>
+        <SupportTeam label={config?.support.whatsApp || ""} />
       </Container>
-
-      <Container className="flex flex-col-reverse lg:flex-row justify-center items-center gap-10 w-full py-12 px-6 mx-auto">
-        {/* TODO: Add course ive link list */}
+      <Container className="my-8">
+        <ActivePageCard
+          time
+          title="Welcome Class"
+          className="flex flex-col justify-center items-center w-full max-w-xs mx-auto bg-slate-50"
+        >
+          <GoogleMeetLink meetId={config?.support.welcomeClass || ""}>
+            Join Class
+          </GoogleMeetLink>
+        </ActivePageCard>
+      </Container>
+      <Container className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-5 justify-items-center">
         <LiveLearningClass />
       </Container>
     </main>
