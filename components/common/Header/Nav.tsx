@@ -50,10 +50,10 @@ export const Nav: FC<INav> = ({ navData }) => {
         </div>
 
         <div className="flex gap-4 pb-10 lg:pb-0 flex-col sm:flex-row">
-          <LinkButton href="/" className="w-full sm:w-auto">
+          <LinkButton href="/sub-admin-login" className="w-full sm:w-auto">
             SubAdmin Login
           </LinkButton>
-          <LinkButton href="/" className="w-full sm:w-auto">
+          <LinkButton href="/admin-login" className="w-full sm:w-auto">
             Admin Login
           </LinkButton>
         </div>

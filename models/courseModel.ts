@@ -7,7 +7,6 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid course title"],
     },
-
     image: {
       type: String,
       required: [true, "Please provide a valid image"],
@@ -28,6 +27,10 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid description"],
     },
+    assignments: {
+      type: Number,
+      default: 10,
+    },
     price: {
       type: String,
       required: [true, "Please provide a valid price"],
@@ -36,13 +39,16 @@ const courseSchema = new Schema<ICourseSchema>(
       type: String,
       required: [true, "Please provide a valid duration"],
     },
+    meetingId: {
+      type: String,
+    },
     footerDes: {
       type: String,
       default: "",
     },
     status: {
       type: String,
-      default: "active",
+      default: "enroll",
     },
     enrolled: {
       type: [String],
@@ -62,4 +68,4 @@ const courseSchema = new Schema<ICourseSchema>(
 );
 
 export const Course =
-  models.courses || model<ICourseSchema>("courses", courseSchema);
+  models?.courses || model<ICourseSchema>("courses", courseSchema);

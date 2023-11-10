@@ -21,6 +21,7 @@ export const Meeting: FC = () => (
           variant="secondary"
           className="font-medium text-xl lg:text-2xl p-3 pr-12 flex justify-between items-center gap-6 rounded-xl bg-primary lg:bg-accent"
         >
+          {/* TODO: Add Link */}
           <Image src={plus} className="w-12 h-12" alt="join meeting" />
           Join Meeting
         </Button>

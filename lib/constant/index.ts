@@ -28,16 +28,26 @@ export const Languages: string[] = [
 
 export const UserRole = {
   admin: "admin",
-  subAdmin: "subAdmin",
-  consultant: "consultant",
-  controller: "controller",
-  teacher: "teacher",
-  gl: "gl",
   active: "active",
   inactive: "inactive",
+  consultant: "consultant",
+  srController: "sr-controller",
+  controller: "controller",
+  sgl: "sgl", // Senior Group Leader
+  gl: "gl",
+  teacher: "teacher",
+  trainer: "trainer",
+  leadChecker: "lead-checker",
+  checker: "checker",
+  srAccountant: "sr-accountant", // Senior Accountant
+  accountant: "accountant",
+  telecaller: "telecaller",
+  audit: "audit",
+  support: "support",
+  lcBdItdSolution: "LC-BD-Itd-Solution",
 };
 
-export const inactiveLimit: number = 10;
+export const inactiveLimit: number = 12;
 
 export const months = [
   "January",

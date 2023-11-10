@@ -1,4 +1,6 @@
+import { Types } from "mongoose";
 import { Dispatch, SetStateAction } from "react";
+import { IUser } from ".";
 
 export interface IUploadImage {
   setSelectedImage: Dispatch<SetStateAction<string | null>>;
@@ -16,17 +18,48 @@ export interface IChangePassword {
 }
 
 export interface ISearchData {
-  year: string;
-  month: string;
-  id: string;
+  date: Date;
+  id: Types.ObjectId;
 }
 
 export interface ISearchBar extends ISetSearchData {
-  setSearchData: Dispatch<SetStateAction<ISearchData>>;
+  setData: Dispatch<SetStateAction<IUser[] | any | null>>;
+  onlyActive?: boolean;
+  onlyInactive?: boolean;
+  count?: boolean;
 }
 
 export interface IPageHeader {
   title: string;
   notice: string;
-  setSearchData?: Dispatch<SetStateAction<ISearchData>>;
+  setData?: Dispatch<SetStateAction<IUser[] | null>>;
+  onlyActive?: boolean;
+}
+
+export interface IPopUp {
+  user: IUser;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setSelectUser: Dispatch<SetStateAction<IUser | null | undefined>>;
+}
+
+export interface IUserCourse {
+  sahihHolyQuran: number;
+  photoEditing: number;
+  videoEditing: number;
+  leadGeneration: number;
+  digitalMarketing: number;
+  graphicDesign: number;
+  peopleManagement: number;
+  facebookMarketing: number;
+  mailMarketing: number;
+  youTubeContentCreating: number;
+}
+export interface IGlTrainer {
+  gl: {
+    phone: string;
+  };
+  trainer: {
+    phone: string;
+  };
 }

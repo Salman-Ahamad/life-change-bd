@@ -1,5 +1,4 @@
 import { connectDb } from "@/config";
-import { UserRole } from "@/lib";
 import { User } from "@/models";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
 import { compare } from "bcryptjs";
@@ -70,21 +69,33 @@ export const options: NextAuthOptions = {
       if (account?.provider === "google") {
         // TODO: Need to update this rules for error handling
         const currentUser = await getCurrentUser();
-        const returnUrl =
-          currentUser?.role === UserRole.inactive
-            ? "/inactive"
-            : "/user/active";
+        const returnUrl = !currentUser
+          ? "/"
+          : currentUser?.role === "admin"
+          ? "/admin"
+          : currentUser?.role === "active"
+          ? "/active"
+          : currentUser?.role === "inactive"
+          ? "/inactive"
+          : "/subadmin";
 
-        if (currentUser.email === profile?.email) {
-          const updatedData = {
-            isVerified: true,
-            balance: currentUser.balance + 5,
-          };
-          await User.updateOne({ _id: currentUser.id }, updatedData, {
-            new: true,
-          });
-          return returnUrl;
+        if (currentUser) {
+          if (currentUser.email === profile?.email) {
+            const updatedData = {
+              isVerified: true,
+            };
+            await User.updateOne({ _id: currentUser.id }, updatedData, {
+              new: true,
+            });
+
+            // TODO: Need to update this rules, show toast and the get sign out.
+
+            return returnUrl;
+          }
+        } else {
+          return true;
         }
+
         return returnUrl;
       }
       return true; // Do different verification for other providers that don't have `email_verified`

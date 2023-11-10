@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import LeftSidebarLink from "./LeftSidebarLink";
 import { useSession } from "next-auth/react";
 
@@ -13,7 +12,7 @@ const LeftSidebar = () => {
       <div className="flex flex-col gap-2">
         <LeftSidebarLink
           image={session?.user?.image}
-          text={session?.user?.name}
+          text={session?.user?.firstName}
         />
 
         {/* Extra link section */}

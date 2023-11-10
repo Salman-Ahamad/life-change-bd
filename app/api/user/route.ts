@@ -1,8 +1,8 @@
 import { connectDb } from "@/config";
-import { UserRole } from "@/lib";
 import { User } from "@/models";
 import { ApiResponse } from "@/utils";
 import getCurrentUser from "@/utils/actions/getCurrentUser";
+import { Types } from "mongoose";
 import { NextRequest } from "next/server";
 
 connectDb();
@@ -20,17 +20,25 @@ export const GET = async () => {
       return ApiResponse(404, "User not found❗");
     }
 
-    if (
-      currentUser.role !== UserRole.active &&
-      currentUser.role !== UserRole.inactive &&
-      currentUser.role !== UserRole.admin
-    ) {
-      return ApiResponse(401, "Denied❗unauthorized 😠😡😠");
-    }
-
     const user = await User.findOne({ _id: currentUser.id })
       .populate("courses")
+      .populate({
+        path: "settings.admin",
+        select: "firstName lastName image id",
+      })
       .select("-password");
+
+    if (user.reference !== "-" && Types.ObjectId.isValid(user.reference)) {
+      const result = await User.findOne({ _id: currentUser.id })
+        .populate("courses")
+        .populate({
+          path: "reference",
+          select: "userId",
+        })
+        .select("-password");
+
+      return ApiResponse(200, "User get successfully 👌", result);
+    }
 
     return ApiResponse(200, "User get successfully 👌", user);
   } catch (error: any) {

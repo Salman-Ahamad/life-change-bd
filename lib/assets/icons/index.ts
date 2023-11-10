@@ -13,6 +13,7 @@ import group from "./groupdiscuss.png";
 import helping from "./helpinghand.png";
 import globe from "./globe.png";
 import plus from "./plus.png";
+import youtube from "./youtube.svg";
 
 export {
   appStore,
@@ -30,4 +31,5 @@ export {
   helping,
   globe,
   plus,
+  youtube,
 };

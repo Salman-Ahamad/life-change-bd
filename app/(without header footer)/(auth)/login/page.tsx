@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -16,7 +16,12 @@ const Login: FC = () => {
   useEffect(() => {
     if (session?.user) {
       if (session.user.role === UserRole.inactive) redirect("/inactive");
-      if (session.user.role !== UserRole.inactive) redirect("/user/active");
+      if (session.user.role === UserRole.active) redirect("/active");
+      if (
+        session.user.role !== UserRole.inactive ||
+        session.user.role !== UserRole.active
+      )
+        signOut();
     }
   }, [session]);
 
@@ -25,11 +30,12 @@ const Login: FC = () => {
       <section className="w-full px-5 lg:px-0 lg:w-[50vw] max-w-[370px] mx-auto">
         <LoginForm />
 
-        <Link href="/forgot-password">
-          <CommonText className="mt-2.5 text-orange-400">
-            Forgot password?
-          </CommonText>
-        </Link>
+        <p
+          onClick={() => signIn("google", { callbackUrl: "/forgot-password" })}
+          className="mt-2.5 text-orange-400 cursor-pointer w-40"
+        >
+          Forgot password?
+        </p>
 
         <CommonText className="text-center mt-5">
           Don&rsquo;t have an account?&nbsp;

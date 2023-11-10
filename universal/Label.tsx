@@ -3,9 +3,9 @@
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { ILabel } from "@/interface";
+import { ILabelText } from "@/interface";
 
-export const Label: FC<ILabel> = ({ children, className, uppercase }) => (
+export const Label: FC<ILabelText> = ({ children, className, uppercase }) => (
   <label
     className={twMerge(
       `text-lg md:text-xl lg:text-2xl leading-[22px] md:leading-[28px] text-center font-poppins ${

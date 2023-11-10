@@ -3,6 +3,11 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema<IUserSchema>(
   {
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     firstName: {
       type: String,
       required: [true, "Please provide a First Name"],
@@ -42,9 +47,13 @@ const userSchema = new Schema<IUserSchema>(
       type: String,
       default: "inactive",
     },
+    image: {
+      type: String,
+    },
     reference: {
       type: String,
       default: "-",
+      ref: "users",
     },
     balance: {
       type: Number,
@@ -67,34 +76,57 @@ const userSchema = new Schema<IUserSchema>(
       default: false,
     },
     settings: {
+      admin: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+        default: "6527ecf7577ff95a96133786",
+      },
+      controller: {
+        type: String,
+      },
+      consultant: {
+        type: String,
+      },
+      teacher: {
+        type: String,
+      },
+      trainer: {
+        type: String,
+      },
+      sgl: {
+        type: String,
+      },
+      gl: {
+        type: String,
+      },
+      activates: {
+        type: Date,
+      },
       activeNotice: {
         type: Boolean,
         default: true,
       },
-
-      subAdmin: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      controller: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      consultant: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      teacher: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      gl: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-      collectInactive: {
+      inactiveBonus: {
         type: Boolean,
         default: false,
+      },
+      activeBonus: {
+        type: Boolean,
+        default: false,
+      },
+      withdrawalFee: {
+        type: Boolean,
+        default: false,
+      },
+      sendWish: {
+        type: Boolean,
+        default: false,
+      },
+      sendMessage: {
+        type: Date,
+      },
+      course: {
+        type: String,
       },
     },
   },
@@ -106,4 +138,4 @@ const userSchema = new Schema<IUserSchema>(
   }
 );
 
-export const User = models.users || model<IUserSchema>("users", userSchema);
+export const User = models?.users || model<IUserSchema>("users", userSchema);

@@ -1,75 +1,88 @@
-import { useRef, useState } from "react";
-import { GoSmiley } from "react-icons/go";
+"use client";
+
+import { useState } from "react";
 import { MdOutlineClose, MdOutlinePhotoLibrary } from "react-icons/md";
-
-import { useSession } from "next-auth/react";
-
-// import {
-//   addDoc,
-//   collection,
-//   doc,
-//   serverTimestamp,
-//   updateDoc,
-// } from "firebase/firestore";
-// import { db, storage } from "../firebase";
-// import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { useCurrentUser } from "@/hooks";
 import { Button } from "@/universal";
+import { Axios } from "@/utils";
 import Image from "next/image";
+import { getFileUploader } from "@/utils/actions/getFileUploade";
 
-const WhatsOnYourMind = () => {
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+const WhatsOnYourMind: React.FC = () => {
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFileThumb, setSelectedFileThumb] = useState<string | null>(
+    null
+  );
+  const [postText, setPostText] = useState<string>("");
+  const [postImage, setPostImage] = useState<string>("");
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const user = useCurrentUser(true);
 
-  const fPicker = useRef(null);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
 
-  const { data: session } = useSession();
+      const reader = new FileReader();
 
-  const addImageToPost = (e: any) => {
-    const reader = new FileReader();
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event) => {
+        setSelectedFileThumb(event.target?.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      console.error("Invalid file type. Please choose a valid file.");
     }
-
-    reader.onload = (readerEvent) => {
-      //   setSelectedFile(readerEvent.target.result);
-    };
   };
 
-  const sendPost = async () => {
-    if (loading) return;
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    setLoading(true);
+    if (selectedFile) {
+      try {
+        setUploading(true);
 
-    // const docRef = await addDoc(collection(db, "posts"), {
-    //   id: session.user.uid,
-    //   username: session.user.name,
-    //   userImg: session.user.image,
-    //   text: input,
-    //   timestamp: serverTimestamp(),
-    // });
+        // const formData = new FormData();
 
-    // const imageRef = ref(storage, `posts/${docRef.id}/image`);
+        // formData.set("file", selectedFile);
+        // formData.append("upload_preset", "ebm0hyxo");
 
-    // if (selectedFile) {
-    //   await uploadString(imageRef, selectedFile, "data_url").then(async () => {
-    //     const downloadURL = await getDownloadURL(imageRef);
-    //     await updateDoc(doc(db, "posts", docRef.id), {
-    //       image: downloadURL,
-    //     });
-    //   });
-    // }
+        // const endpoint = process.env
+        //   .NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
 
-    setLoading(false);
-    setInput("");
-    setSelectedFile(null);
+        // const uploadRes = await Axios.post(endpoint, formData);
+
+        // if (!endpoint) {
+        //   throw new Error(`Failed to upload file: ${endpoint}`);
+        // }
+        // // File uploaded
+        // const { url } = await uploadRes.data;
+        const { url } = await getFileUploader(selectedFile);
+
+        await Axios.post("/photo-zone/post", { postImg: url, postText }).then(
+          () => window.location.reload()
+        );
+
+        // Reset the form
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        return;
+      } finally {
+        setUploading(false);
+      }
+    } else {
+      console.error("No file selected for upload.");
+      return;
+    }
   };
 
   return (
-    <div
+    <form
+      onSubmit={handleSubmit}
       className={`px-4 py-6 bg-white rounded-[17px] shadow-md mt-5 ${
-        loading && "opacity-50"
+        uploading && "opacity-50"
       }`}
     >
       <div className="flex gap-4 border-b border-gray-300 pb-4">
@@ -77,27 +90,25 @@ const WhatsOnYourMind = () => {
           width={40}
           height={40}
           className="w-10 h-10 object-cover rounded-full"
-          src={session?.user?.image || ""}
-          alt={session?.user?.name || ""}
+          src={user?.image || ""}
+          alt={user?.firstName || ""}
         />
 
         <input
           className="outline-none border-none w-[100%] text-[18px] placeholder:text-gray-600"
           type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          value={postText ? postText : ""}
+          onChange={(e) => setPostText(e.target.value)}
           placeholder="What's on your mind?"
         />
       </div>
 
-      {selectedFile && (
+      {postImage && (
         <div className="relative">
-          <img src={selectedFile} alt="pic" />
           <div
             className="bg-gray-300 text-gray-500 absolute top-0 right-0 m-[10px] text-[18px] h-[30px] w-[30px] rounded-full cursor-pointer grid place-items-center"
             onClick={() => {
-              setSelectedFile(null);
-              //   fPicker.current.value = "";
+              setPostImage("");
             }}
           >
             <MdOutlineClose />
@@ -106,44 +117,40 @@ const WhatsOnYourMind = () => {
       )}
 
       <div className="flex justify-between px-4 pt-6">
-        {/* <div className="flex items-center gap-2 cursor-pointer">
-          <IoVideocamSharp className="text-[#E42645] text-[30px]" />
-          <p className="text-gray-500 font-medium">Live Video</p>
-        </div> */}
-
         <label htmlFor="filePicker">
           <div className="flex items-center gap-2 cursor-pointer">
             <MdOutlinePhotoLibrary className="text-[#41B35D] text-[30px]" />
-            <p className="text-gray-500 font-medium">Photo/video</p>
+            <p className="text-gray-500 font-medium">Photo</p>
+            {selectedFileThumb && (
+              <Image
+                width={30}
+                height={50}
+                src={selectedFileThumb}
+                alt="file to upload"
+                className="rounded ml-2"
+              />
+            )}
           </div>
-
           <input
             type="file"
             name="filePicker"
             id="filePicker"
             accept="image/*"
-            onChange={addImageToPost}
-            ref={fPicker}
+            onChange={handleFileChange}
             hidden
           />
         </label>
-
-        <div className="hidden sm:flex items-center gap-2 cursor-pointer">
-          <GoSmiley className="text-[#ECBF55] text-[30px]" />
-          <p className="text-gray-500 font-medium">Feeling/activity</p>
-        </div>
       </div>
 
-      {/* <Button input={input} selectedFile={selectedFile} onClick={sendPost} /> */}
       <Button
-        disabled={!input.trim() && !selectedFile}
-        onClick={sendPost}
+        disabled={uploading}
+        type="submit"
         variant="primary"
         className="bg-primary w-full text-white py-2 px-5 rounded-lg mt-[30px] disabled:bg-gray-300 disabled:text-gray-500"
       >
         Post
       </Button>
-    </div>
+    </form>
   );
 };
 

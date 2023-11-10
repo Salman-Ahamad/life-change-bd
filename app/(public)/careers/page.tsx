@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Title } from "@/universal";
 import React from "react";
 

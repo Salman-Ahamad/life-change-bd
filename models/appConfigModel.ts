@@ -8,7 +8,23 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       default: "admin",
       unique: true,
     },
+    mainBalance: {
+      type: Number,
+      default: 500000,
+    },
+    totalPendingFee: {
+      type: Number,
+      default: 0,
+    },
+    totalWithdraw: {
+      type: Number,
+      default: 0,
+    },
     baseFee: {
+      type: Number,
+      default: 0,
+    },
+    withdrawalFee: {
       type: Number,
       default: 0,
     },
@@ -16,9 +32,19 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
       type: [String],
       default: [],
     },
-    meetings: {
-      type: [String],
-      default: [],
+    support: {
+      type: {
+        whatsApp: String,
+        meeting: String,
+        help: String,
+        welcomeClass: String,
+      },
+      default: {
+        whatsApp: "",
+        meeting: "",
+        help: "",
+        welcomeClass: "",
+      },
     },
   },
   {
@@ -30,4 +56,4 @@ const AppConfigSchema = new Schema<IAppConfigSchema>(
 );
 
 export const AppConfig =
-  models.AppConfig || model<IAppConfigSchema>("AppConfig", AppConfigSchema);
+  models?.AppConfig || model<IAppConfigSchema>("AppConfig", AppConfigSchema);

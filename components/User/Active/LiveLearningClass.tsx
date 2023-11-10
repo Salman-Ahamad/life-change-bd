@@ -1,14 +1,27 @@
 "use client";
 
-import { Button } from "@/universal";
-import React from "react";
-import { ActivePageCard, DataRow } from ".";
+import { GoogleMeetLink } from "@/components";
+import { useGetData } from "@/hooks";
+import { ICourse } from "@/interface";
+import { useState } from "react";
+import { ActivePageCard } from ".";
 
 export const LiveLearningClass = () => {
+  const [courses, setCourses] = useState<ICourse[]>([]);
+
+  useGetData("/courses", setCourses, true);
+
   return (
-    <ActivePageCard title="Join Live Learning Training Class">
-      <DataRow title="Photo Editing & Sharing Class" btnText="ViewClass" icon />
-      <DataRow title="Lead Generation Class" btnText="ViewClass" icon />
-    </ActivePageCard>
+    courses &&
+    courses.map(({ title, meetingId }, idx) => (
+      <ActivePageCard
+        icon
+        key={idx}
+        title={title}
+        className="flex flex-col justify-center items-center w-full max-w-xs bg-slate-200"
+      >
+        <GoogleMeetLink meetId={meetingId || ""}>Join Class</GoogleMeetLink>
+      </ActivePageCard>
+    ))
   );
 };

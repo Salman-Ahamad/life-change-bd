@@ -9,7 +9,7 @@ const postSchema = new Schema<IPostSchema>(
     },
     imageUrl: {
       type: String,
-      required: [true, "Please provide a valid image URL"],
+      default: "",
     },
     text: {
       type: String,
@@ -28,4 +28,4 @@ const postSchema = new Schema<IPostSchema>(
   }
 );
 
-export const Post = models.posts || model<IPostSchema>("posts", postSchema);
+export const Post = models?.posts || model<IPostSchema>("posts", postSchema);

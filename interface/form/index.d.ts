@@ -13,10 +13,13 @@ export interface ISignUpFormValue {
 export interface ILoginFormValue {
   phone: string;
   password: string;
-  randomNum: string;
 }
 
-export interface IForgotPasswordValue {
+export interface ISubAdminLoginFormValue extends ILoginFormValue {
+  role: string;
+}
+
+export interface IChangePasswordValue {
   newPassword: string;
   retypeNewPassword: string;
 }

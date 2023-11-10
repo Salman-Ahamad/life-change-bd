@@ -3,7 +3,6 @@
 export * from "./AbsoluteImg";
 export * from "./BackButton";
 export * from "./BackgroundImage";
-export * from "./BgContainer";
 export * from "./Button";
 export * from "./CTA";
 export * from "./CommonText";

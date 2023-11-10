@@ -1,14 +1,11 @@
 "use client";
 
+import { updateData } from "@/hooks";
+import { ISendWish, IWaDeepLink, IWaShareLink } from "@/interface";
 import { Button } from "@/universal";
+import { openWhatsappChat } from "@/utils";
 import { FC } from "react";
-
-interface IWaDeepLink {
-  phoneNo: string;
-  btnText: string;
-  message?: string;
-  groupLink?: string;
-}
+import { FaShareSquare } from "react-icons/fa";
 
 export const WhatsAppLink: FC<IWaDeepLink> = ({
   phoneNo,
@@ -16,26 +13,58 @@ export const WhatsAppLink: FC<IWaDeepLink> = ({
   message,
   groupLink,
 }) => {
-  // Component or Button click handler
-  const openWhatsappChat = () => {
-    const messageToSend = encodeURIComponent(message || "");
-    const url = phoneNo
-      ? `https://wa.me/+88${phoneNo}?text=${messageToSend}`
-      : groupLink
-      ? `https://chat.whatsapp.com/${groupLink}`
-      : "";
-    // const url = `https://chat.whatsapp.com/your-group-link`;
-
-    window.open(url, "_blank");
-  };
-
   return (
-    <Button variant="secondary" onClick={openWhatsappChat}>
+    <Button
+      variant="secondary"
+      onClick={() => openWhatsappChat(phoneNo, message, groupLink)}
+    >
       {btnText}
     </Button>
   );
 };
 
+export const SendWishMessage: FC<ISendWish> = ({
+  phoneNo,
+  btnText,
+  message,
+  groupLink,
+  data,
+  userId,
+}) => {
+  const handleSendWish = () => {
+    updateData(`/send-wish?id=${userId}`, {
+      ...data,
+    }).then(() => openWhatsappChat(phoneNo, message, groupLink));
+  };
+  return (
+    <Button variant="secondary" onClick={handleSendWish}>
+      {btnText}
+    </Button>
+  );
+};
+
+export const ShareReferLink: FC<IWaShareLink> = ({
+  phoneNo,
+  btnText,
+  message,
+  groupLink,
+  userId,
+}) => {
+  const handleSendWish = () => {
+    const referalLink = `https://lifechangebd.com/signup?referral=${userId}`;
+    openWhatsappChat(phoneNo, referalLink, groupLink);
+  };
+  return (
+    <Button
+      variant="secondary"
+      onClick={handleSendWish}
+      className="flex gap-2 justify-center items-center md:py-2 w-full"
+    >
+      {btnText}
+      <FaShareSquare className="" />
+    </Button>
+  );
+};
 // `
 
 // Hi...Md Nuralam Hossen

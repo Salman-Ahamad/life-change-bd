@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./ActivationPoint";
 export * from "./Footer";
 export * from "./ImageUploadSection";

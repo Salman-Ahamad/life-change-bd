@@ -1,22 +1,17 @@
 "use client";
 
-import { Button } from "@/universal";
-import React, { FC } from "react";
+import { IGoogleMeetDeepLink } from "@/interface";
+import { Button, LinkButton } from "@/universal";
+import Link from "next/link";
+import { FC } from "react";
 
-interface IGoogleMeetDeepLink {
-  meetId: string;
-  startTime?: string;
-  endTime?: string;
-}
-
-export const GoogleMeetLink: FC<IGoogleMeetDeepLink> = ({ meetId }) => {
-  const openJoinMeeting = () => {
-    const url = `https://meet.google.com/${meetId}`;
-    window.open(url, "_blank");
-  };
+export const GoogleMeetLink: FC<IGoogleMeetDeepLink> = ({
+  meetId,
+  children,
+}) => {
   return (
-    <Button variant="secondary" onClick={openJoinMeeting}>
-      Join Meet
-    </Button>
+    <Link href={`https://meet.google.com/${meetId}`} target="_blank">
+      <Button variant="secondary">{children || "Join Meet"}</Button>
+    </Link>
   );
 };

@@ -14,14 +14,17 @@ export const GET = async () => {
     const user = await getCurrentUser();
 
     if (!user) {
-      return ApiResponse(404, "User not found❗");
+      const courses = await Course.find().select({
+        enrolled: 0,
+        certificates: 0,
+      });
+      return ApiResponse(200, "Courses Get successfully 👌", courses);
     }
 
     if (user.role === UserRole.admin) {
       const courses = await Course.find();
       return ApiResponse(200, "Courses Get successfully 👌", courses);
     } else {
-      // This will return after removing certificate and enrolled user
       const courses = await Course.find().select({
         enrolled: 0,
         certificates: 0,
@@ -41,7 +44,12 @@ export const POST = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.admin) {
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
@@ -62,7 +70,12 @@ export const PATCH = async (req: NextRequest) => {
 
     if (!user) {
       return ApiResponse(404, "User not found❗");
-    } else if (user.role !== UserRole.admin) {
+    } else if (
+      user.role !== UserRole.controller &&
+      user.role !== UserRole.consultant &&
+      user.role !== UserRole.teacher &&
+      user.role !== UserRole.admin
+    ) {
       return ApiResponse(401, "Denied❗ unauthorized user 😠😡😠");
     }
 
